@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CommuneService } from './commune.service';
+import { CarInOutService } from './car-in-out.service';
 
-describe('CommuneService', () => {
-  let service: CommuneService;
+describe('CarInOutService', () => {
+  let service: CarInOutService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CommuneService);
+    service = TestBed.inject(CarInOutService);
   });
 
   it('should be created', () => {

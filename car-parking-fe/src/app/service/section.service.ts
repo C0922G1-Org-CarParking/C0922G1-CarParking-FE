@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 const API_URL = `${environment.apiUrl}`;
 
 @Injectable({
   providedIn: 'root'
 })
-export class AddressService {
+export class SectionService {
 
   constructor(private http: HttpClient) {
   }
