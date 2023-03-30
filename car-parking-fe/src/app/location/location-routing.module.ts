@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {StatisticByDayMonthYearComponent} from '../statistic/statistic-by-day-month-year/statistic-by-day-month-year.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {LocationListComponent} from './location-list/location-list.component';
 import {LocationDetailComponent} from './location-detail/location-detail.component';
 import {LocationCreateComponent} from './location-create/location-create.component';
