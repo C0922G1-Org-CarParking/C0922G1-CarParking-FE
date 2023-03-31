@@ -27,6 +27,9 @@ const routes: Routes = [
   }, {
     path: 'location',
     loadChildren: () => import('./location/location.module').then(module => module.LocationModule)
+  }, {
+    path: 'test',
+    loadChildren: () => import('./test-form/test-form-routing.module').then(module => module.TestFormRoutingModule)
   }
 ];
 

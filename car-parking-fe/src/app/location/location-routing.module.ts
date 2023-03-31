@@ -5,6 +5,7 @@ import {LocationDetailComponent} from './location-detail/location-detail.compone
 import {LocationCreateComponent} from './location-create/location-create.component';
 import {LocationUpdateComponent} from './location-update/location-update.component';
 import {LocationMapComponent} from './location-map/location-map.component';
+import {LocationCustomerDetailComponent} from "./location-customer-detail/location-customer-detail.component";
 
 
 const routes: Routes = [
@@ -25,8 +26,12 @@ const routes: Routes = [
     path: '#2',
     component: LocationUpdateComponent,
   }, {
-    path: '#3',
+    path: 'mapParking',
     component: LocationMapComponent,
+  },
+  {
+    path: 'detailLocationWithCustomer/:id',
+    component: LocationCustomerDetailComponent,
   }
 ];
 

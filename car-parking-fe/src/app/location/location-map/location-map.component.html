@@ -1,1 +1,118 @@
-<p>location-map works!</p>
+<div style="text-align: center">
+  <div class="row">
+    <p>
+      <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-2xl"
+         style="float: left; margin-left: 12% ; margin-top: 3%"></i>
+    </p>
+  </div>
+  <div class="container " style="margin-top: 50px">
+    <p *ngIf="checkError" style="text-align: center">Mất kết nối</p>
+    <div>
+      <div style="margin-top: 30px">
+        <!--            Chạy vòng lặp-->
+        <div class="row" style="margin-bottom: 1px; margin-top: 2px; margin-left: 3px">
+          <div class="row-for">
+            <ng-container *ngFor="let location of listLocation">
+              <ng-container *ngIf="location.section.id ==1">
+                <div class="col-6">
+                  <button *ngIf="location.name % 2 != 0"
+                          style="transform: rotate(45deg); margin-bottom: 68px; margin-right: 20px; border:  1px solid white;"
+                          (click)="redirectRouter(location.name, location.occupied)"
+                          [style.background-color]="location.occupied ? 'red' : 'green'"
+                          class="btn btn-danger col-12"><p style="transform: rotate(314deg)">{{location.name}}</p>
+                  </button>
+                  <button *ngIf="location.name % 2 == 0"
+                          style="transform: rotate(135deg); margin-top: 0px; margin-left: 112px; border: 1px solid white"
+                          onmouseout="onMouseOut(this)" (mousemove)="moverOver()"
+                          (click)="redirectRouter(location.name, location.occupied)"
+                          [style.background-color]="location.occupied ? 'red' : 'green'" class="btn btn-danger col-12">
+                    <p style="transform: rotate(228deg); margin-top: 15%">{{location.name}}</p>
+                    <p id="test" style="display: none">HHHH</p>
+                  </button>
+
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+          <div class="row-for">
+            <ng-container *ngFor="let location of listLocation">
+              <ng-container *ngIf="location.section.id ==2">
+                <div class="col-6">
+                  <button *ngIf="location.name % 2 != 0"
+                          style="transform: rotate(45deg); margin-bottom: 68px; margin-right: 20px; border:  1px solid white;"
+                          (click)="redirectRouter(location.id, location.occupied)"
+                          [style.background-color]="location.occupied ? 'red' : 'green'" class="btn btn-danger col-12">
+                    <p style="transform: rotate(314deg)">{{location.name}}</p>
+                  </button>
+                  <button *ngIf="location.name % 2 == 0"
+                          style="transform: rotate(135deg); margin-top: 0px; margin-left: 112px; border: 1px solid white"
+                          (click)="redirectRouter(location.id, location.occupied)"
+                          [style.background-color]="location.occupied ? 'red' : 'green'" class="btn btn-danger col-12">
+                    <p
+                      style="transform: rotate(228deg); margin-top: 15%">{{location.name}}</p></button>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+          <div class="row-for">
+            <ng-container *ngFor="let location of listLocation">
+              <ng-container *ngIf="location.section.id ==3">
+                <div class="col-6">
+                  <button *ngIf="location.name % 2 != 0"
+                          style="transform: rotate(45deg); margin-bottom: 68px; margin-right: 20px; border:  1px solid white;"
+                          (click)="redirectRouter(location.id, location.occupied)"
+                          [style.background-color]="location.occupied ? 'red' : 'green'" class="btn btn-danger col-12">
+                    <p style="transform: rotate(314deg)">{{location.name}}</p>
+                  </button>
+                  <button *ngIf="location.name % 2 == 0"
+                          style="transform: rotate(135deg); margin-top: 0px; margin-left: 112px; border: 1px solid white"
+                          (click)="redirectRouter(location.id, location.occupied)"
+                          [style.background-color]="location.occupied ? 'red' : 'green'" class="btn btn-danger col-12">
+                    <p
+                      style="transform: rotate(228deg); margin-top: 15%">{{location.name}}</p></button>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+          <div class="row-for">
+            <ng-container *ngFor="let location of listLocation">
+              <ng-container *ngIf="location.section.id ==4">
+                <div class="col-6">
+                  <button *ngIf="location.name % 2 != 0"
+                          style="transform: rotate(45deg); margin-bottom: 68px; margin-right: 20px; border:  1px solid white;"
+                          (click)="redirectRouter(location.id, location.occupied)"
+                          [style.background-color]="location.occupied ? 'red' : 'green'" class="btn btn-danger col-12">
+                    <p style="transform: rotate(314deg)">{{location.name}}</p>
+                  </button>
+                  <button *ngIf="location.name % 2 == 0"
+                          [style.background-color]="location.occupied ? 'red' : 'green'"
+                          (click)="redirectRouter(location.id, location.occupied)"
+                          style="transform: rotate(135deg); margin-top: 0px; margin-left: 112px; border: 1px solid white"
+                          class="btn btn-danger col-12"><p
+                    style="transform: rotate(228deg); margin-top: 15%">{{location.name}}</p></button>
+                </div>
+
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+         <br>
+         <br>
+        <i class="fa-solid fa-arrow-up-from-bracket fa-2xl"
+           style="float: right; margin-right: 12%; margin-top: 5%"></i>
+      </div>
+         <br>
+      <div style="float: left ;margin-top: 5% ">
+        <p> Số chỗ trống: {{locationEmpty}}</p>
+        <p>Bản đồ tầng:
+          <a class="btn btn-outline-warning">Trước</a> <a class="btn btn-warning">1</a><a
+            class="btn btn-outline-warning">2</a>
+          <a class="btn btn-outline-warning">Sau</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
