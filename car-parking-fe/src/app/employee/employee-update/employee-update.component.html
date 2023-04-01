@@ -1,1 +1,165 @@
-<p>employee-update works!</p>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="container">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="card" style="border-radius: 15px;box-shadow: 0 0 20px 0 #253365 ">
+          <div class="card-body">
+
+
+            <form [formGroup]="employeeGroup" (ngSubmit)="submit()">
+              <h1 style="text-align: center; margin-top: 2%; margin-bottom: 4%">CHỈNH SỬA NHÂN VIÊN</h1>
+              <div class="row d-flex">
+                <div class="row align-items-center py-3 col-md-12">
+                  <div class="col-md-2">
+                    <label style="font-weight: bold; margin-left: 5px">Họ và tên:<b
+                      style="color: red">*</b></label>
+                  </div>
+                  <div class="col-md-10 d-flex">
+                    <input class="form-control" type="text"
+                           style="margin-right: 23px;margin-left: -3px" formControlName="name">
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="row d-flex">
+                <div class="row align-items-center py-3 col-md-6">
+                  <div class="col-md-4">
+                    <label style="font-weight: bold; margin-left: 5px">Chức vụ:</label>
+                  </div>
+                  <div class="col-md-8">
+                    <select class="form-control" formControlName="position" [compareWith]="compare">
+                      <option *ngFor="let item of position" [ngValue]="item">{{item.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row align-items-center py-3 col-md-6">
+                  <div class="col-md-4">
+                    <label style="font-weight: bold; margin-left: 25px" class="mb-0">CCCD: <b
+                      style="color: red">*</b></label>
+                  </div>
+                  <div class="col-md-8">
+                    <input class="form-control" formControlName="idCard">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row d-flex">
+                <div class="row align-items-center py-3 col-md-6">
+                  <div class="col-md-4">
+                    <label style="font-weight: bold; margin-left: 5px">Ngày sinh: <b
+                      style="color: red">*</b></label>
+                  </div>
+                  <div class="col-md-8">
+                    <input class="form-control" type="date" formControlName="dateOfBirth">
+                  </div>
+                </div>
+                <div class="row align-items-center py-3 col-md-6">
+                  <div class="col-md-4">
+                    <label style="font-weight: bold; margin-left: 10px" class="mb-0">Giới tính: <b
+                      style="color: red">*</b></label>
+                  </div>
+                  <div class="col-md-8">
+                    <label>
+                      <input type="radio" [value]="true" formControlName="gender">
+                    </label>Nam
+                    <label>
+                      <input type="radio" [value]="false" formControlName="gender">
+                    </label>Nữ
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row d-flex">
+                <div class="row align-items-center py-3 col-md-6">
+                  <div class="col-md-4">
+                    <label style="font-weight: bold; margin-left: 5px">Email: <b
+                      style="color: red">*</b></label>
+                  </div>
+                  <div class="col-md-8">
+                    <input class="form-control" formControlName="email" >
+                  </div>
+                </div>
+                <div class="row align-items-center py-3 col-md-6">
+                  <div class="col-md-4">
+                    <label style="font-weight: bold; margin-left: 25px">SÐT: <b
+                      style="color: red">*</b></label>
+                  </div>
+                  <div class="col-md-8">
+                    <input class="form-control" formControlName="phoneNumber" >
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <div class="row align-items-center">
+                <div class="col-md-2">
+                  <label style="font-weight: bold; margin-left: 5px">Ðịa chỉ: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control" formControlName="province"
+                          style="margin-left: -10px; margin-right: -10px">
+                    <option value="1"> 1</option>
+                    <option value="2"> 2</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control" formControlName="district"
+                          style="margin-left: -10px; margin-right: -10px" >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control" formControlName="commune"
+                          style="margin-left: -10px; margin-right: -10px">
+                    <option value="1"> 1</option>
+                    <option value="2"> 2</option>
+                  </select>
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+
+              <div class="row d-flex">
+                <div class="row align-items-center py-3 col-md-12">
+                  <div class="col-md-2">
+                    <label style="font-weight: bold; margin-left: 5px">Địa chỉ #:<b
+                      style="color: red">*</b></label>
+                  </div>
+                  <div class="col-md-10 d-flex">
+                    <input class="form-control" type="text"
+                           style="margin-right: 23px;margin-left: -3px" formControlName="street" >
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <div align="center" class="px-5 py-4">
+                <button type="submit" class="btn btn-secondary">Quay lại</button>
+                <button style="margin-left: 10px;background-color:  #E67E22" type="submit" class="btn">
+                  Lưu thông tin
+                </button>
+
+              </div>
+
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-2"></div>
+
+</div>
+
