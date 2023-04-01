@@ -18,18 +18,17 @@ export class EmployeeUpdateComponent implements OnInit {
 
   employeeGroup: FormGroup = new FormGroup({
     id: new FormControl(),
-    name: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z]+(?:\\s+[A-Za-z]+)*$')]),
-    dateOfBirth: new FormControl('', [Validators.required,
-      Validators.pattern('^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$')]),
+    name: new FormControl('', Validators.required),
+    dateOfBirth: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
-    idCard: new FormControl('', [Validators.required, Validators.pattern('(\\d{9})|(\\d{12})')]),
+    email: new FormControl('', Validators.required),
+    idCard: new FormControl('', Validators.required),
     position: new FormControl('', Validators.required),
     province: new FormControl(),
     district: new FormControl(),
     commune: new FormControl(),
     street: new FormControl('', Validators.required),
-    phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^(0|\\+84)\\d{9}$')]),
+    phoneNumber: new FormControl('', Validators.required),
 
   });
 
