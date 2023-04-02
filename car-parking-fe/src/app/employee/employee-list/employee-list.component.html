@@ -1,1 +1,148 @@
-<p>employee-list works!</p>
+<div style="margin-top: 7%">
+  <div class="container-fluid">
+    <div class="row justify-content-center mt-5 mb-3">
+      <h1 class="text-center">DANH SÁCH NHÂN VIÊN</h1>
+    </div>
+    <div class="container">
+      <form>
+        <!--                dòng trên-->
+        <div class="col-md-12 row ">
+          <div class="col-md-2"></div>
+          <div class="col-md-1" style="margin-top: 5px;">Sinh ngày:</div>
+          <div class="col-md-3" style="margin-left: -0.5%">
+            <input class="form-control me-2" type="date"
+                   aria-label="Search" style="border: 1px solid #b6effb; width: 100%" name="dateOfBirth"
+                   [(ngModel)]="startDate">
+          </div>
+          <div class="col-md-1" style="margin-top: 5px">Đến ngày:</div>
+          <div class="col-md-3"  style="margin-left: -0.5%">
+            <input class="form-control me-2" type="date"
+                   aria-label="Search" style="border: 1px solid #b6effb; width: 100%"
+                   name="dateOfBirth" [(ngModel)]="endDate">
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+        <!--                dòng dưới-->
+        <div class="col-md-12 row mt-3">
+          <div class="col-md-2"></div>
+          <div class="col-md-1" style="margin-top: 5px; ">Sống tại:</div>
+          <div class="col-md-3 "  style="margin-left: -0.5%">
+                      <input class="form-control me-2" name="name" type="search"
+                             aria-label="Search" style="border: 1px solid #b6effb; width: 100%">
+          </div>
+          <div class="col-md-1" style="margin-top: 5px">Họ và tên:</div>
+          <div class="col-md-3 col-lg-3" style="margin-left: -0.5%">
+            <input class="form-control me-2" type="text"
+                   style="border: 1px solid #b6effb; width: 100%" name="nameSearch" [(ngModel)]="nameSearch">
+          </div>
+
+          <div class="col-md-1">
+            <button (click)="getAll()"
+                    class="btn" type="button"
+                    style="text-align: center; size: 30px; border: 1px solid #b6effb;background-color: darkorange">
+              <i class=" fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+      </form>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-11 col-12">
+        <h3 *ngIf="message" style="text-align: center; color: red">không tìm thấy dữ liệu</h3>
+        <table  class="table table-bordered table-hover text-center"
+               style="box-shadow: 0 0 10px 0 #253365; margin-top: 20px">
+          <thead style="background-color: #E67E22">
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Họ và tên</th>
+            <th scope="col">Ngày sinh</th>
+            <th scope="col">Giới tính</th>
+            <th scope="col">Email</th>
+            <th scope="col">Thẻ căn cước</th>
+            <th scope="col">Chức vụ</th>
+            <th scope="col">Địa chỉ</th>
+            <th scope="col">Số điện thoại</th>
+            <th scope="col">Chỉnh sửa</th>
+            <th scope="col">Xóa</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let empl of employees">
+            <td>{{empl.id}}</td>
+            <td>{{empl?.name}}</td>
+            <td>{{empl.dateOfBirth | date : 'dd-MM-yyyy'}}</td>
+            <td>
+              <ng-container *ngIf="empl.gender == true"> Nam </ng-container>
+              <ng-container *ngIf="empl.gender == false"> Nữ </ng-container>
+            </td>
+            <td>{{empl.email}}</td>
+            <td>{{empl.idCard}}</td>
+            <td>{{empl.position.name}}</td>
+            <td>{{empl.street}}, {{empl.province}}, {{empl.district}}, {{empl.commune}}  </td>
+            <td>{{empl.phoneNumber}}</td>
+            <td>
+              <span type="submit"><i class="fa-regular fa-pen-to-square"></i></span>
+            </td>
+            <td>
+            <span type="submit" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="employeeDelete = empl">
+              <i class="fa-regular fa-trash-can"></i></span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <!--phân trang-->
+        <div class="row">
+          <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px">
+            <button class="btn" style="background-color: darkorange">Thêm nhân viên</button>
+          </div>
+          <div class="col-md-8"></div>
+          <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px" >
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item" [ngClass]="{disabled: currentPage === 0}">
+                  <a class="btn" style="background-color: darkorange" (click)="previous()">Trước</a>
+                </li>
+                <li *ngFor="let page of pageNumber">
+                  <a class="page-link page" [ngClass]="{colorCurrentPage: currentPage + 1 == page}"
+                     (click)="numberPage(page)">{{page}}</a>
+                </li>
+                <li class="page-item" [ngClass]="{disabled: currentPage === totalPages - 1}">
+                  <a class=" btn" style="background-color: darkorange" (click)="next()">Sau</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--modal xóa-->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Xác nhận xóa nhân viên</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <span>
+          Bạn có chắc chắn muốn xoá nhân viên
+        </span>
+        <span style="color: red">{{employeeDelete.name}}</span>
+        <span> này không ?</span>
+        <p style="color: red">* Lưu ý: Hành động này không thể hoàn tác !</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #e4e6eb">Đóng
+        </button>
+        <button type="button" class="btn"
+                data-bs-dismiss="modal" style="background-color: darkorange" (click)="delete(employeeDelete.id)">Xóa
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
