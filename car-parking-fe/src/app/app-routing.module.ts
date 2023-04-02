@@ -1,15 +1,17 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {HomePageContentComponent} from './home-page/home-page-content.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: HomePageContentComponent
-  },
-  {
+    redirectTo: 'homepage'
+  }, {
+    path: 'homepage',
+    loadChildren: () => import('./home-page/home-page.module').then(module => module.HomePageModule)
+  }, {
     path: 'employee',
     loadChildren: () => import('./employee/employee.module').then(module => module.EmployeeModule)
   }, {
@@ -27,6 +29,9 @@ const routes: Routes = [
   }, {
     path: 'location',
     loadChildren: () => import('./location/location.module').then(module => module.LocationModule)
+  }, {
+    path: '**',
+    component: PageNotFoundComponent
   }
 ];
 

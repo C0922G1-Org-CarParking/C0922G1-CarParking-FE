@@ -1,3 +1,28 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #212529;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ef7f4d;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-primary {
+  font-family: "Raleway", sans-serif;
+}
+
+
 a {
   text-decoration: none;
 }
@@ -119,7 +144,7 @@ nav .n-item:hover {
   height: 70vh;
   background: #fef8f5;
   border-bottom: 2px solid #fcebe3;
-  margin: 72px 0 -72px 0;
+  margin: 72px 0 0 0;
 }
 
 #hero h1 {
@@ -218,8 +243,9 @@ nav .n-item:hover {
 # Section
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding: 0 0;
   overflow: hidden;
+  margin-top: 72px;
 }
 
 .section-bg {
