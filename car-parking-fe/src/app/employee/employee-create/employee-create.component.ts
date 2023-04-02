@@ -4,13 +4,15 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EmployeeService} from 'src/app/service/employee.service';
 import {PositionService} from '../../service/position.service';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-employee-create',
   templateUrl: './employee-create.component.html',
   styleUrls: ['./employee-create.component.css']
 })
 export class EmployeeCreateComponent implements OnInit {
-  selectedPosition = '';
+
   position: IPosition[] = [];
   employeeGroup: FormGroup = new FormGroup({
     id: new FormControl(),
@@ -39,7 +41,6 @@ export class EmployeeCreateComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
     this.refresh();
   }
@@ -49,12 +50,16 @@ export class EmployeeCreateComponent implements OnInit {
     if (this.employeeGroup.valid) {
       this.employeeService.addEmployee(this.employeeGroup.value).subscribe(next => {
         this.router.navigateByUrl('/employee/list');
-
-        alert('thành công');
-
+        // alert(' thành công');
+        // Swal.fire('Thêm mới thành công',
+        //   '',
+        //   'success');
+        Swal.fire(
+          'Added!',
+          'Your file has been added.',
+          'success'
+        );
       });
-    } else {
-      alert('thất bại');
     }
   }
 

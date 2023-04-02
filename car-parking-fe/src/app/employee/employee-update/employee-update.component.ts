@@ -5,6 +5,7 @@ import {EmployeeService} from '../../service/employee.service';
 import {PositionService} from '../../service/position.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Employee} from '../../model/employee';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-update',
@@ -56,8 +57,12 @@ export class EmployeeUpdateComponent implements OnInit {
   submit() {
     if (this.employeeGroup.valid) {
       this.employeeService.edit(this.employeeGroup.value).subscribe(next => {
-        alert('ha');
         this.router.navigateByUrl('employee/list');
+        Swal.fire(
+          'Updated!',
+          'Your file has been updated.',
+          'success'
+        );
       });
     }
   }
@@ -66,5 +71,7 @@ export class EmployeeUpdateComponent implements OnInit {
     return s1 && s2 ? s1.id === s2.id : s1 === s2;
   }
 
-
+  cancel() {
+    this.router.navigateByUrl('/employee/list');
+  }
 }
