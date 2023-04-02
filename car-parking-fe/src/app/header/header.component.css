@@ -1,3 +1,28 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #212529;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ef7f4d;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-primary {
+  font-family: "Raleway", sans-serif;
+}
+
+
 a {
   text-decoration: none;
 }
@@ -74,7 +99,8 @@ header .logo img {
   position: relative;
 }
 nav ul li .n-item{
-  color: #1d1d1d;
+  color: #000000;
+  font-size: 18px;
   /*font-weight: bold;*/
 }
 
@@ -84,11 +110,7 @@ nav ul li  .n-item:hover{
 
 .navbar .getstarted,
 .navbar .getstarted:focus{
-  background: #eb5d1e;
-  color: #fff;
-  padding: 10px 10px;
-  margin-left: 10px;
-  border-radius: 100px;
+
 }
 
 .navbar .getstarted:hover,
@@ -115,9 +137,29 @@ nav .n-item:hover {
   }
 }
 
+.dropdownUser {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 10px 0 0 0;
+  z-index: 1;
+  left: 0;
+}
+
+.dropdownUser:hover .dropdown-content {
+  display: block;
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+
 /*#carousel {*/
 /*  !*width: 100%;*!*/
 /*  height: 85vh;*/
@@ -125,6 +167,15 @@ nav .n-item:hover {
 /*  !*background-size: cover;*!*/
 /*  !*border-bottom: 2px solid #fcebe3;*!*/
 /*  !*margin: 72px 0 0 0;*!*/
+
+#hero {
+  width: 100%;
+  height: 70vh;
+  background: #fef8f5;
+  border-bottom: 2px solid #fcebe3;
+  margin: 72px 0 0 0;
+}
+
 
 /*}*/
 
@@ -224,8 +275,9 @@ nav .n-item:hover {
 # Section
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0 0 0;
+  /*padding: 60px 0 0 0;*/
   overflow: hidden;
+  margin-top: 60px;
 }
 
 .section-bg {

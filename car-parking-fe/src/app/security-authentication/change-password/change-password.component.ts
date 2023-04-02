@@ -14,7 +14,11 @@ import {ShareService} from '../service/share.service';
 export class ChangePasswordComponent implements OnInit {
   formChangePassword: FormGroup;
   username: string;
-  message: '';
+  newPasswordError: '';
+  confirmNewPasswordError: '';
+  findAccountError: '';
+  passwordError: '';
+
 
   constructor(private tokenStorageService: TokenStorageService,
               private loginService: LoginService,
@@ -55,13 +59,29 @@ export class ChangePasswordComponent implements OnInit {
       this.shareService.sendClickEvent();
       this.router.navigateByUrl('/');
     }, error => {
+      this.newPasswordError = '';
+      this.confirmNewPasswordError = '';
+      this.findAccountError = '';
+      this.passwordError = '';
       // this.message = error.error.message;
       Swal.fire({
-        text: 'Mật khẩu cũ không đúng hoặc mật khẩu mới chưa hợp lệ!',
+        text: 'Đổi mật khẩu không thành công',
         icon: 'error',
         confirmButtonText: 'OK'
       });
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < error.error.length; i++) {
+        if (error.error[i].field === 'newPassword') {
+          this.newPasswordError = error.error[i].defaultMessage;
+        } else if (error.error[i].field === 'confirmNewPassword') {
+          this.confirmNewPasswordError = error.error[i].defaultMessage;
+        } else if (error.error[i].field === 'findAccount') {
+          this.findAccountError = error.error[i].defaultMessage;
+        } else if (error.error[i].field === 'password') {
+          this.passwordError = error.error[i].defaultMessage;
+        }
+      }
+
     });
   }
-
 }
