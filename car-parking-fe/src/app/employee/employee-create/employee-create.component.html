@@ -1,6 +1,7 @@
+<div style="margin-top: 7%;margin-bottom:1%">
 <div class="container">
   <div class="row d-flex justify-content-center align-items-center h-100" style="margin-left:10%;margin-right:10%;">
-    <div class="card" style="border-radius: 1%;margin-top:7%;box-shadow: 0 0 15px 0 #253365 ">
+    <div class="card" style="border-radius: 1%;box-shadow: 0 0 15px 0 #253365 ">
       <div class="card-body">
         <form [formGroup]="employeeGroup" (ngSubmit)="submit()">
           <h1 style="text-align: center; margin-top: 2%; margin-bottom: 4%">THÊM NHÂN VIÊN</h1>
@@ -17,12 +18,11 @@
                 <input class="form-control" formControlName="name">
 
                 <p style="color: red; position: absolute"
-                   *ngIf="(employeeGroup.controls.name.hasError('required')) ||
-                   employeeGroup.controls.name.hasError('required') && employeeGroup.controls.name.touched">
+                   *ngIf="(employeeGroup.controls.name.hasError('required')) && employeeGroup.controls.name.touched">
                   Tên Không được để trống.</p>
 
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.name.hasError('pattern')) ||
+                   *ngIf="
                    employeeGroup.controls.name.hasError('pattern') && employeeGroup.controls.name.touched">
                   Họ tên không đúng định dạng.</p>
 
@@ -39,10 +39,10 @@
               </div>
               <div class="col-md-8">
                 <select class="form-control" formControlName="position">
-                  <option *ngFor="let item of position " [ngValue]="item">{{item.name}}</option>
+                  <option *ngFor="let item of position " [ngValue]="item" >{{item.name}}</option>
                 </select>
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.position.hasError('required')) || employeeGroup.controls.position.hasError('required') && employeeGroup.controls.position.touched">
+                   *ngIf="employeeGroup.controls.position.hasError('required') && employeeGroup.controls.position.touched">
                   Chức vụ không được để trống.</p>
 
               </div>
@@ -59,12 +59,12 @@
               <div class="col-md-8">
                 <input class="form-control" formControlName="idCard">
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.idCard.hasError('required')) ||
+                   *ngIf="
                     employeeGroup.controls.idCard.hasError('required') &&
                      employeeGroup.controls.idCard.touched">
                   CCCD không được để trống.</p>
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.idCard.hasError('pattern')) ||
+                   *ngIf="
                    employeeGroup.controls.idCard.hasError('pattern') && employeeGroup.controls.idCard.touched">
                   CCCD không đúng định dạng.</p>
               </div>
@@ -77,7 +77,7 @@
               <div class="col-md-8">
                 <input class="form-control" formControlName="dateOfBirth" type="date">
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.dateOfBirth.hasError('required')) ||
+                   *ngIf="
                     employeeGroup.controls.dateOfBirth.hasError('required') &&
                      employeeGroup.controls.dateOfBirth.touched">
                   Ngày Sinh không được để trống.</p>
@@ -95,12 +95,12 @@
               <div class="col-md-8">
                 <input class="form-control" type="text" formControlName="email">
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.email.hasError('required')) ||
+                   *ngIf="
                     employeeGroup.controls.email.hasError('required') &&
                      employeeGroup.controls.email.touched">
                   email không được để trống.</p>
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.email.hasError('pattern')) ||
+                   *ngIf="
                    employeeGroup.controls.email.hasError('pattern') && employeeGroup.controls.email.touched">
                   Email không đúng định dạng.</p>
 
@@ -122,7 +122,7 @@
                   <input type="radio" [value]="false" formControlName="gender">
                 </label>Nữ
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.gender.hasError('required')) ||
+                   *ngIf="
                     employeeGroup.controls.gender.hasError('required') &&
                      employeeGroup.controls.gender.touched">
                   Giới tính không được để trống.</p>
@@ -141,12 +141,12 @@
               <div class="col-md-8">
                 <input class="form-control" type="text" formControlName="phoneNumber">
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.phoneNumber.hasError('required')) ||
+                   *ngIf="
                     employeeGroup.controls.phoneNumber.hasError('required') &&
                      employeeGroup.controls.phoneNumber.touched">
                   SĐT không được để trống.</p>
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.phoneNumber.hasError('pattern')) ||
+                   *ngIf="
                    employeeGroup.controls.phoneNumber.hasError('pattern') && employeeGroup.controls.phoneNumber.touched">
                   phone Number không đúng định dạng.</p>
 
@@ -160,7 +160,7 @@
                 <input class="form-control" formControlName="street" type="text"
                        style="margin-right: 23px;margin-left: -3px">
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.street.hasError('required')) ||
+                   *ngIf="
                     employeeGroup.controls.street.hasError('required') &&
                      employeeGroup.controls.street.touched">
                   Địa chỉ khác không được để trống.</p>
@@ -182,7 +182,7 @@
                   <option value="2"> 2</option>
                 </select>
                 <p style="color: red; position: absolute"
-                   *ngIf="(employeeGroup.controls.province.hasError('required')) ||
+                   *ngIf="
                     employeeGroup.controls.province.hasError('required') &&
                      employeeGroup.controls.province.touched">
                   không được để trống.</p>
@@ -195,7 +195,7 @@
                   <option value="2">2</option>
                 </select>
                 <p style="color: red; position: absolute"
-                   *ngIf="( employeeGroup.controls.district.hasError('required')) ||
+                   *ngIf="
                     employeeGroup.controls.district.hasError('required') &&
                      employeeGroup.controls.district.touched">
                   không được để trống.</p>
@@ -208,7 +208,7 @@
                   <option value="2"> 2</option>
                 </select>
                 <p style="color: red; position: absolute"
-                   *ngIf="(employeeGroup.controls.commune.hasError('required')) ||
+                   *ngIf="
                     employeeGroup.controls.commune.hasError('required') &&
                      employeeGroup.controls.commune.touched">
                   không được để trống.</p>
@@ -235,6 +235,6 @@
     </div>
   </div>
 </div>
-
+</div>
 
 
