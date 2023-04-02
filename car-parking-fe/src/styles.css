@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@media (min-width: 992px) {
+  .user {
+    position: relative;
+    left: 45%;
+    padding-left: 5%;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .user {
+    position: relative;
+    left: 48%;
+    padding-left: 7%;
+  }
+}
+
+
+@media (min-width: 1400px) {
+  .user {
+    position: relative;
+    left: 45%;
+    padding-left: 1%;
+  }
+}

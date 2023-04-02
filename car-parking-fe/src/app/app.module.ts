@@ -3,18 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomePageContentComponent } from './home-page/home-page-content.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import {AuthInterceptor} from './security-authentication/security-auth/auth.interceptor';
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent,
         FooterComponent,
-        HomePageContentComponent
+        HomePageContentComponent,
+        ErrorPageComponent
     ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { HomePageContentComponent } from './home-page/home-page-content.componen
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

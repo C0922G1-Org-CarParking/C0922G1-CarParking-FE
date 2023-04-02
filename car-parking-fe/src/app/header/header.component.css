@@ -5,12 +5,13 @@ a {
 # Header
 --------------------------------------------------------------*/
 header {
-  height: 5rem;
+  height: 4.2rem;
   transition: all 0.5s;
   z-index: 997;
   transition: all 0.5s;
   background: #fff;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+
 }
 
 header .logo-name {
@@ -72,7 +73,10 @@ header .logo img {
 .nabar li {
   position: relative;
 }
-
+nav ul li .n-item{
+  color: #1d1d1d;
+  /*font-weight: bold;*/
+}
 
 nav ul li  .n-item:hover{
   color: #eb5d1e;
@@ -114,49 +118,51 @@ nav .n-item:hover {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
-#hero {
-  width: 100%;
-  height: 70vh;
-  background: #fef8f5;
-  border-bottom: 2px solid #fcebe3;
-  margin: 72px 0 -72px 0;
-}
+/*#carousel {*/
+/*  !*width: 100%;*!*/
+/*  height: 85vh;*/
+/*  !*background-image: url("http://sika.scene7.com/is/image/sika/glo-car-parking-garage-floor-03:16-9?wid=1920&hei=1080&fit=crop%2C1");*!*/
+/*  !*background-size: cover;*!*/
+/*  !*border-bottom: 2px solid #fcebe3;*!*/
+/*  !*margin: 72px 0 0 0;*!*/
 
-#hero h1 {
-  margin: 0;
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 56px;
-  color: #4e4039;
-}
+/*}*/
 
-#hero h2 {
-  color: #a08f86;
-  margin: 15px 0 0 0;
-  font-size: 24px;
-}
+/*#hero h1 {*/
+/*  margin: 0;*/
+/*  font-size: 48px;*/
+/*  font-weight: 700;*/
+/*  line-height: 56px;*/
+/*  color: #0e0e0e;*/
+/*}*/
 
-#hero .btn-get-started {
-  font-family: "Raleway", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 8px 28px;
-  border-radius: 3px;
-  transition: 0.5s;
-  margin-top: 30px;
-  color: #fff;
-  background: #eb5d1e;
-}
+/*#hero h2 {*/
+/*  color: #bd4709;*/
+/*  margin: 15px 0 0 0;*/
+/*  font-size: 24px;*/
+/*}*/
 
-#hero .btn-get-started:hover {
-  background: #ef7f4d;
-}
+/*#hero .btn-get-started {*/
+/*  font-family: "Raleway", sans-serif;*/
+/*  font-weight: 500;*/
+/*  font-size: 16px;*/
+/*  letter-spacing: 1px;*/
+/*  display: inline-block;*/
+/*  padding: 8px 28px;*/
+/*  border-radius: 3px;*/
+/*  transition: 0.5s;*/
+/*  margin-top: 30px;*/
+/*  color: #fff;*/
+/*  background: #eb5d1e;*/
+/*}*/
 
-#hero .animated {
-  animation: up-down 2s ease-in-out infinite alternate-reverse both;
-}
+/*#hero .btn-get-started:hover {*/
+/*  background: #ef7f4d;*/
+/*}*/
+
+/*#hero .animated {*/
+/*  animation: up-down 2s ease-in-out infinite alternate-reverse both;*/
+/*}*/
 
 @media (max-width: 991px) {
   #hero {
@@ -218,7 +224,7 @@ nav .n-item:hover {
 # Section
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding: 60px 0 0 0;
   overflow: hidden;
 }
 
@@ -259,4 +265,6 @@ section {
   bottom: 0;
   left: calc(50% - 30px);
 }
+
+
 
