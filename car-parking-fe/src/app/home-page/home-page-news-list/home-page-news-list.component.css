@@ -1,4 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #212529;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ef7f4d;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h5 .card-title
+.font-primary {
+  font-family: "Raleway", sans-serif;
+}
+
 #main {
   margin-top: 72px;
 }
@@ -21,19 +46,15 @@ section {
 }
 
 .section-title h2 {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
-  padding-bottom: 0;
-  line-height: 1px;
-  margin-bottom: 15px;
   color: #c2b7b1;
+  margin-top: 12px;
 }
 
 .section-title p {
-  padding-bottom: 15px;
-  margin-bottom: 15px;
   position: relative;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
   color: #4e4039;
 }
