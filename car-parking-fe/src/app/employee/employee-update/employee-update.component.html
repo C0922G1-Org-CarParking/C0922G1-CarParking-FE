@@ -218,6 +218,8 @@
 
                 </div>
               </div>
+
+
             </div>
 
 
@@ -339,6 +341,58 @@
               </div>
             </div>
 
+
+
+
+<!--            <div class="row d-flex">-->
+<!--              <div class="row align-items-center py-3">-->
+<!--                <div class="col-md-2">-->
+<!--                  <label style="font-weight: bold; margin-left: 5px">Ðịa chỉ: <b-->
+<!--                    style="color: red">*</b></label>-->
+<!--                </div>-->
+<!--                <div class="col-md-3">-->
+<!--                  <select class="form-control" formControlName="province" type="text"-->
+<!--                          style="margin-left: -5px; margin-right: -10px">-->
+
+<!--                    <option value="1">Đà Nẵng</option>-->
+<!--                    <option value="2">Quảng Nam</option>-->
+<!--                  </select>-->
+<!--                  <p style="color: red; position: absolute"-->
+<!--                     *ngIf="-->
+<!--                    employeeGroup.controls.province.hasError('required') &&-->
+<!--                     employeeGroup.controls.province.touched">-->
+<!--                    không được để trống.</p>-->
+<!--                </div>-->
+<!--                <div class="col-md-3">-->
+<!--                  <select class="form-control" formControlName="district"-->
+<!--                          style="margin-left: -10px; margin-right: -10px">-->
+<!--                    <option value="">Chọn Huyện</option>-->
+<!--                    <option value="1">Hải Châu</option>-->
+<!--                    <option value="2">Tam Kỳ</option>-->
+<!--                  </select>-->
+<!--                  <p style="color: red; position: absolute"-->
+<!--                     *ngIf="-->
+<!--                    employeeGroup.controls.district.hasError('required') &&-->
+<!--                     employeeGroup.controls.district.touched">-->
+<!--                    không được để trống.</p>-->
+<!--                </div>-->
+<!--                <div class="col-md-3">-->
+<!--                  <select class="form-control" formControlName="commune" type="text"-->
+<!--                          style="margin-left: -10px; margin-right: -10px">-->
+<!--                    <option value="">Chọn xã</option>-->
+<!--                    <option value="1">Khuê Trung</option>-->
+<!--                    <option value="2">Phương Hoà nam</option>-->
+<!--                  </select>-->
+<!--                  <p style="color: red; position: absolute"-->
+<!--                     *ngIf="-->
+<!--                    employeeGroup.controls.commune.hasError('required') &&-->
+<!--                     employeeGroup.controls.commune.touched">-->
+<!--                    không được để trống.</p>-->
+<!--                </div>-->
+<!--                <div class="col-md-1"></div>-->
+<!--              </div>-->
+<!--            </div>-->
+
             <div class="row d-flex">
               <div class="row align-items-center py-3">
                 <div class="col-md-2">
@@ -346,12 +400,17 @@
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-3">
-                  <select class="form-control" formControlName="province" type="text"
-                          style="margin-left: -5px; margin-right: -10px">
-
-                    <option value="1"> 1</option>
-                    <option value="2"> 2</option>
+                  <select class="form-control" type="text"
+                          style="margin-left: -10px; margin-right: -10px" formControlName="province" #province
+                          (click)="getProvince(province.value)" [compareWith]="compare">
+                    <option value="" selected>Chọn tỉnh thành</option>
+                    <option *ngFor="let item of provinceList" [value]="item.code">{{item.name}}</option>
                   </select>
+
+<!--                  <select class="form-control" formControlName="position" [compareWith]="compare">-->
+<!--                    <option *ngFor="let item of position" [ngValue]="item">{{item.name}}</option>-->
+<!--                  </select>-->
+
                   <p style="color: red; position: absolute"
                      *ngIf="
                     employeeGroup.controls.province.hasError('required') &&
@@ -359,11 +418,11 @@
                     không được để trống.</p>
                 </div>
                 <div class="col-md-3">
-                  <select class="form-control" formControlName="district"
-                          style="margin-left: -10px; margin-right: -10px">
-                    <option value="">Chọn Huyện</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
+                  <select class="form-control" type="text"
+                          style="margin-left: -10px; margin-right: -10px" id="district" formControlName="district"
+                          #district (click)="getDistrict(district.value)" [compareWith]="compare">
+                    <option value="" selected>Chọn quận huyện</option>
+                    <option *ngFor="let item of districtList" [value]="item.code">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"
                      *ngIf="
@@ -372,11 +431,11 @@
                     không được để trống.</p>
                 </div>
                 <div class="col-md-3">
-                  <select class="form-control" formControlName="commune" type="text"
-                          style="margin-left: -10px; margin-right: -10px">
-                    <option value="">Chọn xã</option>
-                    <option value="1"> 1</option>
-                    <option value="2"> 2</option>
+                  <select class="form-control" type="text"
+                          style="margin-left: -10px; margin-right: -10px" id="ward" formControlName="commune" #commune
+                          (click)="getCommune(commune.value)" [compareWith]="compare" >
+                    <option value="" selected>Chọn phường xã</option>
+                    <option *ngFor="let item of communeList" [value]="item.code">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"
                      *ngIf="
@@ -387,6 +446,9 @@
                 <div class="col-md-1"></div>
               </div>
             </div>
+
+
+
 
 
             <div align="center" class="px-5 py-4">

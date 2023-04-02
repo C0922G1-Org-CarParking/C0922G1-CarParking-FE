@@ -20,11 +20,11 @@ export class EmployeeUpdateComponent implements OnInit {
   employeeGroup: FormGroup = new FormGroup({
 
     id: new FormControl(),
-    name: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z]+(?:\\s+[A-Za-z]+)*$')]),
+    name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ỹ\s]*$/)]),
     dateOfBirth: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
-    idCard: new FormControl('', [Validators.required, Validators.pattern('^(\\d{9})|(\\d{12})$')]),
+    idCard: new FormControl('', [Validators.required, Validators.pattern('^(\\d{9}|\\d{12})$')]),
     position: new FormControl('', Validators.required),
     province: new FormControl('', Validators.required),
     district: new FormControl('', Validators.required),
@@ -32,7 +32,9 @@ export class EmployeeUpdateComponent implements OnInit {
     street: new FormControl('', Validators.required),
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^(0|\\+84)\\d{9}$')])
   });
-
+  provinceList: any;
+  districtList: any;
+  communeList: any;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -51,7 +53,33 @@ export class EmployeeUpdateComponent implements OnInit {
     });
   }
 
+  getProvince(value: string) {
+    console.log(value);
+    // tslint:disable-next-line:radix
+    parseInt(value);
+    // tslint:disable-next-line:radix
+    this.employeeService.getAllDistrict(parseInt(value)).subscribe(next => {
+      this.districtList = next.data.data;
+    });
+  }
+
+  getDistrict(value: string) {
+    console.log(value);
+    // tslint:disable-next-line:radix
+    this.employeeService.getAllCommune(parseInt(value)).subscribe(next => {
+      this.communeList = next.data.data;
+    });
+  }
+
+  getCommune(value: string) {
+    console.log(value);
+  }
+
+
   ngOnInit(): void {
+    this.employeeService.getAllProvince().subscribe(next => {
+      this.provinceList = next.data.data;
+    });
   }
 
   submit() {

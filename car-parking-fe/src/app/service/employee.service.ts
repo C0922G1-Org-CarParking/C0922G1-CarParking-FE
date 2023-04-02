@@ -27,4 +27,19 @@ export class EmployeeService {
   edit(value: any) {
     return this.http.patch('http://localhost:8080/api/update-employee/' + value.id, value);
   }
+
+
+
+  getAllProvince(): Observable<any> {
+    return this.http.get<any>('https://vn-public-apis.fpo.vn/provinces/getAll?limit=-1');
+  }
+
+  getAllDistrict(province: number): Observable<any> {
+    return this.http.get<any>('https://vn-public-apis.fpo.vn/districts/getByProvince?provinceCode=' + province + '&limit=-1');
+  }
+
+  getAllCommune(district: number): Observable<any> {
+    return this.http.get<any>('https://vn-public-apis.fpo.vn/wards/getByDistrict?districtCode=' + district + '&limit=-1');
+  }
+
 }
