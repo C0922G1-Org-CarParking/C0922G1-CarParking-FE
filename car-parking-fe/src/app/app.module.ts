@@ -4,10 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomePageContentComponent } from './home-page/home-page-content.component';
+import {TicketModule} from "./ticket/ticket.module";
 
 @NgModule({
     declarations: [
@@ -20,8 +20,7 @@ import { HomePageContentComponent } from './home-page/home-page-content.componen
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule
+    TicketModule
   ],
   providers: [],
   bootstrap: [AppComponent]
