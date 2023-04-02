@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Customer} from '../../model/customer';
+import {CustomerService} from '../../service/customer.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -6,10 +8,87 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
+  idDelete: number;
+  nameDelete: string;
+  customers: Customer[];
+  name = '';
+  idCard = '';
+  phoneNumber = '';
+  starDate = '';
+  endDate = '';
+  page = 0;
+  pageSize = 10;
+  pageCount = 0;
+  pageNumbers: number[] = [];
+  color = 'yellow';
+  message: string;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private customerService: CustomerService) {
   }
 
+  ngOnInit(): void {
+    this.getAll();
+  }
+
+  onSearch(name: string, idCard: string, phoneNumber: string, starDate: string, endDate: string) {
+    this.name = name;
+    this.idCard = idCard;
+    this.phoneNumber = phoneNumber;
+    this.starDate = starDate;
+    this.endDate = endDate;
+    this.getAll();
+  }
+
+  getAll() {
+    this.customerService.getAll(this.name, this.idCard, this.phoneNumber, this.starDate, this.endDate, this.page, this.pageSize)
+      .subscribe(customeres => {
+        this.customers = customeres.content;
+        this.pageCount = customeres.totalPages;
+        this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);
+        this.message = null;
+      }, error => {
+        this.message = 'Dữ liệu bạn vừa nhập không khớp trong cơ sử dữ liệu!';
+      });
+  }
+
+  previousPage() {
+    if (this.page > 0) {
+      this.page--;
+      this.getAll();
+    }
+  }
+
+  nextPage() {
+    if (this.page < (this.pageCount - 1)) {
+      this.page++;
+      this.getAll();
+    }
+  }
+
+  goToPage(pageNumber: number) {
+    this.page = pageNumber - 1;
+    this.getAll();
+  }
+
+  delete(id: number, name: string) {
+    this.idDelete = id;
+    this.nameDelete = name;
+  }
+
+  deletes(idDelete: number) {
+    this.message = null;
+    this.customerService.deleteCustomer(idDelete).subscribe(() => {
+      this.getAll();
+      this.message = 'ok';
+    }, error => {
+      // this.getAll();
+      if (error.status === 404) {
+        this.message = 'Xóa khách hàng không thành công, khách hàng đã bị xóa hoặc không tồn tại trong cơ sở dữ liệu';
+      } else if (error.status === 405) {
+        this.message = 'Xóa không thành công, Khách hàng hiện tại vẫn còn thời hạn vé.';
+      } else {
+        this.message = 'Lỗi kết nối';
+      }
+    });
+  }
 }
