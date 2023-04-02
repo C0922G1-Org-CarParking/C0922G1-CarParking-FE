@@ -37,6 +37,15 @@ export class CustomerListComponent implements OnInit {
     this.phoneNumber = phoneNumber;
     this.starDate = starDate;
     this.endDate = endDate;
+    this.customerService.getAll(this.name, this.idCard, this.phoneNumber, this.starDate, this.endDate, this.page, this.pageSize)
+      .subscribe(customeres => {
+        this.customers = customeres.content;
+        this.pageCount = customeres.totalPages;
+        this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);
+        this.message = null;
+      }, error => {
+        Swal.fire('Dữ liệu bạn vừa nhập không khớp trong cơ sử dữ liệu!', '', 'error');
+      });
     this.getAll();
   }
 
@@ -47,8 +56,6 @@ export class CustomerListComponent implements OnInit {
         this.pageCount = customeres.totalPages;
         this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);
         this.message = null;
-      }, error => {
-        Swal.fire('Dữ liệu bạn vừa nhập không khớp trong cơ sử dữ liệu!', '', 'error');
       });
   }
 
