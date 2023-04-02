@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
-
+import {ErrorPageComponent} from './error-page/error-page.component';
 
 const routes: Routes = [
   {
@@ -30,8 +29,11 @@ const routes: Routes = [
     path: 'location',
     loadChildren: () => import('./location/location.module').then(module => module.LocationModule)
   }, {
+    path: 'error',
+    component: ErrorPageComponent
+  }, {
     path: '**',
-    component: PageNotFoundComponent
+    component: ErrorPageComponent
   }
 ];
 
