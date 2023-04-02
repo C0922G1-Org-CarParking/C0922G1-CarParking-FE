@@ -5,7 +5,6 @@ import {LocationDetailComponent} from './location-detail/location-detail.compone
 import {LocationCreateComponent} from './location-create/location-create.component';
 import {LocationUpdateComponent} from './location-update/location-update.component';
 import {LocationMapComponent} from './location-map/location-map.component';
-import {LocationCustomerDetailComponent} from "./location-customer-detail/location-customer-detail.component";
 
 
 const routes: Routes = [
@@ -17,7 +16,7 @@ const routes: Routes = [
     path: 'list',
     component: LocationListComponent,
   }, {
-    path: '#1',
+    path: 'detail/:id',
     component: LocationDetailComponent,
   }, {
     path: 'create',
@@ -26,12 +25,8 @@ const routes: Routes = [
     path: '#2',
     component: LocationUpdateComponent,
   }, {
-    path: 'mapParking',
+    path: 'mapParking/:id',
     component: LocationMapComponent,
-  },
-  {
-    path: 'detailLocationWithCustomer/:id',
-    component: LocationCustomerDetailComponent,
   }
 ];
 

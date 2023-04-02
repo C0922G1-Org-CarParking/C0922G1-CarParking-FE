@@ -14,11 +14,14 @@ export class LocationService {
 
   constructor(private http: HttpClient) {
   }
-  findByLIdLocationAndCustomerDetail(id: number):Observable<LocationDetailDto>{
+  findLocationByIdAndCustomerDetail(id: number):Observable<LocationDetailDto>{
     return this.http.get<LocationDetailDto>('http://localhost:8080/location/findLocationById?id=' + id)
   }
   findAllLocationInFloor(id: number): Observable<ILocation[]> {
-    return this.http.get<ILocation[]>('http://localhost:8080/location/mapParking?id=' + id);
+    return this.http.get<ILocation[]>('http://localhost:8080/location/mapParking?idFloor=' + id);
+  }
+  findLocationEmptyById(id: number):Observable<ILocation>{
+    return this.http.get<ILocation>('http://localhost:8080/location/findLocationEmptyById?id=' + id)
   }
 
 }

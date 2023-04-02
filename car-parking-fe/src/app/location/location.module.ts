@@ -7,11 +7,10 @@ import { LocationListComponent } from './location-list/location-list.component';
 import { LocationDetailComponent } from './location-detail/location-detail.component';
 import { LocationUpdateComponent } from './location-update/location-update.component';
 import { LocationMapComponent } from './location-map/location-map.component';
-import { LocationCustomerDetailComponent } from './location-customer-detail/location-customer-detail.component';
 
 
 @NgModule({
-  declarations: [LocationCreateComponent, LocationListComponent, LocationDetailComponent, LocationUpdateComponent, LocationMapComponent, LocationCustomerDetailComponent],
+  declarations: [LocationCreateComponent, LocationListComponent, LocationDetailComponent, LocationUpdateComponent, LocationMapComponent],
   imports: [
     CommonModule,
     LocationRoutingModule

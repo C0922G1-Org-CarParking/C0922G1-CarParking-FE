@@ -1,3 +1,6 @@
+import {Floor} from "./floor";
+import {Section} from "./section";
+
 export interface LocationDetailDto {
   locationName?: string;
   sectionName?: string;
@@ -9,4 +12,5 @@ export interface LocationDetailDto {
   nameCarType?: string;
   nameCar?: string;
   dateOfBirth?: string;
+
 }
