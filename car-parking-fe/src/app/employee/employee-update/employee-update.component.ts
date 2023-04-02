@@ -16,7 +16,18 @@ export class EmployeeUpdateComponent implements OnInit {
 
   position: IPosition[] = [];
   employee: Employee;
-
+  errors = {
+    name: '',
+    dateOfBirth: '',
+    gender: '',
+    email: '',
+    idCard: '',
+    province: '',
+    district: '',
+    commune: '',
+    street: '',
+    phoneNumber: '',
+  };
   employeeGroup: FormGroup = new FormGroup({
 
     id: new FormControl(),
@@ -68,7 +79,8 @@ export class EmployeeUpdateComponent implements OnInit {
     // tslint:disable-next-line:radix
     this.employeeService.getAllCommune(parseInt(value)).subscribe(next => {
       this.communeList = next.data.data;
-    });
+    }
+      );
   }
 
   getCommune(value: string) {
@@ -91,7 +103,51 @@ export class EmployeeUpdateComponent implements OnInit {
           'Your file has been updated.',
           'success'
         );
-      });
+      }, error => {
+          console.log(error);
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Chỉnh sửa!',
+            text: 'Chỉnh sửa thất bại vui lòng điền đúng tất cả thông tin',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          // tslint:disable-next-line:prefer-for-of
+          for (let i = 0; i < error.error.length; i++) {
+            if (error.error && error.error[i].field === 'email') {
+              this.errors.email = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'phoneNumber') {
+              this.errors.phoneNumber = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'idCard') {
+              this.errors.idCard = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'name') {
+              this.errors.name = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'dateOfBirth') {
+              this.errors.dateOfBirth = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'province') {
+              this.errors.province = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'district') {
+              this.errors.district = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'commune') {
+              this.errors.commune = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'street') {
+              this.errors.street = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'phoneNumber') {
+              this.errors.phoneNumber = error.error[i].defaultMessage;
+            }
+          }
+        }
+      );
     }
   }
 

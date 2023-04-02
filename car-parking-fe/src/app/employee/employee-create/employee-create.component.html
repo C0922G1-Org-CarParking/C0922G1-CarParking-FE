@@ -26,11 +26,9 @@
                      *ngIf="
                    employeeGroup.controls.name.hasError('pattern') && employeeGroup.controls.name.touched">
                     Họ tên không đúng định dạng.</p>
-
-                  <!--                <p style="color: red; position: absolute"-->
-                  <!--                   *ngIf="errors.name && !employeeGroup.controls.name.hasError('required')-->
-                  <!--                   && !employeeGroup.controls.name.hasError('pattern')">{{errors.name}}</p>-->
-
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.name && !employeeGroup.controls.code.hasError('required') &&
+                      !employeeGroup.controls.name.hasError('pattern')">{{errors.name}}</p>
 
                 </div>
               </div>
@@ -68,6 +66,10 @@
                      *ngIf="
                    employeeGroup.controls.idCard.hasError('pattern') && employeeGroup.controls.idCard.touched">
                     CCCD không đúng định dạng.</p>
+
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.idCard && !employeeGroup.controls.idCard.hasError('required') &&
+                      !employeeGroup.controls.idCard.hasError('pattern')">{{errors.idCard}}</p>
                 </div>
               </div>
               <div class="row align-items-center py-3 col-md-6">
@@ -104,10 +106,10 @@
                      *ngIf="
                    employeeGroup.controls.email.hasError('pattern') && employeeGroup.controls.email.touched">
                     Email không đúng định dạng.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.email && !employeeGroup.controls.email.hasError('required') &&
+                      !employeeGroup.controls.email.hasError('pattern')">{{errors.email}}</p>
 
-                  <!--                <p style="color: red; position: absolute"-->
-                  <!--                   *ngIf="errors.email && !employeeGroup.controls.email.hasError('required') &&-->
-                  <!--                    !employeeGroup.controls.email.hasError('pattern')">1{{errors.email}}</p>-->
                 </div>
               </div>
               <div class="row align-items-center py-3 col-md-6">
@@ -150,6 +152,10 @@
                      *ngIf="
                    employeeGroup.controls.phoneNumber.hasError('pattern') && employeeGroup.controls.phoneNumber.touched">
                     phone Number không đúng định dạng.</p>
+
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.phoneNumber && !employeeGroup.controls.phoneNumber.hasError('required') &&
+                      !employeeGroup.controls.phoneNumber.hasError('pattern')">{{errors.phoneNumber}}</p>
 
                 </div>
               </div>
