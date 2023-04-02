@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Customer} from '../../model/customer';
 import {CustomerService} from '../../service/customer.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-customer-list',
@@ -17,7 +18,7 @@ export class CustomerListComponent implements OnInit {
   starDate = '';
   endDate = '';
   page = 0;
-  pageSize = 10;
+  pageSize = 5;
   pageCount = 0;
   pageNumbers: number[] = [];
   color = 'yellow';
@@ -47,7 +48,7 @@ export class CustomerListComponent implements OnInit {
         this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);
         this.message = null;
       }, error => {
-        this.message = 'Dữ liệu bạn vừa nhập không khớp trong cơ sử dữ liệu!';
+        Swal.fire('Dữ liệu bạn vừa nhập không khớp trong cơ sử dữ liệu!', '', 'error');
       });
   }
 
@@ -78,16 +79,15 @@ export class CustomerListComponent implements OnInit {
   deletes(idDelete: number) {
     this.message = null;
     this.customerService.deleteCustomer(idDelete).subscribe(() => {
+      Swal.fire( 'Xóa khách hàng thành công', '', 'success');
       this.getAll();
-      this.message = 'ok';
     }, error => {
-      // this.getAll();
       if (error.status === 404) {
-        this.message = 'Xóa khách hàng không thành công, khách hàng đã bị xóa hoặc không tồn tại trong cơ sở dữ liệu';
+        Swal.fire('Xóa khách hàng không thành công, khách hàng đã bị xóa hoặc không tồn tại trong cơ sở dữ liệu', '', 'success');
       } else if (error.status === 405) {
-        this.message = 'Xóa không thành công, Khách hàng hiện tại vẫn còn thời hạn vé.';
+        Swal.fire('Xóa không thành công, Khách hàng hiện tại vẫn còn thời hạn vé.', '', 'error');
       } else {
-        this.message = 'Lỗi kết nối';
+        Swal.fire('Lỗi kết nối', '', 'error');
       }
     });
   }

@@ -17,10 +17,6 @@ export class CustomerService {
       + '&name=' + name + '&idCard=' + idCard + '&phoneNumber=' + phoneNumber + '&starDate=' + starDate + '&endDate=' + endDate);
   }
 
-  findCustomerbyId(id: number): Observable<Customer> {
-    return this.http.get<Customer>('http://localhost:8080/customerRest/' + id);
-  }
-
   deleteCustomer(id: number): Observable<string> {
     return this.http.delete<string>('http://localhost:8080/customerRest/' + id + '/delete');
   }
