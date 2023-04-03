@@ -33,21 +33,6 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
-    this.employeeService.getAllProvince().subscribe(next => {
-      // tslint:disable-next-line:radix
-      this.province = next.data.data.filter(n => n.code === parseInt(this.employee.province))[0].name;
-
-      // tslint:disable-next-line:radix no-shadowed-variable
-      this.employeeService.getAllDistrict(parseInt(this.employee.province)).subscribe(next => {
-        // tslint:disable-next-line:radix
-        this.district = next.data.data.filter(n => n.code === parseInt(this.employee.district))[0].name;
-      });
-      // tslint:disable-next-line:radix no-shadowed-variable
-      this.employeeService.getAllCommune(parseInt(this.employee.district)).subscribe(next => {
-        // tslint:disable-next-line:radix
-        this.commune = next.data.data.filter(n => n.code === parseInt(this.employee.commune))[0].name;
-      });
-    });
   }
 
   getAll() {

@@ -45,7 +45,13 @@ export class EmployeeCreateComponent implements OnInit {
   provinceList: any;
   districtList: any;
   communeList: any;
-
+  /**
+   * Created by: DinhNTC
+   * Date created: 4/03/2023
+   * Function: get value api province
+   *
+   * @return data province
+   */
   getProvince(value: string) {
     console.log(value);
     // tslint:disable-next-line:radix
@@ -55,7 +61,13 @@ export class EmployeeCreateComponent implements OnInit {
       this.districtList = next.data.data;
     });
   }
-
+  /**
+   * Created by: DinhNTC
+   * Date created: 4/03/2023
+   * Function: get value district
+   *
+   * @return data api province
+   */
   getDistrict(value: string) {
     console.log(value);
     // tslint:disable-next-line:radix
@@ -87,7 +99,7 @@ export class EmployeeCreateComponent implements OnInit {
   }
 
 
-  submit() {
+  submitAdd() {
     if (this.employeeGroup.valid) {
       this.employeeService?.addEmployee(this.employeeGroup.value).subscribe(next => {
           this.router.navigateByUrl('/employee/list');

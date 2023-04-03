@@ -94,9 +94,9 @@ export class EmployeeUpdateComponent implements OnInit {
     });
   }
 
-  submit() {
+  submitUpdate() {
     if (this.employeeGroup.valid) {
-      this.employeeService.edit(this.employeeGroup.value).subscribe(next => {
+      this.employeeService.editEmployee(this.employeeGroup.value).subscribe(next => {
         this.router.navigateByUrl('employee/list');
         Swal.fire(
           'Updated!',
