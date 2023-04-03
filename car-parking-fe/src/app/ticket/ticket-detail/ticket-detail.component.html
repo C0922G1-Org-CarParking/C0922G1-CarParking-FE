@@ -153,9 +153,14 @@
         </div>
       </div>
       <div class=" text-center">
-        <button type="reset" class="btn m-4 w-25" style="background-color: #e4e6eb">Quay lại</button>
-        <button type="reset" class="btn m-4 w-25" style="background-color: darkorange">Chỉnh sửa</button>
-        <button type="submit" class="btn m-4 w-25" style="background-color: darkorange" data-bs-toggle="modal"
+        <button routerLink="ticket/list" type="reset" class="btn m-4 w-25" style="background-color: #e4e6eb">Quay lại</button>
+        <button routerLink="ticket/edit/{{ticketDetail.ticketId}}}" type="reset" class="btn m-4 w-25" style="background-color: darkorange">Chỉnh sửa</button>
+        <button (click)="setInfoDelete(
+        ticketDetail.ticketId,
+        ticketDetail.customerName,
+        ticketDetail.plateNumber,
+        ticketDetail.expiryDate
+        )" type="submit" class="btn m-4 w-25" style="background-color: darkorange" data-bs-toggle="modal"
                 data-bs-target="#deleteModal">Xóa
         </button>
       </div>
@@ -163,7 +168,7 @@
   </div>
 </div>
 
-<!--modal xóa-->
+<!--modal delete-->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -193,7 +198,10 @@
       </div>
       <div class="modal-footer">
         <button type="reset" class="btn" style="background-color: #e4e6eb" data-bs-dismiss="modal">Hủy</button>
-        <button class="btn" style="background-color: darkorange" data-bs-toggle="modal" data-bs-target="#warning">Xóa</button>
+        <button *ngIf="isTicketExpired" class="btn" style="background-color: darkorange" (click)="delete()">Xóa</button>
+        <button *ngIf="!isTicketExpired" class="btn" style="background-color: darkorange" data-bs-toggle="modal"
+                data-bs-target="#warning">Xóa
+        </button>
       </div>
     </div>
   </div>

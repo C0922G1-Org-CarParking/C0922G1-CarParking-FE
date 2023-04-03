@@ -5,7 +5,7 @@
       DANH SÁCH VÉ</h1>
     <!--                     Tìm kiếm-->
     <div *ngIf="formSearchTicket" class="col-10 row ms-2 mb-2" [formGroup]="formSearchTicket">
-      <div class=" d-flex mt-2 mb-2 col-4 col-md-6 col-sm-12  align-items-center">
+      <div class=" d-flex mt-2 mb-2 col-4 col-md-6 col-sm-12 row align-items-center">
         <label style="white-space: nowrap;" for="nameCustomer" class="form-label me-3">Tên
           khách hàng:</label>
         <input formControlName="customerName" type="text" class="form-control" id="nameCustomer">
@@ -68,14 +68,14 @@
       <div class="col-md-2">
         <table>
           <tr>
-            <td>
+            <td class="border-0">
               <a (click)="setStatusSearchAllDefault()" class="btn badge m-2"
                  style="background-color: darkorange; color: #212529;">
                 Vé còn hạn
                 (chưa xóa)
               </a>
             </td>
-            <td>
+            <td class="border-0">
               <a (click)="setStatusSearchAllExpired()" class="btn badge m-2"
                  style="background-color: darkorange; color: #212529;">
                Vé hết hạn
@@ -127,7 +127,7 @@
                                          </span>
           </td>
           <td>
-                                         <span>
+                                         <span routerLink="ticket/edit/{{ticket.ticketId}}">
                                              <i class="fa-regular fa-pen-to-square" style="color:#ef8500;"></i>
                                          </span>
           </td>
@@ -150,13 +150,12 @@
             <span class="ms-3">Server đang mất kết nối</span>
           </td>
         </tr>
-
         </tbody>
       </table>
     </div>
     <div class="row m-2">
       <div class="mb-2 col-md-4 col-sm-6" style=" margin-bottom: 20px;margin-top: 5px">
-        <button class="btn" style=" background-color: darkorange; white-space: nowrap;">Thêm mới</button>
+        <button class="btn" routerLink="ticket/create" style=" background-color: darkorange; white-space: nowrap;">Thêm mới</button>
       </div>
       <div class="mb-8 col-md-4 col-sm-0"></div>
 <!--      Phân trang-->

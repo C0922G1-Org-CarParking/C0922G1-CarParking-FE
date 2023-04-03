@@ -3,8 +3,8 @@ import {TicketService} from "../../service/ticket.service";
 import {TicketType} from "../../model/ticket-type";
 import {Floor} from "../../model/floor";
 import {FormControl, FormGroup} from "@angular/forms";
-import {TicketDto} from "../../model/ticket-dto";
-import {Observable} from "rxjs";
+import {TicketDtoForList} from "../../model/ticket-dto-for-list";
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-ticket-list',
@@ -24,7 +24,7 @@ export class TicketListComponent implements OnInit {
   private ticketPage: any;
   public ticketTypeList: TicketType[];
   public floorList: Floor[];
-  public ticketList: TicketDto[];
+  public ticketList: TicketDtoForList[];
   public ticketPageNumber: number = 0;
   public isServerOnline: boolean = false;
   public idDelete: number;
@@ -44,14 +44,14 @@ export class TicketListComponent implements OnInit {
 
   initForm() {
     this.formSearchTicket = new FormGroup({
-      customerName: new FormControl(''),
-      customerPhone: new FormControl(''),
-      employeeName: new FormControl(''),
-      employeePhone: new FormControl(''),
-      floor: new FormControl(''),
-      expiryDate: new FormControl(''),
-      ticketType: new FormControl(''),
-      status: new FormControl('')
+      customerName: new FormControl(this.customerNameSearch),
+      customerPhone: new FormControl(this.customerPhoneSearch),
+      employeeName: new FormControl(this.employeeNameSearch),
+      employeePhone: new FormControl(this.employeePhoneSearch),
+      floor: new FormControl(this.floorSearch),
+      expiryDate: new FormControl(this.expiryDateSearch),
+      ticketType: new FormControl(this.ticketTypeSearch),
+      status: new FormControl(this.statusSearch)
     });
   }
 
@@ -87,34 +87,28 @@ export class TicketListComponent implements OnInit {
 
   setValueSearch() {
     if (this.isSearchTicket) {
-      this.customerNameSearch = this.formSearchTicket?.value?.customerName;
-      this.customerPhoneSearch = this.formSearchTicket?.value?.customerPhone;
-      this.employeeNameSearch = this.formSearchTicket?.value?.employeeName;
-      this.employeePhoneSearch = this.formSearchTicket?.value?.employeePhone;
-      this.floorSearch = this.formSearchTicket?.value?.floor;
-      this.expiryDateSearch = this.formSearchTicket?.value?.expiryDate;
-      this.ticketTypeSearch = this.formSearchTicket?.value?.ticketType;
       this.statusSearch = this.formSearchTicket?.value?.status;
-      this.getListTicket();
+      this.setOtherValuesSearch();
     } else {
       if (this.isSearchExpired) {
         this.statusSearch = 3;
-        this.setValueSearchAll();
+        this.setOtherValuesSearch();
       } else {
         this.statusSearch = '';
-        this.setValueSearchAll();
+        this.setOtherValuesSearch();
       }
     }
   }
 
-  setValueSearchAll() {
-    this.customerNameSearch = '';
-    this.customerPhoneSearch = '';
-    this.employeeNameSearch = '';
-    this.employeePhoneSearch = '';
-    this.floorSearch = '';
-    this.expiryDateSearch = '';
-    this.ticketTypeSearch = '';
+  setOtherValuesSearch() {
+    this.customerNameSearch = this.formSearchTicket?.value?.customerName;
+    this.customerPhoneSearch = this.formSearchTicket?.value?.customerPhone;
+    this.employeeNameSearch = this.formSearchTicket?.value?.employeeName;
+    this.employeePhoneSearch = this.formSearchTicket?.value?.employeePhone;
+    this.floorSearch = this.formSearchTicket?.value?.floor;
+    this.expiryDateSearch = this.formSearchTicket?.value?.expiryDate;
+    this.ticketTypeSearch = this.formSearchTicket?.value?.ticketType;
+    debugger
     this.getListTicket();
   }
 
@@ -126,6 +120,7 @@ export class TicketListComponent implements OnInit {
   }
 
   getListTicket(page?: number) {
+    debugger
     this.setPageNumber(page);
     this.ticketService.searchTicket(
       this.customerNameSearch,
@@ -133,15 +128,16 @@ export class TicketListComponent implements OnInit {
       this.employeeNameSearch,
       this.employeePhoneSearch,
       this.floorSearch,
-      this.ticketTypeSearch,
       this.expiryDateSearch,
+      this.ticketTypeSearch,
       this.statusSearch,
       this.ticketPageNumber).subscribe((ticketPage) => {
       this.ticketPage = ticketPage;
-      this.ticketList = this.ticketPage.content;
       debugger
+      this.ticketList = this.ticketPage.content;
       this.initForm();
     });
+    debugger
   }
   setPageNumber(page?: number) {
     if (!(page === 0) && !(page === undefined)) {
@@ -173,7 +169,21 @@ export class TicketListComponent implements OnInit {
   }
 
   delete() {
-    this.ticketService.deleteTicket(this.idDelete);
+    this.ticketService.deleteTicket(this.idDelete).subscribe(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }, error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href="">Xóa thất bại</a>'
+      })
+    });
   }
 
 }

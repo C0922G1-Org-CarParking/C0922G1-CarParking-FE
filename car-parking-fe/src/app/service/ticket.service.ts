@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs";
-import {TicketDto} from "../model/ticket-dto";
+import {TicketDtoForList} from "../model/ticket-dto-for-list";
 import {TicketType} from "../model/ticket-type";
 import {Floor} from "../model/floor";
 
@@ -37,17 +37,16 @@ export class TicketService {
       status,
       page
     };
-    console.log(params)
     const query = Object.entries(params)
       .filter(([_, value]) => value !== undefined && value !== null)
       .map(([key, value]) => `${key}=${value}`)
       .join('&&');
-
+    debugger
     return this.http.get<any>(`http://localhost:8080/ticket/search?${query}`);
   }
 
-  findById(id: number): Observable<TicketDto> {
-    return this.http.get<TicketDto>(`http://localhost:8080/ticket/detail/${id}`);
+  findById(id: number): Observable<TicketDtoForList> {
+    return this.http.get<TicketDtoForList>(`http://localhost:8080/ticket/detail/${id}`);
   }
 
   findAllTicketType(): Observable<TicketType[]> {
@@ -58,7 +57,7 @@ export class TicketService {
     return this.http.get<Floor[]>(`http://localhost:8080/ticket/floor`)
   }
 
-  deleteTicket(idDelete: number): void {
-    this.http.delete(`http://localhost:8080/ticket/delete/${idDelete}`)
+  deleteTicket(idDelete: number): Observable<any> {
+    return this.http.delete<any>(`http://localhost:8080/ticket/delete/${idDelete}`)
   }
 }

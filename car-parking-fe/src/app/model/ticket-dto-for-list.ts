@@ -1,4 +1,4 @@
-export interface TicketDto {
+export interface TicketDtoForList {
   ticketId?: number;
   plateNumber?: string;
   customerName?: string;
