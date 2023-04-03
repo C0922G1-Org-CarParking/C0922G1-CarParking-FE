@@ -1,15 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomerService} from "../../service/customer.service";
-import {CarService} from "../../service/car.service";
-import {CarTypeService} from "../../service/car-type.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-
-import {CarType} from "../../model/car-type";
-import {Car} from "../../model/car";
-import {CustomerVu} from "../../model/customer-vu";
-import Swal from "sweetalert2";
-
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {CarType} from '../../model/car-type';
+import {Car} from '../../model/car';
+import {CustomerService} from '../../service/customer.service';
+import {CarService} from '../../service/car.service';
+import {CarTypeService} from '../../service/car-type.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import Swal from 'sweetalert2';
+import {CustomerVu} from '../../model/customer-vu';
 
 @Component({
   selector: 'app-customer-update',
@@ -23,8 +21,8 @@ export class CustomerUpdateComponent implements OnInit {
   carList: Car[] = [];
   formCreateCar: FormGroup;
   id: number;
-  valueProvince: string ="";
-  valueDistrict: string ="";
+  valueProvince = '';
+  valueDistrict = '';
   item: Car = {};
   districtList: any;
   provinceList: any;
@@ -36,19 +34,18 @@ export class CustomerUpdateComponent implements OnInit {
               private carTypeService: CarTypeService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
-
+    this.activatedRoute.paramMap.subscribe(paramMap => {
+      this.id = +paramMap.get('id');
+      console.log(this.id);
+      this.createFormCar(this.id);
+      this.getCustomerById(this.id);
+    });
   }
 
   ngOnInit(): void {
-
     this.customerService.getAllProvince().subscribe(next => {
-      this.provinceList = next.data.data});
-    this.activatedRoute.paramMap.subscribe(paramMap => {
-      this.id = +paramMap.get('id')
-      this.createFormCar(1)
-      this.getCustomerById(1);
-
-    })
+      this.provinceList = next.data.data;
+    });
   }
 
 
@@ -62,12 +59,12 @@ export class CustomerUpdateComponent implements OnInit {
           // Reactive form group for customer information
           this.formEditCustomer = new FormGroup({
             id: new FormControl(customer.id),
-            name: new FormControl(customer.name, [Validators.required,Validators.maxLength(30)]),
-            idCard: new FormControl(customer.idCard, [Validators.required,Validators.pattern('^(\\d{9}|\\d{12})$')]),
+            name: new FormControl(customer.name, [Validators.required, Validators.maxLength(30)]),
+            idCard: new FormControl(customer.idCard, [Validators.required, Validators.pattern('^(\\d{9}|\\d{12})$')]),
             gender: new FormControl(customer.gender, [Validators.required]),
             dateOfBirth: new FormControl(customer.dateOfBirth, [Validators.required]),
-            phoneNumber: new FormControl(customer.phoneNumber, [Validators.required,Validators.pattern('^(((\\+|)84)|0)(3|5|7|8|9)+([0-9]{8})$')]),
-            email: new FormControl(customer.email, [Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]),
+            phoneNumber: new FormControl(customer.phoneNumber, [Validators.required, Validators.pattern('^(((\\+|)84)|0)(3|5|7|8|9)+([0-9]{8})$')]),
+            email: new FormControl(customer.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]),
             province: new FormControl(customer.province, [Validators.required]),
             district: new FormControl(customer.district, [Validators.required]),
             commune: new FormControl(customer.commune, [Validators.required]),
@@ -86,20 +83,20 @@ export class CustomerUpdateComponent implements OnInit {
           });
         });
       });
-    })
+    });
 
   }
 
   createFormCar(id: number) {
     this.customerService.findCustomerById(id).subscribe(custom => {
       this.formCreateCar = new FormGroup({
-        name: new FormControl('', [Validators.required,Validators.pattern('^[a-zA-Z]+$')]),
-        brand: new FormControl('', [Validators.required,Validators.pattern('^[a-zA-Z]+$')]),
+        name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
+        brand: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
         carType: new FormControl('', [Validators.required]),
-        plateNumber: new FormControl('', [Validators.required,Validators.pattern('^[A-Z1-9]+$')]),
+        plateNumber: new FormControl('', [Validators.required, Validators.pattern('^[A-Z1-9]+$')]),
         customer: new FormControl(custom),
       });
-    })
+    });
   }
 
   addCar() {
@@ -147,31 +144,31 @@ export class CustomerUpdateComponent implements OnInit {
       this.carList = carListFormArray.getRawValue();
     }
   }
+
   getProvince(value: string) {
     this.valueProvince = value;
     this.customerService.getAllDistrict(parseInt(value)).subscribe(next => {
-      this.districtList = next.data.data
-    })
+      this.districtList = next.data.data;
+    });
   }
 
   getDistrict(value: string) {
     this.valueDistrict = value;
-    if (this.valueProvince === "") {
-      Swal.fire('Bạn phải chọn Tỉnh.', '', 'error')
+    if (this.valueProvince === '') {
+      Swal.fire('Bạn phải chọn Tỉnh.', '', 'error');
     }
     this.customerService.getAllCommune(parseInt(value)).subscribe(next => {
-      this.communeList = next.data.data
-    })
+      this.communeList = next.data.data;
+    });
   }
 
   getCommune(value: string) {
-    if (this.valueDistrict === "") {
-      Swal.fire('Bạn phải chọn Quận/Huyện.', '', 'error')
+    if (this.valueDistrict === '') {
+      Swal.fire('Bạn phải chọn Quận/Huyện.', '', 'error');
     }
   }
 
   updateCustomer(id: number) {
-    debugger
     const customerCar = this.formEditCustomer.value;
     this.customerService.updateCustomer(id, customerCar).subscribe(() => {
       this.Swal.fire({
@@ -180,7 +177,7 @@ export class CustomerUpdateComponent implements OnInit {
         icon: 'success',
         confirmButtonText: 'Ok'
       });
-    })
+    });
   }
 }
 
