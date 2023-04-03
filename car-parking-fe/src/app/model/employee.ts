@@ -1,4 +1,4 @@
-import {IPosition} from "./iposition";
+import {IPosition} from './iposition';
 
 export interface Employee {
   id: number;

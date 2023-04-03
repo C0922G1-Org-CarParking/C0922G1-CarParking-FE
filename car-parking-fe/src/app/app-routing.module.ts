@@ -26,14 +26,19 @@ const routes: Routes = [
     path: 'statistic',
     loadChildren: () => import('./statistic/statistic.module').then(module => module.StatisticModule)
   }, {
-    path: 'location',
-    loadChildren: () => import('./location/location.module').then(module => module.LocationModule)
+    path: 'security',
+    loadChildren: () => import('./security-authentication/security-authentication.module')
+      .then(module => module.SecurityAuthenticationModule)
   }, {
     path: 'error',
     component: ErrorPageComponent
   }, {
+    path: 'location',
+    loadChildren: () => import('./location/location.module').then(module => module.LocationModule)
+  }, {
     path: '**',
-    component: ErrorPageComponent
+    pathMatch: 'full',
+    redirectTo: 'error'
   }
 ];
 

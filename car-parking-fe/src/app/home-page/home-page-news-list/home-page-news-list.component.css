@@ -24,9 +24,9 @@ h5 .card-title
   font-family: "Raleway", sans-serif;
 }
 
-#main {
-  margin-top: 30px;
-}
+/*#main {*/
+/*  margin-top: 72px;*/
+/*}*/
 
 /*--------------------------------------------------------------
 # Section
@@ -45,16 +45,11 @@ section {
   padding-bottom: 30px;
 }
 
-.section-title h2 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #c2b7b1;
-  margin-top: 12px;
-}
 
 .section-title p {
+  margin-bottom: 0;
   position: relative;
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 700;
   color: #4e4039;
 }
