@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'http://localhost:8080',
   firebaseConfig: {
     apiKey: 'AIzaSyDzI7j_aBdKw1D_j_zWwyCSKHWSii7WzEc',
     authDomain: 'car-parking-project-145a6.firebaseapp.com',
