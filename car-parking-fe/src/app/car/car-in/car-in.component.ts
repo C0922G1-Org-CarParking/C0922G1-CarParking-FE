@@ -9,12 +9,14 @@ import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-car-in',
   templateUrl: './car-in.component.html',
   styleUrls: ['./car-in.component.css']
 })
 export class CarInComponent implements OnInit {
+  dataList: ICarInOut[];
   plateNumberImage?: File;
   carIn?: ICarInOut;
   timeIn?: any;
@@ -25,8 +27,8 @@ export class CarInComponent implements OnInit {
   constructor(private carInOutService: CarInOutService,
               private router: Router,
               private storage: AngularFireStorage
-  ) {
-  }
+  ) {}
+
 
   ngOnInit(): void {
   }
@@ -146,5 +148,26 @@ export class CarInComponent implements OnInit {
         });
       }
     });
+  }
+  searchCarIn(carPlateNumber: string,
+              customerName: string,
+              customerPhoneNumber: string) {
+
+    this.carInOutService.searchCarIn(customerName, customerPhoneNumber, carPlateNumber).subscribe(carInList => {
+      console.log(carInList);
+      this.dataList = carInList;
+    })
+  }
+
+  selectCar(carId: number) {
+    debugger
+    for (let i = 0; i < this.dataList.length; i++) {
+      debugger
+      if (this.dataList[i].carId == carId) {
+        this.carIn = this.dataList[i];
+        console.log(this.carIn);
+        return;
+      }
+    }
   }
 }

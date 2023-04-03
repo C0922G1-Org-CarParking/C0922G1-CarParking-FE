@@ -5,13 +5,13 @@ import {CarInComponent} from './car-in/car-in.component';
 import {FormsModule} from '@angular/forms';
 import { CarOutComponent } from './car-out/car-out.component';
 
-
 @NgModule({
+
   declarations: [CarInComponent, CarOutComponent],
-  imports: [
-    CommonModule,
-    CarRoutingModule,
-    FormsModule,
-  ]
+    imports: [
+        CommonModule,
+        CarRoutingModule,
+        FormsModule,
+    ]
 })
 export class CarModule { }

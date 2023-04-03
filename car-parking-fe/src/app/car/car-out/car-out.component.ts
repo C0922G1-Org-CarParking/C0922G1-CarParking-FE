@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
+import {isFromDtsFile} from "@angular/compiler-cli/src/ngtsc/util/src/typescript";
 
 @Component({
   selector: 'app-car-out',
@@ -18,11 +19,13 @@ export class CarOutComponent implements OnInit {
   timeOut?: any;
   now: any;
   urlCarOutImage: string;
+  dataList: ICarInOut[];
 
   constructor(private carInOutService: CarInOutService,
               private router: Router,
               private storage: AngularFireStorage) {
   }
+
 
   ngOnInit(): void {
   }
@@ -133,5 +136,25 @@ export class CarOutComponent implements OnInit {
       }, 3000);
     }, error => {
     });
+  }
+  searchCarOut(carPlateNumber: string,
+               customerName: string,
+               customerPhoneNumber: string) {
+
+    this.carInOutService.searchCarOut(customerName, customerPhoneNumber, carPlateNumber).subscribe(carInList => {
+      console.log(carInList);
+      this.dataList = carInList;
+    })
+  }
+
+  selectCar(carId: number) {
+    for (let i = 0; i < this.dataList.length; i++) {
+      debugger
+      if (this.dataList[i].carId == carId) {
+        this.carOut = this.dataList[i];
+        console.log(this.carOut);
+        return;
+      }
+    }
   }
 }
