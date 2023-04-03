@@ -21,7 +21,7 @@ import { HomePageContentComponent } from './home-page/home-page-content.componen
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
