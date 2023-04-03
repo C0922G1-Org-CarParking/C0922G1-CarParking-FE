@@ -139,7 +139,6 @@
                           [style.background-color]="location.occupied ? 'red' : 'green'" class="btn btn-danger">
                     <p style="transform: rotate(228deg); margin-top: 15%">{{location.name}}</p>
                     <span style="transform: rotate(226deg)">{{showDetailLocation}}</span>
-
                   </button>
                 </div>
               </ng-container>
@@ -157,13 +156,11 @@
     <div style="float: left ;margin-top:9%;  ">
       <p> Số chỗ trống: {{locationEmpty}}</p>
       <p>Bản đồ tầng:
-        <a class="btn btn-outline-warning" [ngClass]="{'disabled': idFloor===1}" (click)="previous()">Trước</a> <a
-          class="btn btn-warning">{{idFloor}}</a><a
-         *ngIf="idFloor < totalPage" class="btn btn-outline-warning" (click)="total()">4</a>
-        <a class="btn btn-outline-warning" [ngClass]="{'disabled': idFloor=== totalPage-1}" (click)="next()">Sau</a>
+          <a class="btn btn-outline-warning" [ngClass]="{'disabled': idFloor===1}" (click)="previous()">Trước</a>
+        <a class="btn btn-outline-warning" *ngFor="let floor of totalPage"  [style.background-color]="idFloor == floor.id ? 'orangered' : ''" (click)="pageChange(floor.id)">{{floor.name}}</a>
+          <a class="btn btn-outline-warning" [ngClass]="{'disabled': idFloor=== maxFloor-1}" (click)="next()">Sau</a>
       </p>
     </div>
-
   </div>
 </div>
 

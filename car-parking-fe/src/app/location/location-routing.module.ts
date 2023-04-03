@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'create',
     component: LocationCreateComponent,
   }, {
-    path: '#2',
+    path: 'edit/:id',
     component: LocationUpdateComponent,
   }, {
     path: 'mapParking/:id',

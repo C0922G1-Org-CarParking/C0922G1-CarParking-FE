@@ -8,7 +8,8 @@ export interface ILocation {
   width: number;
   height: number;
   length: number;
-  permissionCarTypeLocations: string;
-  floor: Floor;
+  permissionCarTypeLocations: string[];
   section: Section;
+  floor: Floor;
+
 }

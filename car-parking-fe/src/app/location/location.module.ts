@@ -7,13 +7,16 @@ import { LocationListComponent } from './location-list/location-list.component';
 import { LocationDetailComponent } from './location-detail/location-detail.component';
 import { LocationUpdateComponent } from './location-update/location-update.component';
 import { LocationMapComponent } from './location-map/location-map.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [LocationCreateComponent, LocationListComponent, LocationDetailComponent, LocationUpdateComponent, LocationMapComponent],
-  imports: [
-    CommonModule,
-    LocationRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        LocationRoutingModule,
+        ReactiveFormsModule,
+        FormsModule
+    ]
 })
 export class LocationModule { }
