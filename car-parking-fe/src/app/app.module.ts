@@ -20,7 +20,12 @@ import {TicketModule} from "./ticket/ticket.module";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+<<<<<<< HEAD
     TicketModule
+=======
+    ReactiveFormsModule,
+    FormsModule,
+>>>>>>> fb78b61370be32eeaa372c8e3ca67b7e7393aaee
   ],
   providers: [],
   bootstrap: [AppComponent]
