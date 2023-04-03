@@ -15,16 +15,16 @@ export class CustomerService {
   }
 
   getAll(name: string, idCard: string, phoneNumber: string, starDate: string, endDate: string, page: number, pageSize: number): Observable<Page<Customer>> {
-    return this.http.get<Page<Customer>>('http://localhost:8080/customerRest/list?page=' + page + '&pageSize=' + pageSize
+    return this.http.get<Page<Customer>>('http://localhost:8080/customer/list?page=' + page + '&pageSize=' + pageSize
       + '&name=' + name + '&idCard=' + idCard + '&phoneNumber=' + phoneNumber + '&starDate=' + starDate + '&endDate=' + endDate);
   }
 
   sendEmail(toMail: string, id: number): Observable<string> {
-    return this.http.post<string>('http://localhost:8080/customerRest/send?to=' + toMail, id);
+    return this.http.post<string>('http://localhost:8080/customer/send?to=' + toMail, id);
   }
 
   deleteCustomer(id: number): Observable<string> {
-    return this.http.delete<string>('http://localhost:8080/customerRest/' + id + '/delete');
+    return this.http.delete<string>('http://localhost:8080/customer/' + id + '/delete');
   }
 }
 
