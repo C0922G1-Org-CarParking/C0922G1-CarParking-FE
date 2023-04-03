@@ -48,7 +48,6 @@ export class CustomerListComponent implements OnInit {
   getAll() {
     this.customerService.getAll(this.name, this.idCard, this.phoneNumber, this.starDate, this.endDate, this.page, this.pageSize)
       .subscribe(customeres => {
-        console.log(customeres)
         this.customers = customeres.content;
         this.pageCount = customeres.totalPages;
         this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);

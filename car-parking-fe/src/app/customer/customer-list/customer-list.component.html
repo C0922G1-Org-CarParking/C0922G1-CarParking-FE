@@ -10,7 +10,7 @@
         <!--    TÌM KIẾM    -->
         <div class="row">
           <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <form  style="margin-top: 10px; margin-bottom: 20px">
+            <form class="d-flex" style="margin-top: 10px; margin-bottom: 20px">
               <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="row" style="margin-top: 5px">
 
@@ -98,8 +98,8 @@
               <td style="text-align: left" class="a">{{customer.name}}</td>
               <td class="a">{{customer.dateOfBirth}}</td>
               <td>{{customer.idCard}}</td>
-              <td *ngIf="customer.isGender">Nam</td>
-              <td *ngIf="!customer.isGender">Nữ</td>
+              <td *ngIf="customer.gender">Nam</td>
+              <td *ngIf="!customer.gender">Nữ</td>
               <td class="a">{{customer.phoneNumber}}</td>
               <td class="a">{{customer.email}}</td>
               <td>
@@ -159,8 +159,6 @@
 
 </div>
 <!--modal xóa-->
-
-<!--data-bs-toggle="modal" data-bs-target="#deleteModal"-->
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
