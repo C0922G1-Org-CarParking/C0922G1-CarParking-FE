@@ -41,10 +41,7 @@ export class EmployeeListComponent implements OnInit {
   getAll() {
     this.message = null;
     this.employeeService.getAllEmployee(this.currentPage, this.size,
-      this.nameSearch,
-      this.startDate,
-      this.endDate,
-      this.street).subscribe(data => {
+      this.nameSearch, this.startDate, this.endDate, this.street).subscribe(data => {
       this.employee = data;
       this.employees = this.employee.content;
       this.totalPages = this.employee.totalPages;
@@ -88,5 +85,6 @@ export class EmployeeListComponent implements OnInit {
 
   getProvince(value: string) {
     console.log(value);
+    parseInt(value);
   }
 }

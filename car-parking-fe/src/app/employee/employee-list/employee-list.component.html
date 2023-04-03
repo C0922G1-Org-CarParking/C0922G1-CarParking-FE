@@ -30,15 +30,15 @@
         <!--                dòng dưới-->
         <div class="col-md-12 row mt-3">
           <div class="col-md-2"></div>
-          <div class="col-md-1" style="margin-top: 5px; ">Sống tại:</div>
-          <div class="col-md-3 "  style="margin-left: -0.5%">
+          <div class="col-md-1" style="margin-top: 5px">Sống tại:</div>
+          <div class="col-md-3 " style="margin-left: -0.5%">
                       <input class="form-control me-2" name="name" type="search"
                              aria-label="Search" style="border: 1px solid #b6effb; width: 100%" [(ngModel)]="street">
           </div>
           <div class="col-md-1" style="margin-top: 5px">Tỉnh/Thành:</div>
           <div class="col-md-3">
             <select class="form-control"
-                    style="border: 1px solid #b6effb; width: 100%" formControlName="province" #province
+                    style="border: 1px solid #b6effb; width: 100%" name="province" #province
                     (click)="getProvince(province.value)">
               <option value="" selected>Chọn tỉnh thành</option>
               <option *ngFor="let item of provinceList" [value]="item.code">{{item.name}}</option>
@@ -108,7 +108,7 @@
           <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px" >
             <nav aria-label="Page navigation example">
               <ul class="pagination">
-                <li class="page-item" [ngClass]="{disabled: currentPage === 0}">
+                <li class="page-item" [ngClass]="{disable: currentPage === 0}">
                   <a class="btn" style="background-color: darkorange" (click)="previous()">Trước</a>
                 </li>
                 <li *ngFor="let page of pageNumber">
@@ -125,7 +125,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <!--modal xóa-->

@@ -81,7 +81,12 @@ export class EmployeeService {
     return this.http.get<any>('https://vn-public-apis.fpo.vn/wards/getByDistrict?districtCode=' + district + '&limit=-1');
   }
 
-
+  /**
+   * Created by:TaiLH
+   * Date created: 04/03/2023
+   * Function: get list employee and search all field
+   * @return status OK
+   */
   getAllEmployee(
     page: number = 0,
     size: number,
@@ -107,7 +112,12 @@ export class EmployeeService {
     );
   }
 
-
+  /**
+   * Created by:TaiLH
+   * Date created: 04/03/2023
+   * Function: delete employee by id
+   * @return status OK
+   */
   deleteById(id: number) {
     return this.http.delete(this.apiDelete + id);
   }
