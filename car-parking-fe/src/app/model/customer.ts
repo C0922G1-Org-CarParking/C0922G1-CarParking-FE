@@ -6,7 +6,7 @@ export interface Customer {
   idCard?: string;
   phoneNumber?: string;
   email?: string;
-  isGender?: boolean;
+  gender?: boolean;
   province?: string;
   district?: string;
   commune?: string;

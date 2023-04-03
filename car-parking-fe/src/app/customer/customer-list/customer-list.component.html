@@ -98,8 +98,8 @@
               <td style="text-align: left" class="a">{{customer.name}}</td>
               <td class="a">{{customer.dateOfBirth}}</td>
               <td>{{customer.idCard}}</td>
-              <td *ngIf="customer.isGender">Nam</td>
-              <td *ngIf="!customer.isGender">Nữ</td>
+              <td *ngIf="customer.gender">Nam</td>
+              <td *ngIf="!customer.gender">Nữ</td>
               <td class="a">{{customer.phoneNumber}}</td>
               <td class="a">{{customer.email}}</td>
               <td>
@@ -187,3 +187,4 @@
     </div>
   </div>
 </div>
+
