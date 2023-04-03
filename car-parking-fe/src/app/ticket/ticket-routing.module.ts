@@ -12,7 +12,7 @@ const routes: Routes = [{
   path: 'create',
   component: TicketCreateComponent
 }, {
-  path: 'update/:id',
+  path: 'update/:id/:idFloor',
   component: TicketUpdateComponent
 },  {
   path: '',
