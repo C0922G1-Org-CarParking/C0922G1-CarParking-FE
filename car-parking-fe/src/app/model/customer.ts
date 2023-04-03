@@ -12,5 +12,4 @@ export interface Customer {
   commune?: string;
   street?: string;
   idDeleted?: boolean;
-
 }

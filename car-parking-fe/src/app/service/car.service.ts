@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs";
 import {CarTicket} from "../model/car-ticket";
+import {Car} from "../model/car";
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -16,6 +17,10 @@ export class CarService {
 
   findCarByCustomerId(customerId: number): Observable<CarTicket[]> {
     return this.http.get<CarTicket[]>('http://localhost:8080/car/info/' + customerId)
+  }
+
+  findCarById(id: number): Observable<Car[]> {
+    return this.http.get<Car[]>(`http://localhost:8080/customer/car/${id}`)
   }
 }
 

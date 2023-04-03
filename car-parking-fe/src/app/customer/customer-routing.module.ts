@@ -5,13 +5,12 @@ import {CustomerUpdateComponent} from './customer-update/customer-update.compone
 import {CustomerInfoComponent} from "./customer-info/customer-info.component";
 import {CustomerCreateComponent} from "./customer-create/customer-create.component";
 
-
 const routes: Routes = [
   {
     path: 'list',
     component: CustomerListComponent
   }, {
-    path: 'update/:id',
+    path: 'update/1',
     component: CustomerUpdateComponent
   }, {
     path: 'info/:id',
