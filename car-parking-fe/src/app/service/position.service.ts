@@ -14,6 +14,13 @@ export class PositionService {
 
   constructor(private http: HttpClient) {
   }
+  /**
+   * Created by: DinhNTC
+   * Date created: 4/03/2023
+   * Function: get all data Position
+   *
+   * @return data data Position
+   */
   getAllPosition(): Observable<IPosition[]> {
     return this.http.get<IPosition[]>('http://localhost:8080/api/list-position');
   }
