@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           text: 'Đăng nhập thành công',
           icon: 'success',
-          confirmButtonText: 'OK'
+          timer: 2000
         });
         this.router.navigateByUrl('/');
         this.shareService.sendClickEvent();

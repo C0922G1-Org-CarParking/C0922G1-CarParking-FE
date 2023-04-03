@@ -21,12 +21,12 @@
         <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['statistic']"><span class="n-item">Thống kê</span></a></li>
         <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['location']"><span class="n-item">Bãi đỗ</span></a></li>
         <li [hidden]="isLoggedIn">
-          <a role="button" class="getstarted btn btn-md btn-outline-danger mx-3" routerLink="/security/login">Log in</a>
+          <a routerLink="/security/login"><img src="../../assets/img/header/login-icon.png" class="img-fluid" style="width: 30px"></a>
         </li>
         <li [hidden]="!isLoggedIn">
           <div class="dropdownUser">
             <div class="n-item d-flex align-items-center">
-              <i class='bx bx-user-circle bx-md'></i>
+              <i class="bi bi-person-lines-fill mx-2" ></i>
               <span>{{nameEmployee}}</span></div>
             <div class="dropdown-content">
               <div class=" getstarted" routerLink="/security/change-password"><button class="btn">Đổi mật khẩu</button></div>

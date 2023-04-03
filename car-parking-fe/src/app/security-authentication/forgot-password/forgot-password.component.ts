@@ -17,7 +17,15 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.view();
   }
+  view(): void {
+    const element = document.getElementById('login');
+    if (element) {
+      element.scrollIntoView();
+    }
+  }
+
 
   onSubmit(username: string) {
     this.loginService.forgotPassword(username).subscribe(() => {

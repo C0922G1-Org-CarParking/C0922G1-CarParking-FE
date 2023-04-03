@@ -27,6 +27,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.view();
     if (this.tokenStorageService.getToken()) {
       this.username = this.tokenStorageService.getUser().username;
       this.formChangePassword = new FormGroup({
@@ -39,6 +40,14 @@ export class ChangePasswordComponent implements OnInit {
       this.errorAuth();
     }
   }
+
+  view(): void {
+    const element = document.getElementById('login');
+    if (element) {
+      element.scrollIntoView();
+    }
+  }
+
 
   errorAuth() {
     Swal.fire({

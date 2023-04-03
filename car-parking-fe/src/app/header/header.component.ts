@@ -19,13 +19,11 @@ export class HeaderComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService,
               private shareService: ShareService,
               private router: Router) {
-    this.shareService.getClickEvent().subscribe(() => {
-      this.loadHeader();
-    });
   }
 
   loadHeader(): void {
     if (this.tokenStorageService.getToken()) {
+      debugger
       this.currentUser = this.tokenStorageService.getUser().username;
       this.role = this.tokenStorageService.getUser().roles[0];
       this.username = this.tokenStorageService.getUser().username;
@@ -36,19 +34,21 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.shareService.getClickEvent().subscribe(() => {
+      this.loadHeader();
+    });
     this.loadHeader();
   }
 
-  logOut() {
+  async logOut() {
     this.tokenStorageService.signOut();
     this.shareService.sendClickEvent();
-    Swal.fire({
+    await Swal.fire({
       text: 'Đăng xuất thành công',
       icon: 'success',
-      confirmButtonText: 'OK'
+      timer: 2000
     });
-    this.router.navigateByUrl('/');
-    // cập nhật lại
+    await this.router.navigateByUrl('/');
     location.reload();
   }
 
