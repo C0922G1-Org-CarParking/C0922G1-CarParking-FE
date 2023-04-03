@@ -11,22 +11,25 @@
                 VÀO</h4>
               <div class="row">
                 <div>
-                  <button data-bs-toggle="modal" data-bs-target="#exampleModal"
-                          class="btn" style="background-color: darkorange">
-                    Tìm xe
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                         fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                      <path
-                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                  </button>
-                  <div style="display: inline-block; float: right;">
+
+                  <div style="display: inline-block; float: left;">
                     <button class="btn" style="background-color:darkorange">
                       Bản đồ
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                            class="bi bi-map" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
                               d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div style="display: inline-block; float: right">
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            class="btn" style="background-color: darkorange">
+                      Tìm xe
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                           fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                       </svg>
                     </button>
                   </div>
@@ -39,7 +42,7 @@
                       <label style="font-weight: bold">Biển số xe</label>
                     </div>
                     <div class="col-md-8">
-                      <input value="{{carIn.carPlateNumber}}" class="form-control" type="text">
+                      <input readonly value="{{carIn.carPlateNumber}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -49,7 +52,7 @@
                       <label style="font-weight: bold" class="mb-0">Tên xe:</label>
                     </div>
                     <div class="col-md-8">
-                      <input value="{{carIn.carName}}" class="form-control" type="text">
+                      <input readonly value="{{carIn.carName}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -59,7 +62,7 @@
                       <label style="font-weight: bold" class="mb-0">Hãng xe:</label>
                     </div>
                     <div class="col-8">
-                      <input value="{{carIn.carBrand}}" class="form-control" type="text">
+                      <input readonly value="{{carIn.carBrand}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -71,7 +74,7 @@
                       <label style="font-weight: bold">Thời gian vé từ</label>
                     </div>
                     <div class="col-8">
-                      <input value="{{carIn.ticketEffectiveDate}}" class="form-control" type="date">
+                      <input readonly value="{{carIn.ticketEffectiveDate}}" class="form-control" type="date">
                     </div>
                   </div>
                 </div>
@@ -81,7 +84,7 @@
                       <label style="font-weight: bold" class="mb-0">Đến: </label>
                     </div>
                     <div class="col-8">
-                      <input value="{{carIn.ticketExpiryDate}}" class="form-control" type="date">
+                      <input readonly value="{{carIn.ticketExpiryDate}}" class="form-control" type="date">
                     </div>
                   </div>
                 </div>
@@ -92,7 +95,7 @@
                       <label style="font-weight: bold" class="mb-0">Tầng:</label>
                     </div>
                     <div class="col-8">
-                      <input value="{{carIn.floorName}}" class="form-control" type="text">
+                      <input readonly value="{{carIn.floorName}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -104,7 +107,7 @@
                       <label style="font-weight: bold">Tên Khách Hàng</label>
                     </div>
                     <div class="col-8">
-                      <input value="{{carIn.customerName}}" class="form-control" type="text">
+                      <input readonly value="{{carIn.customerName}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -114,7 +117,7 @@
                       <label style="font-weight: bold" class="mb-0">Số Điện thoại</label>
                     </div>
                     <div class="col-8">
-                      <input value="{{carIn.customerPhoneNumber}}" class="form-control" type="text">
+                      <input readonly value="{{carIn.customerPhoneNumber}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -124,7 +127,7 @@
                       <label style="font-weight: bold" class="mb-0">Vị trí đỗ</label>
                     </div>
                     <div class="col-8">
-                      <input value="{{carIn.locationName}}" class="form-control" type="text">
+                      <input readonly value="{{carIn.locationName}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -177,7 +180,7 @@
                         <label style="font-weight: bold" class="mb-0">Thời gian vào</label>
                       </div>
                       <div class="col-8">
-                        <input [value]="timeIn" class="form-control" type="text">
+                        <input readonly [value]="timeIn" class="form-control" type="text">
                       </div>
                     </div>
                   </div>
@@ -193,7 +196,7 @@
                         <label style="font-weight: bold" class="mb-0">Thời gian ra</label>
                       </div>
                       <div class="col-8">
-                        <input id="thoi-gian-ra" class="form-control" type="text" disabled>
+                        <input id="thoi-gian-ra" class="form-control" type="text" readonly>
                       </div>
                     </div>
                   </div>
