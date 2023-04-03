@@ -7,7 +7,7 @@
   </div>
 
   <div class="container " style="margin-top: 50px">
-    <p *ngIf="checkError" style="text-align: center">Mất kết nối</p>
+    <p *ngIf="checkError" style="text-align: center">Hiện tại chưa có vị trí đỗ</p>
 
     <div style="margin-top: 30px">
       <!--                    Chạy vòng lặp-->
@@ -159,7 +159,7 @@
       <p>Bản đồ tầng:
         <a class="btn btn-outline-warning" [ngClass]="{'disabled': idFloor===1}" (click)="previous()">Trước</a> <a
           class="btn btn-warning">{{idFloor}}</a><a
-          class="btn btn-outline-warning" (click)="total()">4</a>
+         *ngIf="idFloor < totalPage" class="btn btn-outline-warning" (click)="total()">4</a>
         <a class="btn btn-outline-warning" [ngClass]="{'disabled': idFloor=== totalPage-1}" (click)="next()">Sau</a>
       </p>
     </div>
