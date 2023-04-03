@@ -24,9 +24,6 @@ export class LocationDetailComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(param => {
       this.id = +param.get('id')
     });
-    this.activatedRoute.paramMap.subscribe(param => {
-      this.idEditTicket = +param.get('id');
-    })
     this.findByLIdLocationAndCustomerDetail()
   }
 
@@ -41,12 +38,7 @@ export class LocationDetailComponent implements OnInit {
   }
 
   addTicket(idLocation: number) {
-    if (this.idEditTicket == 0) {
       this.route.navigateByUrl('ticket/create/' + idLocation)
-    } else if (this.idEditTicket == 1) {
-      this.route.navigateByUrl('ticket/edit/' + idLocation)
-    }
-
 
   }
 }

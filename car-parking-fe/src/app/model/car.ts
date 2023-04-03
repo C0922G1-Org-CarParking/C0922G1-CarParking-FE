@@ -1,5 +1,5 @@
-import {Customer} from "./customer";
-import {CarType} from "./car-type";
+import {Customer} from './customer';
+import {CarType} from './car-type';
 
 export interface Car {
   id:  number;

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocationService} from "../../service/location.service";
 import {ILocation} from "../../model/ilocation";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FloorService} from "../../service/floor.service";
 import {Floor} from "../../model/floor";
 
@@ -19,8 +19,11 @@ export class LocationMapComponent implements OnInit {
   totalPage :Floor [];
   showDetailLocation: String;
   maxFloor:number
-
-  constructor(private locationService: LocationService, private route: Router, private floorService: FloorService) {
+  check : number;
+  constructor(private locationService: LocationService, private route: Router, private floorService: FloorService, private activatedRoute:ActivatedRoute) {
+    this.activatedRoute.paramMap.subscribe(param =>{
+      this.check= +param.get('id');
+    })
   }
 
   ngOnInit(): void {
@@ -53,7 +56,12 @@ export class LocationMapComponent implements OnInit {
     if (occupied) {
       this.route.navigateByUrl('/location/detail/' + id)
     } else {
-      this.route.navigateByUrl('/ticket/update/' + id)
+      if(this.check==0){
+        this.route.navigateByUrl('/ticket/update/' + id)
+      }else {
+        this.route.navigateByUrl('/ticket/add/'+ id)
+      }
+
     }
   }
 
