@@ -43,4 +43,9 @@ export class TicketService {
     return this.http.get<number>('http://localhost:8080/ticket/getPrice?expiryDate='+expiryDate
       + "&effectiveDate="+effective +"&rate=" +rate);
   }
+
+  getTotalTicketOfMonth(month: number) {
+
+
+  }
 }

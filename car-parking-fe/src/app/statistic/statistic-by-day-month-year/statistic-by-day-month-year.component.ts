@@ -17,6 +17,10 @@ export class StatisticByDayMonthYearComponent implements OnInit {
   ticketList: any[] = []
   customerList: any[] = []
   monthList: any[] = []
+  monthId:any
+
+
+
 
   constructor(private ticketService: TicketService, private customer: CustomerService) {
   }
@@ -87,22 +91,30 @@ export class StatisticByDayMonthYearComponent implements OnInit {
     });
 
   }
+   getTotalTicketOfMonth(month: number) {
+    // this.ticketService.getTotalTicketOfMonth(month).subscribe(data=>{
+    //
+    //
+    // })
+  }
 
   statistics(value: string, value2: string) {
     let sinceMonth = parseInt(value)
     let toMonth = parseInt(value2)
-    this.ticketService.statisticalTicket(sinceMonth, toMonth).subscribe(data => {
-      this.ticketList = data
-      console.log(data)
-    })
-    this.ticketService.statisticalCustomer(sinceMonth, toMonth).subscribe(
-      data => {
-        this.customerList = data
-        console.log(this.customerList)
-      }
-    )
-    this.ticketService.displayMoth(sinceMonth,toMonth).subscribe(data=>{
-      this.monthList = data
-    })
+
+
+
+    for (let i = sinceMonth ; i <= toMonth ;i++){
+      this.monthList.push(i)
+      this.ticketList.push(this.getTotalTicketOfMonth(i))
+      this.customerList.push(this.getTotalCustomerOfMonth(i))
+    }
+  }
+
+
+
+
+  private getTotalCustomerOfMonth(i: number) {
+
   }
 }

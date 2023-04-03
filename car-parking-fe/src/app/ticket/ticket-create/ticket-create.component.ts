@@ -105,16 +105,11 @@ export class TicketCreateComponent implements OnInit {
   }
 
   createTicket() {
-    debugger
     this.ticket = this.ticketCreateForm.value
     if (this.ticket) {
-      debugger
       let temp = this.ticketService.createTicket(this.ticket).subscribe(ok => {
-        debugger
-        if (ok && temp != null) {
-          // this.toast.success('thêm mới thành công!', 'Thêm mới!');
+        if (ok && temp)
           alert('Thêm mới thành công')
-        }
         this.router.navigateByUrl('/ticket/create');
       });
     } else {
