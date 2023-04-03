@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-
-import {Employee} from '../model/employee';
-import {Observable} from 'rxjs';
+import {Observable} from "rxjs";
+import {Employee} from "../model/employee";
 
 
 const API_URL = `${environment.apiUrl}`;
@@ -15,6 +14,7 @@ const API_URL = `${environment.apiUrl}`;
 export class EmployeeService {
   private apiList = 'http://localhost:8080/api/list-employee';
   private apiDelete = 'http://localhost:8080/api/';
+
 
   constructor(private http: HttpClient) {
   }
@@ -122,4 +122,7 @@ export class EmployeeService {
     return this.http.delete(this.apiDelete + id);
   }
 
+  listEmployee(): Observable<Employee[]> {
+    return this.http.get<Employee[]>('http://localhost:8080/ticket/listEmployee');
+  }
 }

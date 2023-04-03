@@ -19,7 +19,10 @@ export class FloorService {
 
   }
 
-  // getAllFloor():Observable<Floor[]>{
-  //   return this.http.get<Floor[]>('http://localhost:8080/floor/list')
-  // }
+
+  listFloor():Observable<Floor[]> {
+    return this.http.get<Floor[]>('http://localhost:8080/ticket/listFloor');
+  }
+
+
 }

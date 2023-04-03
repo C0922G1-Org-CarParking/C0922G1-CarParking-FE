@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-
+import {Employee} from "../model/employee";
 import {Observable} from "rxjs";
-
 import {LocationDetailDto} from "../model/location-detail-dto";
-
 import {ILocation} from '../model/ilocation';
 // @ts-ignore
 import {Page} from 'ngx-pagination/dist/pagination-controls.directive';
@@ -57,6 +55,9 @@ export class LocationService {
 
   deleteLocation(id: number): Observable<Page> {
     return this.http.delete<Page>('http://localhost:8080/location/delete/' + id);
+  }
+  listLocation():Observable<ILocation[]> {
+    return this.http.get<ILocation[]>('http://localhost:8080/ticket/listLocation');
   }
 }
 export interface Page<T> {
