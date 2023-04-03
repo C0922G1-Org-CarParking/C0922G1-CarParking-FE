@@ -20,11 +20,11 @@ export class EmployeeListComponent implements OnInit {
   pageNumber: number[] = [];
   startDate: string;
   endDate: string;
+  street: string;
   message: '';
-  size = 5;
+  size = 10;
   province: any;
-  district: any;
-  commune: any;
+  provinceList: any;
 
 
   constructor(private employeeService: EmployeeService) {
@@ -34,19 +34,7 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit(): void {
     this.getAll();
     this.employeeService.getAllProvince().subscribe(next => {
-      // tslint:disable-next-line:radix
-      this.province = next.data.data.filter(n => n.code === parseInt(this.employee.province))[0].name;
-
-      // tslint:disable-next-line:radix no-shadowed-variable
-      this.employeeService.getAllDistrict(parseInt(this.employee.province)).subscribe(next => {
-        // tslint:disable-next-line:radix
-        this.district = next.data.data.filter(n => n.code === parseInt(this.employee.district))[0].name;
-      });
-      // tslint:disable-next-line:radix no-shadowed-variable
-      this.employeeService.getAllCommune(parseInt(this.employee.district)).subscribe(next => {
-        // tslint:disable-next-line:radix
-        this.commune = next.data.data.filter(n => n.code === parseInt(this.employee.commune))[0].name;
-      });
+      this.provinceList = next.data.data;
     });
   }
 
@@ -55,7 +43,8 @@ export class EmployeeListComponent implements OnInit {
     this.employeeService.getAllEmployee(this.currentPage, this.size,
       this.nameSearch,
       this.startDate,
-      this.endDate).subscribe(data => {
+      this.endDate,
+      this.street).subscribe(data => {
       this.employee = data;
       this.employees = this.employee.content;
       this.totalPages = this.employee.totalPages;
@@ -95,9 +84,9 @@ export class EmployeeListComponent implements OnInit {
   numberPage(page: number) {
     this.currentPage = page - 1;
     this.getAll();
-
-
   }
 
-
+  getProvince(value: string) {
+    console.log(value);
+  }
 }
