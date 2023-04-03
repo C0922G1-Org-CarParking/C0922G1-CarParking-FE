@@ -3,7 +3,7 @@ import {Section} from "./section";
 
 export interface ILocation {
   id: number;
-  name: string;
+  name: number;
   isOccupied: boolean;
   width: number;
   height: number;

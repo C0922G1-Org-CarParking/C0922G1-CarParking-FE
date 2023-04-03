@@ -8,4 +8,5 @@ export interface Car {
   carType: CarType;
   customer: Customer;
   brand: string;
+  isDelete: boolean;
 }
