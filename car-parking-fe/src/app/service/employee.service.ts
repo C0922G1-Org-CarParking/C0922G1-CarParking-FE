@@ -19,10 +19,6 @@ export class EmployeeService {
   constructor(private http: HttpClient) {
   }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b2f3979c7b27c4696b86293edc325cf733d1d9e3
   /**
    * Created by: DinhNTC
    * Date created: 04/03/2023
@@ -83,10 +79,8 @@ export class EmployeeService {
   getAllCommune(district: number): Observable<any> {
     return this.http.get<any>('https://vn-public-apis.fpo.vn/wards/getByDistrict?districtCode=' + district + '&limit=-1');
   }
-<<<<<<< HEAD
-=======
 
->>>>>>> b2f3979c7b27c4696b86293edc325cf733d1d9e3
+
   /**
    * Created by:TaiLH
    * Date created: 04/03/2023
