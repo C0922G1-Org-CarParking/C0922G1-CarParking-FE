@@ -1,37 +1,11 @@
-body {
-  font-family: "Open Sans", sans-serif;
-  color: #212529;
-}
-
 a {
   text-decoration: none;
 }
-
-a:hover {
-  color: #ef7f4d;
-  text-decoration: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.font-primary {
-  font-family: "Raleway", sans-serif;
-}
-
-
-a {
-  text-decoration: none;
-}
-
 /*--------------------------------------------------------------
 # Section
 --------------------------------------------------------------*/
 section {
-  padding: 30px 0;
+  padding: 60px 0;
   overflow: hidden;
 }
 
@@ -72,6 +46,8 @@ section {
   bottom: 0;
   left: calc(50% - 30px);
 }
+
+
 /*--------------------------------------------------------------
 # Clients
 --------------------------------------------------------------*/
@@ -100,6 +76,8 @@ section {
 .clients .clients-slider .swiper-pagination .swiper-pagination-bullet-active {
   background-color: #eb5d1e;
 }
+
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
@@ -108,6 +86,7 @@ section {
   padding: 0 0 30px 0;
   color: #212529;
   font-size: 14px;
+  background: #fef8f5;
 }
 
 #footer .footer-newsletter {
@@ -160,17 +139,17 @@ section {
 
 
 #footer .footer-top {
-  padding: 30px 0 30px 0;
+  padding: 60px 0 30px 0;
   background: #fff;
 }
 
 #footer .footer-top .footer-contact {
-  margin-bottom: 00px;
+  margin-bottom: 30px;
 }
 
 #footer .footer-top .footer-contact h4 {
   font-size: 22px;
-  margin: 0 0 0px 0;
+  margin: 0 0 30px 0;
   padding: 2px 0 2px 0;
   line-height: 1;
   font-weight: 700;
@@ -193,7 +172,7 @@ section {
 }
 
 #footer .footer-top .footer-links {
-  margin-bottom: 00px;
+  margin-bottom: 30px;
 }
 
 #footer .footer-top .footer-links ul {
@@ -267,6 +246,7 @@ section {
 #footer .credits a {
   color: #eb5d1e;
 }
+
 @media (max-width: 575px) {
 
   #footer .copyright,
@@ -277,4 +257,3 @@ section {
     padding: 3px 0;
   }
 }
-

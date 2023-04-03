@@ -1,9 +1,9 @@
-import {Floor} from './floor';
-import {Section} from './section';
+import {Floor} from "./floor";
+import {Section} from "./section";
 
 export interface ILocation {
   id: number;
-  name: number;
+  name: string;
   isOccupied: boolean;
   width: number;
   height: number;
