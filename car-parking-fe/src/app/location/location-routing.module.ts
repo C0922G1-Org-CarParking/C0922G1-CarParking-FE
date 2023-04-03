@@ -16,16 +16,16 @@ const routes: Routes = [
     path: 'list',
     component: LocationListComponent,
   }, {
-    path: '#1',
+    path: 'detail/:id',
     component: LocationDetailComponent,
   }, {
     path: 'create',
     component: LocationCreateComponent,
   }, {
-    path: '#2',
+    path: 'edit/:id',
     component: LocationUpdateComponent,
   }, {
-    path: '#3',
+    path: 'mapParking/:id',
     component: LocationMapComponent,
   }
 ];

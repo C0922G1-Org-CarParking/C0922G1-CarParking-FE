@@ -1,3 +1,4 @@
+
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
@@ -14,13 +15,16 @@ import {environment} from '../environments/environment';
 // @ts-ignore
 import {AngularFireModule} from '@angular/fire';
 
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    HomePageContentComponent
-  ],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        HomePageContentComponent,
+
+    ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,

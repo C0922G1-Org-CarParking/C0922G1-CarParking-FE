@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-ticket-create',
@@ -10,6 +11,7 @@ export class TicketCreateComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

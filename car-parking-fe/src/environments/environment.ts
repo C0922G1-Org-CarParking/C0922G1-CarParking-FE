@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+
   apiUrl: 'http://localhost:8080',
   firebaseConfig: {
     apiKey: 'AIzaSyDzI7j_aBdKw1D_j_zWwyCSKHWSii7WzEc',
@@ -15,6 +16,7 @@ export const environment = {
     appId: '1:850705253443:web:6d1766e97e90a6799380f6',
     measurementId: 'G-RBBYF81NG9'
   }
+
 };
 
 /*

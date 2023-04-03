@@ -9,10 +9,10 @@ const routes: Routes = [{
   path: 'list',
   component: TicketListComponent
 }, {
-  path: 'create',
+  path: 'create/:idLocation',
   component: TicketCreateComponent
 }, {
-  path: 'update/:id',
+  path: 'update/:id/:idLocation',
   component: TicketUpdateComponent
 },  {
   path: '',
