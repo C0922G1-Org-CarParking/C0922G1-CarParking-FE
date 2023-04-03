@@ -37,7 +37,8 @@
                   <label style="font-weight: bold; margin-left: 5px">Chức vụ:</label>
                 </div>
                 <div class="col-md-8">
-                  <select class="form-control" formControlName="position">
+                  <select formControlName="position" class="form-select" aria-label="Default select example">
+                    <option value="" selected>Chức năng</option>
                     <option *ngFor="let item of position " [ngValue]="item">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"

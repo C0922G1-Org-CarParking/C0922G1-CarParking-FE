@@ -30,6 +30,7 @@ export class EmployeeCreateComponent implements OnInit {
   employeeGroup: FormGroup = new FormGroup({
     id: new FormControl(),
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ỹ\s]*$/)]),
+    // name: new FormControl('', [Validators.required, Validators.pattern('/^(\\p{Lu}[\\p{L}]*\\s?)+$')]),
     dateOfBirth: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
