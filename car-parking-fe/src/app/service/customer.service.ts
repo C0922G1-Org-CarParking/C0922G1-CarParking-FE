@@ -26,6 +26,7 @@ export class CustomerService {
   deleteCustomer(id: number): Observable<string> {
     return this.http.delete<string>('http://localhost:8080/customer/' + id + '/delete');
   }
+
 }
 
 export interface Page<T> {
