@@ -1,15 +1,13 @@
-
-export interface Customer {
-  id?: number;
+export interface CustomerVu {
+  id?:  number;
   name?: string;
   dateOfBirth?: string;
   idCard?: string;
   phoneNumber?: string;
   email?: string;
   gender?: boolean;
-  province?: string;
-  district?: string;
-  commune?: string;
+  province?: number;
+  district?: number;
+  commune?: number;
   street?: string;
-  idDeleted?: boolean;
 }
