@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, OnChanges, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
@@ -6,16 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  username: string;
+  currentUser: string;
+  nameEmployee: string;
+  role: string;
+  isLoggedIn = false;
 
-  constructor() { }
+  constructor(private router: Router) {}
+
+  loadHeader(): void {}
+
 
   ngOnInit(): void {
+    this.loadHeader();
   }
 
-  view(): void {
-    const element = document.getElementById('mySection');
-    if (element) {
-      element.scrollIntoView();
-    }
-  }
+  logOut() {}
+
 }

@@ -1,5 +1,5 @@
 export interface CarType {
-  id:  number;
+  id: number;
   name: string;
   rate: number;
 }
