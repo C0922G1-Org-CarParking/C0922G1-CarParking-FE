@@ -39,10 +39,6 @@ export class CustomerListComponent implements OnInit {
     this.endDate = endDate;
     this.customerService.getAll(this.name, this.idCard, this.phoneNumber, this.starDate, this.endDate, this.page, this.pageSize)
       .subscribe(customeres => {
-        this.customers = customeres.content;
-        this.pageCount = customeres.totalPages;
-        this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);
-        this.message = null;
       }, error => {
         Swal.fire('Dữ liệu bạn vừa nhập không khớp trong cơ sử dữ liệu!', '', 'error');
       });
@@ -92,7 +88,8 @@ export class CustomerListComponent implements OnInit {
       if (error.status === 404) {
         Swal.fire('Xóa khách hàng không thành công, khách hàng đã bị xóa hoặc không tồn tại trong cơ sở dữ liệu', '', 'success');
       } else if (error.status === 405) {
-        Swal.fire('Xóa không thành công, Khách hàng hiện tại vẫn còn thời hạn vé.', '', 'error');
+        Swal.fire('Xóa không thành công, Khách hàng hiện tại vẫn còn thời hạn vé. Chờ xác nhận mail từ khách hàng', '', 'error');
+        this.customerService.sendEmail('duyhuynhzi767@gmail.com', idDelete).subscribe();
       } else {
         Swal.fire('Lỗi kết nối', '', 'error');
       }
