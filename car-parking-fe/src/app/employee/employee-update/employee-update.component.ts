@@ -78,9 +78,10 @@ export class EmployeeUpdateComponent implements OnInit {
     console.log(value);
     // tslint:disable-next-line:radix
     this.employeeService.getAllCommune(parseInt(value)).subscribe(next => {
-      this.communeList = next.data.data;
-    }
-      );
+
+        this.communeList = next.data.data;
+      }
+    );
   }
 
   getCommune(value: string) {

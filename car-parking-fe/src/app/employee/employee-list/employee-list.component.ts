@@ -20,11 +20,11 @@ export class EmployeeListComponent implements OnInit {
   pageNumber: number[] = [];
   startDate: string;
   endDate: string;
+  street: string;
   message: '';
-  size = 5;
+  size = 10;
   province: any;
-  district: any;
-  commune: any;
+  provinceList: any;
 
 
   constructor(private employeeService: EmployeeService) {
@@ -33,14 +33,15 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+    this.employeeService.getAllProvince().subscribe(next => {
+      this.provinceList = next.data.data;
+    });
   }
 
   getAll() {
     this.message = null;
     this.employeeService.getAllEmployee(this.currentPage, this.size,
-      this.nameSearch,
-      this.startDate,
-      this.endDate).subscribe(data => {
+      this.nameSearch, this.startDate, this.endDate, this.street).subscribe(data => {
       this.employee = data;
       this.employees = this.employee.content;
       this.totalPages = this.employee.totalPages;
@@ -80,9 +81,10 @@ export class EmployeeListComponent implements OnInit {
   numberPage(page: number) {
     this.currentPage = page - 1;
     this.getAll();
-
-
   }
 
-
+  getProvince(value: string) {
+    console.log(value);
+    parseInt(value);
+  }
 }

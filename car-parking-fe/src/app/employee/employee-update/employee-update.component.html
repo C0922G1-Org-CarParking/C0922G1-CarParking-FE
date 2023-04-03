@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> b2f3979c7b27c4696b86293edc325cf733d1d9e3
 <div style="margin-top: 7%;margin-bottom:1%">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center h-100" style="margin-left:10%;margin-right:10%;">
@@ -6,8 +9,6 @@
         <div class="card-body">
           <form [formGroup]="employeeGroup" (ngSubmit)="submitUpdate()">
             <h1 style="text-align: center; margin-top: 2%; margin-bottom: 4%">CHỈNH SỬA NHÂN VIÊN</h1>
-
-
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
@@ -15,13 +16,10 @@
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
-
                   <input class="form-control" formControlName="name">
-
                   <p style="color: red; position: absolute"
                      *ngIf="(employeeGroup.controls.name.hasError('required')) && employeeGroup.controls.name.touched">
                     Tên Không được để trống.</p>
-
                   <p style="color: red; position: absolute"
                      *ngIf="
                    employeeGroup.controls.name.hasError('pattern') && employeeGroup.controls.name.touched">
@@ -29,8 +27,11 @@
                   <p style="color: red; position: absolute"
                      *ngIf="errors.name && !employeeGroup.controls.code.hasError('required') &&
                       !employeeGroup.controls.name.hasError('pattern')">{{errors.name}}</p>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b2f3979c7b27c4696b86293edc325cf733d1d9e3
                 </div>
               </div>
               <div class="row align-items-center py-3 col-md-6">
@@ -47,15 +48,14 @@
                   <p style="color: red; position: absolute"
                      *ngIf="employeeGroup.controls.position.hasError('required') && employeeGroup.controls.position.touched">
                     Chức vụ không được để trống.</p>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b2f3979c7b27c4696b86293edc325cf733d1d9e3
                 </div>
               </div>
-
-
             </div>
-
-
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
@@ -93,8 +93,6 @@
                 </div>
               </div>
             </div>
-
-
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
@@ -137,10 +135,7 @@
                     Giới tính không được để trống.</p>
                 </div>
               </div>
-
             </div>
-
-
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
@@ -178,8 +173,11 @@
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b2f3979c7b27c4696b86293edc325cf733d1d9e3
             <div class="row d-flex">
               <div class="row align-items-center py-3">
                 <div class="col-md-2">
@@ -216,7 +214,7 @@
                 <div class="col-md-3">
                   <select class="form-control" type="text"
                           style="margin-left: -10px; margin-right: -10px" id="ward" formControlName="commune" #commune
-                          (click)="getCommune(commune.value)" [compareWith]="compare" >
+                          (click)="getCommune(commune.value)" [compareWith]="compare">
                     <option value="" selected>Chọn phường xã</option>
                     <option *ngFor="let item of communeList" [value]="item.code">{{item.name}}</option>
                   </select>
@@ -229,19 +227,13 @@
                 <div class="col-md-1"></div>
               </div>
             </div>
-
-
-
-
-
             <div align="center" class="px-5 py-4">
-              <button type="submit" class="btn btn-secondary" style="margin-left: 1%" (click)="cancel()">Quay lại</button>
+              <button type="submit" class="btn btn-secondary" style="margin-left: 1%" (click)="cancel()">Quay lại
+              </button>
               <button style="margin-left: 1%;background-color:  #E67E22" type="submit" class="btn">
                 Lưu thông tin
               </button>
             </div>
-
-
           </form>
         </div>
       </div>

@@ -12,6 +12,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./employee-create.component.css']
 })
 export class EmployeeCreateComponent implements OnInit {
+<<<<<<< HEAD
+=======
+
+>>>>>>> b2f3979c7b27c4696b86293edc325cf733d1d9e3
   errors = {
     name: '',
     dateOfBirth: '',
@@ -103,16 +107,20 @@ export class EmployeeCreateComponent implements OnInit {
     if (this.employeeGroup.valid) {
       this.employeeService?.addEmployee(this.employeeGroup.value).subscribe(next => {
           this.router.navigateByUrl('/employee/list');
+<<<<<<< HEAD
           // alert(' thành công');
           // Swal.fire('Thêm mới thành công',
           //   '',
           //   'success');
+=======
+>>>>>>> b2f3979c7b27c4696b86293edc325cf733d1d9e3
           Swal.fire(
             'Added!',
             'Your file has been added.',
             'success'
           );
         }, error => {
+<<<<<<< HEAD
         console.log(error);
         Swal.fire({
           position: 'center',
@@ -155,6 +163,50 @@ export class EmployeeCreateComponent implements OnInit {
             this.errors.phoneNumber = error.error[i].defaultMessage;
           }
         }
+=======
+          console.log(error);
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Thêm mới thất bại!',
+            text: 'Thêm mới thất bại vui lòng điền đúng tất cả thông tin',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          // tslint:disable-next-line:prefer-for-of
+          for (let i = 0; i < error.error.length; i++) {
+            if (error.error && error.error[i].field === 'email') {
+              this.errors.email = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'phoneNumber') {
+              this.errors.phoneNumber = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'idCard') {
+              this.errors.idCard = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'name') {
+              this.errors.name = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'dateOfBirth') {
+              this.errors.dateOfBirth = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'province') {
+              this.errors.province = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'district') {
+              this.errors.district = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'commune') {
+              this.errors.commune = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'street') {
+              this.errors.street = error.error[i].defaultMessage;
+            }
+            if (error.error && error.error[i].field === 'phoneNumber') {
+              this.errors.phoneNumber = error.error[i].defaultMessage;
+            }
+          }
+>>>>>>> b2f3979c7b27c4696b86293edc325cf733d1d9e3
         }
       );
     }
