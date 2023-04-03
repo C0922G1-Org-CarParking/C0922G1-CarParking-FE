@@ -10,12 +10,14 @@ import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomePageContentComponent } from './home-page/home-page-content.component';
 import {TicketModule} from "./ticket/ticket.module";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+
 
 @NgModule({
     declarations: [

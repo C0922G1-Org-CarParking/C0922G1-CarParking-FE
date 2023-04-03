@@ -214,12 +214,127 @@ nav .n-item:hover {
   }
 }
 
+# Hero Section
+  --------------------------------------------------------------*/
+
+/*#carousel {*/
+/*  !*width: 100%;*!*/
+/*  height: 85vh;*/
+/*  !*background-image: url("http://sika.scene7.com/is/image/sika/glo-car-parking-garage-floor-03:16-9?wid=1920&hei=1080&fit=crop%2C1");*!*/
+/*  !*background-size: cover;*!*/
+/*  !*border-bottom: 2px solid #fcebe3;*!*/
+/*  !*margin: 72px 0 0 0;*!*/
+
+#hero {
+  width: 100%;
+  height: 70vh;
+  background: #fef8f5;
+  border-bottom: 2px solid #fcebe3;
+  margin: 72px 0 0 0;
+}
+
+
+/*}*/
+
+/*#hero h1 {*/
+/*  margin: 0;*/
+/*  font-size: 48px;*/
+/*  font-weight: 700;*/
+/*  line-height: 56px;*/
+/*  color: #0e0e0e;*/
+/*}*/
+
+/*#hero h2 {*/
+/*  color: #bd4709;*/
+/*  margin: 15px 0 0 0;*/
+/*  font-size: 24px;*/
+/*}*/
+
+/*#hero .btn-get-started {*/
+/*  font-family: "Raleway", sans-serif;*/
+/*  font-weight: 500;*/
+/*  font-size: 16px;*/
+/*  letter-spacing: 1px;*/
+/*  display: inline-block;*/
+/*  padding: 8px 28px;*/
+/*  border-radius: 3px;*/
+/*  transition: 0.5s;*/
+/*  margin-top: 30px;*/
+/*  color: #fff;*/
+/*  background: #eb5d1e;*/
+/*}*/
+
+/*#hero .btn-get-started:hover {*/
+/*  background: #ef7f4d;*/
+/*}*/
+
+/*#hero .animated {*/
+/*  animation: up-down 2s ease-in-out infinite alternate-reverse both;*/
+/*}*/
+
+@media (max-width: 991px) {
+  #hero {
+    height: calc(100vh - 72px);
+  }
+
+  #hero .animated {
+    animation: none;
+  }
+
+  #hero .hero-img {
+    text-align: center;
+  }
+
+  #hero .hero-img img {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  #hero h2 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  #hero .hero-img img {
+    width: 70%;
+  }
+}
+
+@media (max-width: 575px) {
+  #hero .hero-img img {
+    width: 80%;
+  }
+}
+
+@media (max-height: 600px) {
+  #hero {
+    height: 120vh;
+  }
+}
+
+@keyframes up-down {
+  0% {
+    transform: translateY(10px);
+  }
+
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
 /*--------------------------------------------------------------
 # Section
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  /*padding: 60px 0 0 0;*/
   overflow: hidden;
+  margin-top: 60px;
 }
 
 .section-bg {
