@@ -1,11 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Chart, registerables, Tick} from "chart.js";
 import {TicketService} from "../../service/ticket.service";
 import {Ticket} from "../../model/ticket";
 import {CustomerService} from "../../service/customer.service";
 import {Customer} from "../../model/customer";
-
-Chart.register(...registerables)
 
 @Component({
   selector: 'app-statistic-by-day-month-year',

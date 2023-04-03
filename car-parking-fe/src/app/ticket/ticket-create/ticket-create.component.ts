@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
-import {TicketService} from "../../service/ticket.service";
-import {Ticket} from "../../model/ticket";
-=======
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, Validators} from "@angular/forms";
 import {Employee} from "../../model/employee";
@@ -20,9 +15,8 @@ import {TicketTypeService} from "../../service/ticket-type.service";
 import {Customer} from "../../model/customer";
 import {Ticket} from "../../model/ticket";
 import {ActivatedRoute, Router} from "@angular/router";
-
 import {Subscription} from "rxjs";
->>>>>>> fb78b61370be32eeaa372c8e3ca67b7e7393aaee
+
 
 @Component({
   selector: 'app-ticket-create',
@@ -30,10 +24,6 @@ import {Subscription} from "rxjs";
   styleUrls: ['./ticket-create.component.css']
 })
 export class TicketCreateComponent implements OnInit {
-<<<<<<< HEAD
-  private ticketList: Ticket[];
-  constructor(private ticketService: TicketService) { }
-=======
 
   employeeList: Employee[] = [];
   locationList: ILocation[] = [];
@@ -65,13 +55,8 @@ export class TicketCreateComponent implements OnInit {
               private ticketTypeService: TicketTypeService,
               private activatedRoute: ActivatedRoute,
               ) {
->>>>>>> fb78b61370be32eeaa372c8e3ca67b7e7393aaee
-
   }
 
-
-<<<<<<< HEAD
-=======
   ngOnInit(): void {
 
     this.employeeService.listEmployee().subscribe(data => {
@@ -199,5 +184,4 @@ export class TicketCreateComponent implements OnInit {
     this.getPrice(this.effectiveDate,this.expiryDate,this.rate);
 
   }
->>>>>>> fb78b61370be32eeaa372c8e3ca67b7e7393aaee
 }

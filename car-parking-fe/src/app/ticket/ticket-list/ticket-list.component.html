@@ -4,41 +4,36 @@
       style="size:32px; text-align: center; margin-top: 1rem; margin-bottom: 30px;  font-family: 'Copperplate Gothic Bold'">
       DANH SÁCH VÉ</h1>
     <!--                     Tìm kiếm-->
-    <div *ngIf="formSearchTicket" class="col-10 row ms-2 mb-2" [formGroup]="formSearchTicket">
-      <div class=" d-flex mt-2 mb-2 col-4 col-md-6 col-sm-12 row align-items-center">
-        <label style="white-space: nowrap;" for="nameCustomer" class="form-label me-3">Tên
-          khách hàng:</label>
+
+    <div *ngIf="formSearchTicket" class="row ms-2 mb-2" [formGroup]="formSearchTicket">
+      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
+        <label style="white-space: nowrap;" for="nameCustomer" class="form-label me-3">Tên khách hàng:</label>
         <input formControlName="customerName" type="text" class="form-control" id="nameCustomer">
       </div>
-      <div class=" d-flex mt-2 mb-2 col-4 col-md-4 col-sm-12 align-items-center">
-        <label style="white-space: nowrap;" for="phoneCustomer" class="form-label me-3">SĐT
-          khách hàng:</label>
+      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
+        <label style="white-space: nowrap;" for="phoneCustomer" class="form-label me-3">SĐT khách hàng:</label>
         <input formControlName="customerPhone" type="text" class="form-control" id="phoneCustomer">
       </div>
-      <div class=" d-flex mt-2 mb-2 col-4 col-md-4 col-sm-12 align-items-center">
-        <label style="white-space: nowrap;" for="nameEmployee" class="form-label me-3">Tên
-          người tạo vé:</label>
+      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
+        <label style="white-space: nowrap;" for="nameEmployee" class="form-label me-3">Tên người tạo vé:</label>
         <input formControlName="employeeName" type="text" class="form-control" id="nameEmployee">
       </div>
-      <div class=" d-flex mt-2 mb-2 col-4 col-md-4 col-sm-12 align-items-center">
-        <label style="white-space: nowrap;" for="phoneEmployee" class="form-label me-3">SĐT
-          người tạo vé:</label>
+      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
+        <label style="white-space: nowrap;" for="phoneEmployee" class="form-label me-3">SĐT người tạo vé:</label>
         <input formControlName="employeePhone" type="text" class="form-control" id="phoneEmployee">
       </div>
-      <div class=" d-flex mt-2 mb-2 col-4 col-md-4 col-sm-12 align-items-center">
-        <label style="white-space: nowrap;" for="expiry" class="form-label me-3">Ngày
-          hết hạn:</label>
+      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
+        <label style="white-space: nowrap;" for="expiry" class="form-label me-3">Ngày hết hạn:</label>
         <input formControlName="expiryDate" type="date" class="form-control" id="expiry">
       </div>
-      <div class=" d-flex mt-2 mb-2 col-4 col-md-4 col-sm-12 align-items-center">
-        <label style="white-space: nowrap;" for="floor"
-               class="form-label me-3">Tầng:</label>
+      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
+        <label style="white-space: nowrap;" for="floor" class="form-label me-3">Tầng:</label>
         <select formControlName="floor" class="form-select" id="floor">
           <option selected>-chọn tầng-</option>
           <option *ngFor="let floor of floorList" [value]="floor.name">{{floor.name}}</option>
         </select>
       </div>
-      <div class=" d-flex mt-2 mb-2 col-4 col-md-4 col-sm-12 align-items-center">
+      <div class=" d-flex mt-2 mb-2 col-12 col-md-6 col-sm-12 align-items-center">
         <label style="white-space: nowrap;" for="ticket_type"
                class="form-label me-3">Loại vé:</label>
         <select formControlName="ticketType" class="form-select" id="ticket_type">
@@ -46,7 +41,7 @@
           <option *ngFor="let ticketType of ticketTypeList" [value]="ticketType.name">{{ticketType.name}}</option>
         </select>
       </div>
-      <div class="d-flex mt-2 mb-2 col-4 col-md-4 col-sm-12 align-items-center">
+      <div class="d-flex mt-2 mb-2 col-12 col-md-6 col-sm-12 align-items-center">
         <label style="white-space: nowrap;" for="ticket_status"
                class="form-label me-3">Trạng thái:</label>
         <select formControlName="status" class="form-select" id="ticket_status">
@@ -55,28 +50,28 @@
           <option [value]="2">hết hạn</option>
         </select>
       </div>
-      <div class="d-flex mt-2 mb-2 col-4 col-md-4 col-sm-12">
-        <button (click)="setStatusSearch()" class="btn float-right" type="submit"
+      <div class="d-flex mt-2 mb-2 col-12 col-md-6 col-sm-12">
+        <button (click)="setStatusSearch()" class="my-button rounded-pill border-0  border-0 rounded-pill float-right" type="submit"
                 style="white-space: nowrap; text-align: center; size: 30px; background-color: darkorange">
           <i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
         </button>
       </div>
     </div>
 
-    <!--    more feature-->
+          <!--    more feature-->
     <div class="row justify-content-center">
       <div class="col-md-2">
         <table>
           <tr>
             <td class="border-0">
-              <a (click)="setStatusSearchAllDefault()" class="btn badge m-2"
+              <a (click)="setStatusSearchAllDefault()" class="rounded-pill border-0 my-button badge m-2"
                  style="background-color: darkorange; color: #212529;">
                 Vé còn hạn
                 (chưa xóa)
               </a>
             </td>
             <td class="border-0">
-              <a (click)="setStatusSearchAllExpired()" class="btn badge m-2"
+              <a (click)="setStatusSearchAllExpired()" class="rounded-pill border-0 my-button badge m-2"
                  style="background-color: darkorange; color: #212529;">
                Vé hết hạn
                 (chưa xóa)
@@ -90,7 +85,7 @@
     <!--                    table-->
     <div class="table-container">
       <table class="fixed-size-table" style="box-shadow: 0 0 10px 0 #e37d00; width: 93rem">
-        <thead style="background-color: #E67E22">
+        <thead style="background-color: #ffb97a">
         <tr>
           <th scope="col" style="vertical-align: middle; border-top-left-radius: 1em">STT</th>
           <th scope="col" style="vertical-align: middle;">Mã vé</th>
@@ -155,20 +150,22 @@
     </div>
     <div class="row m-2">
       <div class="mb-2 col-md-4 col-sm-6" style=" margin-bottom: 20px;margin-top: 5px">
-        <button class="btn" routerLink="ticket/create" style=" background-color: darkorange; white-space: nowrap;">Thêm mới</button>
+        <a class="rounded-pill border-0 my-button" routerLink="ticket/create" style=" background-color: darkorange; white-space: nowrap;">Thêm mới</a>
       </div>
       <div class="mb-8 col-md-4 col-sm-0"></div>
 <!--      Phân trang-->
       <div class="mb-2 col-md-4 col-sm-6" style=" margin-bottom: 20px;margin-top: 5px">
         <div>
-          {{ticketPageNumber}}
+
         </div>
         <div class="pagination">
-          <a class="btn" style="background-color: darkorange" (click)="getListTicket(ticketPageNumber - 1)">Trước</a>
+          <a [attr.disable]="!hasPrevious" class="rounded-pill border-0 my-button" [style.disabled] = "true" style="background-color: darkorange" (click)="getListTicket(ticketPageNumber - 1)">Trước</a>
           <a (click)="getListTicket(0)">1</a>
           <a (click)="getListTicket(1)">2</a>
           <a (click)="getListTicket(2)">3</a>
-          <a class="btn" style="background-color: darkorange" (click)="getListTicket( ticketPageNumber + 1)">Sau</a>
+          <a>...</a>
+          <a (click)="getListTicket(4)">{{ticketPageNumber}}</a>
+          <a class="rounded-pill border-0 my-button" style="background-color: darkorange" (click)="getListTicket( ticketPageNumber + 1)">Sau</a>
         </div>
       </div>
     </div>
@@ -182,7 +179,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa vé</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="my-button rounded-pill border-0  border-0 rounded-pill-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>
@@ -205,9 +202,9 @@
         <p class="text-danger">Lưu ý: khi xóa sẽ không thể hoàn tác!</p>
       </div>
       <div class="modal-footer">
-        <button type="reset" class="btn" style="background-color: #e4e6eb" data-bs-dismiss="modal">Hủy</button>
-        <button *ngIf="isTicketExpired" class="btn" style="background-color: darkorange" (click)="delete()">Xóa</button>
-        <button *ngIf="!isTicketExpired" class="btn" style="background-color: darkorange" data-bs-toggle="modal"
+        <button type="reset" class="my-button rounded-pill border-0  border-0 rounded-pill" style="background-color: #e4e6eb" data-bs-dismiss="modal">Hủy</button>
+        <button *ngIf="isTicketExpired" class="my-button rounded-pill border-0  border-0 rounded-pill" style="background-color: darkorange" (click)="delete()">Xóa</button>
+        <button *ngIf="!isTicketExpired" class="my-button rounded-pill border-0  border-0 rounded-pill" style="background-color: darkorange" data-bs-toggle="modal"
                 data-bs-target="#warning">Xóa
         </button>
       </div>
@@ -220,7 +217,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel2">Cảnh báo</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="my-button rounded-pill border-0 rounded-pill" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p class="text-danger">
@@ -228,7 +225,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button class="btn" style="background-color: darkorange" data-bs-dismiss="modal">Close</button>
+        <button class="my-button rounded-pill border-0 rounded-pill" style="background-color: darkorange" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

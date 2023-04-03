@@ -34,7 +34,9 @@ export class TicketListComponent implements OnInit {
   public isTicketExpired: boolean = false;
   private isSearchTicket: boolean = false;
   private isSearchExpired: boolean;
-
+  private totalPage: number;
+  public hasPrevious: boolean = false;
+  private hasNext: boolean;
   constructor(private ticketService: TicketService) {
   }
 
@@ -120,7 +122,14 @@ export class TicketListComponent implements OnInit {
   }
 
   getListTicket(page?: number) {
-    debugger
+    this.hasNext = true;
+    this.hasPrevious = true;
+    if (this.ticketPageNumber >= this.totalPage) {
+      this.hasNext = false;
+    }
+    if (this.ticketPageNumber <= 0) {
+      this.hasPrevious = false;
+    }
     this.setPageNumber(page);
     this.ticketService.searchTicket(
       this.customerNameSearch,

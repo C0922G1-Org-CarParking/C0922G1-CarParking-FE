@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomePageContentComponent } from './home-page/home-page-content.component';
 import {TicketModule} from "./ticket/ticket.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -20,12 +21,9 @@ import {TicketModule} from "./ticket/ticket.module";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-<<<<<<< HEAD
-    TicketModule
-=======
+    TicketModule,
     ReactiveFormsModule,
-    FormsModule,
->>>>>>> fb78b61370be32eeaa372c8e3ca67b7e7393aaee
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
