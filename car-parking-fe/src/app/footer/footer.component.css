@@ -108,6 +108,7 @@ section {
   padding: 0 0 30px 0;
   color: #212529;
   font-size: 14px;
+  background: #fef8f5;
 }
 
 #footer .footer-newsletter {
@@ -277,4 +278,3 @@ section {
     padding: 3px 0;
   }
 }
-

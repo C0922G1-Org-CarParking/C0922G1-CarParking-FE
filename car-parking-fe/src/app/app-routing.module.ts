@@ -1,16 +1,16 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {ErrorPageComponent} from './error-page/error-page.component';
+import {HomePageContentComponent} from './home-page/home-page-content.component';
+import {ErrorPageComponent} from "./error-page/error-page.component";
+
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'homepage'
-  }, {
-    path: 'homepage',
-    loadChildren: () => import('./home-page/home-page.module').then(module => module.HomePageModule)
-  }, {
+    component: HomePageContentComponent
+  },
+  {
     path: 'employee',
     loadChildren: () => import('./employee/employee.module').then(module => module.EmployeeModule)
   }, {
@@ -26,19 +26,11 @@ const routes: Routes = [
     path: 'statistic',
     loadChildren: () => import('./statistic/statistic.module').then(module => module.StatisticModule)
   }, {
-    path: 'security',
-    loadChildren: () => import('./security-authentication/security-authentication.module')
-      .then(module => module.SecurityAuthenticationModule)
-  }, {
-    path: 'error',
-    component: ErrorPageComponent
-  }, {
     path: 'location',
     loadChildren: () => import('./location/location.module').then(module => module.LocationModule)
   }, {
     path: '**',
-    pathMatch: 'full',
-    redirectTo: 'error'
+    component: ErrorPageComponent
   }
 ];
 
