@@ -17,13 +17,8 @@ const routes: Routes = [{
   path: 'create/:idLocation',
   component: TicketCreateComponent
 }
- // {
-//
-//   path: 'update/:id/:idLocation',
-//   component: TicketUpdateComponent
-// }
   , {
-  path: 'update/:id/:idFloor',
+  path: 'update/:id/:idLocation',
   component: TicketUpdateComponent
 }, {
   path: '',

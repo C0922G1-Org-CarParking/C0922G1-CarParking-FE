@@ -10,6 +10,8 @@ import {error} from "@angular/compiler/src/util";
 import {ActivatedRoute} from "@angular/router";
 import {switchMapTo} from "rxjs/operators";
 import {getLocaleMonthNames} from "@angular/common";
+import {LocationService} from "../../service/location.service";
+import {ILocation} from "../../model/ilocation";
 
 @Component({
   selector: 'app-ticket-update',
@@ -26,22 +28,27 @@ export class TicketUpdateComponent implements OnInit {
   floorList: Floor[];
   ticketTypeList: TicketType[];
   newExpiryDate = '';
-
-
+  idLocation: number;
+   location:ILocation;
   constructor(private ticketService: TicketService,
               private floorService: FloorService,
               private ticketTypeService: TicketTypeService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute, private locationService: LocationService) {
 
   }
 
   ngOnInit(): void {
     this.ticketTypeService.getAllTicketType().subscribe(ticketTypeList => {
+      this.activatedRoute.paramMap.subscribe(param =>{
+        this.idLocation= +param.get('idLocation');
+        this.findLocation();
+      });
       debugger
       this.ticketTypeList = ticketTypeList;
       console.log(ticketTypeList);
       this.activatedRoute.paramMap.subscribe(paramMap => {
         this.ticketService.findByTicketId(+paramMap.get('id')).subscribe(ticketEdit => {
+
           this.ticketEdit = ticketEdit;
           this.rate = ticketEdit.rate;
           // this.editTicketForm.patchValue(ticketEdit);
@@ -50,6 +57,13 @@ export class TicketUpdateComponent implements OnInit {
           this.initForm();
         })
       })
+    })
+  }
+  findLocation(){
+    this.locationService.findLocationEmptyById(this.idLocation).subscribe(param =>{
+      this.location = param
+    }, error1 => {
+      this.location=null;
     })
   }
 
