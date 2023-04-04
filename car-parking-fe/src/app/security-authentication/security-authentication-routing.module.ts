@@ -6,7 +6,6 @@ import {ChangePasswordComponent} from './change-password/change-password.compone
 import {AdminGuard} from './security-auth/admin.guard';
 import {UserGuard} from './security-auth/user.guard';
 
-
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},

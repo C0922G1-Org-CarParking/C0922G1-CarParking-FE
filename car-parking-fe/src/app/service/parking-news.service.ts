@@ -16,10 +16,10 @@ export class ParkingNewsService {
   }
 
   getListParkingNews(keyword: string, pageNumber: number): Observable<PageJson> {
-    return this.http.get<any>(`${API_URL}/api/parking_news?page=` + pageNumber + '&keyword=' + keyword);
+    return this.http.get<any>(`${API_URL}/api/public/parking_news?page=` + pageNumber + '&keyword=' + keyword);
   }
 
   getDetailParkingNews(id: number): Observable<ParkingNews> {
-    return this.http.get<ParkingNews>(`${API_URL}/api/parking_news/detail/${id}`);
+    return this.http.get<ParkingNews>(`${API_URL}/api/public/parking_news/detail/${id}`);
   }
 }

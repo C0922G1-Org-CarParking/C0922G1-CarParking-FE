@@ -32,7 +32,7 @@ h5 .card-title
 # Section
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  /*padding: 60px 0;*/
   overflow: hidden;
 }
 
@@ -45,12 +45,6 @@ section {
   padding-bottom: 30px;
 }
 
-/*.section-title h2 {*/
-/*  font-size: 18px;*/
-/*  font-weight: 700;*/
-/*  color: #c2b7b1;*/
-/*  margin-top: 12px;*/
-/*}*/
 
 .section-title p {
   margin-bottom: 0;
@@ -70,6 +64,7 @@ section {
   bottom: 0;
   left: calc(50% - 30px);
 }
+
 .getstarted:hover
 .getstarted:focus:hover{
   color: #fff;

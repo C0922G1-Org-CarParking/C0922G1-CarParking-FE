@@ -1,30 +1,37 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, OnInit} from '@angular/core';
-
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-
+import {NgModule} from '@angular/core';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from '@angular/fire';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HeaderComponent} from './header/header.component';
-import {FooterComponent} from './footer/footer.component';
-import {ErrorPageComponent} from './error-page/error-page.component';
-import {AuthInterceptor} from './security-authentication/security-auth/auth.interceptor';
+
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import {TicketModule} from "./ticket/ticket.module";
+import {AuthInterceptor} from "./security-authentication/security-auth/auth.interceptor";
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    ErrorPageComponent
-  ],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+    ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    TicketModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

@@ -28,6 +28,7 @@ export class HomePageNewsDetailComponent implements OnInit {
     this.parkingNewsService.getDetailParkingNews(this.id).subscribe((item) => {
       this.parkingNews = item;
     }, error => {
+      this.route.navigateByUrl('/error');
     });
   }
 

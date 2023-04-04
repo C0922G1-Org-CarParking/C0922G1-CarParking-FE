@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ParkingNews} from '../../model/parking-news';
 import {HttpClient} from '@angular/common/http';
 import {ParkingNewsService} from '../../service/parking-news.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-page-news-list',
@@ -15,7 +16,8 @@ export class HomePageNewsListComponent implements OnInit {
   keyword = '';
 
   constructor(private http: HttpClient,
-              private parkingNewsService: ParkingNewsService) {
+              private parkingNewsService: ParkingNewsService,
+              private route: Router) {
   }
 
   ngOnInit(): void {
@@ -49,6 +51,9 @@ export class HomePageNewsListComponent implements OnInit {
       this.parkingNews = items.content;
       this.totalPage = items.totalPages;
       this.pageNumber = items.pageable.pageNumber;
+    }, error => {
+      debugger
+      this.route.navigateByUrl('/error');
     });
   }
 }

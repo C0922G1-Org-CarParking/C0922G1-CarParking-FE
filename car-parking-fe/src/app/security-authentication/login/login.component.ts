@@ -25,6 +25,16 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    debugger
+    if(this.loginService.isLoggedIn) {
+      Swal.fire({
+        text: 'Bạn đã đăng nhập.',
+        icon: 'warning',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.router.navigateByUrl('/');
+    }
     this.view();
     this.loginForm = new FormGroup({
       username: new FormControl(),
@@ -68,7 +78,7 @@ export class LoginComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/list');
         this.shareService.sendClickEvent();
       },
       err => {
