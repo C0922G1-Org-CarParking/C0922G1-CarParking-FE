@@ -16,11 +16,14 @@ const routes: Routes = [{
 }, {
   path: 'create/:idLocation',
   component: TicketCreateComponent
+
 }
   , {
   path: 'update/:id/:idLocation',
-  component: TicketUpdateComponent
-}, {
+    component: TicketUpdateComponent
+
+},
+  {
   path: '',
   pathMatch: 'full',
   redirectTo: 'list'

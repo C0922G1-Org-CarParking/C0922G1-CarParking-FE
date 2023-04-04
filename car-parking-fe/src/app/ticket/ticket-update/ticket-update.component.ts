@@ -30,28 +30,31 @@ export class TicketUpdateComponent implements OnInit {
   newExpiryDate = '';
   idLocation: number;
    location:ILocation;
+   idTicketEdit:number;
   constructor(private ticketService: TicketService,
               private floorService: FloorService,
               private ticketTypeService: TicketTypeService,
               private activatedRoute: ActivatedRoute, private locationService: LocationService) {
 
+
   }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(param =>{
+      this.idLocation= +param.get('idLocation');
+      this.findLocation();
+    });
     this.ticketTypeService.getAllTicketType().subscribe(ticketTypeList => {
-      this.activatedRoute.paramMap.subscribe(param =>{
-        this.idLocation= +param.get('idLocation');
-        this.findLocation();
-      });
+
       debugger
       this.ticketTypeList = ticketTypeList;
       console.log(ticketTypeList);
       this.activatedRoute.paramMap.subscribe(paramMap => {
+        this.idTicketEdit = +paramMap.get('id')
         this.ticketService.findByTicketId(+paramMap.get('id')).subscribe(ticketEdit => {
 
           this.ticketEdit = ticketEdit;
           this.rate = ticketEdit.rate;
-          // this.editTicketForm.patchValue(ticketEdit);
           this.oldExpiryDate = ticketEdit.expiryDate;
           console.log(ticketEdit);
           this.initForm();
@@ -62,8 +65,6 @@ export class TicketUpdateComponent implements OnInit {
   findLocation(){
     this.locationService.findLocationEmptyById(this.idLocation).subscribe(param =>{
       this.location = param
-    }, error1 => {
-      this.location=null;
     })
   }
 
@@ -75,9 +76,9 @@ export class TicketUpdateComponent implements OnInit {
       phoneNumber: new FormControl(this.ticketEdit.phoneNumber),
       effectiveDate: new FormControl(this.ticketEdit.effectiveDate),
       expiryDate: new FormControl(this.ticketEdit.expiryDate),
-      floorId: new FormControl(''),
-      locationId: new FormControl(''),
-      sectionId: new FormControl(''),
+      floorId: new FormControl(this.location?.floor.name),
+      locationId: new FormControl(this.location?.name),
+      sectionId: new FormControl(this.location?.section.name),
       totalPrice: new FormControl(''),
       ticketType: new FormControl(""),
     });
