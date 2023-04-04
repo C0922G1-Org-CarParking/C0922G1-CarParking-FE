@@ -57,22 +57,21 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-12">
-
         <div class="col-md-12">
           <h3 *ngIf="message" style="text-align: center; color: red">không tìm thấy dữ liệu</h3>
           <table class="table table-bordered table-hover text-center"
-                 style="box-shadow: 0 0 10px 0 #253365; margin-top: 20px">
+                 style="box-shadow: 0 0 10px 0 #253365; margin-top: 20px" >
             <thead style="background-color: #E67E22">
             <tr>
               <th scope="col">STT</th>
               <th scope="col">Họ và tên</th>
               <th scope="col">Ngày sinh</th>
-              <th scope="col">Giới tính</th>
-              <th scope="col">Email</th>
-              <th scope="col">Thẻ căn cước</th>
-              <th scope="col">Chức vụ</th>
+              <th scope="col" class="hidden-on-mobile">Giới tính</th>
+              <th scope="col" class="hidden-on-mobile">Email</th>
+              <th scope="col" class="hidden-on-mobile">Thẻ căn cước</th>
+              <th scope="col" class="hidden-on-mobile">Chức vụ</th>
               <th scope="col">Địa chỉ</th>
-              <th scope="col">Số điện thoại</th>
+              <th scope="col" class="hidden-on-mobile">Số điện thoại</th>
               <th scope="col">Chỉnh sửa</th>
               <th scope="col">Xóa</th>
             </tr>
@@ -82,15 +81,15 @@
               <td>{{empl.id}}</td>
               <td>{{empl?.name}}</td>
               <td>{{empl.dateOfBirth | date : 'dd-MM-yyyy'}}</td>
-              <td>
+              <td class="hidden-on-mobile">
                 <ng-container *ngIf="empl.gender == true"> Nam</ng-container>
                 <ng-container *ngIf="empl.gender == false"> Nữ</ng-container>
               </td>
-              <td>{{empl.email}}</td>
-              <td>{{empl.idCard}}</td>
-              <td>{{empl.position.name}}</td>
+              <td class="hidden-on-mobile">{{empl.email}}</td>
+              <td class="hidden-on-mobile">{{empl.idCard}}</td>
+              <td class="hidden-on-mobile">{{empl.position.name}}</td>
               <td>{{empl.street}}</td>
-              <td>{{empl.phoneNumber}}</td>
+              <td class="hidden-on-mobile">{{empl.phoneNumber}}</td>
               <td>
                 <span type="submit"><i class="fa-regular fa-pen-to-square"
                                        routerLink="/employee/update/{{empl.id}}}"></i></span>
