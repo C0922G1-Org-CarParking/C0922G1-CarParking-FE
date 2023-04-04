@@ -5,6 +5,7 @@ import {CarType} from '../../model/car-type';
 import {CustomerService} from 'src/app/service/customer.service';
 import {CarTypeService} from '../../service/car-type.service';
 import Swal from 'sweetalert2';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-customer-create',
@@ -24,7 +25,8 @@ export class CustomerCreateComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private customerService: CustomerService,
-              private carTypeService: CarTypeService) {
+              private carTypeService: CarTypeService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -65,6 +67,7 @@ export class CustomerCreateComponent implements OnInit {
   onSubmit() {
     this.customerService?.createCustomer(this.customerForm.value, this.cars).subscribe(data => {
         console.log(data);
+        this.router.navigateByUrl('/customer/list');
         Swal.fire('Thêm mới khách hàng thành công.', '', 'success');
       },
       error => {
