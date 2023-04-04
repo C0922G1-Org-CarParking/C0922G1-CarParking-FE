@@ -1,3 +1,28 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #212529;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ef7f4d;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-primary {
+  font-family: "Raleway", sans-serif;
+}
+
+
 a {
   text-decoration: none;
 }
@@ -5,12 +30,13 @@ a {
 # Header
 --------------------------------------------------------------*/
 header {
-  height: 5rem;
+  height: 4.2rem;
   transition: all 0.5s;
   z-index: 997;
   transition: all 0.5s;
   background: #fff;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+
 }
 
 header .logo-name {
@@ -72,19 +98,23 @@ header .logo img {
 .nabar li {
   position: relative;
 }
-
+nav ul li .n-item{
+  color: #000000;
+  font-size: 18px;
+  /*font-weight: bold;*/
+}
 
 nav ul li  .n-item:hover{
   color: #eb5d1e;
 }
 
+nav ul li  .n-item{
+  font-size: large;
+  color: #212529;
+
+}
 .navbar .getstarted,
 .navbar .getstarted:focus{
-  background: #eb5d1e;
-  color: #fff;
-  padding: 10px 10px;
-  margin-left: 10px;
-  border-radius: 100px;
 }
 
 .navbar .getstarted:hover,
@@ -111,111 +141,28 @@ nav .n-item:hover {
   }
 }
 
+.dropdownUser {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 10px 0 0 0;
+  z-index: 1;
+  left: 0;
+}
+
+.dropdownUser:hover .dropdown-content {
+  display: block;
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
-#hero {
-  width: 100%;
-  height: 70vh;
-  background: #fef8f5;
-  border-bottom: 2px solid #fcebe3;
-  margin: 72px 0 -45px 0;
-}
-
-#hero h1 {
-  margin: 0;
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 56px;
-  color: #4e4039;
-}
-
-#hero h2 {
-  color: #a08f86;
-  margin: 15px 0 0 0;
-  font-size: 24px;
-}
-
-#hero .btn-get-started {
-  font-family: "Raleway", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 8px 28px;
-  border-radius: 3px;
-  transition: 0.5s;
-  margin-top: 30px;
-  color: #fff;
-  background: #eb5d1e;
-}
-
-#hero .btn-get-started:hover {
-  background: #ef7f4d;
-}
-
-#hero .animated {
-  animation: up-down 2s ease-in-out infinite alternate-reverse both;
-}
-
-@media (max-width: 991px) {
-  #hero {
-    height: calc(100vh - 72px);
-  }
-
-  #hero .animated {
-    animation: none;
-  }
-
-  #hero .hero-img {
-    text-align: center;
-  }
-
-  #hero .hero-img img {
-    width: 50%;
-  }
-}
-
-@media (max-width: 768px) {
-  #hero h1 {
-    font-size: 28px;
-    line-height: 36px;
-  }
-
-  #hero h2 {
-    font-size: 18px;
-    line-height: 24px;
-  }
-
-  #hero .hero-img img {
-    width: 70%;
-  }
-}
-
-@media (max-width: 575px) {
-  #hero .hero-img img {
-    width: 80%;
-  }
-}
-
-@media (max-height: 600px) {
-  #hero {
-    height: 120vh;
-  }
-}
-
-@keyframes up-down {
-  0% {
-    transform: translateY(10px);
-  }
-
-  100% {
-    transform: translateY(-10px);
-  }
-}
-
-# Hero Section
-  --------------------------------------------------------------*/
 
 /*#carousel {*/
 /*  !*width: 100%;*!*/
@@ -233,44 +180,6 @@ nav .n-item:hover {
   margin: 72px 0 0 0;
 }
 
-
-/*}*/
-
-/*#hero h1 {*/
-/*  margin: 0;*/
-/*  font-size: 48px;*/
-/*  font-weight: 700;*/
-/*  line-height: 56px;*/
-/*  color: #0e0e0e;*/
-/*}*/
-
-/*#hero h2 {*/
-/*  color: #bd4709;*/
-/*  margin: 15px 0 0 0;*/
-/*  font-size: 24px;*/
-/*}*/
-
-/*#hero .btn-get-started {*/
-/*  font-family: "Raleway", sans-serif;*/
-/*  font-weight: 500;*/
-/*  font-size: 16px;*/
-/*  letter-spacing: 1px;*/
-/*  display: inline-block;*/
-/*  padding: 8px 28px;*/
-/*  border-radius: 3px;*/
-/*  transition: 0.5s;*/
-/*  margin-top: 30px;*/
-/*  color: #fff;*/
-/*  background: #eb5d1e;*/
-/*}*/
-
-/*#hero .btn-get-started:hover {*/
-/*  background: #ef7f4d;*/
-/*}*/
-
-/*#hero .animated {*/
-/*  animation: up-down 2s ease-in-out infinite alternate-reverse both;*/
-/*}*/
 
 @media (max-width: 991px) {
   #hero {
@@ -374,4 +283,3 @@ section {
   bottom: 0;
   left: calc(50% - 30px);
 }
-
