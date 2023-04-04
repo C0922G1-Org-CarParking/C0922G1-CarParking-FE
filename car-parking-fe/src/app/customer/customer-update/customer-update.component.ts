@@ -23,6 +23,7 @@ export class CustomerUpdateComponent implements OnInit {
   id: number;
   valueProvince = '';
   valueDistrict = '';
+  // @ts-ignore
   item: Car = {};
   districtList: any;
   provinceList: any;
@@ -50,7 +51,7 @@ export class CustomerUpdateComponent implements OnInit {
 
 
   getCustomerById(id: number) {
-    this.customerService.findCustomerById(id).subscribe((customer) => {
+    this.customerService.findCustomerVuById(id).subscribe((customer) => {
       this.customer = customer;
       this.carService.findCarById(id).subscribe((cars) => {
         this.carList = cars;
@@ -88,7 +89,7 @@ export class CustomerUpdateComponent implements OnInit {
   }
 
   createFormCar(id: number) {
-    this.customerService.findCustomerById(id).subscribe(custom => {
+    this.customerService.findCustomerVuById(id).subscribe(custom => {
       this.formCreateCar = new FormGroup({
         name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
         brand: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),

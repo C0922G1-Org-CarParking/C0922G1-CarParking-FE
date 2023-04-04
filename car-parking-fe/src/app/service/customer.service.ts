@@ -19,6 +19,17 @@ export class CustomerService {
   constructor(private http: HttpClient) {
   }
 
+  searchName(name: string): Observable<Customer[]> {
+    return this.http.get<Customer[]>('http://localhost:8080/ticket/listSearchCustomer?name=' + name);
+  }
+
+  findCustomerById(id: number) {
+    return this.http.get<Customer>('http://localhost:8080/ticket/chooseCustomer/' + id);
+  }
+
+  getCarListOfCustomerById(id: number):Observable<Car[]> {
+    return this.http.get<Car[]>('http://localhost:8080/ticket/findCarListOfCustomerId/' + id);
+  }
   findByCustomerId(customerId: number): Observable<Customer> {
     return this.http.get<Customer>('http://localhost:8080/customer/info/' + customerId);
   }
@@ -43,7 +54,7 @@ export class CustomerService {
     return this.http.put<CustomerAndCar>(`http://localhost:8080/customer/update/${id}`, customerAndCar);
   }
 
-  findCustomerById(id: number): Observable<CustomerVu> {
+  findCustomerVuById(id: number): Observable<CustomerVu> {
     return this.http.get<CustomerVu>('http://localhost:8080/customer/findCustomer/' + id);
   }
 
