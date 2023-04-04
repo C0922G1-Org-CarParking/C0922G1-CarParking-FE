@@ -8,6 +8,8 @@ import {TicketType} from "../../model/ticket-type";
 import {TicketTypeService} from "../../service/ticket-type.service";
 import {error} from "@angular/compiler/src/util";
 import {ActivatedRoute} from "@angular/router";
+import {switchMapTo} from "rxjs/operators";
+import {getLocaleMonthNames} from "@angular/common";
 
 @Component({
   selector: 'app-ticket-update',
@@ -20,11 +22,10 @@ export class TicketUpdateComponent implements OnInit {
   oldExpiryDate: string;
   totalPrice = 0;
   ticketEdit: EditTicket;
-
-
   editTicketForm: FormGroup;
   floorList: Floor[];
   ticketTypeList: TicketType[];
+  newExpiryDate = '';
 
 
   constructor(private ticketService: TicketService,
@@ -36,23 +37,23 @@ export class TicketUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.ticketTypeService.getAllTicketType().subscribe(ticketTypeList => {
-      this.ticketTypeList = ticketTypeList;
       debugger
-      this.activatedRoute.paramMap.subscribe(paramMap =>{
-        this.ticketService.findByTicketId(+paramMap.get('id')).subscribe(ticketEdit=>{
+      this.ticketTypeList = ticketTypeList;
+      console.log(ticketTypeList);
+      this.activatedRoute.paramMap.subscribe(paramMap => {
+        this.ticketService.findByTicketId(+paramMap.get('id')).subscribe(ticketEdit => {
           this.ticketEdit = ticketEdit;
           this.rate = ticketEdit.rate;
           // this.editTicketForm.patchValue(ticketEdit);
           this.oldExpiryDate = ticketEdit.expiryDate;
           console.log(ticketEdit);
           this.initForm();
-          debugger
         })
       })
     })
   }
 
-  initForm(){
+  initForm() {
     this.editTicketForm = new FormGroup({
       id: new FormControl(this.ticketEdit.id),
       customerName: new FormControl(this.ticketEdit.customerName),
@@ -64,11 +65,8 @@ export class TicketUpdateComponent implements OnInit {
       locationId: new FormControl(''),
       sectionId: new FormControl(''),
       totalPrice: new FormControl(''),
-      ticketTypeId: new FormControl(this.ticketTypeList.filter(item=>{
-        item.id = this.ticketEdit.ticketTypeId;
-      })),
+      ticketType: new FormControl(""),
     });
-    debugger
   }
 
   editInfoTicket() {
@@ -86,9 +84,51 @@ export class TicketUpdateComponent implements OnInit {
   }
 
   getRenewalPrice(newExpiryDate: string) {
+    debugger
     this.ticketService.getRenewalPrice(newExpiryDate, this.oldExpiryDate, this.rate).subscribe(price => {
       this.totalPrice = price;
     });
   }
 
+  onChange() {
+    const dateString = this.editTicketForm.get('expiryDate').value;
+    const dateObject = new Date(Date.parse(dateString));
+    let newDate = new Date(dateObject);
+    const options = {
+      timeZone: 'Asia/Ho_Chi_Minh',
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
+    }
+    debugger
+    console.log(this.ticketTypeList);
+    const ticketTypeId = this.editTicketForm.get('ticketType').value;
+
+    switch (ticketTypeId) {
+      case '1':
+        newDate.setDate(dateObject.getDate() + 1);
+        break;
+      case '2':
+        newDate.setDate(dateObject.getDate() + 7);
+        break;
+      case '3':
+        newDate.setMonth(dateObject.getMonth() + 1);
+        break;
+      case '4':
+        newDate.setFullYear(dateObject.getFullYear() + 1);
+        break;
+    }
+    this.newExpiryDate = newDate.toLocaleString('vi-VN', options);
+    let date = '';
+    let month = '';
+    if (newDate.getDate() < 10) {
+       date = '0' + newDate.getDate();
+    } else date += newDate.getDate();
+    if (newDate.getMonth() < 10) {
+       month = '0' + (newDate.getMonth() + 1);
+    } else month += (newDate.getMonth() + 1);
+    let year = newDate.getFullYear();
+    let newExpiryDateFormatted = year + '-' + month + '-' + date;
+    this.getRenewalPrice(newExpiryDateFormatted);
+  }
 }
