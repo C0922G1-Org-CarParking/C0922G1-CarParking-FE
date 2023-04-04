@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from '../../service/employee.service';
 import {Employee} from '../../model/employee';
 import Swal from 'sweetalert2';
+import {log} from "util";
 
 @Component({
   selector: 'app-employee-list',
@@ -23,7 +24,7 @@ export class EmployeeListComponent implements OnInit {
   street: string;
   message: '';
   size = 10;
-  province: any;
+  province: number = 0;
   provinceList: any;
 
 
@@ -37,11 +38,19 @@ export class EmployeeListComponent implements OnInit {
       this.provinceList = next.data.data;
     });
   }
+  getProvince(value: string) {
+    console.log(value);
+    if (!isNaN(parseInt(value))) {
+      this.province = parseInt(value);
+    } else {
+      this.province = 0;
+    }
+  }
 
   getAll() {
     this.message = null;
     this.employeeService.getAllEmployee(this.currentPage, this.size,
-      this.nameSearch, this.startDate, this.endDate, this.street).subscribe(data => {
+      this.nameSearch, this.startDate, this.endDate, this.street, this.province).subscribe(data => {
       this.employee = data;
       this.employees = this.employee.content;
       this.totalPages = this.employee.totalPages;
@@ -60,6 +69,12 @@ export class EmployeeListComponent implements OnInit {
           'success'
         );
         this.getAll();
+      }, error => {
+        Swal.fire(
+          'Xóa nhân viên không thành công',
+          '',
+          'error'
+        );
       });
     }
   }
@@ -83,8 +98,4 @@ export class EmployeeListComponent implements OnInit {
     this.getAll();
   }
 
-  getProvince(value: string) {
-    console.log(value);
-    parseInt(value);
-  }
 }
