@@ -1,0 +1,38 @@
+.a {
+  white-space: nowrap;
+  width: 12%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.outline:hover {
+  color: #b3c444;
+}
+
+.page-link {
+  background-color: #e67e22;
+}
+
+.page {
+  background-color: #d8dce1;
+}
+
+.currentpage {
+  background-color: #b3c444
+}
+
+.b {
+  white-space: nowrap;
+  width: 5%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.a:hover {
+  overflow: visible;
+}
+
+.b:hover {
+  overflow: visible;
+}
+
