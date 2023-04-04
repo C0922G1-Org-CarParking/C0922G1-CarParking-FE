@@ -215,7 +215,7 @@
                 style="background-color: #e4e6eb" data-bs-dismiss="modal">Hủy
         </button>
         <button *ngIf="isTicketExpired" class="my-button"
-                style="background-color: darkorange" (click)="delete()">Xóa
+                style="background-color: darkorange" (click)="delete()"  data-bs-dismiss="modal">Xóa
         </button>
         <button *ngIf="!isTicketExpired" class="my-button "
                 style="background-color: darkorange" data-bs-toggle="modal"

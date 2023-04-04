@@ -84,6 +84,7 @@ export class TicketListComponent implements OnInit {
   setStatusSearchAllDefault() {
     this.isSearchExpired = false;
     this.isSearchTicket = false;
+    this.resetForm();
     this.setValueSearch();
   }
 
@@ -202,4 +203,16 @@ export class TicketListComponent implements OnInit {
     });
   }
 
+  private resetForm() {
+    this.formSearchTicket = new FormGroup({
+      customerName: new FormControl(''),
+      customerPhone: new FormControl(''),
+      employeeName: new FormControl(''),
+      employeePhone: new FormControl(''),
+      floor: new FormControl(''),
+      expiryDate: new FormControl(''),
+      ticketType: new FormControl(''),
+      status: new FormControl('')
+    });
+  }
 }
