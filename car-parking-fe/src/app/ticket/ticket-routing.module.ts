@@ -4,8 +4,6 @@ import {TicketListComponent} from "./ticket-list/ticket-list.component";
 import {TicketCreateComponent} from "./ticket-create/ticket-create.component";
 import {TicketUpdateComponent} from "./ticket-update/ticket-update.component";
 import {TicketDetailComponent} from "./ticket-detail/ticket-detail.component";
-import {StatisticByDayMonthYearComponent} from "../statistic/statistic-by-day-month-year/statistic-by-day-month-year.component";
-
 
 const routes: Routes = [
   {
@@ -28,12 +26,12 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'list'
-
   },
   {
     path: 'chooseCustomer/:id',
     component: TicketCreateComponent
-  }, {
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'list'

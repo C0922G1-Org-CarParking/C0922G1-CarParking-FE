@@ -42,6 +42,7 @@ export class TicketService {
       .filter(([_, value]) => value !== undefined && value !== null)
       .map(([key, value]) => `${key}=${value}`)
       .join('&');
+
     debugger
     return this.http.get<any>(`http://localhost:8080/ticket/search?${query}`);
   }
@@ -62,20 +63,8 @@ export class TicketService {
     return this.http.delete<any>(`http://localhost:8080/ticket/delete/${idDelete}`)
   }
   createTicket(ticket: Ticket):Observable<Ticket> {
-    debugger
+
     return this.http.post<Ticket>("http://localhost:8080/ticket/createTicket" , ticket)
-  }
-
-  statisticalTicket(sinceMonth: number, toMonth: number):Observable<[]> {
-    return this.http.get<[]>("http://localhost:8080/ticket/statisticalTicketChart/" + sinceMonth + "/" + toMonth)
-  }
-
-  statisticalCustomer(sinceMonth: number, toMonth: number):Observable<[]> {
-    return this.http.get<[]>("http://localhost:8080/ticket/statisticalCustomerChart/" + sinceMonth + "/" + toMonth)
-  }
-
-  displayMoth(sinceMonth: number, toMonth: number):Observable<[]> {
-    return this.http.get<[]>("http://localhost:8080/ticket/displayMonth/" + sinceMonth + "/" + toMonth);
   }
 
   findRateByIdCar(idCar: number) {
@@ -83,11 +72,9 @@ export class TicketService {
   }
 
   getPrice(effective: string, expiryDate: string, rate: any) {
-    debugger
+
     return this.http.get<number>('http://localhost:8080/ticket/getPrice?expiryDate='+expiryDate
       + "&effectiveDate="+effective +"&rate=" +rate);
   }
 
-  getTotalTicketOfMonth(month: number) {
-  }
 }

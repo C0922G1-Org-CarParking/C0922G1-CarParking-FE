@@ -18,7 +18,7 @@ export class TicketTypeService {
   }
 
   listTicketType(): Observable<TicketType[]> {
-    return this.http.get<TicketType[]>('http://localhost:8080/ticket/listFloor');
+    return this.http.get<TicketType[]>('http://localhost:8080/ticket/ticketType');
   }
 
 }

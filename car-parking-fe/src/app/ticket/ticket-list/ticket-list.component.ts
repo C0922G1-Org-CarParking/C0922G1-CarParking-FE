@@ -34,9 +34,9 @@ export class TicketListComponent implements OnInit {
   public isTicketExpired: boolean = false;
   private isSearchTicket: boolean = false;
   private isSearchExpired: boolean;
-  private totalPage: number;
+  public totalPage: number;
   public hasPrevious: boolean = false;
-  private hasNext: boolean;
+  public hasNext: boolean = false;
   constructor(private ticketService: TicketService) {
   }
 
@@ -62,10 +62,10 @@ export class TicketListComponent implements OnInit {
       this.ticketTypeList = ticketTypeList;
       this.findAllFloor()
       this.isServerOnline = true;
-      debugger
+
     }, error => {
       this.isServerOnline = false;
-      debugger
+
     })
   }
 
@@ -123,13 +123,7 @@ export class TicketListComponent implements OnInit {
 
   getListTicket(page?: number) {
     this.hasNext = true;
-    this.hasPrevious = true;
-    if (this.ticketPageNumber >= this.totalPage) {
-      this.hasNext = false;
-    }
-    if (this.ticketPageNumber <= 0) {
-      this.hasPrevious = false;
-    }
+    this.hasPrevious = true
     this.setPageNumber(page);
     this.ticketService.searchTicket(
       this.customerNameSearch,
@@ -142,19 +136,32 @@ export class TicketListComponent implements OnInit {
       this.statusSearch,
       this.ticketPageNumber).subscribe((ticketPage) => {
       this.ticketPage = ticketPage;
-      debugger
+      this.totalPage = this.ticketPage.totalPages;
       this.ticketList = this.ticketPage.content;
-      this.initForm();
+      this.setStatusPreviousNext();
+      if (this.isSearchExpired || !this.isSearchTicket) {
+        this.initForm();
+      }
     });
-    debugger
+
   }
+
+  setStatusPreviousNext() {
+    if (this.ticketPageNumber >= this.totalPage - 1) {
+      this.hasNext = false;
+    }
+    if (this.ticketPageNumber <= 0) {
+      this.hasPrevious = false;
+    }
+  }
+
   setPageNumber(page?: number) {
     if (!(page === 0) && !(page === undefined)) {
       this.ticketPageNumber = page;
-      debugger
+
     } else {
       this.ticketPageNumber = 0;
-      debugger
+
     }
   }
 

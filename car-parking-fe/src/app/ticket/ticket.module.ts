@@ -6,10 +6,11 @@ import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { TicketUpdateComponent } from './ticket-update/ticket-update.component';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { MyChartComponent } from './my-chart/my-chart.component';
 
 
 @NgModule({
-  declarations: [TicketListComponent, TicketCreateComponent, TicketUpdateComponent, TicketDetailComponent],
+  declarations: [TicketListComponent, TicketCreateComponent, TicketUpdateComponent, TicketDetailComponent, MyChartComponent],
   imports: [
     CommonModule,
     TicketRoutingModule,

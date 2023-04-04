@@ -69,6 +69,7 @@ export class TicketCreateComponent implements OnInit {
       this.floorList = data
     })
     this.ticketTypeService.listTicketType().subscribe(data => {
+      debugger
       this.ticketTypeList = data
     })
     this.activatedRoute.paramMap.subscribe(data => {
