@@ -12,7 +12,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./employee-create.component.css']
 })
 export class EmployeeCreateComponent implements OnInit {
-
   errors = {
     name: '',
     dateOfBirth: '',
@@ -104,7 +103,6 @@ export class EmployeeCreateComponent implements OnInit {
     if (this.employeeGroup.valid) {
       this.employeeService?.addEmployee(this.employeeGroup.value).subscribe(next => {
           this.router.navigateByUrl('/employee/list');
-
           Swal.fire(
             'Added!',
             'Your file has been added.',
@@ -200,7 +198,6 @@ export class EmployeeCreateComponent implements OnInit {
     }
     this.clickButton = true;
   }
-
 
   cancel() {
     this.router.navigateByUrl('/employee/list');

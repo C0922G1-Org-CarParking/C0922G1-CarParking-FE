@@ -93,8 +93,11 @@ export class EmployeeService {
     nameSearch: string = '',
     startDate: string = '',
     endDate: string = '',
-    street: string = ''
+    street: string = '',
+    province: number
   ): Observable<Employee[]> {
+    console.log(province)
+    debugger
     return this.http.get<Employee[]>(
       this.apiList +
       '?page=' +
@@ -108,7 +111,9 @@ export class EmployeeService {
       '&endDate=' +
       endDate +
       '&street=' +
-      street
+      street +
+      '&province=' +
+      province
     );
   }
 
