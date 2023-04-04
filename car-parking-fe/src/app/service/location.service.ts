@@ -18,7 +18,6 @@ export class LocationService {
   }
 
   editLocation(id: number, location: Location): Observable<any> {
-    
     return this.http.patch<any>("http://localhost:8080/location/edit/" + id, location);
   }
   findLocationById(id): Observable<any> {

@@ -28,10 +28,9 @@ export class LocationCreateComponent implements OnInit {
               private sectionService: SectionService,
               private router: Router) {
     this.locationForm = new FormGroup({
-      name: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
-      width: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
-      height: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
-      length: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
+      width: new FormControl("",[Validators.required, Validators.min(0)]),
+      height: new FormControl("",[Validators.required, Validators.min(0)]),
+      length: new FormControl("",[Validators.required, Validators.min(0)]),
       car4: new FormControl("",[Validators.required]),
       car7: new FormControl("",[Validators.required]),
       permissionCarTypeLocations: new FormControl("",[Validators.required]),
@@ -66,7 +65,7 @@ export class LocationCreateComponent implements OnInit {
     if (this.locationForm.valid){}
     this.locationService.createLocation(this.locationForm.value).subscribe(data =>{
       console.log(data)
-      alert("thêm mới thành  công")
+      Swal.fire('Thêm mới vị trí thành công','','success')
       this.router.navigateByUrl("/list")
     })
   }

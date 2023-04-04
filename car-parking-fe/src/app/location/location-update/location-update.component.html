@@ -9,8 +9,7 @@
             <form class="px-md-4 " [formGroup]="locationForm" (ngSubmit)="editLocation()">
               <div class="row align-items-center pt-4 pb-4">
                 <div class="col-md-4 ps-3">
-                  <label style="font-weight: bold"  class="mb-0">Vị trí<sup
-                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+                  <label style="font-weight: bold"  class="mb-0">Vị trí</label>
                 </div>
 
                 <div style="position: relative" class="col-md-8 pe-4" *ngIf="locationDto" >
@@ -23,8 +22,7 @@
 
               <div class="row align-items-center pt-4 pb-4">
                 <div class="col-md-4 ps-3">
-                  <label style="font-weight: bold"  class="mb-0">Dãy<sup
-                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+                  <label style="font-weight: bold"  class="mb-0">Dãy</label>
                 </div>
                 <div style="position: relative" class="col-md-8 pe-4">
                   <select  formControlName="section" class="form-select" disabled [compareWith]="compareFun"  aria-label="Default select example"  >
@@ -35,8 +33,7 @@
               </div>
               <div class="row align-items-center pt-3 pb-4">
                 <div class="col-md-4 ps-3">
-                  <label style="font-weight: bold"  class="mb-0">Tầng<sup
-                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+                  <label style="font-weight: bold"  class="mb-0">Tầng</label>
                 </div>
                 <div style="position: relative" class="col-md-8 pe-4">
                   <select formControlName="floor" class="form-select" disabled  [compareWith]="compareFun1" aria-label="Default select example">
@@ -47,8 +44,7 @@
               </div>
               <div class="row align-items-center pt-4 pb-4">
                 <div class="col-md-4 ps-3">
-                  <label style="font-weight: bold"  class="mb-0">Số vị trí<sup
-                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+                  <label style="font-weight: bold"  class="mb-0">Số vị trí</label>
                 </div>
 
                 <div style="position: relative" class="col-md-8 pe-4">
@@ -165,7 +161,7 @@
                   </div>
                 </div>
               </div>-->
-            <!--  <div class="row align-items-center pt-4 pb-3">
+          <!--    <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-4 ps-3">
                   <label style="font-weight: bold" class="mb-0">Loại xe cho phép<sup
                     style="color: red; font-size: 15px" class="m-1">*</sup></label>
@@ -186,7 +182,7 @@
                   <div class="form-check" style="display: inline-flex;margin-left :20px ">
                     <input type="checkbox" style="margin-left: 5px" formControlName="permissionCarTypeLocations">
                     Loại xe khác
-                    <input style="margin-left: 25px" type="text"
+                    <input formControlName="permissionCarTypeLocations" style="margin-left: 25px" type="text"
                            placeholder="Nhập loại xe khác">
                   </div>
              &lt;!&ndash;     <p  style="color: red;position: absolute"

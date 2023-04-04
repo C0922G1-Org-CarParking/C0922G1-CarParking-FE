@@ -21,7 +21,7 @@ export class LocationUpdateComponent implements OnInit {
   floorList: Floor[] = [];
  sectionList1: Section[] = [];
 locationList: ILocation[] = [];
- locationId: number = 177
+ locationId: number = 1
  locationDto: LocationDto
   clickButton: false;
   constructor(private locationService: LocationService,
@@ -31,11 +31,13 @@ locationList: ILocation[] = [];
               private router: Router) {
     this.locationForm = new FormGroup({
       id: new FormControl(),
-      name: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
-      width: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
-      height: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
-      length: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
-      /*permissionCarTypeLocations: new FormControl(),*/
+      name: new FormControl("",[Validators.required, Validators.min(0)]),
+      width: new FormControl("",[Validators.required, Validators.min(0)]),
+      height: new FormControl("",[Validators.required, Validators.min(0)]),
+      length: new FormControl("",[Validators.required, Validators.min(0)]),
+/*
+      permissionCarTypeLocations: new FormControl(),
+*/
       floor: new FormControl("",[Validators.required]),
       section: new FormControl("",[Validators.required]),
     })
@@ -49,7 +51,6 @@ locationList: ILocation[] = [];
     })
     this.sectionService.getAllSection1().subscribe(data =>{
       this.sectionList1 = data
-      console.log(data)
     })
     this.locationService.getAll(this.locationId).subscribe(data =>{
       this.locationDto = data
@@ -71,7 +72,8 @@ locationList: ILocation[] = [];
     if (this.locationForm.valid){
       this.locationService.editLocation(this.locationForm.value.id, this.locationForm.value).subscribe(data =>{
       console.log(data)
-       alert("chỉnh sửa thành công")
+        console.log(data)
+        Swal.fire("Chỉnh sửa vị trí thành công","","success")
         this.router.navigateByUrl("/list")
       })
     }
