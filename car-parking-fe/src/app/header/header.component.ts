@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
 
   loadHeader(): void {
     if (this.tokenStorageService.getToken()) {
-      debugger
       this.currentUser = this.tokenStorageService.getUser().username;
       this.role = this.tokenStorageService.getUser().roles[0];
       this.username = this.tokenStorageService.getUser().username;
@@ -46,7 +45,8 @@ export class HeaderComponent implements OnInit {
     await Swal.fire({
       text: 'Đăng xuất thành công',
       icon: 'success',
-      timer: 2000
+      showConfirmButton: false,
+      timer: 1500
     });
     await this.router.navigateByUrl('/');
     location.reload();
