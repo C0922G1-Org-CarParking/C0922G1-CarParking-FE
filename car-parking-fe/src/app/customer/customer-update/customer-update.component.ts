@@ -6,8 +6,8 @@ import {CustomerService} from '../../service/customer.service';
 import {CarService} from '../../service/car.service';
 import {CarTypeService} from '../../service/car-type.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {CustomerUpdate} from '../../model/customer-update';
 import Swal from 'sweetalert2';
-import {CustomerVu} from '../../model/customer-vu';
 
 @Component({
   selector: 'app-customer-update',
@@ -16,7 +16,7 @@ import {CustomerVu} from '../../model/customer-vu';
 })
 export class CustomerUpdateComponent implements OnInit {
   formEditCustomer: FormGroup;
-  customer: CustomerVu;
+  customer: CustomerUpdate;
   carTypeList: CarType[] = [];
   carList: Car[] = [];
   formCreateCar: FormGroup;
@@ -145,6 +145,7 @@ export class CustomerUpdateComponent implements OnInit {
     }
   }
 
+
   getProvince(value: string) {
     this.valueProvince = value;
     this.customerService.getAllDistrict(parseInt(value)).subscribe(next => {
@@ -168,10 +169,12 @@ export class CustomerUpdateComponent implements OnInit {
     }
   }
 
+
   updateCustomer(id: number) {
     const customerCar = this.formEditCustomer.value;
     this.customerService.updateCustomer(id, customerCar).subscribe(() => {
-      this.Swal.fire({
+      this.router.navigateByUrl('/customer/list');
+      Swal.fire({
         title: 'Success!',
         text: 'Do you want to continue',
         icon: 'success',

@@ -18,7 +18,7 @@
                     <div style="float: left">Tên khách hàng:</div>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                    <input class="form-control me-4" type="text" placeholder="Tên khách hàng" #name
+                    <input class="form-control me-4" type="text" placeholder="Tên khách hàng" #nameInput [value]="name"
                            aria-label="Search" style="border: 1px solid #b6effb">
                   </div>
 
@@ -26,7 +26,7 @@
                     <div style="float: left">CMND/CCCD:</div>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                    <input class="form-control me-4" type="text" placeholder="Chứng minh nhân dân" #idCard
+                    <input class="form-control me-4" type="text" placeholder="Chứng minh nhân dân" #idCardInput [value]="idCard"
                            aria-label="Search" style="border: 1px solid #b6effb; ">
                   </div>
 
@@ -34,7 +34,7 @@
                     <div style="float: left">Số điện thoại:</div>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                    <input class="form-control me-4" name="name" type="search" placeholder="Số điện thoại" #phoneNumber
+                    <input class="form-control me-4" name="name" type="search" placeholder="Số điện thoại" #phoneNumberInput [value]="phoneNumber"
                            aria-label="Search" style="border: 1px solid #b6effb">
                   </div>
 
@@ -46,7 +46,7 @@
                     <div style="float: left">Sinh từ ngày:</div>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                    <input class="form-control me-4" type="date" #starDate
+                    <input class="form-control me-4" type="date" #starDateInput [value]="starDate"
                            aria-label="Search" style="border: 1px solid #b6effb; ">
                   </div>
 
@@ -54,18 +54,25 @@
                     <div style="float: left">Đến ngày:</div>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                    <input class="form-control me-4" name="name" type="date" #endDate
+                    <input class="form-control me-4" name="name" type="date" #endDateInput [value]="endDate"
                            aria-label="Search" style="border: 1px solid #b6effb">
                   </div>
 
-                  <div class="col-sm-12 col-md-6 col-lg-1 col-xl-2"></div>
+                  <div class="col-sm-12 col-md-6 col-lg-1 col-xl-2">
+
+                  </div>
                   <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                    <div style="float: right">
+                    <div style="float: left">
                       <button class="btn " type="button"
-                              (click)="onSearch(name.value, idCard.value, phoneNumber.value, starDate.value, endDate.value)"
+                              (click)="onSearch(nameInput.value, idCardInput.value, phoneNumberInput.value, starDateInput.value, endDateInput.value)"
                               style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
                         <i class="fa-solid fa-magnifying-glass"></i>Tìm kiếm
                       </button>
+                    </div>
+                    <div style="float: right">
+                      <button class="btn" type="button" (click)="backList(nameInput, idCardInput, phoneNumberInput, starDateInput, endDateInput)"
+                              style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
+                        Quay về</button>
                     </div>
                   </div>
                 </div>

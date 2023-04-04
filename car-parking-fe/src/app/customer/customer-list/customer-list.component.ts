@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Customer} from '../../model/customer';
 import {CustomerService} from '../../service/customer.service';
+// @ts-ignore
 import Swal from 'sweetalert2';
 
 @Component({
@@ -82,7 +83,7 @@ export class CustomerListComponent implements OnInit {
   deletes(idDelete: number) {
     this.message = null;
     this.customerService.deleteCustomer(idDelete).subscribe(() => {
-      Swal.fire( 'Xóa khách hàng thành công', '', 'success');
+      Swal.fire('Xóa khách hàng thành công', '', 'success');
       this.getAll();
     }, error => {
       if (error.status === 404) {
@@ -94,5 +95,19 @@ export class CustomerListComponent implements OnInit {
         Swal.fire('Lỗi kết nối', '', 'error');
       }
     });
+  }
+
+  backList(nameInput: HTMLInputElement, idCardInput: HTMLInputElement, phoneNumberInput: HTMLInputElement, starDateInput: HTMLInputElement, endDateInput: HTMLInputElement) {
+    nameInput.value = '';
+    idCardInput.value = '';
+    phoneNumberInput.value = '';
+    starDateInput.value = '';
+    endDateInput.value = '';
+    this.name = '';
+    this.idCard = '';
+    this.phoneNumber = '';
+    this.starDate = '';
+    this.endDate = '';
+    this.getAll();
   }
 }

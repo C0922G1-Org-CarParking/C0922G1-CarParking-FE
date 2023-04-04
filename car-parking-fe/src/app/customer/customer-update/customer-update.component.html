@@ -6,8 +6,8 @@
     <div class="col-md-10">
       <div class="card" style="border-radius: 15px;">
         <div class="card-body" style="background-color: whitesmoke; box-shadow: 0 0 20px 0 #253365">
-          <form *ngIf="formEditCustomer" [formGroup]="formEditCustomer" (ngSubmit)="updateCustomer(1)" >
-            <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px">CHỈNNH SỬA THÔNG TIN
+          <form *ngIf="formEditCustomer" [formGroup]="formEditCustomer" (ngSubmit)="updateCustomer(id)" >
+            <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px">CHỈNH SỬA THÔNG TIN
               KHÁCH HÀNG</h1>
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-md-6">
@@ -189,7 +189,7 @@
                 </div>
               </div>
               <div align="center" class="px-5 py-4">
-                <button type="button" class="btn btn-secondary">Quay lại</button>
+                <button type="button" class="btn btn-secondary" routerLink="/customer/list">Quay lại</button>
                 <button style="margin-left: 10px;background-color:  #E67E22"  class="btn" >
                   Lưu thay đổi
                 </button>
