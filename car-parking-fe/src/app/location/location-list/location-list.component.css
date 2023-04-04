@@ -1,0 +1,8 @@
+.highlight-on-hover {
+  background-color: chartreuse;
+  transition: background-color 0.5s ease;
+  padding: 10px ;
+}
+.highlight-on-hover:hover {
+  background-color: #f1f1f1;
+}

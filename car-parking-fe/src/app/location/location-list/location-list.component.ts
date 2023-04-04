@@ -5,6 +5,8 @@ import {Page} from 'ngx-pagination/dist/pagination-controls.directive';
 import {FormControl, FormGroup} from "@angular/forms";
 import {LocationDto} from "../../dto/location-dto";
 import Swal from 'sweetalert2'
+import {Floor} from "../../model/floor";
+import {FloorService} from "../../service/floor.service";
 
 
 @Component({
@@ -36,15 +38,27 @@ export class LocationListComponent implements OnInit {
     documentName: new FormControl()
   })
 
-  constructor(private locationService: LocationService) {
+  floorList: Floor[] = [];
+
+  constructor(private locationService: LocationService,
+              private floorService: FloorService) {
+    this.getAllFloor();
   }
+
 
   ngOnInit(): void {
     this.getAll(this.page);
+
   }
 
+  getAllFloor() {
+    this.floorService.getAllFloor().subscribe(next => {
+      // @ts-ignore
+      this.floorList = next;
+    })
+  }
 
-  getAll(page : number) {
+  getAll(page: number) {
     this.locationService.getAllLocation(this.search.trim(), page).subscribe(data => {
       // @ts-ignore
       this.locationList = data.content;
@@ -60,7 +74,7 @@ export class LocationListComponent implements OnInit {
       // @ts-ignore
       this.size = data['size'];
     }, error => {
-      this.locationList=null;
+      this.locationList = null;
     });
 
 
@@ -86,7 +100,7 @@ export class LocationListComponent implements OnInit {
     if (this.idDelete != null) {
       this.locationService.deleteLocation(this.idDelete).subscribe(data => {
         // alert("Xóa thành công");
-        Swal.fire('Xóa thành công','','success')
+        Swal.fire('Xóa thành công', '', 'success')
         this.getAll(this.p);
       })
     } else {
@@ -105,7 +119,6 @@ export class LocationListComponent implements OnInit {
   delete(id: number) {
     this.idDelete = id;
   }
-
 
 
   // locationList: ;

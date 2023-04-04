@@ -1,6 +1,7 @@
 <!--<body style="background-color: rgba(194,218,224,0.45)">-->
 
 
+
 <div class="container-fluid d-flex flex-row">
 
   <div class="row" style="text-align: center">
@@ -16,18 +17,20 @@
             <div class="col-sm-1 col-xs-1 col-lg-1 col-md-1 col-xl-1"></div>
             <div class="col-sm-9 col-xs-9 col-lg-9 col-md-9 col-xl-9 d-flex "
                  style="text-align: right; padding: 0; width: 360px;height: 67px">
+
               <select #element class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                 <option value="" selected>---Chọn Tầng---</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+<!--                <option value="1">1</option>-->
+<!--                <option value="2">2</option>-->
+<!--                <option value="3">3</option>-->
+<!--                <option value="4">4</option>-->
+                <option *ngFor="let item of floorList" [ngValue]="item" >{{item.name}}</option>
               </select>
               <!--                </div>-->
-              <div style="margin-left: 10px; padding: 0 ; width: 100px">
+              <div style="margin-left: 10px; padding: 0 ; width: 100px" >
                 <button class="btn btn-outline-warning" type="submit" (click)="searchLocation(element.value)"
                         style="border: 1px solid chocolate;margin: 0; padding: 0;font-weight: bold; color: black;background: linear-gradient(180deg, darkorange, darkorange 60%, rgba(252,173,29,0.8))">
-                  Tìm kiếm
+                 Tìm kiếm
                 </button>
               </div>
             </div>
@@ -72,9 +75,12 @@
           </table>
           <!--phân trang-->
           <div class="row" id="page">
-            <div class="col-2" style=" margin-bottom: 20px;margin-top: 5px">
-              <button class="btn" style="background-color: darkorange">Thêm mới</button>
+            <div class="highlight-on-hover">
+              <div class="col-2 " style=" margin-bottom: 20px;margin-top: 5px" >
+                <button class="btn  " style="background-color: darkorange" >Thêm mới</button>
+              </div>
             </div>
+
             <div class="col-8"></div>
             <div class="col-2" style=" margin-bottom: 20px;margin-top: 5px">
               <nav aria-label="Page navigation example" style="float: right">
