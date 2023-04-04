@@ -204,8 +204,8 @@
               </div>
             </form>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-        style="margin-top: 10%">
+<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        style="margin-top: 10%;background: darkorange">
   Tìm xe
 </button>
 
@@ -225,8 +225,8 @@
               <h1 style="size:32px; margin-top: 50px; margin-bottom: 10px; text-align: center">TÌM KIẾM XE</h1>
             </div>
             <div>
-              <div class="col-1"></div>
-              <div class="col-10 container-fluid ">
+              <div class="col-0"></div>
+              <div class="col-12 container-fluid ">
                 <div class="row">
                   <div class="col-1"></div>
                   <div class="col-9" style="text-align: right">
@@ -234,19 +234,19 @@
                           style="margin-top: 10px; margin-bottom: 20px;margin-left: 40px">
                       <div class="col-4">
                         <label style="float: left">Tên khách hàng:</label>
-                        <input class="form-control me-2" name="name" type="search" #customerName
+                        <input class="form-control me-2" type="search" #customerName
                                placeholder="Nhập tên khách hàng"
                                aria-label="Search" style="border: 1px solid #b6effb">
                       </div>
                       <div class="col-4" style="margin-left: 20px">
                         <label style="float: left">Số điện thoại:</label>
-                        <input class="form-control me-2" name="name" type="search" #customerPhoneNumber
+                        <input class="form-control me-2" type="search" #customerPhoneNumber
                                placeholder="Nhập số điện thoại"
                                aria-label="Search" style="border: 1px solid #b6effb">
                       </div>
                       <div class="col-4" style="margin-left: 20px">
                         <label style="float: left">Biển số xe:</label>
-                        <input class="form-control me-2" name="name" type="search" #carPlateNumber
+                        <input class="form-control me-2" type="search" #carPlateNumber
                                placeholder="Nhập biển số xe"
                                aria-label="Search" style="border: 1px solid #b6effb">
                       </div>
@@ -293,66 +293,16 @@
                     <td>{{item.customerPhoneNumber}}</td>
                     <td>{{item.ticketEffectiveDate}}</td>
                     <td>{{item.ticketExpiryDate}}</td>
-
-                    <!--                    <td >-->
-                    <!--                      <button  data-bs-dismiss="modal" style="margin-right: 50px;text-align: center" class="btn btn-primary "-->
-                    <!--                               routerLink='/ticket/chooseCustomer/{{item.id}}'>Chọn-->
-                    <!--                      </button>-->
-                    <!--                    </td>-->
                     <td>
-                      <button (click)="selectCar(item.carId)" data-bs-dismiss="modal" class="btn" style="background-color: darkorange;font-size: 13px">Chọn
+                      <button (click)="selectCar(item.carId)" data-bs-dismiss="modal" class="btn"
+                              style="background-color: darkorange;font-size: 13px">Chọn
                       </button>
                     </td>
                   </tr>
                   </tbody>
                 </table>
-
-                <!--                                <table class=" table-bordered table-hover"-->
-                <!--                                       style="table-layout: fixed; width: 100%;box-shadow: 0 0 10px 0 #253365">-->
-                <!--                  <thead style="background-color: #E67E22">-->
-                <!--                  <tr style="font-size: 19px">-->
-                <!--                    <th scope="col">STT</th>-->
-                <!--                    <th scope="col">Biển số xe</th>-->
-                <!--                    <th scope="col">Tên khách hàng</th>-->
-                <!--                    <th scope="col">Số CMND</th>-->
-                <!--                    <th scope="col">Số điện thoại</th>-->
-                <!--                    <th scope="col">Chức năng</th>-->
-                <!--                  </tr>-->
-                <!--                  </thead>-->
-                <!--                  <tbody>-->
-                <!--                  <tr *ngFor="let item of dataList,index as i">-->
-                <!--                    <th scope="row">{{i + 1}}</th>-->
-                <!--                    <td>{{item.carPlateNumber}}</td>-->
-                <!--                    <td style="text-align: left">{{item.customerName}}</td>-->
-                <!--                    <td>{{item.customerIdCard}}</td>-->
-                <!--                    <td>{{item.customerPhoneNumber}}</td>-->
-                <!--                    <td>-->
-                <!--                      <button class="btn" style="background-color: darkorange;font-size: 13px" (click)="getCarInOutById(item.id)">Chọn</button>-->
-                <!--                    </td>-->
-                <!--                  </tr>-->
-                <!--                  </tbody>-->
-                <!--                </table>-->
               </div>
               <div class="col-1"></div>
-              <div style="margin-left: 53%;margin-top: 40px;font-size:18px ">
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
-                         style="background-color: darkorange;color: black">Trang trước</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#"
-                                             style="background-color: white;color: black">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#"
-                                             style="background-color: darkorange;color: black">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#"
-                                             style="background-color: darkorange;color: black">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" style="background-color: darkorange;color: black">Trang sau</a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
             </div>
 <!--&gt;>>>>>> origin/ticket-HuyNL-->
           </div>
