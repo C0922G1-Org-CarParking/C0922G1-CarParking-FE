@@ -15,7 +15,16 @@
       <ul class="navbar-nav ms-auto">
         <li><a class="nav-link" [routerLink]="['employee']"><span class="n-item">Nhân viên</span></a></li>
         <li><a class="nav-link" [routerLink]="['customer']"><span class="n-item">Khách hàng</span></a></li>
-        <li><a class="nav-link" [routerLink]="['car/car-in']"><span class="n-item">Xe</span></a></li>
+        <li>
+
+          <div class="dropdownUser">
+            <span class="n-item">Xe</span>
+            <div class="dropdown-content">
+              <div class="getstarted" [routerLink]="['car/car-in']">Xe vào</div>
+              <div class="getstarted" [routerLink]="['car/car-out']">Xe ra</div>
+            </div>
+          </div>
+        </li>
         <li><a class="nav-link" [routerLink]="['ticket']"><span class="n-item">Vé</span></a></li>
         <li><a class="nav-link" [routerLink]="['statistic']"><span class="n-item">Thống kê</span></a></li>
         <li><a class="nav-link" [routerLink]="['location']"><span class="n-item">Bãi đỗ</span></a></li>

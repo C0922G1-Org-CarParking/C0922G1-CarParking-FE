@@ -39,7 +39,25 @@
                   [disabled]="pageNumber === 0">
             <span>Trước</span>
           </button>
-          <span class="mx-2">{{pageNumber + 1}} / {{totalPage}}</span>
+          <button class="getstarted btn btn-sm" type="button" [hidden]="pageNumber -1 <= 0"
+                  (click)="getParkingNews(keyword, pageNumber - 2)">
+            <span>{{pageNumber - 1}}</span>
+          </button>
+          <button class="getstarted btn btn-sm" type="button" [hidden]="pageNumber <= 0 "
+                  (click)="getParkingNews(keyword, pageNumber - 1)">
+            <span>{{pageNumber}}</span>
+          </button>
+          <button class="getstarted btn btn-sm" disabled type="button">
+            <span>{{pageNumber + 1}}</span>
+          </button>
+          <button class="getstarted btn btn-sm" type="button" [hidden]="pageNumber + 2 > totalPage"
+                  (click)="getParkingNews(keyword, pageNumber + 1)">
+            <span>{{pageNumber + 2}}</span>
+          </button>
+          <button class="getstarted btn btn-sm" type="button" [hidden]="pageNumber + 3 > totalPage"
+                  (click)="getParkingNews(keyword, pageNumber + 2)">
+            <span>{{pageNumber + 3}}</span>
+          </button>
           <button class="getstarted btn btn-sm" type="button" (click)="nextNews()"
                   [disabled]="pageNumber + 1 === totalPage">
             <span>Sau</span>
