@@ -6,6 +6,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CarInOut} from '../../model/car-in-out';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
+
+// @ts-ignore
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 

@@ -99,6 +99,7 @@ export class TicketCreateComponent implements OnInit {
     })
 
   }
+location:ILocation;
 
   createTicket() {
     this.ticket = this.ticketCreateForm.value

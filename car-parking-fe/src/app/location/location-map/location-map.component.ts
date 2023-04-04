@@ -59,7 +59,7 @@ export class LocationMapComponent implements OnInit {
       if(this.check==0){
         this.route.navigateByUrl('/ticket/update/' + id)
       }else {
-        this.route.navigateByUrl('/ticket/add/'+ id)
+        this.route.navigateByUrl('/ticket/create/'+ id)
       }
 
     }

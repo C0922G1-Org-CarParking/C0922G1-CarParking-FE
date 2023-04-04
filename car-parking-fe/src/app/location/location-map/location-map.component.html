@@ -5,7 +5,6 @@
          style="float: left; margin-left: 12% ; margin-top: 3%"></i>
     </p>
   </div>
-
   <div class="container " style="margin-top: 50px">
     <p *ngIf="checkError" style="text-align: center">Hiện tại chưa có vị trí đỗ</p>
 
@@ -21,7 +20,7 @@
                 <div class="col-6 ">
                   <button *ngIf="location.name % 2 != 0"
                           style="transform: rotate(45deg); margin-bottom: 68%; margin-right: -50%; border:  1px solid white;"
-                          (click)="redirectLink(location.name, location.occupied)"
+                          (click)="redirectLink(location.id, location.occupied)"
                           [style.background-color]="location.occupied ? 'red' : 'green'"
                           (mouseleave)="hiddenInformation()"
                           (mousemove)="show(location.length, location.width, location.height)" class="btn btn-danger">
@@ -32,7 +31,7 @@
                   <button *ngIf="location.name % 2 == 0"
                           style="transform: rotate(135deg); margin-top: 40%;
                            margin-left: -50%; border: 1px solid white"
-                          (click)="redirectLink(location.name, location.occupied)"
+                          (click)="redirectLink(location.id, location.occupied)"
                           (mousemove)="show(location.length, location.width, location.height)"
                           (mouseleave)="hiddenInformation()"
                           [style.background-color]="location.occupied ? 'red' : 'green'" class="btn btn-danger">

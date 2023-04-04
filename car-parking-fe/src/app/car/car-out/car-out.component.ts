@@ -4,6 +4,8 @@ import {CarInOutService} from '../../service/car-in-out.service';
 import {CarInOut} from '../../model/car-in-out';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
+
+// @ts-ignore
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {isFromDtsFile} from "@angular/compiler-cli/src/ngtsc/util/src/typescript";
