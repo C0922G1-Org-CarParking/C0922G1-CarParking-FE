@@ -2,17 +2,17 @@
   <!-- ======= Portfolio Section/  Home Page Content ======= -->
   <section id="portfolio" class="portfolio p-0 m-2">
     <div class="container-fluid my-4">
-        <div class="section-title p-0">
-          <p>TRANG THÔNG TIN</p>
+      <div class="section-title p-0">
+        <p>TRANG THÔNG TIN</p>
+      </div>
+      <div class="row">
+        <div class="container-fluid d-flex justify-content-end my-1 p-0">
+          <input class="mx-2 form-control" style="width: 20%" placeholder="Từ khóa tìm kiếm" [(ngModel)]="keyword">
+          <button (click)="searchParkingNews()" class="getstarted btn btn-sm"
+                  type="button">Tìm
+          </button>
         </div>
-        <div class="row">
-          <div class="container-fluid d-flex justify-content-end my-1 p-0">
-            <input class="mx-2 form-control" style="width: 20%" placeholder="Từ khóa tìm kiếm" [(ngModel)]="keyword">
-            <button (click)="searchParkingNews()" class="getstarted btn btn-sm"
-                    type="button">Tìm
-            </button>
-          </div>
-        </div>
+      </div>
       <div class="row portfolio-container">
         <div class="card mb-3 m-0 p-0" style="max-width: 100%;" *ngFor="let pn of parkingNews">
           <div class="row g-0">
