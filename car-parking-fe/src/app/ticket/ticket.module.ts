@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, CurrencyPipe} from '@angular/common';
 
 import { TicketRoutingModule } from './ticket-routing.module';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         TicketRoutingModule,
         ReactiveFormsModule,
         FormsModule
-    ]
+    ],
+  providers: [CurrencyPipe]
 })
 export class TicketModule { }

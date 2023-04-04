@@ -5,7 +5,7 @@ import {StatisticByDayMonthYearComponent} from './statistic-by-day-month-year/st
 
 const routes: Routes = [
   {
-    path: 'statistical',
+    path: 'statistic',
     component: StatisticByDayMonthYearComponent,
   }
 ];

@@ -15,9 +15,8 @@ import {TicketTypeService} from "../../service/ticket-type.service";
 import {Customer} from "../../model/customer";
 import {Ticket} from "../../model/ticket";
 import {ActivatedRoute, Router} from "@angular/router";
-
-import {Subscription} from "rxjs";
-
+import {CurrencyPipe} from '@angular/common';
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-ticket-create',
   templateUrl: './ticket-create.component.html',
@@ -40,13 +39,15 @@ export class TicketCreateComponent implements OnInit {
   enableChooseCar: boolean = false;
   locationInfo: Location;
   locationInfoName: any;
-  rate:any
-  priceTotal :any
-  effectiveDate:any
-  expiryDate:any
+  rate: any
+  priceTotal: any
+  effectiveDate: any
+  expiryDate: any
+  messCar: boolean = true
 
 
-  constructor(private router: Router,
+  constructor(private currencyPipe: CurrencyPipe,
+              private router: Router,
               private ticketService: TicketService,
               private employeeService: EmployeeService,
               private customerService: CustomerService,
@@ -54,14 +55,15 @@ export class TicketCreateComponent implements OnInit {
               private floorService: FloorService,
               private ticketTypeService: TicketTypeService,
               private activatedRoute: ActivatedRoute,
-              ) {
-
+  ) {
   }
 
 
   ngOnInit(): void {
 
+
     this.employeeService.listEmployee().subscribe(data => {
+      debugger
       this.employeeList = data
     })
     this.locationService.listLocation().subscribe(data => {
@@ -88,35 +90,33 @@ export class TicketCreateComponent implements OnInit {
     // })
 
 
-
     this.ticketCreateForm = new FormGroup({
       // id: new FormControl(),
-      effectiveDate: new FormControl(this.ticket?.effectiveDate,[Validators.required]),
-      expiryDate: new FormControl(this.ticket?.expiryDate,[Validators.required]),
+      effectiveDate: new FormControl(this.ticket?.effectiveDate, [Validators.required]),
+      expiryDate: new FormControl(this.ticket?.expiryDate, [Validators.required]),
       isDeleted: new FormControl(0),
-      price: new FormControl(15000,[Validators.required]),
-      totalPrice: new FormControl(this.ticket?.totalPrice,[Validators.required]),
-      ticketType: new FormControl(this.ticket?.ticketType,[Validators.required]),
-      location: new FormControl(this.ticket?.location,[Validators.required]),
-      car: new FormControl(this.ticket?.car,[Validators.required]),
-      employee: new FormControl(this.ticket?.employee,[Validators.required]),
+      price: new FormControl(15000, [Validators.required]),
+      totalPrice: new FormControl(this.ticket?.totalPrice, [Validators.required]),
+      ticketType: new FormControl(this.ticket?.ticketType, [Validators.required]),
+      location: new FormControl(this.ticket?.location, [Validators.required]),
+      car: new FormControl(this.ticket?.car, [Validators.required]),
+      employee: new FormControl(this.ticket?.employee, [Validators.required]),
     })
 
   }
 
   createTicket() {
-    this.ticket = this.ticketCreateForm.value
-    if (this.ticket) {
-      let temp = this.ticketService.createTicket(this.ticket).subscribe(ok => {
-        if (ok && temp)
-          alert('Thêm mới thành công')
+    if (this.ticketCreateForm.valid) {
+      this.ticket = this.ticketCreateForm.value
+      this.ticketService.createTicket(this.ticket).subscribe(ok => {
+        // alert('Thêm mới thành công')
+        Swal.fire('Thêm mới thành công','','success')
+        this.ticketCreateForm.reset()
         this.router.navigateByUrl('/ticket/create');
       });
     } else {
-      alert('Vui lòng kiểm tra lại thông tin');
+     Swal.fire('Thêm mới thất bại','','error')
     }
-
-
   }
 
   searchCustomerByName(name: string) {
@@ -127,9 +127,8 @@ export class TicketCreateComponent implements OnInit {
         // this.ngOnInit()
       })
     } else {
-      alert("Không tìm thấy tên khách hàng")
+      Swal.fire('Không tìm thấy tên khách hàng','','error')
       this.customerList = []
-      this.router.navigateByUrl("/ticket/create")
     }
   }
 
@@ -145,10 +144,10 @@ export class TicketCreateComponent implements OnInit {
 
 
   private getCarListOfCustomerById(id: number) {
-    this.customerService.getCarListOfCustomerById(id).subscribe(data =>{
+    this.customerService.getCarListOfCustomerById(id).subscribe(data => {
       this.carList = data
+      this.messCar = false
       this.enableChooseCar = true
-
     })
   }
 
@@ -158,19 +157,22 @@ export class TicketCreateComponent implements OnInit {
   //     this.locationInfoName = this.locationInfo.name
   //   })
   // }
+
+
   getRate(value: string) {
     let idCar = parseInt(value)
-    this.ticketService.findRateByIdCar(idCar).subscribe(data =>{
+    this.ticketService.findRateByIdCar(idCar).subscribe(data => {
       this.rate = data
       console.log(this.rate)
-      this.getPrice(this.effectiveDate,this.expiryDate,this.rate);
+      this.getPrice(this.effectiveDate, this.expiryDate, this.rate);
     })
   }
 
   getPrice(effectiveDate: string, expiryDate: string, rate: any) {
-    if(effectiveDate != null && expiryDate != null && rate != null){
-      this.ticketService.getPrice(effectiveDate,expiryDate,rate).subscribe(data =>{
-        this.priceTotal = data
+    if (effectiveDate != null && expiryDate != null && rate != null) {
+      this.ticketService.getPrice(effectiveDate, expiryDate, rate).subscribe(data => {
+        this.priceTotal = data;
+        // this.currencyPipe.transform(data,this.priceTotal, 'VND ', '1.0-3')
         debugger
       })
     }
@@ -178,12 +180,12 @@ export class TicketCreateComponent implements OnInit {
 
   getEffectiveDate(value: string) {
     this.effectiveDate = value;
-    this.getPrice(this.effectiveDate,this.expiryDate,this.rate);
+    this.getPrice(this.effectiveDate, this.expiryDate, this.rate);
   }
 
   expiryDates(value: string) {
     this.expiryDate = value;
-    this.getPrice(this.effectiveDate,this.expiryDate,this.rate);
+    this.getPrice(this.effectiveDate, this.expiryDate, this.rate);
 
   }
 }

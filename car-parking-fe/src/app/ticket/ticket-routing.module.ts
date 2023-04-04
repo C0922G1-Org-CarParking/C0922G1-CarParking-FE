@@ -3,7 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {TicketListComponent} from "./ticket-list/ticket-list.component";
 import {TicketCreateComponent} from "./ticket-create/ticket-create.component";
 import {TicketUpdateComponent} from "./ticket-update/ticket-update.component";
-import {StatisticByDayMonthYearComponent} from "../statistic/statistic-by-day-month-year/statistic-by-day-month-year.component";
+
 
 
 const routes: Routes = [{
@@ -32,6 +32,7 @@ const routes: Routes = [{
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
+
 })
 export class TicketRoutingModule {
 }
