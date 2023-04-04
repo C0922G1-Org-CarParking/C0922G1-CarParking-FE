@@ -24,6 +24,7 @@ export class TicketService {
   }
 
   getRenewalPrice(expiryDate: string, effectiveDate: string, rate: number): Observable<any> {
+    debugger
     return this.http.get(this.URL_GET_PRICE + "?expiryDate=" + expiryDate + "&effectiveDate="
       + effectiveDate + "&rate=" + rate);
   }

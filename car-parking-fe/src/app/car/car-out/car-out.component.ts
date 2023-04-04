@@ -23,7 +23,7 @@ export class CarOutComponent implements OnInit {
                customerName: string,
                customerPhoneNumber: string) {
 
-    this.carInOutService.searchCarOut(customerName, customerPhoneNumber, carPlateNumber).subscribe(carInList => {
+    this.carInOutService.searchCarOut(carPlateNumber, customerName, customerPhoneNumber).subscribe(carInList => {
       console.log(carInList);
       this.dataList = carInList;
     })
