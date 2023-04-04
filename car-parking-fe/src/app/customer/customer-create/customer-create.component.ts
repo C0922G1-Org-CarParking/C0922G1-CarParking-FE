@@ -22,6 +22,19 @@ export class CustomerCreateComponent implements OnInit {
   valueProvince: string = "";
   valueDistrict: string = "";
 
+  messCustomerName: string;
+  messEmail: string;
+  messPhoneNumber: string;
+  messDateOfBirth: string;
+  messCCCD: string;
+  messStreet: string;
+  messCustomerNamePattern: string;
+  messCCCDPattern: string;
+  messDateOfBirthPattern: string;
+  messEmailPattern: string;
+  messPhoneNumberPattern: string;
+
+
   constructor(private fb: FormBuilder,
               private customerService: CustomerService,
               private carTypeService: CarTypeService) {
@@ -54,7 +67,6 @@ export class CustomerCreateComponent implements OnInit {
       customer: this.customerForm,
       brand: ['', Validators.required],
       isDelete: ['', Validators.required],
-
     })
 
     this.customerService?.getAllProvince().subscribe(next => {
@@ -63,12 +75,61 @@ export class CustomerCreateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.messCustomerName = "";
+    this.messStreet = "";
+    this.messCCCD = "";
+    this.messDateOfBirth = "";
+    this.messEmail = "";
+    this.messPhoneNumber = "";
     this.customerService?.createCustomer(this.customerForm.value, this.cars).subscribe(data => {
         console.log(data)
         Swal.fire('Thêm mới khách hàng thành công.', '', 'success')
       },
       error => {
-        alert("lỗi")
+        console.log(error)
+        for (let i = 0; i < error.error.length; i++) {
+          if (error.error[i].field === 'customerDto.name') {
+            if (error.error[i].code === 'NotBlank') {
+              this.messCustomerName = error.error[i].defaultMessage;
+            } else {
+              this.messCustomerNamePattern = error.error[i].defaultMessage;
+            }
+          }
+          if (error.error[i].field === 'customerDto.phoneNumber') {
+            if (error.error[i].code === 'NotBlank') {
+              this.messPhoneNumber = error.error[i].defaultMessage;
+            } else {
+              this.messPhoneNumberPattern = error.error[i].defaultMessage;
+            }
+          }
+          if (error.error[i].field === 'customerDto.idCard') {
+            if (error.error[i].code === 'NotBlank') {
+              this.messCCCD = error.error[i].defaultMessage;
+            } else {
+              this.messCCCDPattern = error.error[i].defaultMessage;
+            }
+          }
+          if (error.error[i].field === 'customerDto.email') {
+            if (error.error[i].code === 'NotBlank') {
+              this.messEmail = error.error[i].defaultMessage;
+            } else {
+              this.messEmailPattern = error.error[i].defaultMessage;
+            }
+          }
+          if (error.error[i].field === 'customerDto.dateOfBirth') {
+            if (error.error[i].code === 'NotBlank') {
+              this.messDateOfBirth = error.error[i].defaultMessage;
+            } else {
+              this.messDateOfBirthPattern = error.error[i].defaultMessage;
+            }
+          }
+          if (error.error[i].field === 'customerDto.street') {
+            if (error.error[i].code === 'NotBlank') {
+              this.messStreet = error.error[i].defaultMessage;
+            }
+          }
+
+        }
       }
     );
   }

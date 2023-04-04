@@ -13,8 +13,12 @@
                     <label style="font-weight: bold; margin-left: 15px">Họ và tên: <b
                       style="color: red">*</b></label>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="text" formControlName="name">
+                      <div style="position: absolute">
+                      <div style="color: red" *ngIf="messCustomerName">{{messCustomerName}}</div>
+                      <div style="color: red" *ngIf="messCustomerNamePattern">{{messCustomerNamePattern}}</div>
+                      </div>
                   </div>
                 </div>
                 <div class="row align-items-center py-3 col-md-6">
@@ -22,19 +26,30 @@
                     <label style="font-weight: bold; margin-left: 25px" class="mb-0">CCCD: <b
                       style="color: red">*</b></label>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="text" formControlName="idCard">
+
+                    <div style="position: absolute">
+                      <div style="color: red" *ngIf="messCCCD">{{messCCCD}}</div>
+                      <div style="color: red" *ngIf="messCCCDPattern">{{messCCCDPattern}}</div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="row d-flex">
+              <div class="row d-flex" style="margin-top: 40px">
                 <div class="row align-items-center py-3 col-md-6">
                   <div class="col-md-4">
                     <label style="font-weight: bold; margin-left: 15px">Ngày sinh: <b
                       style="color: red">*</b></label>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="date" formControlName="dateOfBirth">
+
+
+                    <div style="position: absolute">
+                      <div style="color: red" *ngIf="messDateOfBirth">{{messDateOfBirth}}</div>
+                      <div style="color: red" *ngIf="messDateOfBirthPattern">{{messDateOfBirthPattern}}</div>
+                    </div>
                   </div>
                 </div>
                 <div class="row align-items-center py-3 col-md-6">
@@ -48,14 +63,18 @@
                   </div>
                 </div>
               </div>
-              <div class="row d-flex">
+              <div class="row d-flex mt-5">
                 <div class="row align-items-center py-3 col-md-6">
                   <div class="col-md-4">
                     <label style="font-weight: bold; margin-left: 15px">Email: <b
                       style="color: red">*</b></label>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="text" formControlName="email">
+                    <div style="position: absolute">
+                      <div style="color: red" *ngIf="messEmail">{{messEmail}}</div>
+                      <div style="color: red" *ngIf="messEmailPattern">{{messEmailPattern}}</div>
+                    </div>
                   </div>
                 </div>
                 <div class="row align-items-center py-3 col-md-6">
@@ -63,12 +82,18 @@
                     <label style="font-weight: bold; margin-left: 25px">SÐT: <b
                       style="color: red">*</b></label>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="text" formControlName="phoneNumber">
+
+
+                    <div style="position: absolute">
+                      <div style="color: red" *ngIf="messPhoneNumber">{{messPhoneNumber}}</div>
+                      <div style="color: red" *ngIf="messPhoneNumberPattern">{{messPhoneNumberPattern}}</div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="row align-items-center py-3">
+              <div class="row align-items-center py-3 mt-5">
                 <div class="col-md-2">
                   <label style="font-weight: bold; margin-left: 15px">Ðịa chỉ: <b
                     style="color: red">*</b></label>
@@ -96,13 +121,15 @@
                   </select>
                 </div>
                 <div class="col-md-3">
-
                   <input class="form-control" style="margin-left: 3%" formControlName="street" placeholder="Nhập số nhà">
+                  <div style="position: absolute">
+                    <p style="color: red" *ngIf="messStreet">{{messStreet}}</p>
+                  </div>
                 </div>
                 <div class="col-md-1"></div>
               </div>
 
-              <div class="row align-items-center py-3">
+              <div class="row align-items-center py-3 mt-3">
                 <h2 style="text-align: center; margin-bottom: 10px">DANH SÁCH XE</h2>
                 <div class="row">
                   <div class="col-md-1"></div>

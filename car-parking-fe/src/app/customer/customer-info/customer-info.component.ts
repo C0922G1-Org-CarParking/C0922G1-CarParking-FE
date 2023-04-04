@@ -13,7 +13,7 @@ export class CustomerInfoComponent implements OnInit {
 
   customer: Customer;
   carTickets: CarTicket[];
-  customerId: number = 1;
+  customerId: number =1;
   district: string
   province: string
   commune: string
@@ -24,9 +24,9 @@ export class CustomerInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.customerService.findByCustomerId(this.customerId).subscribe((next) => {
+      console.log(next)
       this.customer = next;
     }, (err) => {
-      alert(err.toString())
       console.log(err.toString())
     }, () => {
       this.carService.findCarByCustomerId(this.customerId).subscribe(next => {

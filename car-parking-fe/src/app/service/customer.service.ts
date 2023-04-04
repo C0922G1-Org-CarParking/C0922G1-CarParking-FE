@@ -63,18 +63,6 @@ export class CustomerService {
     return this.http.get<any>("https://vn-public-apis.fpo.vn/wards/getByDistrict?districtCode=" + district + "&limit=-1")
   }
 
-  // getAll(name: string, idCard: string, phoneNumber: string, starDate: string, endDate: string, page: number, pageSize: number): Observable<Page<Customer>> {
-  //   return this.http.get<Page<Customer>>('http://localhost:8080/customer/list?page=' + page + '&pageSize=' + pageSize
-  //     + '&name=' + name + '&idCard=' + idCard + '&phoneNumber=' + phoneNumber + '&starDate=' + starDate + '&endDate=' + endDate);
-  // }
-
-  // sendEmail(toMail: string, id: number): Observable<string> {
-  //   return this.http.post<string>('http://localhost:8080/customer/send?to=' + toMail, id);
-  // }
-
-  // deleteCustomer(id: number): Observable<string> {
-  //   return this.http.delete<string>('http://localhost:8080/customer/' + id + '/delete');
-  // }
   getAll(name: string, idCard: string, phoneNumber: string, starDate: string, endDate: string, page: number, pageSize: number): Observable<Page<Customer>> {
     return this.http.get<Page<Customer>>('http://localhost:8080/customer/list?page=' + page + '&pageSize=' + pageSize
       + '&name=' + name + '&idCard=' + idCard + '&phoneNumber=' + phoneNumber + '&starDate=' + starDate + '&endDate=' + endDate);
