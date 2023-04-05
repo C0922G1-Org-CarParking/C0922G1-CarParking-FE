@@ -13,9 +13,9 @@
     </button>
     <nav class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
-        <li><a class="nav-link" [routerLink]="['employee']"><span class="n-item">Nhân viên</span></a></li>
-        <li><a class="nav-link" [routerLink]="['customer']"><span class="n-item">Khách hàng</span></a></li>
-        <li>
+        <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['employee']"><span class="n-item">Nhân viên</span></a></li>
+        <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['customer']"><span class="n-item">Khách hàng</span></a></li>
+        <li [hidden]="!isLoggedIn">
 
           <div class="dropdownUser">
             <span class="n-item">Xe</span>
@@ -25,18 +25,21 @@
             </div>
           </div>
         </li>
-        <li><a class="nav-link" [routerLink]="['ticket']"><span class="n-item">Vé</span></a></li>
-        <li><a class="nav-link" [routerLink]="['statistic']"><span class="n-item">Thống kê</span></a></li>
-        <li><a class="nav-link" [routerLink]="['location']"><span class="n-item">Bãi đỗ</span></a></li>
-        <li>
+        <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['ticket']"><span class="n-item">Vé</span></a></li>
+        <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['statistic']"><span class="n-item">Thống kê</span></a></li>
+        <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['location']"><span class="n-item">Bãi đỗ</span></a></li>
+        <li [hidden]="!isLoggedIn">
           <div class="dropdownUser">
-            <span class="n-item"> <i class='bx bx-user-circle bx-md'></i></span>
+            <div class="n-item d-flex align-items-center">
+              <i class="bi bi-person-lines-fill mx-2" ></i>
+              <span>{{nameEmployee}}</span></div>
             <div class="dropdown-content">
-              <div class="getstarted">Đổi mật khẩu</div>
-              <div class="getstarted">Đăng xuất</div>
+              <div class=" getstarted" routerLink="/security/change-password"><button class="btn">Đổi mật khẩu</button></div>
+              <div class=" getstarted" (click)="logOut()"><button class="btn">Đăng xuất</button></div>
             </div>
           </div>
         </li>
+        <li [hidden]="isLoggedIn"><a class="nav-link" [routerLink]="['security/login']"><span class="n-item">Login</span></a></li>
       </ul>
     </nav>
   </div>

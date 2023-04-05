@@ -16,11 +16,11 @@ export class CarService {
   }
 
   findCarByCustomerId(customerId: number): Observable<CarTicket[]> {
-    return this.http.get<CarTicket[]>('http://localhost:8080/car/info/' + customerId)
+    return this.http.get<CarTicket[]>('http://localhost:8080/api/user/car/info/' + customerId)
   }
 
   findCarById(id: number): Observable<Car[]> {
-    return this.http.get<Car[]>(`http://localhost:8080/customer/car/${id}`)
+    return this.http.get<Car[]>(`http://localhost:8080/api/user/customer/car/${id}`)
   }
 }
 

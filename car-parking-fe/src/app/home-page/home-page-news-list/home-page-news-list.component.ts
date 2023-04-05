@@ -53,6 +53,6 @@ export class HomePageNewsListComponent implements OnInit {
       this.pageNumber = items.pageable.pageNumber;
     }, error => {
       this.route.navigateByUrl('/error');
-    });
+    }); 
   }
 }
