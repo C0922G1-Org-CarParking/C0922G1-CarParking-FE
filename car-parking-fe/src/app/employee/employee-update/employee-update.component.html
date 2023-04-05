@@ -1,0 +1,227 @@
+
+<div style="margin-top: 7%;margin-bottom:1%">
+  <div class="container">
+    <div class="row d-flex justify-content-center align-items-center h-100" style="margin-left:10%;margin-right:10%;">
+      <div class="card" style="border-radius: 1%;box-shadow: 0 0 15px 0 #253365 ">
+        <div class="card-body">
+          <form [formGroup]="employeeGroup" (ngSubmit)="submitUpdate()">
+            <h1 style="text-align: center; margin-top: 2%; margin-bottom: 4%">CHỈNH SỬA NHÂN VIÊN</h1>
+            <div class="row d-flex">
+              <div class="row align-items-center py-3 col-md-6">
+                <div class="col-md-4">
+                  <label style="font-weight: bold; margin-left: 5px">Họ và tên:<b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-md-8">
+                  <input class="form-control" formControlName="name">
+                  <p style="color: red; position: absolute"
+                     *ngIf="(employeeGroup.controls.name.hasError('required')) && employeeGroup.controls.name.touched">
+                    Tên Không được để trống.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                   employeeGroup.controls.name.hasError('pattern') && employeeGroup.controls.name.touched">
+                    Họ tên không đúng định dạng.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.name && !employeeGroup.controls.code.hasError('required') &&
+                      !employeeGroup.controls.name.hasError('pattern')">{{errors.name}}</p>
+
+                </div>
+              </div>
+              <div class="row align-items-center py-3 col-md-6">
+                <div class="col-md-4">
+                  <label style="font-weight: bold; margin-left: 5px">Chức vụ:</label>
+                </div>
+                <div class="col-md-8">
+
+
+                  <select class="form-control" formControlName="position" [compareWith]="compare">
+                    <option *ngFor="let item of position" [ngValue]="item">{{item.name}}</option>
+                  </select>
+
+                  <p style="color: red; position: absolute"
+                     *ngIf="employeeGroup.controls.position.hasError('required') && employeeGroup.controls.position.touched">
+                    Chức vụ không được để trống.</p>
+
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex">
+              <div class="row align-items-center py-3 col-md-6">
+                <div class="col-md-4">
+                  <label style="font-weight: bold; margin-left: 5px" class="mb-0">CCCD: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-md-8">
+                  <input class="form-control" formControlName="idCard">
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                    employeeGroup.controls.idCard.hasError('required') &&
+                     employeeGroup.controls.idCard.touched">
+                    CCCD không được để trống.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                   employeeGroup.controls.idCard.hasError('pattern') && employeeGroup.controls.idCard.touched">
+                    CCCD không đúng định dạng.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.idCard && !employeeGroup.controls.idCard.hasError('required') &&
+                      !employeeGroup.controls.idCard.hasError('pattern')">{{errors.idCard}}</p>
+                </div>
+              </div>
+              <div class="row align-items-center py-3 col-md-6">
+                <div class="col-md-4">
+                  <label style="font-weight: bold; margin-left: 5px">Ngày sinh: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-md-8">
+                  <input class="form-control" formControlName="dateOfBirth" type="date">
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                    employeeGroup.controls.dateOfBirth.hasError('required') &&
+                     employeeGroup.controls.dateOfBirth.touched">
+                    Ngày Sinh không được để trống.</p>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex">
+              <div class="row align-items-center py-3 col-md-6">
+                <div class="col-md-4">
+                  <label style="font-weight: bold; margin-left: 5px">Email: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-md-8">
+                  <input class="form-control" type="text" formControlName="email">
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                    employeeGroup.controls.email.hasError('required') &&
+                     employeeGroup.controls.email.touched">
+                    email không được để trống.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                   employeeGroup.controls.email.hasError('pattern') && employeeGroup.controls.email.touched">
+                    Email không đúng định dạng.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.email && !employeeGroup.controls.email.hasError('required') &&
+                      !employeeGroup.controls.email.hasError('pattern')">{{errors.email}}</p>
+
+                </div>
+              </div>
+              <div class="row align-items-center py-3 col-md-6">
+                <div class="col-md-4">
+                  <label style="font-weight: bold; margin-left: 10px" class="mb-0">Giới tính: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-md-8">
+                  <label>
+                    <input type="radio" [value]="true" formControlName="gender">
+                  </label>Nam
+                  <label>
+                    <input type="radio" [value]="false" formControlName="gender">
+                  </label>Nữ
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                    employeeGroup.controls.gender.hasError('required') &&
+                     employeeGroup.controls.gender.touched">
+                    Giới tính không được để trống.</p>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex">
+              <div class="row align-items-center py-3 col-md-6">
+                <div class="col-md-4">
+                  <label style="font-weight: bold; margin-left: 5px">SÐT: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-md-8">
+                  <input class="form-control" type="text" formControlName="phoneNumber">
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                    employeeGroup.controls.phoneNumber.hasError('required') &&
+                     employeeGroup.controls.phoneNumber.touched">
+                    SĐT không được để trống.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                   employeeGroup.controls.phoneNumber.hasError('pattern') && employeeGroup.controls.phoneNumber.touched">
+                    phone Number không đúng định dạng.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.phoneNumber && !employeeGroup.controls.phoneNumber.hasError('required') &&
+                      !employeeGroup.controls.phoneNumber.hasError('pattern')">{{errors.phoneNumber}}</p>
+                </div>
+              </div>
+              <div class="row align-items-center py-3 col-md-6">
+                <div class="col-md-4">
+                  <label style="font-weight: bold; margin-left: 5px">Địa chỉ cụ thể:</label>
+                </div>
+                <div class="col-md-8">
+                  <input class="form-control" formControlName="street" type="text"
+                         style="margin-right: 23px;margin-left: -3px">
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                    employeeGroup.controls.street.hasError('required') &&
+                     employeeGroup.controls.street.touched">
+                    Địa chỉ khác không được để trống.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row d-flex">
+              <div class="row align-items-center py-3">
+                <div class="col-md-2">
+                  <label style="font-weight: bold; margin-left: 5px">Ðịa chỉ: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control" type="text"
+                          style="margin-left: -10px; margin-right: -10px" formControlName="province" #province
+                          (click)="getProvince(province.value)" [compareWith]="compare">
+                    <option value="" selected>Chọn tỉnh thành</option>
+                    <option *ngFor="let item of provinceList" [value]="item.code">{{item.name}}</option>
+                  </select>
+
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                    employeeGroup.controls.province.hasError('required') &&
+                     employeeGroup.controls.province.touched">
+                    không được để trống.</p>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control" type="text"
+                          style="margin-left: -10px; margin-right: -10px" id="district" formControlName="district"
+                          #district (click)="getDistrict(district.value)" [compareWith]="compare">
+                    <option value="" selected>Chọn quận huyện</option>
+                    <option *ngFor="let item of districtList" [value]="item.code">{{item.name}}</option>
+                  </select>
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                    employeeGroup.controls.district.hasError('required') &&
+                     employeeGroup.controls.district.touched">
+                    không được để trống.</p>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control" type="text"
+                          style="margin-left: -10px; margin-right: -10px" id="ward" formControlName="commune" #commune
+                          (click)="getCommune(commune.value)" [compareWith]="compare">
+                    <option value="" selected>Chọn phường xã</option>
+                    <option *ngFor="let item of communeList" [value]="item.code">{{item.name}}</option>
+                  </select>
+                  <p style="color: red; position: absolute"
+                     *ngIf="
+                    employeeGroup.controls.commune.hasError('required') &&
+                     employeeGroup.controls.commune.touched">
+                    không được để trống.</p>
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+            </div>
+            <div align="center" class="px-5 py-4">
+              <button type="submit" class="btn btn-secondary" style="margin-left: 1%" (click)="cancel()">Quay lại
+              </button>
+              <button style="margin-left: 1%;background-color:  #E67E22" type="submit" class="btn">
+                Lưu thông tin
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
