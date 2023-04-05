@@ -1,3 +1,4 @@
+<!--<script src="../../app.module.ts"></script>-->
 <div class="container-fluid justify-content-center d-flex" style="margin-top: 72px">
   <div class="p-2">
     <h1
@@ -5,102 +6,99 @@
       DANH SÁCH VÉ</h1>
     <!--                     Tìm kiếm-->
 
-    <div *ngIf="formSearchTicket" class="row ms-2 mb-2" [formGroup]="formSearchTicket">
-      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
-        <label style="white-space: nowrap;" for="nameCustomer" class="form-label me-3">Tên khách hàng:</label>
-        <input formControlName="customerName" type="text" class="form-control" id="nameCustomer">
-      </div>
-      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
-        <label style="white-space: nowrap;" for="phoneCustomer" class="form-label me-3">SĐT khách hàng:</label>
-        <input formControlName="customerPhone" type="text" class="form-control" id="phoneCustomer">
-      </div>
-      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
-        <label style="white-space: nowrap;" for="nameEmployee" class="form-label me-3">Tên người tạo vé:</label>
-        <input formControlName="employeeName" type="text" class="form-control" id="nameEmployee">
-      </div>
-      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
-        <label style="white-space: nowrap;" for="phoneEmployee" class="form-label me-3">SĐT người tạo vé:</label>
-        <input formControlName="employeePhone" type="text" class="form-control" id="phoneEmployee">
-      </div>
-      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
-        <label style="white-space: nowrap;" for="expiry" class="form-label me-3">Ngày hết hạn:</label>
-        <input formControlName="expiryDate" type="date" class="form-control" id="expiry">
-      </div>
-      <div class="col-12 col-md-6 col-sm-12 row align-items-center">
-        <label style="white-space: nowrap;" for="floor" class="form-label me-3">Tầng:</label>
-        <select formControlName="floor" class="form-select" id="floor">
-          <option selected>-chọn tầng-</option>
-          <option *ngFor="let floor of floorList" [value]="floor.name">{{floor.name}}</option>
-        </select>
-      </div>
-      <div class=" d-flex mt-2 mb-2 col-12 col-md-6 col-sm-12 align-items-center">
-        <label style="white-space: nowrap;" for="ticket_type"
-               class="form-label me-3">Loại vé:</label>
-        <select formControlName="ticketType" class="form-select" id="ticket_type">
-          <option selected>-chọn loại vé-</option>
-          <option *ngFor="let ticketType of ticketTypeList" [value]="ticketType.name">{{ticketType.name}}</option>
-        </select>
-      </div>
-      <div class="d-flex mt-2 mb-2 col-12 col-md-6 col-sm-12 align-items-center">
-        <label style="white-space: nowrap;" for="ticket_status"
-               class="form-label me-3">Trạng thái:</label>
-        <select formControlName="status" class="form-select" id="ticket_status">
-          <option selected [value]="0">chưa xóa</option>
-          <option [value]="1">đã xóa</option>
-          <option [value]="2">hết hạn</option>
-        </select>
-      </div>
-      <div class="d-flex mt-2 mb-2 col-12 col-md-6 col-sm-12">
-        <button (click)="setStatusSearch()" class="my-button rounded-pill border-0  border-0 rounded-pill float-right" type="submit"
-                style="white-space: nowrap; text-align: center; size: 30px; background-color: darkorange">
-          <i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
-        </button>
+    <div *ngIf="formSearchTicket" class="row ms-2 mb-2 d-flex justify-content-center" [formGroup]="formSearchTicket">
+      <div class="col-11">
+        <div class="row">
+          <div class="col-9">
+            <div class="row d-flex">
+              <div class="col-3 col-c-3-2 m-1  align-items-center">
+                <label style="white-space: nowrap;" for="nameCustomer" class="form-label me-3">Tên khách hàng:</label>
+                <input formControlName="customerName" type="text" class="form-control" id="nameCustomer">
+              </div>
+              <div class="col-3 col-c-3-2 m-1  align-items-center">
+                <label style="white-space: nowrap;" for="phoneCustomer" class="form-label me-3">SĐT khách hàng:</label>
+                <input formControlName="customerPhone" type="text" class="form-control" id="phoneCustomer">
+              </div>
+              <div class="col-3 col-c-3-2 m-1  align-items-center">
+                <label style="white-space: nowrap;" for="nameEmployee" class="form-label me-3">Tên người tạo vé:</label>
+                <input formControlName="employeeName" type="text" class="form-control" id="nameEmployee">
+              </div>
+              <div class="col-3 col-c-3-2 m-1  align-items-center">
+                <label style="white-space: nowrap;" for="phoneEmployee" class="form-label me-3">SĐT người tạo vé:</label>
+                <input formControlName="employeePhone" type="text" class="form-control" id="phoneEmployee">
+              </div>
+              <div class="col-3 col-c-3-2 m-1  align-items-center">
+                <label style="white-space: nowrap;" for="expiry" class="form-label me-3">Ngày hết hạn:</label>
+                <input formControlName="expiryDate" type="date" class="form-control" id="expiry">
+              </div>
+              <div class="col-3 col-c-3-2 m-1  align-items-center">
+                <label style="white-space: nowrap;" for="floor" class="form-label me-3">Tầng:</label>
+                <select formControlName="floor" class="form-select" id="floor">
+                  <option selected>-chọn tầng-</option>
+                  <option *ngFor="let floor of floorList" [value]="floor.name">{{floor.name}}</option>
+                </select>
+              </div>
+              <div class="col-3 col-c-3-2 m-1  align-items-center">
+                <label style="white-space: nowrap;" for="ticket_type"
+                       class="form-label me-3">Loại vé:</label>
+                <select formControlName="ticketType" class="form-select" id="ticket_type">
+                  <option selected>-chọn loại vé-</option>
+                  <option *ngFor="let ticketType of ticketTypeList" [value]="ticketType.name">{{ticketType.name}}</option>
+                </select>
+              </div>
+              <div class="col-3 col-c-3-2 m-1  align-items-center">
+                <label style="white-space: nowrap;" for="ticket_status"
+                       class="form-label me-3">Trạng thái:</label>
+                <select formControlName="status" class="form-select" id="ticket_status">
+                  <option selected [value]="0">chưa xóa</option>
+                  <option [value]="1">đã xóa</option>
+                  <option [value]="2">hết hạn</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <br>
+            <button id="buttonSearch" (click)="setStatusSearch()"
+                    class="col-5 my-button float-right"
+                    style="white-space: nowrap;">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
-          <!--    more feature-->
-    <div class="row justify-content-center">
-      <div class="col-md-2">
-        <table>
-          <tr>
-            <td class="border-0">
-              <a (click)="setStatusSearchAllDefault()" class="rounded-pill border-0 my-button badge m-2"
-                 style="background-color: darkorange; color: #212529;">
-                Vé còn hạn
-                (chưa xóa)
-              </a>
-            </td>
-            <td class="border-0">
-              <a (click)="setStatusSearchAllExpired()" class="rounded-pill border-0 my-button badge m-2"
-                 style="background-color: darkorange; color: #212529;">
-               Vé hết hạn
-                (chưa xóa)
-              </a>
-            </td>
-          </tr>
-        </table>
-      </div>
+    <div class="float-end">
+      <a (click)="setStatusSearchAllDefault()" class="rounded-pill border-0 my-button badge m-2"
+         style="background-color: darkorange; color: #212529;">
+        Vé còn hạn
+        (chưa xóa)
+      </a>
+      <a (click)="setStatusSearchAllExpired()" class="rounded-pill border-0 my-button badge m-2"
+         style="background-color: darkorange; color: #212529;">
+        Vé hết hạn
+        (chưa xóa)
+      </a>
     </div>
 
     <!--                    table-->
     <div class="table-container">
       <table class="fixed-size-table" style="box-shadow: 0 0 10px 0 #e37d00; width: 93rem">
-        <thead style="background-color: #ffb97a">
+        <thead style="background-color: darkorange">
         <tr>
-          <th scope="col" style="vertical-align: middle; border-top-left-radius: 1em">STT</th>
+          <th scope="col" style="vertical-align: middle;">STT</th>
           <th scope="col" style="vertical-align: middle;">Mã vé</th>
           <th scope="col" style="vertical-align: middle;">Biển số xe</th>
           <th scope="col" style="vertical-align: middle;">Tên khách hàng</th>
-          <th scope="col" style="vertical-align: middle;">SĐT khách hàng</th>
-          <th scope="col" style="vertical-align: middle;">Tên người tạo vé</th>
-          <th scope="col" style="vertical-align: middle;">SĐT người tạo vé</th>
+          <th scope="col" style="vertical-align: middle;">Người tạo vé</th>
           <th scope="col" style="vertical-align: middle;">Loại vé</th>
           <th scope="col" style="vertical-align: middle;">Giá vé</th>
           <th scope="col" style="vertical-align: middle;">Tầng</th>
           <th scope="col" style="vertical-align: middle;">Thời gian hết hiệu lực</th>
           <th scope="col" style="vertical-align: middle;">Chi tiết</th>
           <th scope="col" style="vertical-align: middle;">Sửa</th>
-          <th scope="col" style="vertical-align: middle; border-top-right-radius: 1em">Xóa</th>
+          <th scope="col" style="vertical-align: middle;">Xóa</th>
         </tr>
         </thead>
         <tbody>
@@ -109,9 +107,7 @@
           <td>{{ticket.ticketId}}</td>
           <td>{{ticket.plateNumber}}</td>
           <td>{{ticket.customerName}}</td>
-          <td>{{ticket.customerPhoneNumber}}</td>
           <td>{{ticket.employeeName}}</td>
-          <td>{{ticket.employeePhoneNumber}}</td>
           <td>{{ticket.ticketType}}</td>
           <td>{{ticket.totalPrice}}</td>
           <td>{{ticket.floor}}</td>
@@ -122,7 +118,7 @@
                                          </span>
           </td>
           <td>
-                                         <span routerLink="ticket/edit/{{ticket.ticketId}}">
+                                         <span routerLink="/edit/{{ticket.ticketId}}">
                                              <i class="fa-regular fa-pen-to-square" style="color:#ef8500;"></i>
                                          </span>
           </td>
@@ -148,27 +144,42 @@
         </tbody>
       </table>
     </div>
-    <div class="row m-2">
-      <div class="mb-2 col-md-4 col-sm-6" style=" margin-bottom: 20px;margin-top: 5px">
-        <a class="rounded-pill border-0 my-button" routerLink="ticket/create" style=" background-color: darkorange; white-space: nowrap;">Thêm mới</a>
-      </div>
-      <div class="mb-8 col-md-4 col-sm-0"></div>
-<!--      Phân trang-->
-      <div class="mb-2 col-md-4 col-sm-6" style=" margin-bottom: 20px;margin-top: 5px">
-        <div>
 
-        </div>
-        <div class="pagination">
-          <a [attr.disable]="!hasPrevious" class="rounded-pill border-0 my-button" [style.disabled] = "true" style="background-color: darkorange" (click)="getListTicket(ticketPageNumber - 1)">Trước</a>
-          <a (click)="getListTicket(0)">1</a>
-          <a (click)="getListTicket(1)">2</a>
-          <a (click)="getListTicket(2)">3</a>
-          <a>...</a>
-          <a (click)="getListTicket(4)">{{ticketPageNumber}}</a>
-          <a class="rounded-pill border-0 my-button" style="background-color: darkorange" (click)="getListTicket( ticketPageNumber + 1)">Sau</a>
-        </div>
+    <div class="row container-fluid">
+      <div class="col-4" style="margin-top: 5px">
+        <button class="btn" type="button" style="float: left; background-color: darkorange"
+                routerLink="/customer/create">
+          Thêm vé
+        </button>
+      </div>
+      <div class="col-1"></div>
+
+      <div class="col-7" style="margin-top: 5px">
+        <nav aria-label="Page navigation example" style="float: right">
+          <ul class="pagination" *ngIf="pageCount > 1">
+            <li class="page-item">
+              <button [ngClass]="{disabled: page === 0 }" style="background-color: darkorange"
+                      (click)="previousPage()" class="page-link" aria-label="Previous">
+                <span aria-hidden="true">Trước</span>
+              </button>
+            </li>
+            <li class="page-item" *ngFor="let pageNumber of pageNumbersToDisplay">
+              <a class="page-link page" [ngClass]="{currentpage: page + 1 == pageNumber}"
+                 (click)="goToPage(pageNumber)">
+                {{ pageNumber === '...' ? pageNumber : pageNumber }}
+              </a>
+            </li>
+            <li class="page-item">
+              <button [ngClass]="{disabled: page == totalPage - 1 }" style="background-color: darkorange"
+                      class="page-link page" (click)="nextPage()" aria-label="Next">
+                <span aria-hidden="true">Sau</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -179,7 +190,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa vé</h1>
-        <button type="button" class="my-button rounded-pill border-0  border-0 rounded-pill-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="my-button rounded-pill border-0  border-0 rounded-pill-close"
+                data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>
@@ -202,9 +214,14 @@
         <p class="text-danger">Lưu ý: khi xóa sẽ không thể hoàn tác!</p>
       </div>
       <div class="modal-footer">
-        <button type="reset" class="my-button rounded-pill border-0  border-0 rounded-pill" style="background-color: #e4e6eb" data-bs-dismiss="modal">Hủy</button>
-        <button *ngIf="isTicketExpired" class="my-button rounded-pill border-0  border-0 rounded-pill" style="background-color: darkorange" (click)="delete()">Xóa</button>
-        <button *ngIf="!isTicketExpired" class="my-button rounded-pill border-0  border-0 rounded-pill" style="background-color: darkorange" data-bs-toggle="modal"
+        <button type="reset" class="my-button "
+                style="background-color: #e4e6eb" data-bs-dismiss="modal">Hủy
+        </button>
+        <button *ngIf="isTicketExpired" class="my-button"
+                style="background-color: darkorange" (click)="delete()"  data-bs-dismiss="modal">Xóa
+        </button>
+        <button *ngIf="!isTicketExpired" class="my-button "
+                style="background-color: darkorange" data-bs-toggle="modal"
                 data-bs-target="#warning">Xóa
         </button>
       </div>
@@ -217,7 +234,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel2">Cảnh báo</h1>
-        <button type="button" class="my-button rounded-pill border-0 rounded-pill" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="my-button " data-bs-dismiss="modal"
+                aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p class="text-danger">
@@ -225,7 +243,9 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button class="my-button rounded-pill border-0 rounded-pill" style="background-color: darkorange" data-bs-dismiss="modal">Close</button>
+        <button class="my-button" style="background-color: darkorange"
+                data-bs-dismiss="modal">Close
+        </button>
       </div>
     </div>
   </div>

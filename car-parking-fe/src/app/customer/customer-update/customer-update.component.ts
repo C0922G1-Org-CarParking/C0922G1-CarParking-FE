@@ -44,6 +44,7 @@ export class CustomerUpdateComponent implements OnInit {
   messDateOfBirthPattern: string;
   messEmailPattern: string;
   messPhoneNumberPattern: string;
+  formCreated: boolean = false;
   constructor(private customerService: CustomerService,
               private carService: CarService,
               private carTypeService: CarTypeService,
@@ -62,6 +63,46 @@ export class CustomerUpdateComponent implements OnInit {
       this.id = +paramMap.get('id')
       this.createFormCar(this.id)
       this.getCustomerById(this.id);
+      let timerInterval
+      const swalRef = Swal.fire({
+        title: 'Vui lòng đợi trong giây lát',
+        html: '',
+        timer: 600,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+          const b = Swal.getHtmlContainer().querySelector('b')
+          timerInterval = setInterval(() => {
+            // @ts-ignore
+            b.textContent = Swal.getTimerLeft()
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+        }
+      })
+      setTimeout(() => {
+        if (this.formCreated) {
+
+          // @ts-ignore
+          swalRef.close();
+        } else {
+          Swal.fire({
+            title: 'Đã xảy ra vài sự cố',
+            text: 'Vui lòng tải lại trang!',
+
+            confirmButtonText: 'Đóng'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigateByUrl('/customer/list');
+            }
+          });
+        }
+      }, 5000);
 
     })
   }
@@ -114,6 +155,7 @@ export class CustomerUpdateComponent implements OnInit {
           });
           (this.formEditCustomer.get('carList') as FormArray).push(carFormGroup);
         });
+        this.formCreated = true;
       });
   }
 

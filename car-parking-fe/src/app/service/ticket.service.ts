@@ -20,18 +20,6 @@ export class TicketService {
   constructor(private http: HttpClient) {
   }
 
-  findByTicketId(ticketId: number): Observable<EditTicket> {
-    return this.http.get<EditTicket>('http://localhost:8080/api/user/ticket/' + ticketId);
-  }
-
-  updateTicket(editTicket: EditTicket) {
-    return this.http.put('http://localhost:8080/api/user/ticket/update/', editTicket)
-  }
-
-  getRenewalPrice(expiryDate: string, effectiveDate: string, rate: number): Observable<any> {
-    return this.http.get(this.URL_GET_PRICE + "?expiryDate=" + expiryDate + "&effectiveDate="
-      + effectiveDate + "&rate=" + rate);
-  }
   searchTicket(customerName?: string,
                customerPhone?: string,
                employeeName?: string,
@@ -57,7 +45,7 @@ export class TicketService {
       .filter(([_, value]) => value !== undefined && value !== null)
       .map(([key, value]) => `${key}=${value}`)
       .join('&');
-    debugger
+
     return this.http.get<any>(`http://localhost:8080/api/user/ticket/search?${query}`);
   }
 
@@ -77,20 +65,8 @@ export class TicketService {
     return this.http.delete<any>(`http://localhost:8080/api/user/ticket/delete/${idDelete}`)
   }
   createTicket(ticket: Ticket):Observable<Ticket> {
-    debugger
+
     return this.http.post<Ticket>("http://localhost:8080/api/user/ticket/createTicket" , ticket)
-  }
-
-  statisticalTicket(sinceMonth: number, toMonth: number):Observable<[]> {
-    return this.http.get<[]>("http://localhost:8080/api/user/ticket/statisticalTicketChart/" + sinceMonth + "/" + toMonth)
-  }
-
-  statisticalCustomer(sinceMonth: number, toMonth: number):Observable<[]> {
-    return this.http.get<[]>("http://localhost:8080/api/user/ticket/statisticalCustomerChart/" + sinceMonth + "/" + toMonth)
-  }
-
-  displayMoth(sinceMonth: number, toMonth: number):Observable<[]> {
-    return this.http.get<[]>("http://localhost:8080/api/user/ticket/displayMonth/" + sinceMonth + "/" + toMonth);
   }
 
   findRateByIdCar(idCar: number) {
@@ -98,11 +74,20 @@ export class TicketService {
   }
 
   getPrice(effective: string, expiryDate: string, rate: any) {
-    debugger
+
     return this.http.get<number>('http://localhost:8080/api/user/ticket/getPrice?expiryDate='+expiryDate
       + "&effectiveDate="+effective +"&rate=" +rate);
   }
+  findByTicketId(ticketId: number): Observable<EditTicket> {
+    return this.http.get<EditTicket>('http://localhost:8080/api/user/ticket/' + ticketId);
+  }
 
-  getTotalTicketOfMonth(month: number) {
+  updateTicket(editTicket: EditTicket) {
+    return this.http.put('http://localhost:8080/api/user/ticket/update/', editTicket)
+  }
+
+  getRenewalPrice(expiryDate: string, effectiveDate: string, rate: number): Observable<any> {
+    return this.http.get(this.URL_GET_PRICE + "?expiryDate=" + expiryDate + "&effectiveDate="
+      + effectiveDate + "&rate=" + rate);
   }
 }

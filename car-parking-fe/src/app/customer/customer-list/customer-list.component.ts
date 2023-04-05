@@ -18,7 +18,7 @@ export class CustomerListComponent implements OnInit {
   starDate = '';
   endDate = '';
   page = 0;
-  pageSize = 10;
+  pageSize = 3;
   pageCount = 0;
   pageNumbers: number[] = [];
   message: string;
@@ -37,6 +37,7 @@ export class CustomerListComponent implements OnInit {
     this.phoneNumber = phoneNumber;
     this.starDate = starDate;
     this.endDate = endDate;
+    this.page = 0;
     this.customerService.getAll(this.name, this.idCard, this.phoneNumber, this.starDate, this.endDate, this.page, this.pageSize)
       .subscribe(customeres => {
       }, error => {
@@ -67,7 +68,7 @@ export class CustomerListComponent implements OnInit {
       this.getAll();
     }, error => {
       if (error.status === 404) {
-        Swal.fire('Xóa khách hàng không thành công, khách hàng đã bị xóa hoặc không tồn tại trong cơ sở dữ liệu', '', 'success');
+        Swal.fire('Xóa khách hàng không thành công, khách hàng đã bị xóa hoặc không tồn tại trong cơ sở dữ liệu', '', 'error');
       } else if (error.status === 405) {
         Swal.fire('Xóa không thành công, Khách hàng hiện tại vẫn còn thời hạn vé. Chờ xác nhận mail từ khách hàng', '', 'error');
         this.customerService.sendEmail('duyhuynhzi767@gmail.com', idDelete).subscribe();
