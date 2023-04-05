@@ -1,9 +1,8 @@
-<br>
-<br>
+
 <div style="margin-top: 2%" class="col-12">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-xl-9">
+      <div style="width: 150%" class="col-xl-9">
         <div class="card" style="border-radius: 15px;">
           <div class="card-body" style="box-shadow: 0 0 20px 0 #253365">
             <form>
@@ -42,7 +41,7 @@
                       <label style="font-weight: bold">Biển số xe</label>
                     </div>
                     <div class="col-md-8">
-                      <input readonly value="{{carIn.carPlateNumber}}" class="form-control" type="text">
+                      <input readonly value="{{carIn?.carPlateNumber}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -52,7 +51,7 @@
                       <label style="font-weight: bold" class="mb-0">Tên xe:</label>
                     </div>
                     <div class="col-md-8">
-                      <input readonly value="{{carIn.carName}}" class="form-control" type="text">
+                      <input readonly value="{{carIn?.carName}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -62,7 +61,7 @@
                       <label style="font-weight: bold" class="mb-0">Hãng xe:</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carIn.carBrand}}" class="form-control" type="text">
+                      <input readonly value="{{carIn?.carBrand}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -74,7 +73,7 @@
                       <label style="font-weight: bold">Thời gian vé từ</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carIn.ticketEffectiveDate}}" class="form-control" type="date">
+                      <input readonly value="{{carIn?.ticketEffectiveDate}}" class="form-control" type="date">
                     </div>
                   </div>
                 </div>
@@ -84,7 +83,7 @@
                       <label style="font-weight: bold" class="mb-0">Đến: </label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carIn.ticketExpiryDate}}" class="form-control" type="date">
+                      <input readonly value="{{carIn?.ticketExpiryDate}}" class="form-control" type="date">
                     </div>
                   </div>
                 </div>
@@ -95,7 +94,7 @@
                       <label style="font-weight: bold" class="mb-0">Tầng:</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carIn.floorName}}" class="form-control" type="text">
+                      <input readonly value="{{carIn?.floorName}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -104,10 +103,10 @@
                 <div class="align-items-center py-3 col-md-4">
                   <div class="row">
                     <div class="col-4">
-                      <label style="font-weight: bold">Tên Khách Hàng</label>
+                      <label style="font-weight: bold">Khách Hàng</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carIn.customerName}}" class="form-control" type="text">
+                      <input readonly value="{{carIn?.customerName}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -117,7 +116,7 @@
                       <label style="font-weight: bold" class="mb-0">Số Điện thoại</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carIn.customerPhoneNumber}}" class="form-control" type="text">
+                      <input readonly value="{{carIn?.customerPhoneNumber}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -127,11 +126,12 @@
                       <label style="font-weight: bold" class="mb-0">Vị trí đỗ</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carIn.locationName}}" class="form-control" type="text">
+                      <input readonly [value]="carIn?.locationName" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
               </div>
+
               <div class="row d-flex">
                 <div class="align-items-center py-3 col-md-4">
                   <div class="row">
@@ -140,7 +140,7 @@
                     </div>
                     <div class="col-12">
                       <div class="row align-items-center">
-                        <img [src]="urlCarInImage" src="../../../../assets/car-images/default.png"/>
+                        <img [src]="urlCarInImage"  src="../../../../assets/car-images/default.png"/>
                       </div>
                     </div>
                   </div>
@@ -153,7 +153,7 @@
                     <div style="text-align: center">
                       <div class="mb-3">
                         <label for="file-upload" class="custom-file-upload">
-                          <img style="width: 60%; height: 60%" src="../../../../assets/car-images/scanning.png"
+                          <img style="width: 60%; height: 60%" src="../../../../assets/car-images/scan_icon_176437.png"
                                alt="">
                         </label>
                         <input #uploadFile (change)="onUpload($event)" hidden id="file-upload" type="file"/>
@@ -203,14 +203,21 @@
                 </div>
               </div>
             </form>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-        style="margin-top: 10%">
-  Tìm xe
-</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- Button trigger modal -->
+<!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"-->
+<!--        style="margin-top: 10%">-->
+<!--  Tìm xe-->
+<!--</button>-->
 <!-- Modal -->
-<div class="modal fade modal-dialog-scrollable" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal fade modal-dialog-scrollable" id="exampleModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
@@ -222,7 +229,8 @@
         <div class="justify-content-center m-0 mb-2">
           <div>
             <div>
-              <h1 style="size:32px; margin-top: 50px; margin-bottom: 10px; text-align: center">TÌM KIẾM XE</h1>
+              <h1 style="size:32px; margin-top: 50px; margin-bottom: 10px; text-align: center">TÌM KIẾM
+                XE</h1>
             </div>
             <div>
               <div class="col-1"></div>
@@ -285,14 +293,14 @@
                   </tr>
                   </thead>
                   <tbody style="text-align: center">
-                  <tr *ngFor="let item of dataList, let i = index">
+                  <tr *ngFor="let carIn of dataList, let i = index">
                     <td>{{i + 1}}</td>
-                    <td>{{item.carPlateNumber}}</td>
-                    <td>{{item.customerName}}</td>
-                    <td>{{item.customerIdCard}}</td>
-                    <td>{{item.customerPhoneNumber}}</td>
-                    <td>{{item.ticketEffectiveDate}}</td>
-                    <td>{{item.ticketExpiryDate}}</td>
+                    <td>{{carIn.carPlateNumber}}</td>
+                    <td>{{carIn.customerName}}</td>
+                    <td>{{carIn.customerIdCard}}</td>
+                    <td>{{carIn.customerPhoneNumber}}</td>
+                    <td>{{carIn.ticketEffectiveDate}}</td>
+                    <td>{{carIn.ticketExpiryDate}}</td>
 
                     <!--                    <td >-->
                     <!--                      <button  data-bs-dismiss="modal" style="margin-right: 50px;text-align: center" class="btn btn-primary "-->
@@ -300,7 +308,8 @@
                     <!--                      </button>-->
                     <!--                    </td>-->
                     <td>
-                      <button (click)="selectCar(item.carId)" data-bs-dismiss="modal" class="btn" style="background-color: darkorange;font-size: 13px">Chọn
+                      <button (click)="selectCar(carIn.carId)" data-bs-dismiss="modal" class="btn"
+                              style="background-color: darkorange;font-size: 13px">Chọn
                       </button>
                     </td>
                   </tr>
@@ -348,17 +357,20 @@
                     <li class="page-item"><a class="page-link" href="#"
                                              style="background-color: darkorange;color: black">3</a></li>
                     <li class="page-item">
-                      <a class="page-link" href="#" style="background-color: darkorange;color: black">Trang sau</a>
+                      <a class="page-link" href="#" style="background-color: darkorange;color: black">Trang
+                        sau</a>
                     </li>
                   </ul>
                 </nav>
               </div>
             </div>
-<!--&gt;>>>>>> origin/ticket-HuyNL-->
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
 
