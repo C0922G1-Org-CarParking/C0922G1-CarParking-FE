@@ -75,6 +75,9 @@ export class CustomerService {
     return this.http.get<Page<Customer>>('http://localhost:8080/customer/list?page=' + page + '&pageSize=' + pageSize
       + '&name=' + name + '&idCard=' + idCard + '&phoneNumber=' + phoneNumber + '&starDate=' + starDate + '&endDate=' + endDate);
   }
+  customerConfirmDelete(id: number): Observable<string> {
+    return this.http.get<string>('http://localhost:8080/customer/delete/' + id);
+  }
 
   sendEmail(toMail: string, id: number): Observable<string> {
     return this.http.post<string>('http://localhost:8080/customer/send?to=' + toMail, id);
