@@ -283,3 +283,6 @@ section {
   bottom: 0;
   left: calc(50% - 30px);
 }
+.dropdown-content {
+  width: 3rem;
+}

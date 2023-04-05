@@ -1,10 +1,7 @@
-<<<<<<< HEAD
-<br>
-<br>
 <div style="margin-top: 1.5%" class="col-12">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-xl-9">
+      <div style="width: 150%" class="col-xl-9">
         <div class="card" style="border-radius: 15px;">
           <div class="card-body" style="box-shadow: 0 0 20px 0 #253365">
             <form>
@@ -12,22 +9,24 @@
                 RA</h4>
               <div class="row">
                 <div>
-                  <button
-                    class="btn" style="background-color: darkorange">
-                    Tìm xe
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                         fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                      <path
-                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                  </button>
-                  <div style="display: inline-block; float: right;">
-                    <button class="btn" style="background-color:darkorange">
+                  <div style="display: inline-block; float: left;">
+                    <button routerLink="/location/mapParking/0" class="btn" style="background-color:darkorange">
                       Bản đồ
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                            class="bi bi-map" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
                               d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div style="display: inline-block; float: right">
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            class="btn" style="background-color: darkorange">
+                      Tìm xe
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                           fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                       </svg>
                     </button>
                   </div>
@@ -40,7 +39,7 @@
                       <label style="font-weight: bold">Biển số xe</label>
                     </div>
                     <div class="col-md-8">
-                      <input readonly value="{{carOut.carPlateNumber}}" class="form-control" type="text">
+                      <input readonly value="{{carOut?.carPlateNumber}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -50,7 +49,7 @@
                       <label style="font-weight: bold" class="mb-0">Tên xe:</label>
                     </div>
                     <div class="col-md-8">
-                      <input readonly value="{{carOut.carName}}" class="form-control" type="text">
+                      <input readonly value="{{carOut?.carName}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -60,7 +59,7 @@
                       <label style="font-weight: bold" class="mb-0">Hãng xe:</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carOut.carBrand}}" class="form-control" type="text">
+                      <input readonly value="{{carOut?.carBrand}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -72,7 +71,7 @@
                       <label style="font-weight: bold">Thời gian vé từ</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carOut.ticketEffectiveDate}}" class="form-control" type="date">
+                      <input readonly value="{{carOut?.ticketEffectiveDate}}" class="form-control" type="date">
                     </div>
                   </div>
                 </div>
@@ -82,7 +81,7 @@
                       <label style="font-weight: bold" class="mb-0">Đến: </label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carOut.ticketExpiryDate}}" class="form-control" type="date">
+                      <input readonly value="{{carOut?.ticketExpiryDate}}" class="form-control" type="date">
                     </div>
                   </div>
                 </div>
@@ -93,7 +92,7 @@
                       <label style="font-weight: bold" class="mb-0">Tầng:</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carOut.floorName}}" class="form-control" type="text">
+                      <input readonly value="{{carOut?.floorName}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -102,10 +101,10 @@
                 <div class="align-items-center py-3 col-md-4">
                   <div class="row">
                     <div class="col-4">
-                      <label style="font-weight: bold">Tên Khách Hàng</label>
+                      <label style="font-weight: bold">Khách Hàng</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carOut.customerName}}" class="form-control" type="text">
+                      <input readonly value="{{carOut?.customerName}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -115,7 +114,7 @@
                       <label style="font-weight: bold" class="mb-0">Số Điện thoại</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carOut.customerPhoneNumber}}" class="form-control" type="text">
+                      <input readonly value="{{carOut?.customerPhoneNumber}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -125,7 +124,7 @@
                       <label style="font-weight: bold" class="mb-0">Vị trí đỗ</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carOut.locationName}}" class="form-control" type="text">
+                      <input readonly value="{{carOut?.locationName}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -138,7 +137,8 @@
                     </div>
                     <div class="col-12">
                       <div class="row align-items-center">
-                        <img [src]="carOut.urlCarInImage" src="../../../../assets/car-images/default.png"/>
+                        <img *ngIf="!carOut" src="../../../../assets/car-images/default.png" alt="">
+                        <img *ngIf="carOut" [src]="carOut.urlCarInImage"/>
                       </div>
                     </div>
                   </div>
@@ -151,7 +151,7 @@
                     <div style="text-align: center">
                       <div class="mb-3">
                         <label for="file-upload" class="custom-file-upload">
-                          <img style="width: 60%; height: 60%" src="../../../../assets/car-images/scanning.png"
+                          <img style="width: 60%; height: 60%" src="../../../assets/car-images/scan_icon_176437.png"
                                alt="">
                         </label>
                         <input (change)="onUpload($event)" hidden id="file-upload" type="file"/>
@@ -166,7 +166,8 @@
                     </div>
                     <div class="col-12">
                       <div class="row align-items-center">
-                        <img [src]="urlCarOutImage" src="../../../../assets/car-images/default.png"/>
+                        <img *ngIf="!carOut" src="../../../../assets/car-images/default.png" alt="">
+                        <img *ngIf="carOut?.urlCarInImage" [src]="carOut.urlCarInImage"/>
                       </div>
                     </div>
                   </div>
@@ -178,7 +179,7 @@
                         <label style="font-weight: bold" class="mb-0">Thời gian vào</label>
                       </div>
                       <div class="col-8">
-                        <input readonly value="{{carOut.timeIn}}" class="form-control" type="text">
+                        <input readonly value="{{carOut?.timeIn}}" class="form-control" type="text">
                       </div>
                     </div>
                   </div>
@@ -201,12 +202,13 @@
                 </div>
               </div>
             </form>
-=======
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-        style="margin-top: 10%">
-  Tìm xe
-</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Modal -->
 <div class="modal fade modal-dialog-scrollable" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -301,7 +303,8 @@
                     <!--                      </button>-->
                     <!--                    </td>-->
                     <td>
-                      <button (click)="selectCar(item.carId)" data-bs-dismiss="modal"  class="btn" style="background-color: darkorange;font-size: 13px">Chọn
+                      <button (click)="selectCar(item.carId)" data-bs-dismiss="modal" class="btn"
+                              style="background-color: darkorange;font-size: 13px">Chọn
                       </button>
                     </td>
                   </tr>
@@ -355,7 +358,6 @@
                 </nav>
               </div>
             </div>
->>>>>>> origin/ticket-HuyNL
           </div>
         </div>
       </div>
@@ -363,8 +365,3 @@
   </div>
 </div>
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/ticket-HuyNL

@@ -20,15 +20,15 @@ export class CustomerService {
   }
 
   searchName(name: string): Observable<Customer[]> {
-    return this.http.get<Customer[]>('http://localhost:8080/api/userticket/listSearchCustomer?name=' + name);
+    return this.http.get<Customer[]>('http://localhost:8080/api/user/ticket/listSearchCustomer?name=' + name);
   }
 
   findCustomerById(id: number) {
-    return this.http.get<Customer>('http://localhost:8080/api/userticket/chooseCustomer/' + id);
+    return this.http.get<Customer>('http://localhost:8080/api/user/ticket/chooseCustomer/' + id);
   }
 
   getCarListOfCustomerById(id: number):Observable<Car[]> {
-    return this.http.get<Car[]>('http://localhost:8080/api/userticket/findCarListOfCustomerId/' + id);
+    return this.http.get<Car[]>('http://localhost:8080/api/user/ticket/findCarListOfCustomerId/' + id);
   }
   findByCustomerId(customerId: number): Observable<Customer> {
     return this.http.get<Customer>('http://localhost:8080/api/user/customer/info/' + customerId);

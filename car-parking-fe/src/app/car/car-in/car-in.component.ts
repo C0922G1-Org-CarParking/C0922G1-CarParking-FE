@@ -1,9 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CarInOutService} from '../../service/car-in-out.service';
 import {ICarInOut} from '../../model/i-car-in-out';
-import DateTimeFormat = Intl.DateTimeFormat;
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CarInOut} from '../../model/car-in-out';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
@@ -19,26 +16,30 @@ export class CarInComponent implements OnInit {
   dataList: ICarInOut[];
   plateNumberImage?: File;
   carIn?: ICarInOut;
-  timeIn?: any;
+  timeIn = '';
   now: any;
-  urlCarInImage?: string;
+  urlCarInImage = '../../../../assets/car-images/default.png';
   @ViewChild('uploadFile', {static: true}) public avatarDom: ElementRef | undefined;
 
   constructor(private carInOutService: CarInOutService,
               private router: Router,
               private storage: AngularFireStorage
-  ) {}
+  ) {
+  }
 
 
   ngOnInit(): void {
+    this.searchCarIn('', '', '');
   }
 
   saveCarIn() {
+    debugger
     // car's data not found
     if (this.carIn == null) {
       let timerInterval;
       Swal.fire({
-        title: 'Vui lòng tìm dữ liệu xe!',
+        title: 'Vui lòng tìm xe trước khi lưu!',
+        icon: 'warning',
         html: 'Tự động đóng trong <b></b> ms.',
         timer: 2000,
         timerProgressBar: true,
@@ -73,17 +74,22 @@ export class CarInComponent implements OnInit {
         title: 'Lưu thành công!',
         text: 'Xin mời xe vào!',
         icon: 'success',
-        confirmButtonText: 'Xác nhận'
+        confirmButtonText: 'Xác nhận',
+        confirmButtonColor: 'darkorange'
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
+      this.carIn = null;
+      this.urlCarInImage = '../../../../assets/car-images/default.png';
+      this.timeIn = '';
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 3000);
     }, error => {
       Swal.fire({
-        title: 'Lưu xe không thành công!',
-        text: 'Xin đợi xử lý!',
-        icon: 'question',
-        confirmButtonText: 'Xác nhận'
+        icon: 'error',
+        title: 'Lỗi hệ thống',
+        text: 'Vui lòng liên nhân viên kĩ thuật!',
+        confirmButtonText: 'Xác nhận',
+        confirmButtonColor: 'darkorange'
       });
     });
   }
@@ -93,81 +99,103 @@ export class CarInComponent implements OnInit {
     if (this.plateNumberImage != null) {
       const filePath = this.plateNumberImage.name;
       const fileRef = this.storage.ref(filePath);
-      this.storage.upload(filePath, this.plateNumberImage).snapshotChanges().pipe(
-        finalize(() => (fileRef.getDownloadURL().subscribe(url => {
-          this.urlCarInImage = url;
-          console.log('Đây là đường dẫn ' + this.urlCarInImage);
-        })))
-      ).subscribe();
-    }
-    const imageFormData = new FormData();
-    imageFormData.append('plateNumberImage', this.plateNumberImage, this.plateNumberImage.name);
-    this.carInOutService.searchCarInByScanning(imageFormData).subscribe(carIn => {
-      console.log(carIn);
-      this.carIn = carIn;
-      const now = new Date();
-      // for display and save
-      const options = {
-        timeZone: 'Asia/Ho_Chi_Minh',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: false
-      };
-      this.timeIn = now.toLocaleString('vi-VN', options);
-    }, error => {
-      console.log(error);
-      // car not existing in database
-      if (error.status === 404) {
-        Swal.fire({
-          title: 'Không tìm thấy xe',
-          text: 'Xe có thể đã hết vé!',
-          icon: 'question',
-          confirmButtonText: 'Xác nhận'
-        });
-      }
-      // the system unable to scan the image
-      if (error.status === 406) {
-        Swal.fire({
-          title: 'Không quét được biển số',
-          text: 'Vui lòng ấn vào tìm xe',
-          icon: 'question',
-          confirmButtonText: 'Xác nhận'
-        });
-      }
-      // the system error or the image not identified
-      if (error.status === 500) {
-        Swal.fire({
-          title: 'Lỗi hệ thống!',
-          text: 'Không nhận được file hoặc hệ thống trục trặc, vui lòng thử cách khác!',
-          icon: 'error',
-          confirmButtonText: 'Xác nhận'
-        });
-      }
-    });
-  }
-  searchCarIn(carPlateNumber: string,
-              customerName: string,
-              customerPhoneNumber: string) {
 
+      const imageFormData = new FormData();
+      imageFormData.append('plateNumberImage', this.plateNumberImage, this.plateNumberImage.name);
+      this.carInOutService.searchCarInByScanning(imageFormData).subscribe(carIn => {
+        console.log(carIn);
+        this.carIn = carIn;
+        const now = new Date();
+        this.storage.upload(filePath, this.plateNumberImage).snapshotChanges().pipe(
+          finalize(() => (fileRef.getDownloadURL().subscribe(url => {
+            this.urlCarInImage = url;
+          })))
+        ).subscribe();
+        // for display and save
+        const options = {
+          timeZone: 'Asia/Ho_Chi_Minh',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+          hour12: false
+        };
+        this.timeIn = now.toLocaleString('vi-VN', options);
+      }, error => {
+        console.log(error);
+        // car not existing in database
+        if (error.status === 404) {
+          Swal.fire({
+            title: 'Không tìm thấy xe',
+            text: 'Xe có thể đã hết vé!',
+            icon: 'question',
+            confirmButtonText: 'Xác nhận',
+            confirmButtonColor: 'darkorange'
+          });
+          this.timeIn = '';
+        }
+        // the system unable to scan the image
+        if (error.status === 406) {
+          Swal.fire({
+            title: 'Không quét được biển số',
+            text: 'Vui lòng ấn vào tìm xe',
+            icon: 'error',
+            confirmButtonText: 'Xác nhận',
+            confirmButtonColor: 'darkorange'
+          });
+          this.timeIn = '';
+        }
+        // the system error or the image not identified
+        if (error.status === 500) {
+          Swal.fire({
+            title: 'Lỗi hệ thống!',
+            text: 'Không nhận được file hoặc hệ thống trục trặc, vui lòng thử cách khác!',
+            icon: 'error',
+            confirmButtonText: 'Xác nhận',
+            confirmButtonColor: 'darkorange'
+          });
+          this.timeIn = '';
+        }
+      });
+    } else {
+      Swal.fire({
+        title: 'Tập tin không hợp lệ',
+        text: 'Vui lòng tải lại',
+        icon: 'error',
+        confirmButtonText: 'Xác nhận',
+        confirmButtonColor: 'darkorange'
+      });
+    }
+  }
+
+  searchCarIn(customerName: string, customerPhoneNumber: string, carPlateNumber: string) {
     this.carInOutService.searchCarIn(customerName, customerPhoneNumber, carPlateNumber).subscribe(carInList => {
       console.log(carInList);
       this.dataList = carInList;
-    })
+    });
   }
 
   selectCar(carId: number) {
     debugger
     for (let i = 0; i < this.dataList.length; i++) {
-      debugger
       if (this.dataList[i].carId == carId) {
         this.carIn = this.dataList[i];
-        console.log(this.carIn);
         return;
       }
     }
+    const options = {
+      timeZone: 'Asia/Ho_Chi_Minh',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: false
+    };
+    const now = new Date();
+    this.timeIn = now.toLocaleString('vi-VN', options);
   }
 }

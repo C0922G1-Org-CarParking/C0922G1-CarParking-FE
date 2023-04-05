@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Floor} from "../../model/floor";
 import {Section} from "../../model/section";
-
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-location-create',
@@ -28,10 +28,9 @@ export class LocationCreateComponent implements OnInit {
               private sectionService: SectionService,
               private router: Router) {
     this.locationForm = new FormGroup({
-      name: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
-      width: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
-      height: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
-      length: new FormControl("",[Validators.required, Validators.min(0),Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*")]),
+      width: new FormControl("",[Validators.required, Validators.min(0)]),
+      height: new FormControl("",[Validators.required, Validators.min(0)]),
+      length: new FormControl("",[Validators.required, Validators.min(0)]),
       car4: new FormControl("",[Validators.required]),
       car7: new FormControl("",[Validators.required]),
       permissionCarTypeLocations: new FormControl("",[Validators.required]),
@@ -59,14 +58,14 @@ export class LocationCreateComponent implements OnInit {
     if (this.locationForm.get('otherCarSelected').value) {
       selectedCars.push(this.locationForm.get('otherCar').value);
     }
-/*
-    alert(selectedCars)
-*/
+    /*
+        alert(selectedCars)
+    */
     this.locationForm.get('permissionCarTypeLocations').setValue(selectedCars)
     if (this.locationForm.valid){}
     this.locationService.createLocation(this.locationForm.value).subscribe(data =>{
       console.log(data)
-      alert("thêm mới thành  công")
+      Swal.fire('Thêm mới vị trí thành công','','success')
       this.router.navigateByUrl("/list")
     })
   }
@@ -76,10 +75,10 @@ export class LocationCreateComponent implements OnInit {
     this.sectionList = null;
     this.isSelectedFloor = true;
     this.sectionService.getAllSection(this.floor.id).subscribe((sectionList) => {
-       this.sectionList = sectionList;
+      this.sectionList = sectionList;
     })
     if (this.sectionList) {
-        this.isFullSection = true;
+      this.isFullSection = true;
     }
   }
 }

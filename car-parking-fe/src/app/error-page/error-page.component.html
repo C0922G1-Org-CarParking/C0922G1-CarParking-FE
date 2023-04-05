@@ -1,6 +1,12 @@
-<div class="error-container">
+<div class="error-container" [hidden]="isLoggedIn">
   <h1>Oops!</h1>
   <p>Something went wrong.</p>
   <p>Please try again later.</p>
   <button routerLink="/">Go to Home</button>
+</div>
+<div class="error-container" [hidden]="!isLoggedIn">
+  <h1>Oops!</h1>
+  <p>Something went wrong.</p>
+  <p>Please try again later.</p>
+  <button routerLink="/homepage">Go to Home</button>
 </div>

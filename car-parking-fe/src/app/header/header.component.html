@@ -5,7 +5,7 @@
       <a [routerLink]="['homepage']" class="p-0"><img src="../../assets/img/header/logo.PNG" alt=""
                                                       class="img-fluid"></a>
       <a [routerLink]="['homepage']" style="padding: 0">
-        <h5 class="mx-2 logo-name" style="padding: 0; text-align: center; color: #eb5d1e">Bãi đậu xe thông
+        <h5 class="mx-2 logo-name" style="padding: 0; text-align: center; color: #eb5d1e">Bãi đỗ xe thông
           minh</h5></a>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
@@ -14,11 +14,19 @@
     </button>
     <nav class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
-        <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['employee']"><span class="n-item">Nhân viên</span></a></li>
+        <li [hidden]="!isLoggedIn  || role!=='ROLE_ADMIN'"><a class="nav-link" [routerLink]="['employee']"><span class="n-item">Nhân viên</span></a></li>
         <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['customer']"><span class="n-item">Khách hàng</span></a></li>
-        <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['car/car']"><span class="n-item">Xe</span></a></li>
+        <li [hidden]="!isLoggedIn">
+          <div class="dropdownUser">
+            <span class="n-item" style="padding: 8px">Xe</span>
+            <div class="dropdown-content p-0" style="width: 5rem">
+              <div class="getstarted" [routerLink]="['car/car-in']"><button class="btn">Xe vào</button></div>
+              <div class="getstarted" [routerLink]="['car/car-out']"><button class="btn">Xe ra</button></div>
+            </div>
+          </div>
+        </li>
         <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['ticket']"><span class="n-item">Vé</span></a></li>
-        <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['statistic']"><span class="n-item">Thống kê</span></a></li>
+        <li [hidden]="!isLoggedIn || role!=='ROLE_ADMIN'"><a class="nav-link" [routerLink]="['statistic']"><span class="n-item">Thống kê</span></a></li>
         <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['location']"><span class="n-item">Bãi đỗ</span></a></li>
         <li [hidden]="isLoggedIn">
           <a routerLink="/security/login"><img src="../../assets/img/header/login-icon.png" class="img-fluid" style="width: 30px"></a>
@@ -27,8 +35,8 @@
           <div class="dropdownUser">
             <div class="n-item d-flex align-items-center">
               <i class="bi bi-person-lines-fill mx-2" ></i>
-              <span>{{nameEmployee}}</span></div>
-            <div class="dropdown-content">
+              <span style="color: #eb5d1e"><b>{{nameEmployee}}</b></span></div>
+            <div class="dropdown-content p-0">
               <div class=" getstarted" routerLink="/security/change-password"><button class="btn">Đổi mật khẩu</button></div>
               <div class=" getstarted" (click)="logOut()"><button class="btn">Đăng xuất</button></div>
             </div>

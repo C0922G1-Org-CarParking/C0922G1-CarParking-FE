@@ -1,5 +1,5 @@
 
-<div style="margin-top: 7%;margin-bottom:1%">
+<div style="margin-top: 3%;margin-bottom:3%">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center h-100" style="margin-left:10%;margin-right:10%;">
       <div class="card" style="border-radius: 1%;box-shadow: 0 0 15px 0 #253365 ">
@@ -29,7 +29,8 @@
               </div>
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 5px">Chức vụ:</label>
+                  <label style="font-weight: bold; margin-left: 5px">Chức vụ:<b
+                    style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
 
@@ -79,6 +80,8 @@
                     employeeGroup.controls.dateOfBirth.hasError('required') &&
                      employeeGroup.controls.dateOfBirth.touched">
                     Ngày Sinh không được để trống.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.dateOfBirth && !employeeGroup.controls.dateOfBirth.hasError('required')">{{errors.dateOfBirth}}</p>
                 </div>
               </div>
             </div>
@@ -149,7 +152,8 @@
               </div>
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 5px">Địa chỉ cụ thể:</label>
+                  <label style="font-weight: bold; margin-left: 5px">Địa chỉ cụ thể:<b
+                    style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
                   <input class="form-control" formControlName="street" type="text"
@@ -216,7 +220,7 @@
               <button type="submit" class="btn btn-secondary" style="margin-left: 1%" (click)="cancel()">Quay lại
               </button>
               <button style="margin-left: 1%;background-color:  #E67E22" type="submit" class="btn">
-                Lưu thông tin
+                Lưu thay đổi
               </button>
             </div>
           </form>

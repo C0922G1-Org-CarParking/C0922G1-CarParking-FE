@@ -13,6 +13,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {TicketModule} from "./ticket/ticket.module";
 import {AuthInterceptor} from "./security-authentication/security-auth/auth.interceptor";
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import {ErrorPageComponent} from "./error-page/error-page.component";
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import {AuthInterceptor} from "./security-authentication/security-auth/auth.inte
         AppComponent,
         HeaderComponent,
         FooterComponent,
+        LandingPageComponent,
+      ErrorPageComponent
     ],
 
   imports: [
