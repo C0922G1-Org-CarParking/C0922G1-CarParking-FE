@@ -29,15 +29,15 @@ export class LocationMapComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllLocationInFloor();
-    // this.findMaxFloor();
+    this.findMaxFloor();
   }
 
-  // findMaxFloor() {
-  //   this.floorService.getAllFloor().subscribe(param => {
-  //     this.totalPage = param;
-  //     this.maxFloor = param.length + 1;
-  //   });
-  // }
+  findMaxFloor() {
+    this.floorService.getAllFloors().subscribe(param => {
+      this.totalPage = param;
+      this.maxFloor = param.length + 1;
+    });
+  }
 
   findAllLocationInFloor() {
 
@@ -57,13 +57,8 @@ export class LocationMapComponent implements OnInit {
     if (occupied) {
       this.route.navigateByUrl('/location/detail/' + id);
     } else {
-      if (this.check != 0) {
-        this.route.navigateByUrl('/ticket/update/' + this.check + '/' + id);
-      } else if (this.check == 0) {
-        this.route.navigateByUrl('/ticket/create/' + id);
+        this.route.navigateByUrl('/ticket/create/'+ id)
       }
-
-    }
   }
 
   findLocationIsEmpty() {

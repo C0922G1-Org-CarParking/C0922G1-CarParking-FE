@@ -40,7 +40,7 @@ export class TicketCreateComponent implements OnInit {
   idKhachHang: any;
   carList: Car[] = [];
   enableChooseCar: boolean = false;
-  locationInfo: Location;
+  locationInfo: ILocation;
   locationInfoName: any;
   rate: any
   priceTotal: any
@@ -107,13 +107,16 @@ export class TicketCreateComponent implements OnInit {
         this.getCustomerById(+id)
       }
     })
-    // this.getPrice(this.effectiveDate,this.expiryDate,this.rate)
-    // this.activatedRoute.paramMap.subscribe(data => {
-    //   const id = data.get('idLocation');
-    //   if (id != null) {
-    //     this.getLocationById(+id)
-    //   }
-    // })
+    this.getPrice(this.effectiveDate,this.expiryDate,this.rate)
+
+
+
+    this.activatedRoute.paramMap.subscribe(data => {
+      const id = data.get('idLocation');
+      if (id != null) {
+        this.getLocationById(+id)
+      }
+    })
 
   }
 
@@ -168,12 +171,11 @@ export class TicketCreateComponent implements OnInit {
     })
   }
 
-  // private getLocationById(id: number) {
-  //   this.locationService.findLocationEmptyById(id).subscribe(data=>{
-  //     this.locationInfo = data
-  //     this.locationInfoName = this.locationInfo.name
-  //   })
-  // }
+  private getLocationById(id: number) {
+    this.locationService.findLocationEmptyById(id).subscribe(data=>{
+      this.locationInfo = data
+    })
+  }
   sectionList: Section[];
 
 

@@ -23,6 +23,7 @@ export class CarInComponent implements OnInit {
   @ViewChild('uploadFile', {static: true}) public avatarDom: ElementRef | undefined;
   listEmpty: string;
 
+
   constructor(private carInOutService: CarInOutService,
               private router: Router,
               private storage: AngularFireStorage) {
