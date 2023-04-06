@@ -36,19 +36,17 @@
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
-<<<<<<< HEAD
                   <select formControlName="position" class="form-select" aria-label="Default select example">
                     <option value="" selected>Chức năng</option>
-=======
-                  <select class="form-select" formControlName="position">
-                    <option value="" selected>Chức vụ</option>
->>>>>>> origin/car-in-out
-                    <option *ngFor="let item of position " [ngValue]="item">{{item.name}}</option>
-                  </select>
-                  <p style="color: red; position: absolute"
-                     *ngIf="(clickButton && employeeGroup.controls.position.hasError('required')) ||
+                    <select class="form-select" formControlName="position">
+                      <option value="" selected>Chức vụ</option>
+                      <option *ngFor="let item of position " [ngValue]="item">{{item.name}}</option>
+                    </select>
+                    <p style="color: red; position: absolute"
+                       *ngIf="(clickButton && employeeGroup.controls.position.hasError('required')) ||
                     employeeGroup.controls.position.hasError('required') && employeeGroup.controls.position.touched">
-                    Chức vụ không được để trống.</p>
+                      Chức vụ không được để trống.</p>
+                  </select>
                 </div>
               </div>
             </div>
@@ -152,7 +150,7 @@
                   <p style="color: red; position: absolute"
                      *ngIf="
                    employeeGroup.controls.phoneNumber.hasError('pattern') && employeeGroup.controls.phoneNumber.touched">
-                    SĐT đúng định dạng phải là 10 số  bắt đầu bằng 0 hoặc 84.</p>
+                    SĐT đúng định dạng phải là 10 số bắt đầu bằng 0 hoặc 84.</p>
 
                   <p style="color: red; position: absolute"
                      *ngIf="errors.phoneNumber && !employeeGroup.controls.phoneNumber.hasError('required') &&
