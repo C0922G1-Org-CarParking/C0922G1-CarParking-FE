@@ -15,6 +15,6 @@ export class CarTypeService {
   }
 
   getAllCarType(): Observable<CarType[]> {
-    return this.http.get<CarType[]>('http://localhost:8080/customer/carType');
+    return this.http.get<CarType[]>('http://localhost:8080/api/user/customer/carType');
   }
 }

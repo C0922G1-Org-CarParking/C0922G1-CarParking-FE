@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TokenStorageService} from "../security-authentication/service/token-storage.service";
 
 @Component({
   selector: 'app-error-page',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./error-page.component.css']
 })
 export class ErrorPageComponent implements OnInit {
-
-  constructor() { }
+  isLoggedIn = false;
+  constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    // this.view();
+    this.isLoggedIn = this.tokenStorageService.isLogger();
   }
+  // view(): void {
+  //   const element = document.getElementById('test');
+  //   if (element) {
+  //     element.scrollIntoView();
+  //   }
+  // }
 
 }

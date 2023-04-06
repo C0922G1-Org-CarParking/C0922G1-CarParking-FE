@@ -11,15 +11,14 @@
                 <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px;text-shadow: 0px 5px 5px #999999;">
                   THÊM MỚI VÉ</h1>
 
-
                 <div class="row d-flex">
                   <div class="row align-items-center py-3 col-md-6"></div>
 
                   <div class="row align-items-center py-3 col-md-6">
                     <div class="col-md">
-                      <label style="font-weight: bold" class="mb-0">Thông tin khách hàng:</label>
-                      <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                              style="background-color: orange" data-bs-target="#staticBackdrop">
+                      <label style="font-weight: bold" class="mb-0" data-bs-dismiss="modal">Thông tin khách hàng:</label>
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal"  data-bs-dismiss="modal"
+                              style="margin-left: 25px;background-color:  #E67E22" data-bs-target="#staticBackdrop">
                         Tìm kiếm
                       </button>
                     </div>
@@ -28,13 +27,13 @@
 
                 <div class="row d-flex" >
                   <div class="row align-items-center py-3 col-md-6">
-                    <div class="col-md-4">
-                      <label style="font-weight: bold">Nhân viên bán:</label>
+                    <div class="col-md-5">
+                      <label style="font-weight: bold">Nhân viên bán:<b style="color: red">*</b></label>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                       <select class="form-select" formControlName="employee">
                         <option [value]="null" selected>---Mời chọn chọn nhân viên---</option>
-                        <option *ngFor="let employee of employeeList" [value]="employee.id">{{employee.name}}</option>
+                        <option *ngFor="let employee of employeeList" [value]="employee">{{employee.name}}</option>
                       </select>
                       <p style="color: red" *ngIf="ticketCreateForm.controls.employee.touched && ticketCreateForm.controls.employee.hasError('required')">*Bắt buộc
                         chọn</p>
@@ -42,63 +41,63 @@
                   </div>
 
                   <div class="row align-items-center py-3 col-md-6">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                       <label style="font-weight: bold" class="mb-0">Tên khách hàng:</label>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                       <input readonly class="form-control" [(ngModel)]="tenKhachHang" [ngModelOptions]="{standalone: true}"  placeholder="Tên khách hàng"
                              type="text">
                     </div>
-
                   </div>
 
                 </div>
 
                 <div class="row d-flex">
                   <div class="row align-items-center py-3 col-md-6">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                       <label style="font-weight: bold">Giá vé/ngày:</label>
                     </div>
-                    <div class="col-md-8">
-                      <input readonly class="form-control"  formControlName="price" [value]="15.000" placeholder="15.000"
+                    <div class="col-md-7">
+                      <input readonly class="form-control"  formControlName="price" [value]="12.000" placeholder="15.000"
                              type=text>
                     </div>
-
                   </div>
 
 
                   <div class="row align-items-center py-3 col-md-6">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                       <label style="font-weight: bold" class="mb-0">Số điện thoại:</label>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                       <input readonly class="form-control" [(ngModel)]="soDienThoaiKhachHang" [ngModelOptions]="{standalone: true}" placeholder="Số điện thoại"
                              type="text">
-                      </div>
                     </div>
+                  </div>
                 </div>
                 <div class="row ">
                   <div class="row align-items-center py-3 col-md-6">
                     <div class="col-md-5">
-                      <label style="font-weight: bold">Thời gian có hiệu lực:</label>
+                      <label style="font-weight: bold">Thời gian hiệu lực:<b style="color: red">*</b></label>
                     </div>
                     <div class="col-md-7">
                       <input (change)="getEffectiveDate(effectiveDate.value)" #effectiveDate class="form-control" type="date" formControlName="effectiveDate">
                     </div>
-                    <p style="color: red" *ngIf="ticketCreateForm.controls.effectiveDate.touched && ticketCreateForm.controls.effectiveDate.hasError('required')">*Bắt buộc
+                    <p style="color: red" *ngIf="ticketCreateForm.controls.effectiveDate.touched && ticketCreateForm.controls.effectiveDate.hasError('required')">* Bắt buộc
                       chọn</p>
+                    <p style="color: red" *ngIf="ticketCreateForm.controls.effectiveDate.touched && ticketCreateForm.controls.expiryDate.touched && ticketCreateForm.controls.effectiveDate.value && ticketCreateForm.controls.expiryDate.value && ticketCreateForm.hasError('invalidDateRange')">* Ngày bắt đầu phải bé hơn ngày hết hạn</p>
                   </div>
                   <input type="hidden" formControlName="isDeleted" [value]="0">
 
                   <div class="row align-items-center py-3 col-md-6">
                     <div class="col-md-5">
-                      <label style="font-weight: bold" class="mb-0">Thời gian hết hạn:</label>
+                      <label style="font-weight: bold" class="mb-0">Thời gian hết hạn: <b style="color: red">*</b> </label>
                     </div>
                     <div class="col-md-7">
                       <input (change)="expiryDates(expiryDate.value)" #expiryDate class="form-control" type="date" formControlName="expiryDate">
                     </div>
-                    <p style="color: red" *ngIf="ticketCreateForm.controls.expiryDate.touched && ticketCreateForm.controls.expiryDate.hasError('required')">*Bắt buộc
+                    <p style="color: red" *ngIf="ticketCreateForm.controls.expiryDate.touched && ticketCreateForm.controls.expiryDate.hasError('required')">* Bắt buộc
                       chọn</p>
+                    <p style="color: red" *ngIf="ticketCreateForm.controls.effectiveDate.touched && ticketCreateForm.controls.expiryDate.touched && ticketCreateForm.controls.effectiveDate.value && ticketCreateForm.controls.expiryDate.value && ticketCreateForm.hasError('invalidDateRange')">* Ngày hết hạn phải lớn hơn ngày bắt đầu</p>
                   </div>
                 </div>
 
@@ -108,25 +107,32 @@
                       <label style="font-weight: bold">Tầng: <b style="color: red">*</b></label>
                     </div>
                     <div class="col-md-8">
-                      <select class="form-select" readonly>
+                      <select class="form-select" (change)="getListSectionById(floor.value)" #floor >
                         <option value="" selected>---Mời chọn tầng---</option>
                         <option *ngFor="let floor of floorList" [value]="floor.id">{{floor.name}}</option>
                       </select>
                     </div>
                   </div>
+
                   <div class="row align-items-center py-3 col-md-6">
                     <div class="col-md-4">
-                      <label style="font-weight: bold" class="mb-0">Vị trí: <b style="color: red">*</b></label>
+                      <label style="font-weight: bold" class="mb-0">Dãy: <b style="color: red">*</b></label>
                     </div>
-                    <div class="col-md-8">
-                      <select name="" id="" class="form-select" formControlName="location" >
-                        <option selected [value]="null">---Mời chọn vị trí---</option>
-<!--                        <option selected [(ngModel)]="locationInfo">{{locationInfoName}}</option>-->
-                        <option *ngFor="let location of locationList" [value]="location.id">{{location.name}}</option>
+                    <div *ngIf="!sectionList" class="col-md-8">
+                      <div class="col-md-12">
+                        <input readonly class="form-control"  placeholder="Cần chọn tầng để thực hiện chức năng này"
+                               type="text">
+                      </div>
+                    </div>
+                    <div class="col-md-8" *ngIf="sectionList">
+                      <select (change)="getSectionId(section.value)"  class="form-select"  #section>
+                        <option selected [value]="null">---Mời chọn dãy---</option>
+                        <!--                        <option selected [(ngModel)]="locationInfo">{{locationInfoName}}</option>-->
+                        <option *ngFor="let section of sectionList" [value]="section.id">{{section.name}}</option>
                       </select>
                     </div>
-                    <p style="color: red" *ngIf="ticketCreateForm.controls.location.touched && ticketCreateForm.controls.location.hasError('required')">*Bắt buộc
-                      chọn</p>
+                    <!--                    <p style="color: red" *ngIf="ticketCreateForm.controls.location.touched && ticketCreateForm.controls.location.hasError('required')">*Bắt buộc-->
+                    <!--                      chọn</p>-->
                   </div>
                 </div>
 
@@ -135,14 +141,52 @@
                     <div class="col-md-4">
                       <label style="font-weight: bold" class="mb-0">Xe khách đi: <b style="color: red">*</b></label>
                     </div>
-                    <div class="col-md-8">
-                      <select (change)="getRate(carId.value)" *ngIf="enableChooseCar == true" #carId  class="form-select" formControlName="car" >
+                    <div *ngIf="messCar == true" class="col-md-8">
+                      <div class="col-md-12">
+                        <input readonly class="form-control"  placeholder="Cần chọn khách hàng để thực hiện chức năng này"
+                               type="text">
+                      </div>
+                    </div>
+                    <div *ngIf="messCar == false" class="col-md-8">
+                      <select (change)="getRate($event)" *ngIf="enableChooseCar == true" #carId  class="form-select" formControlName="car" >
                         <option selected [value]="null">---Mời chọn xe khách ---</option>
-                        <option *ngFor="let car of carList" [value]="car.id">{{car.name}}</option>
+                        <option *ngFor="let car of carList" [ngValue]="car" >{{car.name}}</option>
                       </select>
                     </div>
                     <p style="color: red" *ngIf="ticketCreateForm.controls.car.touched && ticketCreateForm.controls.car.hasError('required')">*Bắt buộc
                       chọn</p>
+                  </div>
+                  <div class="row align-items-center py-3 col-md-6">
+                    <div class="col-md-4">
+                      <label style="font-weight: bold" class="mb-0">Vị trí: <b style="color: red">*</b></label>
+                    </div>
+                    <div *ngIf="chooseEnableLocation == false" class="col-md-8">
+                      <div class="col-md-12">
+                        <input readonly class="form-control"  placeholder="Cần chọn dãy để thực hiện chức năng này"
+                               type="text">
+                      </div>
+                    </div>
+                    <div class="col-md-8" *ngIf="chooseEnableLocation == true">
+                      <select name="" id="" class="form-select" formControlName="location" >
+                        <option selected [value]="null">---Mời chọn vị trí---</option>
+                        <!--                        <option selected [(ngModel)]="locationInfo">{{locationInfoName}}</option>-->
+                        <option *ngFor="let location of locationList" [value]="location">{{location.name}}</option>
+                      </select>
+                    </div>
+                    <p style="color: red" *ngIf="ticketCreateForm.controls.location.touched && ticketCreateForm.controls.location.hasError('required')">*Bắt buộc
+                      chọn</p>
+                  </div>
+                </div>
+
+                <div class="row d-flex" class="row">
+                  <div class="row align-items-center py-3 col-md-6">
+                    <div class="col-md-4">
+                      <label style="font-weight: bold">Tổng giá:</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input [(ngModel)]="priceTotal" readonly  class="form-control" formControlName="totalPrice" style="text-align: center" placeholder="........."
+                             type="text">
+                    </div>
                   </div>
                   <div class="row align-items-center py-3 col-md-6">
                     <div class="col-md-4">
@@ -152,7 +196,7 @@
                     <div class="col-md-8">
                       <select class="form-select" formControlName="ticketType">
                         <option [value]="null" selected>---Mời chọn loại vé---</option>
-                        <option *ngFor="let item of ticketTypeList" [value]="item.id">{{item.name}}</option>
+                        <option *ngFor="let item of ticketTypeList" [value]="item">{{item.name}}</option>
                       </select>
                     </div>
                     <p style="color: red" *ngIf="ticketCreateForm.controls.ticketType.touched && ticketCreateForm.controls.ticketType.hasError('required')">*Bắt buộc
@@ -160,21 +204,9 @@
                   </div>
                 </div>
 
-                <div class="row d-flex" class="row">
-                  <div class="row align-items-center py-3 col-md-12">
-                    <div class="col-md-2">
-                      <label style="font-weight: bold">Tổng giá:</label>
-                    </div>
-                    <div class="col-md-9">
-                      <input [(ngModel)]="priceTotal" readonly  class="form-control" formControlName="totalPrice" style="text-align: center" placeholder="Giá vé"
-                             type="text">
-                    </div>
-                  </div>
-                </div>
-
                 <div style="text-align: center" class="px-5 py-4">
                   <button type="submit" class="btn btn-secondary">Quay lại</button>
-                  <button style="margin-left: 10px;background-color:  #E67E22" type="submit"
+                  <button [disabled]="ticketCreateForm.invalid" style="margin-left: 10px;background-color:  #E67E22" type="submit"
                           class="btn">
                     Lưu thông tin
                   </button>
@@ -209,13 +241,13 @@
               </div>
             </div>
             <div class="col-md-6">
-              <button type="submit" class="btn" (click)="searchCustomerByName(name.value)" style="background-color: darkorange">Tìm kiếm</button>
+              <button type="submit"   class="btn"  (click)="searchCustomerByName(name.value)" style="background-color: darkorange">Tìm kiếm</button>
             </div>
             <br>
           </div>
 
         </div>
-        <table class="container  fixed-size-table table table-hover " data-bs-dismiss="modal"
+        <table class="container  fixed-size-table table table-hover "
                style=";width: 95%;margin-bottom: 20px;border-radius:10px">
           <thead style="background-color: #E67E22">
           <tr style="text-align: center">
@@ -232,7 +264,7 @@
             <td>{{customer.phoneNumber}}</td>
             <td style="text-align: center" >
               <button  data-bs-dismiss="modal" style="margin-left: 30px;text-align: center;background-color: #E67E22" class="btn btn-primary "
-                      routerLink='/ticket/chooseCustomer/{{customer.id}}'>Chọn
+                       routerLink='/ticket/chooseCustomer/{{customer.id}}'>Chọn
               </button>
             </td>
           </tr>

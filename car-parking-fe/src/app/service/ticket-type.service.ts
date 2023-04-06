@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {TicketType} from "../model/ticket-type";
 import {Floor} from "../model/floor";
 import {Car} from "../model/car";
+import {Section} from "../model/section";
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -17,10 +18,15 @@ export class TicketTypeService {
   constructor(private http: HttpClient) {
   }
   getAllTicketType():Observable<TicketType[]>{
-    return this.http.get<TicketType[]>('http://localhost:8080/ticket/ticketType')
+    return this.http.get<TicketType[]>('http://localhost:8080/api/user/ticket/ticketType')
   }
 
   listTicketType(): Observable<TicketType[]> {
-    return this.http.get<TicketType[]>('http://localhost:8080/ticket/listFloor');
+    return this.http.get<TicketType[]>('http://localhost:8080/api/user/ticket/listFloor');
+  }
+
+  getListSectionById(id: number):Observable<Section[]> {
+    debugger
+    return this.http.get<Section[]>('http://localhost:8080/api/user/ticket/listSection/' + id );
   }
 }

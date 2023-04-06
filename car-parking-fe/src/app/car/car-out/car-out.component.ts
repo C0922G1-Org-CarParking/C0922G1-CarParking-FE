@@ -61,6 +61,7 @@ export class CarOutComponent implements OnInit {
         let expiryDate  = new Date(this.carOut.ticketExpiryDate).toLocaleString('vi-VN', options2);
         this.carOut.ticketEffectiveDate = effectiveDate;
         this.carOut.ticketExpiryDate = expiryDate;
+
         const options = {
           timeZone: 'Asia/Ho_Chi_Minh',
           year: 'numeric',
@@ -91,6 +92,7 @@ export class CarOutComponent implements OnInit {
           });
         }
         // the system unable able to scan the image => numberPlate being null
+
         if (error.status === 406) {
           Swal.fire({
             title: 'Không quét được biển số',

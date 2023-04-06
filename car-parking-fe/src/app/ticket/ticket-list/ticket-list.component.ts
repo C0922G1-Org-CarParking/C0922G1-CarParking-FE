@@ -34,9 +34,10 @@ export class TicketListComponent implements OnInit {
   public isTicketExpired: boolean = false;
   private isSearchTicket: boolean = false;
   private isSearchExpired: boolean;
-  private totalPage: number;
-  public hasPrevious: boolean = false;
-  private hasNext: boolean;
+  public currentPage = 0;
+  public totalPage = 0;
+  public pageNumbers: number[] = [];
+
   constructor(private ticketService: TicketService) {
   }
 
@@ -44,28 +45,15 @@ export class TicketListComponent implements OnInit {
     this.findAllTicketType()
   }
 
-  initForm() {
-    this.formSearchTicket = new FormGroup({
-      customerName: new FormControl(this.customerNameSearch),
-      customerPhone: new FormControl(this.customerPhoneSearch),
-      employeeName: new FormControl(this.employeeNameSearch),
-      employeePhone: new FormControl(this.employeePhoneSearch),
-      floor: new FormControl(this.floorSearch),
-      expiryDate: new FormControl(this.expiryDateSearch),
-      ticketType: new FormControl(this.ticketTypeSearch),
-      status: new FormControl(this.statusSearch)
-    });
-  }
-
   findAllTicketType() {
     this.ticketService.findAllTicketType().subscribe((ticketTypeList) => {
       this.ticketTypeList = ticketTypeList;
       this.findAllFloor()
       this.isServerOnline = true;
-      debugger
+
     }, error => {
       this.isServerOnline = false;
-      debugger
+
     })
   }
 
@@ -81,24 +69,24 @@ export class TicketListComponent implements OnInit {
     this.setValueSearch();
   }
 
-  setStatusSearchAllDefault() {
+  setStatusFindAll() {
     this.isSearchExpired = false;
     this.isSearchTicket = false;
+    this.resetForm();
     this.setValueSearch();
   }
 
   setValueSearch() {
+    this.currentPage = 0;
     if (this.isSearchTicket) {
       this.statusSearch = this.formSearchTicket?.value?.status;
       this.setOtherValuesSearch();
+    } else if (this.isSearchExpired) {
+      this.statusSearch = 3;
+      this.setOtherValuesSearch();
     } else {
-      if (this.isSearchExpired) {
-        this.statusSearch = 3;
-        this.setOtherValuesSearch();
-      } else {
-        this.statusSearch = '';
-        this.setOtherValuesSearch();
-      }
+      this.statusSearch = '';
+      this.setOtherValuesSearch();
     }
   }
 
@@ -110,7 +98,6 @@ export class TicketListComponent implements OnInit {
     this.floorSearch = this.formSearchTicket?.value?.floor;
     this.expiryDateSearch = this.formSearchTicket?.value?.expiryDate;
     this.ticketTypeSearch = this.formSearchTicket?.value?.ticketType;
-    debugger
     this.getListTicket();
   }
 
@@ -122,14 +109,6 @@ export class TicketListComponent implements OnInit {
   }
 
   getListTicket(page?: number) {
-    this.hasNext = true;
-    this.hasPrevious = true;
-    if (this.ticketPageNumber >= this.totalPage) {
-      this.hasNext = false;
-    }
-    if (this.ticketPageNumber <= 0) {
-      this.hasPrevious = false;
-    }
     this.setPageNumber(page);
     this.ticketService.searchTicket(
       this.customerNameSearch,
@@ -140,21 +119,45 @@ export class TicketListComponent implements OnInit {
       this.expiryDateSearch,
       this.ticketTypeSearch,
       this.statusSearch,
-      this.ticketPageNumber).subscribe((ticketPage) => {
+      this.currentPage).subscribe((ticketPage) => {
+      if (ticketPage == null) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Thông báo',
+          text: 'Không tìm thấy dữ liệu!',
+          footer: '<a href="">Xóa thất bại</a>'
+        })
+      }
       this.ticketPage = ticketPage;
-      debugger
       this.ticketList = this.ticketPage.content;
-      this.initForm();
+      this.totalPage = this.ticketPage.totalPages;
+      this.pageNumbers = Array.from({length: this.totalPage}, (v, k) => k + 1);
+      if (!this.isSearchExpired || this.isSearchTicket) {
+        this.initForm();
+      }
     });
-    debugger
   }
+
+  initForm() {
+    this.formSearchTicket = new FormGroup({
+      customerName: new FormControl(this.customerNameSearch),
+      customerPhone: new FormControl(this.customerPhoneSearch),
+      employeeName: new FormControl(this.employeeNameSearch),
+      employeePhone: new FormControl(this.employeePhoneSearch),
+      floor: new FormControl(this.floorSearch),
+      expiryDate: new FormControl(this.expiryDateSearch),
+      ticketType: new FormControl(this.ticketTypeSearch),
+      status: new FormControl(this.statusSearch)
+    });
+  }
+
   setPageNumber(page?: number) {
     if (!(page === 0) && !(page === undefined)) {
       this.ticketPageNumber = page;
-      debugger
+
     } else {
       this.ticketPageNumber = 0;
-      debugger
+
     }
   }
 
@@ -171,9 +174,9 @@ export class TicketListComponent implements OnInit {
 
   checkTicketExpiry() {
     this.ticketService.findById(this.idDelete).subscribe((ticketDelete) => {
-       let currentDate = new Date();
-       let expiryDate = new Date(ticketDelete.expiryDate);
-       this.isTicketExpired = expiryDate < currentDate;
+      let currentDate = new Date();
+      let expiryDate = new Date(ticketDelete.expiryDate);
+      this.isTicketExpired = expiryDate < currentDate;
     })
   }
 
@@ -181,18 +184,80 @@ export class TicketListComponent implements OnInit {
     this.ticketService.deleteTicket(this.idDelete).subscribe(() => {
       Swal.fire({
         icon: 'success',
-        title: 'Your work has been saved',
+        title: 'Xóa thành công',
         showConfirmButton: false,
         timer: 1500
       })
     }, error => {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-        footer: '<a href="">Xóa thất bại</a>'
+        title: 'Lỗi',
+        text: 'Không thể xóa!',
+        footer: '<a href=""></a>'
       })
     });
   }
 
+  private resetForm() {
+    this.formSearchTicket = new FormGroup({
+      customerName: new FormControl(''),
+      customerPhone: new FormControl(''),
+      employeeName: new FormControl(''),
+      employeePhone: new FormControl(''),
+      floor: new FormControl(''),
+      expiryDate: new FormControl(''),
+      ticketType: new FormControl(''),
+      status: new FormControl('')
+    });
+  }
+
+  get pageNumbersToDisplay() {
+    const currentPageIndex = this.currentPage;
+    const totalPageCount = this.totalPage;
+    const pagesToShow = 3;
+
+    if (totalPageCount <= pagesToShow) {
+      return Array.from({length: totalPageCount}, (_, i) => i + 1);
+    }
+
+    const startPage = Math.max(0, currentPageIndex - Math.floor(pagesToShow / 2));
+    let endPage = startPage + pagesToShow - 1;
+
+    if (endPage >= totalPageCount) {
+      endPage = totalPageCount - 1;
+    }
+
+    let pageNumbersToDisplay: (number | string)[] = Array.from({length: endPage - startPage + 1}, (_, i) => i + startPage + 1);
+
+    if (startPage > 0) {
+      pageNumbersToDisplay = ['...', ...pageNumbersToDisplay];
+    }
+
+    if (endPage < totalPageCount - 1) {
+      pageNumbersToDisplay = [...pageNumbersToDisplay, '...'];
+    }
+
+    return pageNumbersToDisplay;
+  }
+
+  previousPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+    }
+    this.getListTicket(this.currentPage);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPage - 1) {
+      this.currentPage++;
+    }
+    this.getListTicket(this.currentPage);
+  }
+
+  goToPage(pageNumber: number | string) {
+    if (typeof pageNumber === 'number') {
+      this.currentPage = pageNumber - 1;
+    }
+    this.getListTicket(this.currentPage);
+  }
 }
