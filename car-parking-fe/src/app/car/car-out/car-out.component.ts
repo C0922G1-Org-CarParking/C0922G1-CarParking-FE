@@ -18,7 +18,7 @@ export class CarOutComponent implements OnInit {
   now: any;
   urlCarOutImage = '../../../../assets/car-images/default.png';
   dataList: ICarInOut[];
-  private listEmpty: string;
+  public listEmpty: string;
 
   constructor(private carInOutService: CarInOutService,
               private router: Router,

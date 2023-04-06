@@ -72,7 +72,7 @@
         <div class="col-md-12">
           <h3 *ngIf="message" style="text-align: center; color: red">Không tìm thấy dữ liệu!</h3>
           <table *ngIf="!message"
-            class="table table-bordered table-hover text-center"
+            class="table table-bordered table-hover text-left"
                  style="box-shadow: 0 0 10px 0 #253365; margin-top: 20px">
             <thead style="background-color: #E67E22">
             <tr>
@@ -92,7 +92,7 @@
             <tbody>
             <tr *ngFor="let empl of employees">
               <td>{{empl.id}}</td>
-              <td>{{empl?.name}}</td>
+              <td>{{empl.name}}</td>
               <td>{{empl.dateOfBirth | date : 'dd-MM-yyyy'}}</td>
               <td class="hidden-on-mobile">
                 <ng-container *ngIf="empl.gender == true"> Nam</ng-container>
@@ -115,9 +115,9 @@
             </tbody>
           </table>
           <!--phân trang-->
-          <div class="row">
-            <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px">
-              <button class="btn" style="background-color: darkorange" routerLink="/employee/create">Thêm nhân viên
+          <div class="row" >
+            <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px;">
+              <button class="btn"  style="background-color: darkorange" routerLink="/employee/create">Thêm nhân viên
               </button>
             </div>
             <div class="col-md-8"></div>
@@ -152,14 +152,14 @@
   </div>
 
   <!--modal xóa-->
-  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="max-width: 200rem">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Xác nhận xóa nhân viên</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" style="text-align: center; margin-right: 3%">
+        <div class="modal-body" style="text-align: center; margin-right: 3%; width: 102%">
           <span>Bạn có chắc chắn muốn xoá nhân viên </span>
           <span style="color: red">{{employeeDelete.name}}</span>
           <span> này không ?</span>
