@@ -1,6 +1,5 @@
 
-<div class="row d-flex justify-content-center align-items-center" style="margin-left: 5%;margin-right: 5%;margin-top: 7%">
-    <div class="row d-flex justify-content-center align-items-center">
+<div class="row d-flex justify-content-center align-items-center" style="margin: 3% 5%">
       <div class="col-md-10">
         <div class="card" style="border-radius: 15px;">
           <div class="card-body" style="background-color: whitesmoke; box-shadow: 0 0 20px 0 #253365">
@@ -9,7 +8,7 @@
               <div class="row d-flex">
                 <div class="row align-items-center py-3 col-md-6">
                   <div class="col-md-4">
-                    <label style="font-weight: bold; margin-left: 15px">Họ và tên: <b
+                    <label style="font-weight: bold; margin-left: 15px">Họ và tên<b
                       style="color: red">*</b></label>
                   </div>
                   <div class="col-md-8" style="position: relative">
@@ -31,7 +30,7 @@
                 </div>
                 <div class="row align-items-center py-3 col-md-6">
                   <div class="col-md-4">
-                    <label style="font-weight: bold; margin-left: 25px" class="mb-0">CCCD: <b
+                    <label style="font-weight: bold; margin-left: 25px" class="mb-0">CCCD<b
                       style="color: red">*</b></label>
                   </div>
                   <div class="col-md-8" style="position: relative">
@@ -48,7 +47,7 @@
               <div class="row d-flex" style="margin-top: 40px">
                 <div class="row align-items-center py-3 col-md-6">
                   <div class="col-md-4">
-                    <label style="font-weight: bold; margin-left: 15px">Ngày sinh: <b
+                    <label style="font-weight: bold; margin-left: 15px">Ngày sinh<b
                       style="color: red">*</b></label>
                   </div>
                   <div class="col-md-8" style="position: relative">
@@ -61,21 +60,21 @@
                       <span
                         *ngIf="customerForm.controls.dateOfBirth?.touched && customerForm.controls.dateOfBirth?.errors?.required"
                         style="color: red">
-                        Ngày sinh không được để trống .</span>
+                        Ngày sinh không được để trống.</span>
                       <span
-                        *ngIf="customerForm.controls.dateOfBirth?.touched && customerForm.controls.dateOfBirth?.errors?.invalidBirthDate1"
+                        *ngIf="customerForm.controls.dateOfBirth?.errors?.invalidBirthDate1"
                         style="color: red;">
-                        Ngày sinh phải lớn hơn 18 tuổi.</span>
+                        Bạn chưa đủ 18 tuổi, không được phép lái xe.</span>
                       <span
-                        *ngIf="customerForm.controls.dateOfBirth?.touched && customerForm.controls.dateOfBirth?.errors?.invalidDateOfBirth"
+                        *ngIf="customerForm.controls.dateOfBirth?.errors?.invalidDateOfBirth"
                         style="color: red">
-                        Ngày sinh lớn ngày hiện tại.</span>
+                        Ngày sinh không được lớn hơn ngày hiện tại.</span>
                     </div>
                   </div>
                 </div>
                 <div class="row align-items-center py-3 col-md-6">
                   <div class="col-md-4">
-                    <label style="font-weight: bold; margin-left: 25px" class="mb-0">Giới tính: <b
+                    <label style="font-weight: bold; margin-left: 25px" class="mb-0">Giới tính<b
                       style="color: red">*</b></label>
                   </div>
                   <div class="col-md-8">
@@ -87,7 +86,7 @@
               <div class="row d-flex mt-5">
                 <div class="row align-items-center py-3 col-md-6">
                   <div class="col-md-4">
-                    <label style="font-weight: bold; margin-left: 15px">Email: <b
+                    <label style="font-weight: bold; margin-left: 15px">Email<b
                       style="color: red">*</b></label>
                   </div>
                   <div class="col-md-8" style="position: relative">
@@ -108,7 +107,7 @@
                 </div>
                 <div class="row align-items-center py-3 col-md-6">
                   <div class="col-md-4">
-                    <label style="font-weight: bold; margin-left: 25px">SÐT: <b
+                    <label style="font-weight: bold; margin-left: 25px">SÐT<b
                       style="color: red">*</b></label>
                   </div>
                   <div class="col-md-8" style="position: relative">
@@ -128,7 +127,7 @@
               </div>
               <div class="row align-items-center py-3 mt-5">
                 <div class="col-md-2">
-                  <label style="font-weight: bold; margin-left: 15px">Ðịa chỉ: <b
+                  <label style="font-weight: bold; margin-left: 15px">Ðịa chỉ<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-2">
@@ -157,7 +156,7 @@
                 </div>
                 <div class="col-md-3">
                   <input class="form-control" style="margin-left: 3%" formControlName="street"
-                         placeholder="Nhập số nhà">
+                         placeholder="Nhập tên đường/số nhà">
                   <div style="position: absolute">
                     <p style="color: red" *ngIf="messStreet">{{messStreet}}</p>
                   </div>
@@ -211,7 +210,7 @@
         </div>
       </div>
     </div>
-  </div>
+
 
 
 <!--Modal thêm xe-->
