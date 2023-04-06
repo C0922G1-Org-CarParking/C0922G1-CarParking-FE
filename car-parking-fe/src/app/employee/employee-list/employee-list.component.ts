@@ -25,7 +25,7 @@ export class EmployeeListComponent implements OnInit {
   provinceList: any;
   pageCount = 0;
   pageNumbers: number[] = [];
-  totalPages = 0;
+  totalPages = 0;gi
   // số trang hiện tại
   currentPage = 0;
 
