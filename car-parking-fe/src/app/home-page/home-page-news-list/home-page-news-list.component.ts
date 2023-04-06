@@ -52,6 +52,7 @@ export class HomePageNewsListComponent implements OnInit {
       this.totalPage = items.totalPages;
       this.pageNumber = items.pageable.pageNumber;
     }, error => {
+      debugger
       this.route.navigateByUrl('/error');
     });
   }

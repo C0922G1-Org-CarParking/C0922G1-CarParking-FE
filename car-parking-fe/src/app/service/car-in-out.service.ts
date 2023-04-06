@@ -13,13 +13,13 @@ const API_URL = `${environment.apiUrl}`;
   providedIn: 'root'
 })
 export class CarInOutService {
-  URL_SCANNING_CAR_IN = 'http://localhost:8080/car-in-out/scanning-car-in';
-  URL_SAVE_CAR_IN = 'http://localhost:8080/car-in-out/save-car-in';
-  URL_SCANNING_CAR_OUT = 'http://localhost:8080/car-in-out/scanning-car-out';
-  URL_SAVE_CAR_OUT = 'http://localhost:8080/car-in-out/save-car-out';
+  URL_SCANNING_CAR_IN = 'http://localhost:8080/api/user/car-in-out/scanning-car-in';
+  URL_SAVE_CAR_IN = 'http://localhost:8080/api/user/car-in-out/save-car-in';
+  URL_SCANNING_CAR_OUT = 'http://localhost:8080/api/user/car-in-out/scanning-car-out';
+  URL_SAVE_CAR_OUT = 'http://localhost:8080/api/user/car-in-out/save-car-out';
 
-  URL_SEARCH_CAR_IN_BY_NAME_BY_PHONE_BY_PLATE_NUMBER = "http://localhost:8080/car-in-out/list-car-in";
-  URL_SEARCH_CAR_OUT_BY_NAME_BY_PHONE_BY_PLATE_NUMBER = "http://localhost:8080/car-in-out/list-car-out";
+  URL_SEARCH_CAR_IN_BY_NAME_BY_PHONE_BY_PLATE_NUMBER = "http://localhost:8080/api/user/car-in-out/list-car-in";
+  URL_SEARCH_CAR_OUT_BY_NAME_BY_PHONE_BY_PLATE_NUMBER = "http://localhost:8080/api/user/car-in-out/list-car-out";
   constructor(private http: HttpClient) {
   }
 

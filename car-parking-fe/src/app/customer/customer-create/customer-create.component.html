@@ -1,6 +1,6 @@
-<div class="row container">
-  <div class="col-md-1"></div>
-  <div class="col-md-10" style="margin-left: 15%">
+<!--<div class="row container">-->
+
+  <div class="col-md-10" style="margin-left: 9%; margin-top: 3%">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-md-10">
         <div class="card" style="border-radius: 15px;">
@@ -13,8 +13,12 @@
                     <label style="font-weight: bold; margin-left: 15px">Họ và tên: <b
                       style="color: red">*</b></label>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="text" formControlName="name">
+                    <div style="position: absolute">
+                      <div style="color: red" *ngIf="messCustomerName">{{messCustomerName}}</div>
+                      <div style="color: red" *ngIf="messCustomerNamePattern">{{messCustomerNamePattern}}</div>
+                    </div>
                   </div>
                 </div>
                 <div class="row align-items-center py-3 col-md-6">
@@ -22,19 +26,30 @@
                     <label style="font-weight: bold; margin-left: 25px" class="mb-0">CCCD: <b
                       style="color: red">*</b></label>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="text" formControlName="idCard">
+
+                    <div style="position: absolute">
+                      <div style="color: red" *ngIf="messCCCD">{{messCCCD}}</div>
+                      <div style="color: red" *ngIf="messCCCDPattern">{{messCCCDPattern}}</div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="row d-flex">
+              <div class="row d-flex" style="margin-top: 40px">
                 <div class="row align-items-center py-3 col-md-6">
                   <div class="col-md-4">
                     <label style="font-weight: bold; margin-left: 15px">Ngày sinh: <b
                       style="color: red">*</b></label>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="date" formControlName="dateOfBirth">
+
+
+                    <div style="position: absolute">
+                      <div style="color: red" *ngIf="messDateOfBirth">{{messDateOfBirth}}</div>
+                      <div style="color: red" *ngIf="messDateOfBirthPattern">{{messDateOfBirthPattern}}</div>
+                    </div>
                   </div>
                 </div>
                 <div class="row align-items-center py-3 col-md-6">
@@ -43,19 +58,23 @@
                       style="color: red">*</b></label>
                   </div>
                   <div class="col-md-8">
-                    <label><input type="radio" name="isGender" value="true" formControlName="isGender"> Nam</label>
-                    <label><input type="radio" name="isGender" value="false" formControlName="isGender"> Nữ</label>
+                    <label><input type="radio" name="isGender" [value]="true" formControlName="isGender"> Nam</label>
+                    <label><input type="radio" name="isGender" [value]="false" formControlName="isGender"> Nữ</label>
                   </div>
                 </div>
               </div>
-              <div class="row d-flex">
+              <div class="row d-flex" style="margin-top: 60px">
                 <div class="row align-items-center py-3 col-md-6">
                   <div class="col-md-4">
                     <label style="font-weight: bold; margin-left: 15px">Email: <b
                       style="color: red">*</b></label>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="text" formControlName="email">
+                    <div style="position: absolute">
+                      <div style="color: red" *ngIf="messEmail">{{messEmail}}</div>
+                      <div style="color: red" *ngIf="messEmailPattern">{{messEmailPattern}}</div>
+                    </div>
                   </div>
                 </div>
                 <div class="row align-items-center py-3 col-md-6">
@@ -63,26 +82,34 @@
                     <label style="font-weight: bold; margin-left: 25px">SÐT: <b
                       style="color: red">*</b></label>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="text" formControlName="phoneNumber">
+
+
+                    <div style="position: absolute">
+                      <div style="color: red" *ngIf="messPhoneNumber">{{messPhoneNumber}}</div>
+                      <div style="color: red" *ngIf="messPhoneNumberPattern">{{messPhoneNumberPattern}}</div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="row align-items-center py-3">
+              <div class="row align-items-center py-3" style="margin-top: 60px">
                 <div class="col-md-2">
                   <label style="font-weight: bold; margin-left: 15px">Ðịa chỉ: <b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-2">
                   <select class="form-control" type="text"
-                          style="margin-left: 3%" formControlName="province" #province (click)="getProvince(province.value)">
+                          style="margin-left: 3%" formControlName="province" #province
+                          (click)="getProvince(province.value)">
                     <option value="" selected>Chọn Tỉnh</option>
                     <option *ngFor="let item of provinceList" [value]="item.code">{{item.name}}</option>
                   </select>
                 </div>
                 <div class="col-md-2">
                   <select class="form-control" type="text"
-                          style="margin-left: 3%" formControlName="district" #district (click)="getDistrict(district.value)">
+                          style="margin-left: 3%" formControlName="district" #district
+                          (click)="getDistrict(district.value)">
                     <option value="" selected>Quận/Huyện</option>
                     <option *ngFor="let item of districtList" [value]="item.code">{{item.name}}</option>
                   </select>
@@ -96,13 +123,16 @@
                   </select>
                 </div>
                 <div class="col-md-3">
-
-                  <input class="form-control" style="margin-left: 3%" formControlName="street" placeholder="Nhập số nhà">
+                  <input class="form-control" style="margin-left: 3%" formControlName="street"
+                         placeholder="Nhập số nhà">
+                  <div style="position: absolute">
+                    <p style="color: red" *ngIf="messStreet">{{messStreet}}</p>
+                  </div>
                 </div>
                 <div class="col-md-1"></div>
               </div>
 
-              <div class="row align-items-center py-3">
+              <div class="row align-items-center py-3 mt-3">
                 <h2 style="text-align: center; margin-bottom: 10px">DANH SÁCH XE</h2>
                 <div class="row">
                   <div class="col-md-1"></div>
@@ -137,7 +167,7 @@
                 </div>
               </div>
               <div align="center" class="px-5 py-4">
-                <button type="button" class="btn btn-secondary">Quay lại</button>
+                <button type="button" class="btn btn-secondary" routerLink="/customer/list">Quay lại</button>
                 <button style="margin-left: 10px;background-color:  #E67E22" type="submit" class="btn"
                         data-bs-toggle="modal" data-bs-target="#exampleModal">
                   Lưu thông tin
@@ -149,36 +179,41 @@
       </div>
     </div>
   </div>
-  <div class="col-md-1"></div>
-</div>
+
+<!--</div>-->
 
 <!--Modal thêm xe-->
-
-
-
 
 
 <div class="modal fade" id="addExampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
      style="margin-left: -2.5%">
   <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content" style="max-width: 100%;background-color: whitesmoke; box-shadow: 0 0 20px 0 #253365">
+    <div class="modal-content"
+         style="margin-left:2%;max-width: 100%;background-color: whitesmoke; box-shadow: 0 0 20px 0 #253365">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="addExampleModalLabel">Thêm Mới Xe</h1>
+        <h1 class="modal-title fs-5" id="addExampleModalLabel">Thêm mới xe</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h1 class="text-center mt-3">Thêm Xe</h1>
+        <h1 class="text-center mt-3">THÊM MỚI XE</h1>
         <form [formGroup]="carForm" (ngSubmit)="addCar()">
           <div class="row d-flex">
             <div class="col-md-2"></div>
             <div class="col-md-8">
               <div class="row align-items-center py-3">
                 <div class="col-3">
-                  <label style="font-weight: bold; margin-left: 12px">Tên xe: <b
+                  <label style="font-weight: bold">Tên xe: <b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-9">
-                  <input class="form-control" type="text" formControlName="name">
+                  <input formControlName="name" class="form-control" type="text">
+                  <p *ngIf="carForm.controls.name?.touched && carForm.controls.name?.errors?.required"
+                     style="color: red">Tên
+                    xe không được để trống.</p>
+                  <p *ngIf="carForm.controls.name?.touched && carForm.controls.name?.errors?.pattern"
+                     style="color: red">Tên
+                    xe không đúng. Vui lòng nhập lại.</p>
+
                 </div>
               </div>
               <div class="row align-items-center py-3">
@@ -188,18 +223,31 @@
                 </div>
                 <div class="col-md-9">
                   <select class="form-control" formControlName="carType">
-                    <option >Chọn loại xe</option>
-                    <option [ngValue]="c" *ngFor="let c of carTypeList">{{c.name}}</option>
+                    <option value="" selected>Chọn loại xe</option>
+                    <option [ngValue]="c" *ngFor="let c of carTypeList">{{c.name }}</option>
                   </select>
+                  <p
+                    *ngIf="carForm.controls.carType?.touched && carForm.controls.carType?.errors?.required"
+                    style="color: red">
+                    Loại xe không được để trống.</p>
                 </div>
               </div>
               <div class="row align-items-center py-3">
                 <div class="col-md-3">
-                  <label style="font-weight: bold; margin-left: 12px">Biển số xe: <b
+                  <label style="font-weight: bold">Biển số xe: <b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-9">
-                  <input class="form-control" type="text" formControlName="plateNumber">
+                  <input formControlName="plateNumber" class="form-control" type="text">
+                  <p
+                    *ngIf="carForm.controls.plateNumber?.touched && carForm.controls.plateNumber?.errors?.required"
+                    style="color: red">
+                    Biển số xe không được để trống.</p>
+                  <p
+                    *ngIf="carForm.controls.plateNumber?.touched && carForm.controls.plateNumber?.errors?.pattern"
+                    style="color: red">
+                    Biển số xe không đúng.Vui lòng nhập lại.</p>
+
                 </div>
               </div>
               <div class="row align-items-center py-3">
@@ -209,6 +257,12 @@
                 </div>
                 <div class="col-md-9">
                   <input formControlName="brand" class="form-control" type="text">
+                  <p *ngIf="carForm.controls.brand?.touched && carForm.controls.brand?.errors?.required"
+                     style="color: red">
+                    Hãng xe không được để trống.</p>
+                  <p *ngIf="carForm.controls.brand?.touched && carForm.controls.brand?.errors?.pattern"
+                     style="color: red">
+                    Hãng xe không đúng . Vui lòng nhập lại.</p>
                 </div>
               </div>
             </div>
@@ -216,7 +270,9 @@
           </div>
           <div align="center" class="px-5 py-4">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button type="submit" class="btn" data-bs-dismiss="modal" style="background-color:#E67E22">Lưu
+            <button style="margin-left: 10px;background-color:  #E67E22" type="submit" data-bs-dismiss="modal"
+                    class="btn">
+              Lưu thông tin
             </button>
           </div>
         </form>
@@ -224,4 +280,71 @@
     </div>
   </div>
 </div>
+
+<!--<div class="modal fade" id="addExampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"-->
+<!--     style="margin-left: -2.5%">-->
+<!--  <div class="modal-dialog modal-dialog-centered modal-lg">-->
+<!--    <div class="modal-content" style="max-width: 100%;background-color: whitesmoke; box-shadow: 0 0 20px 0 #253365">-->
+<!--      <div class="modal-header">-->
+<!--        <h1 class="modal-title fs-5" id="addExampleModalLabel">Thêm Mới Xe</h1>-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <h1 class="text-center mt-3">Thêm Xe</h1>-->
+<!--        <form [formGroup]="carForm" (ngSubmit)="addCar()">-->
+<!--          <div class="row d-flex">-->
+<!--            <div class="col-md-2"></div>-->
+<!--            <div class="col-md-8">-->
+<!--              <div class="row align-items-center py-3">-->
+<!--                <div class="col-3">-->
+<!--                  <label style="font-weight: bold; margin-left: 12px">Tên xe: <b-->
+<!--                    style="color: red">*</b></label>-->
+<!--                </div>-->
+<!--                <div class="col-md-9">-->
+<!--                  <input class="form-control" type="text" formControlName="name">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="row align-items-center py-3">-->
+<!--                <div class="col-md-3">-->
+<!--                  <label style="font-weight: bold">Loại xe: <b-->
+<!--                    style="color: red">*</b></label>-->
+<!--                </div>-->
+<!--                <div class="col-md-9">-->
+<!--                  <select class="form-control" formControlName="carType">-->
+<!--                    <option >Chọn loại xe</option>-->
+<!--                    <option [ngValue]="c" *ngFor="let c of carTypeList">{{c.name}}</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="row align-items-center py-3">-->
+<!--                <div class="col-md-3">-->
+<!--                  <label style="font-weight: bold; margin-left: 12px">Biển số xe: <b-->
+<!--                    style="color: red">*</b></label>-->
+<!--                </div>-->
+<!--                <div class="col-md-9">-->
+<!--                  <input class="form-control" type="text" formControlName="plateNumber">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="row align-items-center py-3">-->
+<!--                <div class="col-md-3">-->
+<!--                  <label style="font-weight: bold">Hãng xe: <b-->
+<!--                    style="color: red">*</b></label>-->
+<!--                </div>-->
+<!--                <div class="col-md-9">-->
+<!--                  <input formControlName="brand" class="form-control" type="text">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-2"></div>-->
+<!--          </div>-->
+<!--          <div align="center" class="px-5 py-4">-->
+<!--            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>-->
+<!--            <button type="submit" class="btn" data-bs-dismiss="modal" style="background-color:#E67E22">Lưu-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 

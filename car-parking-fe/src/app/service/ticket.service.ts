@@ -15,10 +15,11 @@ const API_URL = `${environment.apiUrl}`;
   providedIn: 'root'
 })
 export class TicketService {
-  URL_GET_PRICE = "http://localhost:8080/ticket/get-price";
+  URL_GET_PRICE = "http://localhost:8080/api/user/ticket/get-price";
 
   constructor(private http: HttpClient) {
   }
+
 
   findByTicketId(ticketId: number): Observable<EditTicket> {
     return this.http.get<EditTicket>('http://localhost:8080/ticket/' + ticketId);
@@ -33,6 +34,7 @@ export class TicketService {
     return this.http.get(this.URL_GET_PRICE + "?expiryDate=" + expiryDate + "&effectiveDate="
       + effectiveDate + "&rate=" + rate);
   }
+
   searchTicket(customerName?: string,
                customerPhone?: string,
                employeeName?: string,
@@ -58,52 +60,38 @@ export class TicketService {
       .filter(([_, value]) => value !== undefined && value !== null)
       .map(([key, value]) => `${key}=${value}`)
       .join('&');
-    debugger
-    return this.http.get<any>(`http://localhost:8080/ticket/search?${query}`);
+
+    return this.http.get<any>(`http://localhost:8080/api/user/ticket/search?${query}`);
   }
 
   findById(id: number): Observable<TicketDtoForList> {
-    return this.http.get<TicketDtoForList>(`http://localhost:8080/ticket/detail/${id}`);
+    return this.http.get<TicketDtoForList>(`http://localhost:8080/api/user/ticket/detail/${id}`);
   }
 
   findAllTicketType(): Observable<TicketType[]> {
-    return this.http.get<TicketType[]>(`http://localhost:8080/ticket/ticketType`)
+    return this.http.get<TicketType[]>(`http://localhost:8080/api/user/ticket/ticketType`)
   }
 
   findAllFloor(): Observable<Floor[]> {
-    return this.http.get<Floor[]>(`http://localhost:8080/ticket/floor`)
+    return this.http.get<Floor[]>(`http://localhost:8080/api/user/ticket/floor`)
   }
 
   deleteTicket(idDelete: number): Observable<any> {
-    return this.http.delete<any>(`http://localhost:8080/ticket/delete/${idDelete}`)
+    return this.http.delete<any>(`http://localhost:8080/api/user/ticket/delete/${idDelete}`)
   }
   createTicket(ticket: Ticket):Observable<Ticket> {
-    debugger
-    return this.http.post<Ticket>("http://localhost:8080/ticket/createTicket" , ticket)
-  }
 
-  statisticalTicket(sinceMonth: number, toMonth: number):Observable<[]> {
-    return this.http.get<[]>("http://localhost:8080/ticket/statisticalTicketChart/" + sinceMonth + "/" + toMonth)
-  }
-
-  statisticalCustomer(sinceMonth: number, toMonth: number):Observable<[]> {
-    return this.http.get<[]>("http://localhost:8080/ticket/statisticalCustomerChart/" + sinceMonth + "/" + toMonth)
-  }
-
-  displayMoth(sinceMonth: number, toMonth: number):Observable<[]> {
-    return this.http.get<[]>("http://localhost:8080/ticket/displayMonth/" + sinceMonth + "/" + toMonth);
+    return this.http.post<Ticket>("http://localhost:8080/api/user/ticket/createTicket" , ticket)
   }
 
   findRateByIdCar(idCar: number) {
-    return this.http.get<number>('http://localhost:8080/ticket/rate/' + idCar);
+    return this.http.get<number>('http://localhost:8080/api/user/ticket/rate/' + idCar);
   }
 
   getPrice(effective: string, expiryDate: string, rate: any) {
-    debugger
-    return this.http.get<number>('http://localhost:8080/ticket/getPrice?expiryDate='+expiryDate
+
+    return this.http.get<number>('http://localhost:8080/api/user/ticket/getPrice?expiryDate='+expiryDate
       + "&effectiveDate="+effective +"&rate=" +rate);
   }
 
-  getTotalTicketOfMonth(month: number) {
-  }
 }

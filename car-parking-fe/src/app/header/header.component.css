@@ -99,7 +99,7 @@ header .logo img {
   position: relative;
 }
 nav ul li .n-item{
-  color: #000000;
+  color: #727171;
   font-size: 18px;
   /*font-weight: bold;*/
 }
@@ -282,4 +282,7 @@ section {
   background: #eb5d1e;
   bottom: 0;
   left: calc(50% - 30px);
+}
+.dropdown-content {
+  width: 3rem;
 }

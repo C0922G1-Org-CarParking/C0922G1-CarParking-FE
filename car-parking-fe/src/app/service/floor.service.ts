@@ -15,13 +15,13 @@ export class FloorService {
   }
 
   getAllFloor(): Observable<any> {
-    return this.http.get<any>("http://localhost:8080/floor");
+    return this.http.get<any>("http://localhost:8080/api/user/floor");
 
   }
 
 
   listFloor():Observable<Floor[]> {
-    return this.http.get<Floor[]>('http://localhost:8080/ticket/listFloor');
+    return this.http.get<Floor[]>('http://localhost:8080/api/user/ticket/listFloor');
   }
 
 
