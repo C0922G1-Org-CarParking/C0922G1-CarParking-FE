@@ -6,6 +6,8 @@ import {PositionService} from '../../service/position.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Employee} from '../../model/employee';
 import Swal from 'sweetalert2';
+import {switchMap} from "rxjs/operators";
+import {forkJoin, pipe} from "rxjs";
 
 @Component({
   selector: 'app-employee-update',
@@ -29,7 +31,6 @@ export class EmployeeUpdateComponent implements OnInit {
     phoneNumber: '',
   };
   employeeGroup: FormGroup = new FormGroup({
-
     id: new FormControl(),
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ỹ\s]*$/)]),
     dateOfBirth: new FormControl('', Validators.required),
@@ -47,6 +48,8 @@ export class EmployeeUpdateComponent implements OnInit {
   districtList: any;
   communeList: any;
 
+
+
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private employeeService: EmployeeService,
@@ -55,55 +58,52 @@ export class EmployeeUpdateComponent implements OnInit {
       this.position = next;
     });
     this.activatedRoute.paramMap.subscribe(next => {
-      const id = next.get('id');
-      // tslint:disable-next-line:no-shadowed-variable radix
+      const id = next.get('id')
       employeeService.findById(parseInt(id)).subscribe(next => {
         this.employee = next;
         this.employeeGroup.patchValue(next);
+        this.getProvince(String(next.province));
+        this.getDistrict(String(next.district));
       });
     });
+
   }
+
+
 
   getProvince(value: string) {
     console.log(value);
-    // tslint:disable-next-line:radix
     parseInt(value);
-    // tslint:disable-next-line:radix
     this.employeeService.getAllDistrict(parseInt(value)).subscribe(next => {
       this.districtList = next.data.data;
     });
   }
-
   getDistrict(value: string) {
     console.log(value);
-    // tslint:disable-next-line:radix
     this.employeeService.getAllCommune(parseInt(value)).subscribe(next => {
-      this.communeList = next.data.data;
-    }
-      );
+        this.communeList = next.data.data;
+      }
+    );
   }
 
   getCommune(value: string) {
     console.log(value);
   }
 
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.employeeService.getAllProvince().subscribe(next => {
       this.provinceList = next.data.data;
     });
   }
-
   submitUpdate() {
     if (this.employeeGroup.valid) {
       this.employeeService.editEmployee(this.employeeGroup.value).subscribe(next => {
-        this.router.navigateByUrl('employee/list');
-        Swal.fire(
-          'Updated!',
-          'Your file has been updated.',
-          'success'
-        );
-      }, error => {
+          this.router.navigateByUrl('employee/list');
+          Swal.fire({
+              title:'Sửa thành công!',
+              icon: 'success'
+          });
+        }, error => {
           console.log(error);
           Swal.fire({
             position: 'center',
@@ -150,7 +150,6 @@ export class EmployeeUpdateComponent implements OnInit {
       );
     }
   }
-
   compare(s1: any, s2: any) {
     return s1 && s2 ? s1.id === s2.id : s1 === s2;
   }

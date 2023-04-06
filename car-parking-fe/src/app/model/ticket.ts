@@ -7,6 +7,7 @@ export interface Ticket {
   id: number;
   effectiveDate: string;
   expiryDate: string;
+  isDeleted:boolean
   price: number;
   totalPrice: number;
   ticketType: TicketType;

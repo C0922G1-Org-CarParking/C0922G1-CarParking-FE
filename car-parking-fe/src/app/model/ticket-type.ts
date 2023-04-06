@@ -1,4 +1,4 @@
 export interface TicketType {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
 }

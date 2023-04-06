@@ -1,0 +1,50 @@
+button {
+  width: 50px;
+  height: 100px;
+  border:  1px solid white
+}
+.col-3 {
+  height: 35px;
+
+}
+
+.fa-2xl {
+  font-size: 200%
+}
+.fa-xl{
+  font-size: 150%
+}
+.col-6{
+  width: 35%;
+  margin-bottom: -28%;
+}
+
+.col-md-6{
+  width: 51%;
+}
+.col-xs-6{
+  width: 35%;
+  margin-bottom: -90px;
+}
+button:hover{
+  position: relative;
+}
+button:hover span{
+  position: absolute;
+  transform: rotate(314deg);
+  display: flex;
+  background: cadetblue  ;
+  width: 120px;
+  border:darkorange 1px solid;
+ color: black;
+  height: 100px;
+  right: 20px;
+  top: 30px;
+  margin-left: 1%;
+}
+button span{
+display: none;
+
+}
+
+

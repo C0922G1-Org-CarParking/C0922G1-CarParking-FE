@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-
-import {Employee} from '../model/employee';
-import {Observable} from 'rxjs';
+import {Observable} from "rxjs";
+import {Employee} from "../model/employee";
 
 
 const API_URL = `${environment.apiUrl}`;
@@ -13,8 +12,9 @@ const API_URL = `${environment.apiUrl}`;
 })
 
 export class EmployeeService {
-  private apiList = 'http://localhost:8080/api/list-employee';
-  private apiDelete = 'http://localhost:8080/api/';
+  private apiList = 'http://localhost:8080/api/admin/list-employee';
+  private apiDelete = 'http://localhost:8080/api/admin/';
+
 
   constructor(private http: HttpClient) {
   }
@@ -26,7 +26,7 @@ export class EmployeeService {
    * @return status Ok
    */
   addEmployee(employee: Employee) {
-    return this.http.post('http://localhost:8080/api/create-employee', employee);
+    return this.http.post('http://localhost:8080/api/admin/create-employee', employee);
   }
 
   /**
@@ -36,7 +36,7 @@ export class EmployeeService {
    * @return id
    */
   findById(id: number): Observable<Employee> {
-    return this.http.get<Employee>('http://localhost:8080/api/' + id);
+    return this.http.get<Employee>('http://localhost:8080/api/admin/' + id);
   }
 
   /**
@@ -46,7 +46,7 @@ export class EmployeeService {
    * @return status Ok
    */
   editEmployee(value: any) {
-    return this.http.patch('http://localhost:8080/api/update-employee/' + value.id, value);
+    return this.http.patch('http://localhost:8080/api/admin/update-employee/' + value.id, value);
   }
 
 
@@ -79,6 +79,8 @@ export class EmployeeService {
   getAllCommune(district: number): Observable<any> {
     return this.http.get<any>('https://vn-public-apis.fpo.vn/wards/getByDistrict?districtCode=' + district + '&limit=-1');
   }
+
+
   /**
    * Created by:TaiLH
    * Date created: 04/03/2023
@@ -90,8 +92,12 @@ export class EmployeeService {
     size: number,
     nameSearch: string = '',
     startDate: string = '',
-    endDate: string = ''
+    endDate: string = '',
+    street: string = '',
+    province: number
   ): Observable<Employee[]> {
+    console.log(province)
+    debugger
     return this.http.get<Employee[]>(
       this.apiList +
       '?page=' +
@@ -103,7 +109,11 @@ export class EmployeeService {
       '&startDate=' +
       startDate +
       '&endDate=' +
-      endDate
+      endDate +
+      '&street=' +
+      street +
+      '&province=' +
+      province
     );
   }
 
@@ -117,4 +127,7 @@ export class EmployeeService {
     return this.http.delete(this.apiDelete + id);
   }
 
+  listEmployee(): Observable<Employee[]> {
+    return this.http.get<Employee[]>('http://localhost:8080/api/user/ticket/listEmployee');
+  }
 }
