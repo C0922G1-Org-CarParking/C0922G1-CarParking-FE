@@ -1,7 +1,7 @@
 <section>
-  <div class=" py-5">
+  <div class=" container py-5">
     <div class="row d-flex justify-content-center align-items-center">
-      <div class="col-lg-8 col-xl-6">
+      <div class="col-lg-8 col-xl-8">
         <div class="card rounded-3">
           <div class="card-body" style="box-shadow: 0 0 20px 0 #253365">
             <h1 class="mb-3 mt-3 text-center">CHỈNH SỬA VỊ TRÍ ĐỖ</h1>
@@ -11,51 +11,52 @@
                 <div class="col-md-4 ps-3">
                   <label style="font-weight: bold"  class="mb-0">Vị trí</label>
                 </div>
-
-                <div style="position: relative" class="col-md-8 pe-4" *ngIf="locationDto" >
-                  <!--                <input type="text" {{location}}-->
-                  <!--                       readonly class="form-control form-control-md">-->
-                  <p >{{locationDto.floorName}}-{{locationDto.sectionName}}{{locationDto.locationName}}</p>
-                </div>
-              </div>
-
-
-              <div class="row align-items-center pt-4 pb-4">
-                <div class="col-md-4 ps-3">
-                  <label style="font-weight: bold"  class="mb-0">Dãy</label>
-                </div>
                 <div style="position: relative" class="col-md-8 pe-4">
-                  <select  formControlName="section" class="form-select" disabled [compareWith]="compareFun"  aria-label="Default select example"  >
-                    <option value="">Chọn dãy </option>
-                    <option  *ngFor="let sections of sectionList1"  [ngValue]="sections">{{sections.name}}</option>
-                  </select>
+                  <p  class="form-control form-control-md" style="border: solid;color: #7e8083; background-color: #e9ecef">{{locationDto.floorName}}-{{locationDto.sectionName}}{{locationDto.locationName}}
+                    </p>
+
                 </div>
               </div>
               <div class="row align-items-center pt-3 pb-4">
                 <div class="col-md-4 ps-3">
-                  <label style="font-weight: bold"  class="mb-0">Tầng</label>
+                  <label style="font-weight: bold"  class="mb-0">Tầng<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
                 </div>
                 <div style="position: relative" class="col-md-8 pe-4">
-                  <select formControlName="floor" class="form-select" disabled  [compareWith]="compareFun1" aria-label="Default select example">
+                  <select formControlName="floor" class="form-select"   [compareWith]="compareFun1" aria-label="Default select example">
                     <option value="">Chọn tầng </option>
                     <option *ngFor="let floors of floorList" [ngValue]="floors" >{{floors.name}}</option>
                   </select>
+                  <p style="color: red;position: absolute"
+                     *ngIf="(clickButton && locationForm.controls.floor.hasError('required'))||
+                       locationForm.controls.floor.hasError('required') && locationForm.controls.floor.touched">
+                    *
+                    Không được để trống.</p>
                 </div>
               </div>
+
               <div class="row align-items-center pt-4 pb-4">
                 <div class="col-md-4 ps-3">
-                  <label style="font-weight: bold"  class="mb-0">Số vị trí</label>
+                  <label style="font-weight: bold"  class="mb-0">Dãy<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
                 </div>
-
                 <div style="position: relative" class="col-md-8 pe-4">
-                  <input readonly formControlName="name" type="number"
-                          class="form-control form-control-md">
+                  <select  formControlName="section" class="form-select"  [compareWith]="compareFun"  aria-label="Default select example"  >
+                    <option value="">Chọn dãy </option>
+                    <option  *ngFor="let sections of sectionList1"  [ngValue]="sections">{{sections.name}}</option>
+                  </select>
+                  <p style="color: red;position: absolute"
+                     *ngIf="(clickButton && locationForm.controls.section.hasError('required'))||
+                       locationForm.controls.section.hasError('required') && locationForm.controls.section.touched">
+                    *
+                    Không được để trống.</p>
                 </div>
               </div>
+
               <div class="row align-items-center pt-4 pb-4">
                 <div class="col-md-4 ps-3">
 
-                  <label style="font-weight: bold" class="mb-0">Chiều rộng<sup
+                  <label style="font-weight: bold" class="mb-0">Chiều rộng(M)<sup
                     style="color: red; font-size: 15px" class="m-1">*</sup></label>
                 </div>
                 <div style="position: relative" class="col-md-8 pe-4">
@@ -76,7 +77,7 @@
 
               <div class="row align-items-center pt-4 pb-4">
                 <div class="col-md-4 ps-3">
-                  <label style="font-weight: bold" class="mb-0">Chiều cao<sup
+                  <label style="font-weight: bold" class="mb-0">Chiều cao(M)<sup
                     style="color: red; font-size: 15px" class="m-1">*</sup></label>
                 </div>
                 <div style="position: relative" class="col-md-8 pe-4">
@@ -98,7 +99,7 @@
               <div class="row align-items-center pt-4 pb-4">
                 <div class="col-md-4 ps-3">
 
-                  <label style="font-weight: bold" class="mb-0">Chiều dài<sup
+                  <label style="font-weight: bold" class="mb-0">Chiều dài(M)<sup
                     style="color: red; font-size: 15px" class="m-1">*</sup></label>
 
                 </div>
@@ -118,7 +119,7 @@
                 </div>
               </div>
 
-              <!--<div class="row align-items-center pt-4 pb-3">
+              <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-4 ps-3">
                   <label style="font-weight: bold"  class="mb-0">Loại xe cho phép<sup
                     style="color: red; font-size: 15px" class="m-1">*</sup></label>
@@ -126,72 +127,35 @@
                 <div style="position: relative" class="col-md-8 pe-3">
                   <div class="form-check" style="display: inline-flex;padding-left: 0px;">
                     <div class="form-check" >
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <input  class="form-check-input" type="checkbox" formControlName="car4" value="Xe 4 chỗ" id="flexCheckDefault">
                       <label class="form-check-label" for="flexCheckDefault">
                         Xe 4 chỗ
                       </label>
                     </div>
                     <div class="form-check" style="margin-left: 30px">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                      <input  class="form-check-input" type="checkbox" formControlName="car7" value="Xe 7 chỗ" id="flexCheckDefault1">
                       <label class="form-check-label" for="flexCheckDefault1">
                         Xe 7 chỗ
                       </label>
                     </div>
-
                   </div>
                   <div class="form-check" style="display: inline-flex;padding-left: 0px;">
-                    <div class="form-check" >
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-                      <label class="form-check-label" for="flexCheckDefault2">
-                        Xe 12 chỗ
-                      </label>
-                    </div>
-                    <div class="form-check"  style="display: inline-flex;margin-left :20px ">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
-                      <label class="form-check-label" for="flexCheckDefault3" style="margin-left: 7px">
+                    <div class="form-check"  style="display: inline-flex">
+                      <input  class="form-check-input"  formControlName="otherCarSelected" type="checkbox" value="otherCarSelected"  id="flexCheckDefault3">
+                      <label  class="form-check-label" for="flexCheckDefault3" style="margin-left: 7px">
                         Loại xe khác
                       </label>
                       <div class="col-md-8 pe-3" >
                         <div style="display: inline-flex" class="input-group mb-3">
-                          <input type="text" style="margin-left: 20px" class="form-control w-50" id="exampleDatepicker4 "/>
+                          <input type="text" style="margin-left: 10px" formControlName="otherCar" class="form-control w-50" id="exampleDatepicker4 "/>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-                    </div>
-                  </div>
-                </div>
-              </div>-->
-          <!--    <div class="row align-items-center pt-4 pb-3">
-                <div class="col-md-4 ps-3">
-                  <label style="font-weight: bold" class="mb-0">Loại xe cho phép<sup
-                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
-                </div>
-                <div style="position: relative" class="col-md-8 pe-3">
-                  <div class="form-check" style="display: inline-flex;">
-                    <div class="form-check">
-                      <input type="checkbox" formControlName="permissionCarTypeLocations" >
-                      Xe 4 chỗ
-                    </div>
-                  </div>
-                  <div class="form-check" style="display: inline-flex;">
-                    <div class="form-check">
-                      <input type="checkbox" formControlName="permissionCarTypeLocations">
-                      Xe 7 chỗ
-                    </div>
-                  </div>
-                  <div class="form-check" style="display: inline-flex;margin-left :20px ">
-                    <input type="checkbox" style="margin-left: 5px" formControlName="permissionCarTypeLocations">
-                    Loại xe khác
-                    <input formControlName="permissionCarTypeLocations" style="margin-left: 25px" type="text"
-                           placeholder="Nhập loại xe khác">
-                  </div>
-             &lt;!&ndash;     <p  style="color: red;position: absolute"
-                      *ngIf="(clickButton && locationForm.controls.permissionCarTypeLocations.hasError('required'))||
-                       locationForm.controls.permissionCarTypeLocations.hasError('required') && locationForm.controls.permissionCarTypeLocations.touched">
-                    *
-                    Không được để trống.</p>&ndash;&gt;
-                </div>
-              </div>-->
+
 
 
               <div class=" text-center">

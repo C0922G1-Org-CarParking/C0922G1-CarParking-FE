@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {LocationService} from "../../service/location.service";
-import {FloorService} from "../../service/floor.service";
-import {SectionService} from "../../service/section.service";
-import {Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Floor} from "../../model/floor";
-import {Section} from "../../model/section";
-import Swal from 'sweetalert2'
+import {LocationService} from '../../service/location.service';
+import {FloorService} from '../../service/floor.service';
+import {SectionService} from '../../service/section.service';
+import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Floor} from '../../model/floor';
+import {Section} from '../../model/section';
+import Swal from 'sweetalert2';
+import {log} from "util";
 
 @Component({
   selector: 'app-location-create',
@@ -28,46 +29,49 @@ export class LocationCreateComponent implements OnInit {
               private sectionService: SectionService,
               private router: Router) {
     this.locationForm = new FormGroup({
-      width: new FormControl("",[Validators.required, Validators.min(0)]),
-      height: new FormControl("",[Validators.required, Validators.min(0)]),
-      length: new FormControl("",[Validators.required, Validators.min(0)]),
-      car4: new FormControl("",[Validators.required]),
-      car7: new FormControl("",[Validators.required]),
-      permissionCarTypeLocations: new FormControl("",[Validators.required]),
-      otherCarSelected: new FormControl("",[Validators.required]),
+      width: new FormControl('', [Validators.required, Validators.min(0)]),
+      height: new FormControl('', [Validators.required, Validators.min(0)]),
+      length: new FormControl('', [Validators.required, Validators.min(0)]),
+      car4: new FormControl('', [Validators.required]),
+      car7: new FormControl('', [Validators.required]),
+      permissionCarTypeLocations: new FormControl('', [Validators.required]),
+      otherCarSelected: new FormControl('', [Validators.required]),
       otherCar: new FormControl(),
-      floor: new FormControl("",[Validators.required]),
-      section: new FormControl("",[Validators.required]),
-    })
-    this.floorService.getAllFloor().subscribe(data =>{
+      floor: new FormControl('', [Validators.required]),
+      section: new FormControl('', [Validators.required]),
+    });
+    this.floorService.getAllFloor().subscribe(data => {
       this.floorList = data;
-    })
+    });
   }
 
   ngOnInit(): void {
   }
 
-  addLocation(){
-    const selectedCars = [];
+  addLocation() {
+    const selectedCars = ['', '', '', ''];
     if (this.locationForm.get('car4').value) {
-      selectedCars.push('Xe 4 chỗ');
+      selectedCars[0] = 'Xe 4 chỗ';
     }
     if (this.locationForm.get('car7').value) {
-      selectedCars.push('Xe 7 chỗ');
+      selectedCars[1] = 'Xe 7 chỗ';
     }
     if (this.locationForm.get('otherCarSelected').value) {
-      selectedCars.push(this.locationForm.get('otherCar').value);
+      selectedCars[2] = 'otherCarSelected';
     }
-/*
-    alert(selectedCars)
-*/
-    this.locationForm.get('permissionCarTypeLocations').setValue(selectedCars)
-    if (this.locationForm.valid){}
-    this.locationService.createLocation(this.locationForm.value).subscribe(data =>{
-      console.log(data)
-      Swal.fire('Thêm mới vị trí thành công','','success')
-      this.router.navigateByUrl("/list")
-    })
+    if (this.locationForm.get('otherCar').value) {
+      selectedCars[3] = this.locationForm.get('otherCar').value;
+    }
+    const selectedCarsStr = selectedCars.join(',');
+    console.log(selectedCarsStr);
+    this.locationForm.get('permissionCarTypeLocations').setValue(selectedCarsStr);
+    if (this.locationForm.valid) {
+    }
+    this.locationService.createLocation(this.locationForm.value).subscribe(data => {
+      console.log(data);
+      Swal.fire('Thêm mới vị trí thành công', '', 'success');
+      this.router.navigateByUrl('/list');
+    });
   }
 
   findSection(event: any) {
@@ -75,10 +79,10 @@ export class LocationCreateComponent implements OnInit {
     this.sectionList = null;
     this.isSelectedFloor = true;
     this.sectionService.getAllSection(this.floor.id).subscribe((sectionList) => {
-       this.sectionList = sectionList;
-    })
+      this.sectionList = sectionList;
+    });
     if (this.sectionList) {
-        this.isFullSection = true;
+      this.isFullSection = true;
     }
   }
 }

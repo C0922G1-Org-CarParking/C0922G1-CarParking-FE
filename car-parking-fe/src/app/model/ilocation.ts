@@ -1,5 +1,5 @@
-import {Floor} from "./floor";
-import {Section} from "./section";
+import {Floor} from './floor';
+import {Section} from './section';
 
 export interface ILocation {
   id: number;
@@ -8,7 +8,7 @@ export interface ILocation {
   width: number;
   height: number;
   length: number;
-  permissionCarTypeLocations: string[];
+  permissionCarTypeLocations: string;
   section: Section;
   floor: Floor;
 
