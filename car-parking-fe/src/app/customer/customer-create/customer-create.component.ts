@@ -153,15 +153,6 @@ export class CustomerCreateComponent implements OnInit {
     debugger
     this.cars.push(this.carForm.value);
     this.carForm.reset();
-    // this.carForm = this.fb?.group({
-    //   id: ['', Validators.required],
-    //   name: ['', Validators.required],
-    //   plateNumber: ['', Validators.required],
-    //   carType: ['', Validators.required],
-    //   customer: this.customerForm,
-    //   brand: ['', Validators.required],
-    //   isDelete: ['', Validators.required],
-    // });
   }
 
   getProvince(value: string) {

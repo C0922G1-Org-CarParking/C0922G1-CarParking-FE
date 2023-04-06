@@ -254,7 +254,7 @@
                 </div>
                 <div class="col-md-9">
                   <select class="form-control" formControlName="carType" style="position: relative">
-                    <option value="" selected disabled>Chọn loại xe</option>
+                    <option value="null" selected disabled>Chọn loại xe</option>
                     <option [ngValue]="c" *ngFor="let c of carTypeList">{{c.name }}</option>
                   </select>
                   <div style="position: absolute">
