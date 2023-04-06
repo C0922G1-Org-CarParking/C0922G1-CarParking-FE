@@ -94,7 +94,7 @@ export class CustomerUpdateComponent implements OnInit {
           Swal.fire({
             title: 'Đã xảy ra vài sự cố',
             text: 'Vui lòng tải lại trang!',
-
+            confirmButtonColor: 'darkorange',
             confirmButtonText: 'Đóng'
           }).then((result) => {
             if (result.isConfirmed) {
@@ -274,9 +274,13 @@ export class CustomerUpdateComponent implements OnInit {
 
       const customerCar = this.formEditCustomer.value;
       this.customerService.updateCustomer(id, customerCar).subscribe(() => {
-
-            Swal.fire('Thêm mới khách hàng thành công.', '', 'success')
-
+        Swal.fire({
+          icon: 'success',
+          iconColor: 'darkorange',
+          title: 'Chỉnh sửa khách hàng thành công.',
+          confirmButtonText: 'Xác nhận',
+          confirmButtonColor: 'darkorange'
+        })
         this.router.navigateByUrl('/customer/list')
         }, error => {
 
@@ -332,6 +336,10 @@ export class CustomerUpdateComponent implements OnInit {
     if (element) {
       element.scrollIntoView();
     }
+  }
+
+  resetForm() {
+    this.formCreateCar.reset();
   }
 }
 

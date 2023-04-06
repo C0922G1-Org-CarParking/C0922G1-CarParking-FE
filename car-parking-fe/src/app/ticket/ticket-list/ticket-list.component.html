@@ -1,4 +1,3 @@
-<script src="../../app.module.ts"></script>
 <div class="container-fluid justify-content-center d-flex" style="margin-top: 72px">
   <div class="col-c-11">
 
@@ -7,121 +6,106 @@
 
     <!--                     Tìm kiếm-->
     <div *ngIf="formSearchTicket" class="row " [formGroup]="formSearchTicket">
-      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div class="d-flex" style="margin-top: 10px; margin-bottom: 20px">
-          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <!--              Dòng 1-->
-            <div class="row" style="margin-top: 5px">
-              <div class="col-sm-12 col-md-6 col-lg-1 col-xl-2">
-                <div style="float: left">Tên khách hàng</div>
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                <input aria-label="Search" style="border: 1px solid #b6effb" class="form-control me-4" type="text"
-                       formControlName="customerName"
-                       id="nameCustomer">
-              </div>
+      <!--              Dòng 1-->
+      <div class="col-md-12 row">
 
-              <div class="col-sm-12 col-md-6 col-lg-1 col-xl-2">
-                <div style="float: left">SĐT khách hàng</div>
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                <input formControlName="customerPhone" aria-label="Search" style="border: 1px solid #b6effb"
-                       class="form-control me-4" type="text">
-              </div>
+        <div class="col-md-1" style="margin-top: 5px;">Tên khách hàng:</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <input aria-label="Search" style="border: 1px solid #b6effb" class="form-control me-2" type="text"
+                 formControlName="customerName"
+                 id="nameCustomer">
+        </div>
 
-              <div class="col-sm-12 col-md-6 col-lg-1 col-xl-2">
-                <div style="float: left">Người tạo vé</div>
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                <input formControlName="employeeName" aria-label="Search" style="border: 1px solid #b6effb"
-                       class="form-control me-4" type="text">
-              </div>
-            </div>
-            <!--              Dòng 2-->
-            <div class="row" style="margin-top: 5px">
-              <div class="col-sm-12 col-md-6 col-lg-1 col-xl-2">
-                <div style="float: left">SĐT người tạo vé</div>
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                <input formControlName="employeePhone" aria-label="Search" style="border: 1px solid #b6effb"
-                       class="form-control me-4" type="text">
-              </div>
+        <div class="col-md-1" style="margin-top: 5px;">SĐT khách hàng</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <input formControlName="customerPhone" aria-label="Search" style="border: 1px solid #b6effb"
+                 class="form-control me-2" type="text">
+        </div>
 
-              <div class="col-sm-12 col-md-6 col-lg-1 col-xl-2">
-                <div style="float: left">Ngày hết
-                  hạn
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                <input formControlName="expiryDate" aria-label="Search" style="border: 1px solid #b6effb"
-                       class="form-control me-4" type="text">
-              </div>
+        <div class="col-md-1" style="margin-top: 5px;">Người tạo vé</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <input formControlName="employeeName" aria-label="Search" style="border: 1px solid #b6effb"
+                 class="form-control me-2" type="text">
+        </div>
+      </div>
+      <!--              Dòng 2-->
+      <div class="col-md-12 row">
 
-              <div class="col-sm-12 col-md-6 col-lg-1 col-xl-2">
-                <div style="float: left">Tầng</div>
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                <select formControlName="floor" aria-label="Search" style="border: 1px solid #b6effb"
-                        class="form-control me-4">
-                  <option selected>-chọn tầng-</option>
-                  <option *ngFor="let floor of floorList" [value]="floor.name">{{floor.name}}</option>
-                </select>
-              </div>
-            </div>
-            <!--              Dòng 3-->
-            <div class="row" style="margin-top: 5px">
-              <div class="col-sm-12 col-md-6 col-lg-1 col-xl-2">
-                <div style="float: left">Loại vé</div>
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                <select formControlName="ticketType" aria-label="Search" style="border: 1px solid #b6effb"
-                        class="form-control me-4">
-                  <option selected>-chọn loại vé-</option>
-                  <option *ngFor="let ticketType of ticketTypeList"
-                          [value]="ticketType.name">{{ticketType.name}}</option>
-                </select>
-              </div>
+        <div class="col-md-1" style="margin-top: 5px;">SĐT người tạo vé</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <input formControlName="employeePhone" aria-label="Search" style="border: 1px solid #b6effb"
+                 class="form-control me-2" type="text">
+        </div>
 
-              <div class="col-sm-12 col-md-6 col-lg-1 col-xl-2">
-                <div style="float: left">Trạng thái</div>
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                <select formControlName="status" aria-label="Search" style="border: 1px solid #b6effb"
-                        class="form-control me-4">
-                  <option selected>--chọn trạng thái--</option>
-                  <option [value]="0">chưa xóa</option>
-                  <option [value]="1">đã xóa</option>
-                  <option [value]="3">hết hạn</option>
-                </select>
-              </div>
+        <div class="col-md-1" style="margin-top: 5px;">Ngày hết hạn
+        </div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <input formControlName="expiryDate" aria-label="Search" style="border: 1px solid #b6effb"
+                 class="form-control me-2" type="text">
+        </div>
 
-              <div class="col-sm-12 col-md-6 col-lg-1 col-xl-2">
-                <button (click)="setStatusSearch()"
-                        class="btn " type="button"
-                        style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                  Tìm kiếm
-                </button>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-1" style="margin-top: 5px;">Tầng</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <select formControlName="floor" aria-label="Search" style="border: 1px solid #b6effb"
+                  class="form-control me-2">
+            <option selected>-chọn tầng-</option>
+            <option *ngFor="let floor of floorList" [value]="floor.name">{{floor.name}}</option>
+          </select>
+        </div>
+      </div>
+      <!--              Dòng 3-->
+      <div class="col-md-12 row">
+
+        <div class="col-md-1" style="margin-top: 5px;">Loại vé</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <select formControlName="ticketType" aria-label="Search" style="border: 1px solid #b6effb"
+                  class="form-control me-2">
+            <option selected>-chọn loại vé-</option>
+            <option *ngFor="let ticketType of ticketTypeList"
+                    [value]="ticketType.name">{{ticketType.name}}</option>
+          </select>
+        </div>
+
+
+        <div class="col-md-1" style="margin-top: 5px;">Trạng thái</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <select formControlName="status" aria-label="Search" style="border: 1px solid #b6effb"
+                  class="form-control me-2">
+            <option selected>--chọn trạng thái--</option>
+            <option [value]="0">chưa xóa</option>
+            <option [value]="1">đã xóa</option>
+            <option [value]="3">hết hạn</option>
+          </select>
+        </div>
+
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <button (click)="setStatusSearch()"
+                  class="btn " type="button"
+                  style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Tìm kiếm
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-4 mb-1">
       <table class="m-0">
         <tr>
-          <td class="p-0 "><button (click)="setStatusFindAll()"
-                                   class="btn" type="button"
-                                   style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
-            Tất cả vé(còn hạn)
-          </button></td>
-          <td class="p-0"><button (click)="setStatusSearchAllExpired()"
-                                  class="btn" type="button"
-                                  style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
-            Vé hết hạn
-          </button></td>
+          <td class="p-0 ">
+            <button (click)="setStatusFindAll()"
+                    class="btn" type="button"
+                    style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
+              Tất cả vé(chưa xóa)
+            </button>
+          </td>
+          <td class="p-0">
+            <button (click)="setStatusSearchAllExpired()"
+                    class="btn" type="button"
+                    style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
+              Vé hết hạn
+            </button>
+          </td>
         </tr>
       </table>
     </div>
@@ -166,7 +150,7 @@
                                          </span>
           </td>
           <td class="a">
-                                         <span routerLink="/ticket/update/{{ticket.ticketId}}">
+                                         <span routerLink="/edit/{{ticket.ticketId}}">
                                              <i class="fa-regular fa-pen-to-square"></i>
                                          </span>
           </td>
@@ -196,7 +180,7 @@
     <div class="row container-fluid">
       <div class="col-4" style="margin-top: 5px">
         <button class="btn" type="button" style="float: left; background-color: darkorange"
-                routerLink="/ticket/create">
+                routerLink="/customer/create">
           Thêm vé
         </button>
       </div>
@@ -207,20 +191,20 @@
           <ul class="pagination" *ngIf="totalPage > 1">
             <li class="page-item">
               <button [ngClass]="{disabled: currentPage === 0 }" style="background-color: darkorange"
-                      (click)="previousPage()" class="page-link" aria-label="Previous">
-                <span aria-hidden="true">Trước</span>
+                      (click)="previousPage()" class="btn" aria-label="Previous">
+                <span aria-hidden="true" style="color: black">Trước</span>
               </button>
             </li>
-            <li class="page-item" *ngFor="let pageNumber of pageNumbersToDisplay">
-              <a class="page-link page" [ngClass]="{currentPage: currentPage + 1 == pageNumber}"
+            <li class="page-item" *ngFor="let pageNumber of pageNumbersToDisplay" >
+              <a style="color: black" class="page-link page" [ngClass]="{currentPage: currentPage + 1 == pageNumber}"
                  (click)="goToPage(pageNumber)">
                 {{ pageNumber === '...' ? pageNumber : pageNumber }}
               </a>
             </li>
             <li class="page-item">
               <button [ngClass]="{disabled: currentPage == totalPage - 1 }" style="background-color: darkorange"
-                      class="page-link page" (click)="nextPage()" aria-label="Next">
-                <span aria-hidden="true">Sau</span>
+                      class="btn" (click)="nextPage()" aria-label="Next">
+                <span aria-hidden="true" style="color: black">Sau</span>
               </button>
             </li>
           </ul>
