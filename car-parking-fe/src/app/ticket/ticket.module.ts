@@ -4,9 +4,12 @@ import { TicketRoutingModule } from './ticket-routing.module';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { TicketUpdateComponent } from './ticket-update/ticket-update.component';
-import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+<<<<<<< HEAD
 import { MyChartComponent } from './my-chart/my-chart.component';
+=======
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
+>>>>>>> origin/car-in-out
 
 
 @NgModule({

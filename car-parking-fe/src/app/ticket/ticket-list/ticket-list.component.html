@@ -1,11 +1,16 @@
 <script src="../../app.module.ts"></script>
 <div class="container-fluid justify-content-center d-flex" style="margin-top: 72px">
-  <div class="p-2">
-    <h1
-      style="size:32px; text-align: center; margin-top: 1rem; margin-bottom: 30px;  font-family: 'Copperplate Gothic Bold'">
-      DANH SÁCH VÉ</h1>
-    <!--                     Tìm kiếm-->
+  <div class="col-c-11">
 
+    <h1 style="size:32px; text-align: center; margin-top: 1rem; margin-bottom: 30px; ">
+      DANH SÁCH VÉ</h1>
+
+    <!--                     Tìm kiếm-->
+    <div *ngIf="formSearchTicket" class="row " [formGroup]="formSearchTicket">
+      <!--              Dòng 1-->
+      <div class="col-md-12 row">
+
+<<<<<<< HEAD
     <div *ngIf="formSearchTicket" class="row ms-2 mb-2 d-flex justify-content-center" [formGroup]="formSearchTicket">
       <div class="col-11">
         <div class="row">
@@ -65,10 +70,89 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
           </div>
+=======
+        <div class="col-md-1" style="margin-top: 5px;">Tên khách hàng:</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <input aria-label="Search" style="border: 1px solid #b6effb" class="form-control me-2" type="text"
+                 formControlName="customerName"
+                 id="nameCustomer">
+        </div>
+
+        <div class="col-md-1" style="margin-top: 5px;">SĐT khách hàng</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <input formControlName="customerPhone" aria-label="Search" style="border: 1px solid #b6effb"
+                 class="form-control me-2" type="text">
+        </div>
+
+        <div class="col-md-1" style="margin-top: 5px;">Người tạo vé</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <input formControlName="employeeName" aria-label="Search" style="border: 1px solid #b6effb"
+                 class="form-control me-2" type="text">
+        </div>
+      </div>
+      <!--              Dòng 2-->
+      <div class="col-md-12 row">
+
+        <div class="col-md-1" style="margin-top: 5px;">SĐT người tạo vé</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <input formControlName="employeePhone" aria-label="Search" style="border: 1px solid #b6effb"
+                 class="form-control me-2" type="text">
+        </div>
+
+        <div class="col-md-1" style="margin-top: 5px;">Ngày hết hạn
+        </div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <input formControlName="expiryDate" aria-label="Search" style="border: 1px solid #b6effb"
+                 class="form-control me-2" type="text">
+        </div>
+
+        <div class="col-md-1" style="margin-top: 5px;">Tầng</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <select formControlName="floor" aria-label="Search" style="border: 1px solid #b6effb"
+                  class="form-control me-2">
+            <option selected>-chọn tầng-</option>
+            <option *ngFor="let floor of floorList" [value]="floor.name">{{floor.name}}</option>
+          </select>
+        </div>
+      </div>
+      <!--              Dòng 3-->
+      <div class="col-md-12 row">
+
+        <div class="col-md-1" style="margin-top: 5px;">Loại vé</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <select formControlName="ticketType" aria-label="Search" style="border: 1px solid #b6effb"
+                  class="form-control me-2">
+            <option selected>-chọn loại vé-</option>
+            <option *ngFor="let ticketType of ticketTypeList"
+                    [value]="ticketType.name">{{ticketType.name}}</option>
+          </select>
+        </div>
+
+
+        <div class="col-md-1" style="margin-top: 5px;">Trạng thái</div>
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <select formControlName="status" aria-label="Search" style="border: 1px solid #b6effb"
+                  class="form-control me-2">
+            <option selected>--chọn trạng thái--</option>
+            <option [value]="0">chưa xóa</option>
+            <option [value]="1">đã xóa</option>
+            <option [value]="3">hết hạn</option>
+          </select>
+        </div>
+
+        <div class="col-md-3" style="margin-left: -0.5%">
+          <button (click)="setStatusSearch()"
+                  class="btn " type="button"
+                  style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Tìm kiếm
+          </button>
+>>>>>>> origin/car-in-out
         </div>
       </div>
     </div>
 
+<<<<<<< HEAD
     <div class="float-end">
       <a (click)="setStatusSearchAllDefault()" class="rounded-pill border-0 my-button badge m-2"
          style="background-color: darkorange; color: #212529;">
@@ -101,39 +185,87 @@
           <th scope="col" style="vertical-align: middle;">Chi tiết</th>
           <th scope="col" style="vertical-align: middle;">Sửa</th>
           <th scope="col" style="vertical-align: middle;">Xóa</th>
+=======
+    <div class="row justify-content-center mt-4 mb-1">
+      <table class="m-0">
+        <tr>
+          <td class="p-0 ">
+            <button (click)="setStatusFindAll()"
+                    class="btn" type="button"
+                    style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
+              Tất cả vé(chưa xóa)
+            </button>
+          </td>
+          <td class="p-0">
+            <button (click)="setStatusSearchAllExpired()"
+                    class="btn" type="button"
+                    style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
+              Vé hết hạn
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!--                   table-->
+    <div class="row justify-content-center">
+      <table class="table table-sm table-bordered table-hover no-spacing"
+             style="table-layout: fixed; box-shadow: 0 0 10px 0 #253365">
+        <thead class="table" style="background-color: #E67E22">
+        <tr>
+          <th scope="col" class="b" style="vertical-align: middle;">STT</th>
+          <th scope="col" class="a" style="vertical-align: middle;">Mã vé</th>
+          <th scope="col" class="a" style="vertical-align: middle;">Biển số xe</th>
+          <th scope="col" class="a" style="vertical-align: middle;">Tên khách hàng</th>
+          <th scope="col" class="a" style="vertical-align: middle;">SĐT khách hàng</th>
+          <th scope="col" class="a" style="vertical-align: middle;">Tên người tạo vé</th>
+          <th scope="col" class="a" style="vertical-align: middle;">SĐT người tạo vé</th>
+          <th scope="col" class="a" style="vertical-align: middle;">Loại vé</th>
+          <th scope="col" class="a" style="vertical-align: middle;">Giá vé</th>
+          <th scope="col" class="a" style="vertical-align: middle;">Tầng</th>
+          <th scope="col" class="a" style="vertical-align: middle;">Thời gian hết hiệu lực</th>
+          <th scope="col" class="a" style="vertical-align: middle;">Chi tiết</th>
+          <th scope="col" class="a" style="vertical-align: middle;">Sửa</th>
+          <th scope="col" class="a" style="vertical-align: middle;">Xóa</th>
+>>>>>>> origin/car-in-out
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let ticket of ticketList; index as i">
-          <th scope="row">{{i}}</th>
-          <td>{{ticket.ticketId}}</td>
-          <td>{{ticket.plateNumber}}</td>
-          <td>{{ticket.customerName}}</td>
-          <td>{{ticket.customerPhoneNumber}}</td>
-          <td>{{ticket.employeeName}}</td>
-          <td>{{ticket.employeePhoneNumber}}</td>
-          <td>{{ticket.ticketType}}</td>
-          <td>{{ticket.totalPrice}}</td>
-          <td>{{ticket.floor}}</td>
-          <td>{{ticket.expiryDate}}</td>
-          <td>
+          <th class="b">{{i}}</th>
+          <td class="a">{{ticket.ticketId}}</td>
+          <td class="a">{{ticket.plateNumber}}</td>
+          <td class="a">{{ticket.customerName}}</td>
+          <td class="a">{{ticket.customerPhoneNumber}}</td>
+          <td class="a">{{ticket.employeeName}}</td>
+          <td class="a">{{ticket.employeePhoneNumber}}</td>
+          <td class="a">{{ticket.ticketType}}</td>
+          <td class="a">{{ticket.totalPrice}}</td>
+          <td class="a">{{ticket.floor}}</td>
+          <td class="a">{{ticket.expiryDate}}</td>
+          <td class="a">
                                          <span routerLink="/ticket/detail/{{ticket.ticketId}}">
-                                             <i class="fa-solid fa-eye" style="color:#3f77ff;"></i>
+                                             <i class="fa-solid fa-eye"></i>
                                          </span>
           </td>
+<<<<<<< HEAD
           <td>
                                          <span routerLink="/edit/{{ticket.ticketId}}">
                                              <i class="fa-regular fa-pen-to-square" style="color:#ef8500;"></i>
+=======
+          <td class="a">
+                                         <span routerLink="/edit/{{ticket.ticketId}}">
+                                             <i class="fa-regular fa-pen-to-square"></i>
+>>>>>>> origin/car-in-out
                                          </span>
           </td>
-          <td>
+          <td class="a">
                                         <span (click)="setInfoDelete(
                                           ticket.ticketId,
                                           ticket.customerName,
                                           ticket.plateNumber,
                                           ticket.expiryDate
                                           )" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                            <i class="fa-regular fa-trash-can" style="color:#ff0000;"></i>
+                                            <i class="fa-regular fa-trash-can"></i>
                                         </span>
           </td>
         </tr>
@@ -148,6 +280,7 @@
         </tbody>
       </table>
     </div>
+<<<<<<< HEAD
     <div class="row m-2">
       <div class="mb-2 col-md-4 col-sm-6" style=" margin-bottom: 20px;margin-top: 5px">
         <!--    more feature-->
@@ -220,9 +353,44 @@
         <button *ngIf="!isTicketExpired" class="my-button "
                 style="background-color: darkorange" data-bs-toggle="modal"
                 data-bs-target="#warning">Xóa
+=======
+
+    <div class="row container-fluid">
+      <div class="col-4" style="margin-top: 5px">
+        <button class="btn" type="button" style="float: left; background-color: darkorange"
+                routerLink="/customer/create">
+          Thêm vé
+>>>>>>> origin/car-in-out
         </button>
       </div>
+      <div class="col-1"></div>
+
+      <div class="col-7" style="margin-top: 5px">
+        <nav aria-label="Page navigation example" style="float: right">
+          <ul class="pagination" *ngIf="totalPage > 1">
+            <li class="page-item">
+              <button [ngClass]="{disabled: currentPage === 0 }" style="background-color: darkorange"
+                      (click)="previousPage()" class="btn" aria-label="Previous">
+                <span aria-hidden="true" style="color: black">Trước</span>
+              </button>
+            </li>
+            <li class="page-item" *ngFor="let pageNumber of pageNumbersToDisplay" >
+              <a style="color: black" class="page-link page" [ngClass]="{currentPage: currentPage + 1 == pageNumber}"
+                 (click)="goToPage(pageNumber)">
+                {{ pageNumber === '...' ? pageNumber : pageNumber }}
+              </a>
+            </li>
+            <li class="page-item">
+              <button [ngClass]="{disabled: currentPage == totalPage - 1 }" style="background-color: darkorange"
+                      class="btn" (click)="nextPage()" aria-label="Next">
+                <span aria-hidden="true" style="color: black">Sau</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
+<<<<<<< HEAD
   </div>
 </div>
 <!-- modal cảnh báo-->
@@ -243,6 +411,73 @@
         <button class="my-button" style="background-color: darkorange"
                 data-bs-dismiss="modal">Close
         </button>
+=======
+
+    <!--modal delete-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa vé</h1>
+            <button type="button" class="btn rounded-pill border-0  border-0 rounded-pill-close"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Bạn có chắc chắn muốn xoá vé dưới đây không
+            </p>
+            <table class="table-delete">
+              <tr>
+                <td>Mã vé</td>
+                <td>Tên khách hàng</td>
+                <td>Biển số xe</td>
+                <td>Thời gian hết hiệu lực</td>
+              </tr>
+              <tr>
+                <td class="text-danger">1</td>
+                <td class="text-danger">Phan Thành Nhân</td>
+                <td class="text-danger">81-H1 20032</td>
+                <td class="text-danger">27/4/2023</td>
+              </tr>
+            </table>
+            <p class="text-danger">Lưu ý: khi xóa sẽ không thể hoàn tác!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn "
+                    style="background-color: #e4e6eb" data-bs-dismiss="modal">Hủy
+            </button>
+            <button *ngIf="isTicketExpired" class="btn"
+                    style="background-color: #e4e6eb" (click)="delete()" data-bs-dismiss="modal">Xóa
+            </button>
+            <button *ngIf="!isTicketExpired" class="btn "
+                    style="background-color: darkorange" data-bs-toggle="modal"
+                    data-bs-target="#warning">Xóa
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- modal cảnh báo-->
+    <div class="modal fade" id="warning" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel2">Cảnh báo</h1>
+            <button type="button" class="btn " data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="text-danger">
+              Vé này chưa hết hạn không thể xóa
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" style="background-color: darkorange"
+                    data-bs-dismiss="modal">Đóng
+            </button>
+          </div>
+        </div>
+>>>>>>> origin/car-in-out
       </div>
     </div>
   </div>

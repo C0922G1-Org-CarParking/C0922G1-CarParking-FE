@@ -1,0 +1,54 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h5,
+.font-primary {
+  font-family: "Raleway", sans-serif;
+}
+
+p {
+  text-align: justify;
+  font-size: 20px;
+}
+
+section {
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: #212529;
+}
+
+
+.head-title,  .head-title  {
+  color: #5c5c5c;
+  font-size: 18px;
+  /*font-weight: bold;*/
+}
+
+.head-title  a:hover{
+  color: #ef7f4d;
+}
+
+
+.section-bg {
+  background-color: #fef8f5;
+}
+
+.section-title {
+  text-align: center;
+  margin-top: 50px;
+  padding-bottom: 30px;
+}
+
+.section-title h2 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #4e4039;
+  margin-top: auto;
+}
