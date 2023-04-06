@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CarInOutComponent } from './car-in-out.component';
+import { HomePageNewsListComponent } from './home-page-news-list.component';
 
-describe('CarInOutComponent', () => {
-  let component: CarInOutComponent;
-  let fixture: ComponentFixture<CarInOutComponent>;
+describe('HomePageNewsListComponent', () => {
+  let component: HomePageNewsListComponent;
+  let fixture: ComponentFixture<HomePageNewsListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CarInOutComponent ]
+      declarations: [ HomePageNewsListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CarInOutComponent);
+    fixture = TestBed.createComponent(HomePageNewsListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,13 +1,12 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {HomePageContentComponent} from './home-page/home-page-content.component';
+import {ErrorPageComponent} from "./error-page/error-page.component";
 
 
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    component: HomePageContentComponent
+    loadChildren: () => import('./home-page/home-page.module').then(module => module.HomePageModule)
   },
   {
     path: 'employee',
@@ -15,10 +14,12 @@ const routes: Routes = [
   }, {
     path: 'customer',
     loadChildren: () => import('./customer/customer.module').then(module => module.CustomerModule)
-  }, {
-    path: 'car',
-    loadChildren: () => import('./car/car.module').then(module => module.CarModule)
-  }, {
+  },
+  // {
+  //   path: 'car',
+  //   loadChildren: () => import('./car/car.module').then(module => module.CarModule)
+  // }
+   {
     path: 'ticket',
     loadChildren: () => import('./ticket/ticket.module').then(module => module.TicketModule)
   }, {
@@ -27,6 +28,9 @@ const routes: Routes = [
   }, {
     path: 'location',
     loadChildren: () => import('./location/location.module').then(module => module.LocationModule)
+  }, {
+    path: '**',
+    component: ErrorPageComponent
   }
 ];
 

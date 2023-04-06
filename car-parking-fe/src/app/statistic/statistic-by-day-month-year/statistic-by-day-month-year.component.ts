@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+
 import Chart from 'chart.js/auto';
 import {registerables} from 'chart.js';
+
 import {TicketService} from "../../service/ticket.service";
 import {CustomerService} from "../../service/customer.service";
 
@@ -9,6 +11,7 @@ Chart.register(...registerables)
 // Chart.defaults.global.defaultFontFamily = 'Lato';
 // Chart.defaults.global.defaultFontSize = 25;
 // Chart.defaults.global.defaultFontColor = '#777';
+
 
 @Component({
   selector: 'app-statistic-by-day-month-year',
@@ -20,6 +23,7 @@ export class StatisticByDayMonthYearComponent implements OnInit {
   ticketList: number[] = []
   customerList: number[] = []
   monthList: string[] = []
+  errorMessage: boolean = false;
 
   constructor(private ticketService: TicketService, private customer: CustomerService) {
   }
@@ -28,30 +32,30 @@ export class StatisticByDayMonthYearComponent implements OnInit {
     this.renderChart();
   }
 
-  statistics(sinceMonthh, toMonthh) {
-    let sinceMonth = parseInt(sinceMonthh)
-    let toMonth = parseInt(toMonthh)
-    this.monthList = []
-    for (let i = sinceMonth; i <= toMonth; i++) {
-      this.monthList.push("Tháng " + i);
+  statistics(sinceMonthh, toMonthh , year) {
+    if (sinceMonthh > toMonthh){
+      return this.errorMessage = true
     }
+      let sinceMonth = parseInt(sinceMonthh)
+      let toMonth = parseInt(toMonthh)
+      this.monthList = []
+      for (let i = sinceMonth; i <= toMonth; i++) {
+        this.monthList.push("Tháng " + i);
+      }
 
-    this.ticketService.getTotalCustomerOfMonth(sinceMonth, toMonth).subscribe((customerList) => {
-      this.customerList = customerList;
-      this.ticketService.getTotalTicketOfMonth(sinceMonth, toMonth).subscribe((ticketList) => {
-        this.ticketList = ticketList;
-        this.renderChart()
-        // });
+      this.ticketService.getTotalCustomerOfMonth(sinceMonth, toMonth , year).subscribe((customerList) => {
+        this.customerList = customerList;
+        this.ticketService.getTotalTicketOfMonth(sinceMonth, toMonth , year).subscribe((ticketList) => {
+          this.ticketList = ticketList;
+          this.renderChart()
+          // });
+        });
       });
-    });
-    debugger
-    console.log(this.monthList)
-    console.log(this.customerList)
-
-
+      debugger
+      console.log(this.monthList)
+      console.log(this.customerList)
   }
 
-  private
 
   renderChart() {
     let myChart = document.getElementById('myChart');
