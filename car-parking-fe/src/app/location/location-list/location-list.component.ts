@@ -86,17 +86,11 @@ export class LocationListComponent implements OnInit {
 
   searchLocation(search: string) {
     this.page = 0;
-    // this.ngOnInit();
+
     this.searchInput = search;
     this.locationList = [];
-    // this.locationService.getAllLocation(this.searchInput, 0).subscribe(data => {
-    //   this.locationList = data['content'];
-    //   this.totalPage = data['totalPages'];
-    //   this.p = data['number'];
-    //   this.size = data['size'];
     this.getAll(this.page);
-    // console.log(data);
-    // });
+
   }
   resetPage(){
 
@@ -115,12 +109,6 @@ export class LocationListComponent implements OnInit {
 
   }
 
-  // delete(id: number) {
-  //   this.locationService.deleteLocation(this.location.id).subscribe(next => {
-  //     Swal.fire('Xóa thành công', '', 'success')
-  //     this.ngOnInit();
-  //   })
-  // }
 
 
   get pageNumbersToDisplay() {
