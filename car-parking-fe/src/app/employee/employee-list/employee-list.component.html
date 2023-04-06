@@ -48,7 +48,7 @@
           <div class="col-md-3">
             <div class="row">
               <div class="col-md-6" style=" margin-left: -4%">
-                <button (click)="getAll()"
+                <button (click)="search()"
                         class="btn" type="button"
                         style="text-align: center; size: 30px; border: 1px solid #b6effb;background-color: darkorange">
                   Tìm kiếm
@@ -70,8 +70,9 @@
     <div class="row justify-content-center">
       <div class="col-12">
         <div class="col-md-12">
-          <h3 *ngIf="message" style="text-align: center; color: red">không tìm thấy dữ liệu</h3>
-          <table class="table table-bordered table-hover text-center"
+          <h3 *ngIf="message" style="text-align: center; color: red">Không tìm thấy dữ liệu!</h3>
+          <table *ngIf="!message"
+            class="table table-bordered table-hover text-center"
                  style="box-shadow: 0 0 10px 0 #253365; margin-top: 20px">
             <thead style="background-color: #E67E22">
             <tr>
@@ -120,12 +121,12 @@
               </button>
             </div>
             <div class="col-md-8"></div>
-            <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px">
+            <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px" *ngIf="!message">
               <nav aria-label="Page navigation example" style="float: right">
                 <ul class="pagination" *ngIf="pageCount > 1">
                   <li class="page-item">
                     <button [ngClass]="{disabled: currentPage === 0 }" style="background-color: darkorange"
-                            (click)="previousPage()" class="page-link outline" aria-label="Previous">
+                            (click)="previousPage()" class="btn" aria-label="Previous">
                       <span aria-hidden="true" style="color: black">Trước</span>
                     </button>
                   </li>
@@ -136,8 +137,8 @@
                     </a>
                   </li>
                   <li class="page-item">
-                    <button [ngClass]="{disabled: currentPage === totalPages - 1 }" style="background-color: darkorange"
-                            class="page-link outline" (click)="nextPage()" aria-label="Next">
+                    <button [ngClass]="{disabled: currentPage === pageCount - 1 }" style="background-color: darkorange"
+                            class="btn" (click)="nextPage()" aria-label="Next">
                       <span aria-hidden="true" style="color: black">Sau</span>
                     </button>
                   </li>
