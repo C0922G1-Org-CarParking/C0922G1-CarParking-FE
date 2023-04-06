@@ -14,14 +14,14 @@
       </div>
       <div class="row portfolio-container">
         <h4 *ngIf="mess" class="row justify-content-center">{{mess}}</h4>
-        <div class="card mb-3 m-0 p-0" style="max-width: 100%; box-shadow: 0 0 5px 0 #253365;" *ngFor="let pn of parkingNews">
+        <div class="card mb-3 m-0 p-1" style="max-width: 100%; box-shadow: 0 0 5px 0 #253365;" *ngFor="let pn of parkingNews">
           <div class="row g-0">
             <div class="col-md-2 portfolio-wrap">
               <img src="{{pn.imageUrl}}" class="img-fluid"
                    style="object-fit: contain; border-radius: 8px; text-align: center" alt="">
             </div>
             <div class="col-md-10">
-              <div class="card-body p-0">
+              <div class="card-body p-1">
                 <a class="text-decoration-none" target="_blank" [routerLink]="['/homepage/detail/', pn.parkingNewsId]">
                   <h5 class="card-title text-black" style="margin: 10px 10px">{{pn.title}}</h5>
                 </a>
