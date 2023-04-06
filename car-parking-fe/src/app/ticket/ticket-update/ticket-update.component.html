@@ -1,9 +1,3 @@
-<!--  <div class="container">-->
-<!--    <div class="row d-flex justify-content-center align-items-center h-100" style="margin-left:10%;margin-right:10%;">-->
-<!--      <div class="card" style="border-radius: 1%;box-shadow: 0 0 15px 0 #253365 ">-->
-<!--        <div class="card-body"-->
-
-
 <div style="margin-top: 7%;margin-bottom:1%">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -14,6 +8,7 @@
             <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px">CHỈNH
               SỬA VÉ</h1>
             <div class="row d-flex">
+
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
                   <label style="font-weight: bold">Tên khách hàng:<b
@@ -22,7 +17,6 @@
                 <div class="col-8">
                   <input class="form-control" type="text" readonly formControlName="customerName">
                 </div>
-
               </div>
 
               <div class="row align-items-center py-3 col-6">
@@ -34,9 +28,11 @@
                   <input class="form-control" type="text" readonly formControlName="plateNumber">
                 </div>
               </div>
+
             </div>
 
             <div class="row d-flex">
+
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
                   <label style="font-weight: bold">Số điện thoại:<b
@@ -47,7 +43,6 @@
                 </div>
               </div>
 
-
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
                   <label style="font-weight: bold" class="mb-0">Thời gian bắt đầu:<b
@@ -57,9 +52,11 @@
                   <input class="form-control" type="date" readonly formControlName="effectiveDate">
                 </div>
               </div>
+
             </div>
 
             <div class="row ">
+
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
                   <label style="font-weight: bold">Thời gian kết thúc: <b
@@ -69,6 +66,7 @@
                   <input class="form-control" type="date" readonly formControlName="expiryDate">
                 </div>
               </div>
+
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
                   <label style="font-weight: bold" class="mb-0">Tầng: <b
@@ -83,7 +81,6 @@
                 </div>
               </div>
             </div>
-
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
@@ -107,7 +104,8 @@
                 </div>
                 <div class="col-8">
                   <p *ngIf="!sectionList" style="color: red">* Vui lòng chọn tầng</p>
-                  <select *ngIf="sectionList" (focus)="getListLocationOfFloor(floor.value,section.value)" #section class="form-select"
+                  <select *ngIf="sectionList" (focus)="getListLocationOfFloor(floor.value,section.value)" #section
+                          class="form-select"
                           formControlName="floorId">
                     <option disabled value="" selected>---Chọn dãy---</option>
                     <option *ngFor="let section of sectionList" [value]="section.id">{{section.name}}</option>
@@ -124,7 +122,8 @@
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-8">
-                  <input #element (change)="getRenewalPrice(element.value)" [value]="newExpiryDate" class="form-control"
+                  <p *ngIf="!newExpiryDate" style="color: red">*Vui lòng chọn loại vé</p>
+                  <input *ngIf="newExpiryDate" #element (change)="getRenewalPrice(element.value)" [value]="newExpiryDate" class="form-control"
                          readonly type="text">
                 </div>
 
@@ -153,7 +152,7 @@
                   <label style="font-weight: bold">Giá(VNĐ):<b style="color: red">*</b></label>
                 </div>
                 <div class="col-8">
-                  <input [value]="priceNew| number" class="form-control" formControlName="priceNew" type="text"
+                  <input [value]="priceNew" class="form-control" type="text"
                          readonly>
                 </div>
 
@@ -171,7 +170,7 @@
               <div class="row align-items-center py-3 col-6">
               </div>
               <div align="center" class="px-5 py-4">
-                <button routerLink="/ticket/list" type="button" class="btn" style="background-color: #e4e6eb">Quay lại</button>
+                <button type="button" class="btn" style="background-color: #e4e6eb">Quay lại</button>
                 <button type="submit" class="btn" data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
                         style="background-color: darkorange;margin-left: 10px">Lưu thay đổi
@@ -189,27 +188,6 @@
 
 <div class="col-2"></div>
 
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--  <div class="modal-dialog">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>-->
-<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        Bạn có muốn lưu chỉnh sửa thông tin vé hay không ?-->
-<!--      </div>-->
-<!--      <div class="modal-footer">-->
-<!--        <button type="submit" class="btn m-4 w-25" data-bs-dismiss="modal" style="background-color: #e4e6eb">-->
-<!--          Hủy-->
-<!--        </button>-->
-<!--        <button type="button" class="btn m-4 w-25" data-bs-dismiss="modal" style="background-color: darkorange">-->
-<!--          Có-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 
 
 

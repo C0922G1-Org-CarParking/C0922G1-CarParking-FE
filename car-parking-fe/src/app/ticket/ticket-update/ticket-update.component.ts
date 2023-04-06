@@ -26,8 +26,9 @@ export class TicketUpdateComponent implements OnInit {
   editTicketForm: FormGroup;
   floorList: Floor[];
   ticketTypeList: TicketType[];
-  newExpiryDate = '';
+  newExpiryDate: string;
   ticketTypeUpdate: Updateticket;
+  containerExpiryDate: any;
   locationList: ILocation[];
   sectionList: Section[];
   id: number;
@@ -37,7 +38,6 @@ export class TicketUpdateComponent implements OnInit {
               private ticketTypeService: TicketTypeService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
-
   }
 
   ngOnInit(): void {
@@ -101,7 +101,7 @@ export class TicketUpdateComponent implements OnInit {
       };
       this.ticketService.updateTicketType(ticketEdit).subscribe(next => {
         this.router.navigateByUrl('/list');
-        alert('Ok ddi veef');
+        // alert('Ok ddi veef');
       }, error => {
         alert('lỗi');
       });
@@ -157,6 +157,7 @@ export class TicketUpdateComponent implements OnInit {
     }
     let year = newDate.getFullYear();
     let newExpiryDateFormatted = year + '-' + month + '-' + date;
+    this.containerExpiryDate = newExpiryDateFormatted;
     this.getRenewalPrice(newExpiryDateFormatted);
   }
 }
