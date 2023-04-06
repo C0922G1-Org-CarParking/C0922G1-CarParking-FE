@@ -15,8 +15,10 @@ import {TicketTypeService} from "../../service/ticket-type.service";
 import {Customer} from "../../model/customer";
 import {Ticket} from "../../model/ticket";
 import {ActivatedRoute, Router} from "@angular/router";
-// import {Subscription} from "rxjs";
-
+import {CurrencyPipe} from '@angular/common';
+import Swal from 'sweetalert2'
+import {Section} from "../../model/section";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-ticket-create',
@@ -40,37 +42,65 @@ export class TicketCreateComponent implements OnInit {
   enableChooseCar: boolean = false;
   locationInfo: Location;
   locationInfoName: any;
-  rate:any
-  priceTotal :any
-  effectiveDate:any
-  expiryDate:any
+  rate: any
+  priceTotal: any
+  effectiveDate: any
+  expiryDate: any
+  messCar: boolean = true
+  floorId: any
+  sectionId: any
+  chooseEnableLocation:boolean = false
 
 
-  constructor(private router: Router,
-              private ticketService: TicketService,
-              private employeeService: EmployeeService,
-              private customerService: CustomerService,
-              private locationService: LocationService,
-              private floorService: FloorService,
-              private ticketTypeService: TicketTypeService,
-              private activatedRoute: ActivatedRoute,
-              ) {
+  constructor(
+    private router: Router,
+    private ticketService: TicketService,
+    private employeeService: EmployeeService,
+    private customerService: CustomerService,
+    private locationService: LocationService,
+    private floorService: FloorService,
+    private ticketTypeService: TicketTypeService,
+    private activatedRoute: ActivatedRoute,
+  ) {
+    this.ticketCreateForm = new FormGroup({
+      id: new FormControl(),
+      effectiveDate: new FormControl(this.ticket?.effectiveDate, [Validators.required]),
+      expiryDate: new FormControl(this.ticket?.expiryDate, [Validators.required]),
+      isDeleted: new FormControl(0),
+      price: new FormControl(15000, [Validators.required]),
+      totalPrice: new FormControl(this.ticket?.totalPrice, [Validators.required]),
+      ticketType: new FormControl(this.ticket?.ticketType, [Validators.required]),
+      location: new FormControl(this.ticket?.location, [Validators.required]),
+      car: new FormControl(this.ticket?.car, [Validators.required]),
+      employee: new FormControl(this.ticket?.employee, [Validators.required]),
+    },{ validators: this.validateDateRange })
+
+  }
+
+  validateDateRange(formGroup: FormGroup) {
+    const effectiveDate = moment(formGroup.get('effectiveDate').value, 'YYYY-MM-DD');
+    const expiryDate = moment(formGroup.get('expiryDate').value, 'YYYY-MM-DD');
+    if (effectiveDate > expiryDate) {
+      formGroup.get('expiryDate').setErrors({ invalidDateRange: true });
+      return { invalidDateRange: true };
+    } else {
+      formGroup.get('expiryDate').setErrors(null);
+      return null;
+    }
   }
 
   ngOnInit(): void {
-
-    this.employeeService.listEmployee().subscribe(data => {
+    this.ticketService.listEmployee().subscribe(data => {
       this.employeeList = data
     })
-    this.locationService.listLocation().subscribe(data => {
-      this.locationList = data
-    })
-    this.floorService.listFloor().subscribe(data => {
+    this.ticketService.listFloor().subscribe(data => {
       this.floorList = data
+      this.ticketTypeService.getAllTicketType().subscribe(data => {
+        this.ticketTypeList = data
+      })
     })
-    this.ticketTypeService.listTicketType().subscribe(data => {
-      this.ticketTypeList = data
-    })
+
+
     this.activatedRoute.paramMap.subscribe(data => {
       const id = data.get('id');
       if (id != null) {
@@ -85,48 +115,37 @@ export class TicketCreateComponent implements OnInit {
     //   }
     // })
 
-    this.ticketCreateForm = new FormGroup({
-      // id: new FormControl(),
-      effectiveDate: new FormControl(this.ticket?.effectiveDate,[Validators.required]),
-      expiryDate: new FormControl(this.ticket?.expiryDate,[Validators.required]),
-      isDeleted: new FormControl(0),
-      price: new FormControl(15000,[Validators.required]),
-      totalPrice: new FormControl(this.ticket?.totalPrice,[Validators.required]),
-      ticketType: new FormControl(this.ticket?.ticketType,[Validators.required]),
-      location: new FormControl(this.ticket?.location,[Validators.required]),
-      car: new FormControl(this.ticket?.car,[Validators.required]),
-      employee: new FormControl(this.ticket?.employee,[Validators.required]),
-    })
-
   }
-location:ILocation;
+
+
+  location: ILocation;
 
   createTicket() {
-    this.ticket = this.ticketCreateForm.value
-    if (this.ticket) {
-      let temp = this.ticketService.createTicket(this.ticket).subscribe(ok => {
-        if (ok && temp)
-          alert('Thêm mới thành công')
+    if (this.ticketCreateForm.valid) {
+      this.ticket = this.ticketCreateForm.value
+      this.ticketService.createTicket(this.ticket).subscribe(ok => {
+        debugger
+        // alert('Thêm mới thành công')
+        Swal.fire('Thêm mới thành công', '', 'success')
+        this.ticketCreateForm.reset()
         this.router.navigateByUrl('/ticket/create');
       });
     } else {
-      alert('Vui lòng kiểm tra lại thông tin');
+      Swal.fire('Thêm mới thất bại', '', 'error')
     }
-
-
   }
 
   searchCustomerByName(name: string) {
     if (name) {
       this.customerService.searchName(name).subscribe(data => {
+        debugger
         this.customerList = data;
         this.router.navigateByUrl("/ticket/create")
         // this.ngOnInit()
       })
     } else {
-      alert("Không tìm thấy tên khách hàng")
+      Swal.fire('Không tìm thấy tên khách hàng', '', 'error')
       this.customerList = []
-      this.router.navigateByUrl("/ticket/create")
     }
   }
 
@@ -142,10 +161,10 @@ location:ILocation;
 
 
   private getCarListOfCustomerById(id: number) {
-    this.customerService.getCarListOfCustomerById(id).subscribe(data =>{
+    this.customerService.getCarListOfCustomerById(id).subscribe(data => {
       this.carList = data
+      this.messCar = false
       this.enableChooseCar = true
-
     })
   }
 
@@ -155,19 +174,16 @@ location:ILocation;
   //     this.locationInfoName = this.locationInfo.name
   //   })
   // }
-  getRate(value: string) {
-    let idCar = parseInt(value)
-    this.ticketService.findRateByIdCar(idCar).subscribe(data =>{
-      this.rate = data
-      console.log(this.rate)
-      this.getPrice(this.effectiveDate,this.expiryDate,this.rate);
-    })
-  }
+  sectionList: Section[];
+
+
+
 
   getPrice(effectiveDate: string, expiryDate: string, rate: any) {
-    if(effectiveDate != null && expiryDate != null && rate != null){
-      this.ticketService.getPrice(effectiveDate,expiryDate,rate).subscribe(data =>{
-        this.priceTotal = data
+    if (effectiveDate != null && expiryDate != null && rate != null) {
+      this.ticketService.getPrice(effectiveDate, expiryDate, rate).subscribe(data => {
+        this.priceTotal = data;
+        // this.currencyPipe.transform(data,this.priceTotal, 'VND ', '1.0-3')
         debugger
       })
     }
@@ -175,12 +191,39 @@ location:ILocation;
 
   getEffectiveDate(value: string) {
     this.effectiveDate = value;
-    this.getPrice(this.effectiveDate,this.expiryDate,this.rate);
+    this.getPrice(this.effectiveDate, this.expiryDate, this.rate);
   }
 
   expiryDates(value: string) {
     this.expiryDate = value;
-    this.getPrice(this.effectiveDate,this.expiryDate,this.rate);
+    this.getPrice(this.effectiveDate, this.expiryDate, this.rate);
 
+  }
+
+  getListSectionById(floorId: string) {
+    this.floorId = parseInt(floorId)
+    debugger
+    this.ticketTypeService.getListSectionById(this.floorId).subscribe(data => {
+      this.sectionList = data
+    })
+  }
+
+  getSectionId(value: string) {
+    this.sectionId = parseInt(value)
+    this.ticketService.listLocation(this.floorId, this.sectionId).subscribe(data => {
+      this.locationList = data
+      this.chooseEnableLocation = true
+    })
+  }
+
+  getRate($event: Event) {
+    let idCar = this.ticketCreateForm.get('car').value;
+    console.log(idCar)
+    this.ticketService.findRateByIdCar(idCar.id).subscribe(data => {
+      console.log(data)
+      this.rate = data
+      console.log(this.rate)
+      this.getPrice(this.effectiveDate, this.expiryDate, this.rate);
+    })
   }
 }

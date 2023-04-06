@@ -1,6 +1,12 @@
-<div class="error-container">
-  <h1>Oops!</h1>
-  <p>Something went wrong.</p>
-  <p>Please try again later.</p>
-  <button routerLink="/">Go to Home</button>
+<div class="error-container" [hidden]="isLoggedIn">
+  <h1>Lỗi!</h1>
+  <p>Đường dẫn này hiện đang hạn chế quyền truy cập.</p>
+  <p>Xin vui lòng thử lại sau.</p>
+  <button routerLink="/">Trở về trang chủ</button>
+</div>
+<div class="error-container" [hidden]="!isLoggedIn">
+  <h1>Lỗi!</h1>
+  <p>Đường dẫn này hiện đang hạn chế quyền truy cập.</p>
+  <p>Xin vui lòng thử lại sau.</p>
+  <button routerLink="/">Trở về trang chủ</button>
 </div>

@@ -1,14 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ICarInOut} from '../../model/i-car-in-out';
 import {CarInOutService} from '../../service/car-in-out.service';
-import {CarInOut} from '../../model/car-in-out';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
-
-// @ts-ignore
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
-import {isFromDtsFile} from "@angular/compiler-cli/src/ngtsc/util/src/typescript";
 
 @Component({
   selector: 'app-car-out',
@@ -18,10 +14,11 @@ import {isFromDtsFile} from "@angular/compiler-cli/src/ngtsc/util/src/typescript
 export class CarOutComponent implements OnInit {
   carOut: ICarInOut;
   plateNumberImage?: File;
-  timeOut?: any;
+  timeOut = '';
   now: any;
-  urlCarOutImage: string;
+  urlCarOutImage = '../../../../assets/car-images/default.png';
   dataList: ICarInOut[];
+  listEmpty: string;
 
   constructor(private carInOutService: CarInOutService,
               private router: Router,
@@ -30,75 +27,113 @@ export class CarOutComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.searchCarOut('', '', '');
   }
 
   onUpload(event) {
     this.plateNumberImage = event.target.files[0];
+    const allowedFileTypes = ['image/jpeg', 'image/png'];
+    if (allowedFileTypes.indexOf(this.plateNumberImage.type) === -1) {
+      Swal.fire({
+        title: 'Tập tin không hợp lệ',
+        text: 'Vui lòng tải lại file ảnh đuôi .jpg hoặc .png',
+        icon: 'error',
+        confirmButtonText: 'Xác nhận',
+        confirmButtonColor: 'darkorange'
+      });
+      return;
+    }
+
     const imageFormData = new FormData();
     imageFormData.append('plateNumberImage', this.plateNumberImage, this.plateNumberImage.name);
     if (this.plateNumberImage != null) {
       const filePath = this.plateNumberImage.name;
       const fileRef = this.storage.ref(filePath);
-      this.storage.upload(filePath, this.plateNumberImage).snapshotChanges().pipe(
-        finalize(() => (fileRef.getDownloadURL().subscribe(url => {
-          this.urlCarOutImage = url;
-          console.log('Đây là đường dẫn ' + this.urlCarOutImage);
-        })))
-      ).subscribe();
+      this.carInOutService.searchCarOutByScanning(imageFormData).subscribe(carOut => {
+        this.carOut = carOut;
+        const options2 = {
+          timeZone: 'Asia/Ho_Chi_Minh',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour12: false
+        };
+        let effectiveDate = new Date(this.carOut.ticketEffectiveDate).toLocaleString('vi-VN', options2);
+        let expiryDate = new Date(this.carOut.ticketExpiryDate).toLocaleString('vi-VN', options2);
+        this.carOut.ticketEffectiveDate = effectiveDate;
+        this.carOut.ticketExpiryDate = expiryDate;
+
+        const options = {
+          timeZone: 'Asia/Ho_Chi_Minh',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+          hour12: false
+        };
+        this.storage.upload(filePath, this.plateNumberImage).snapshotChanges().pipe(
+          finalize(() => (fileRef.getDownloadURL().subscribe(url => {
+            this.urlCarOutImage = url;
+          })))
+        ).subscribe();
+        const now = new Date();
+        this.timeOut = now.toLocaleString('vi-VN', options);
+        console.log(carOut);
+      }, error => {
+        // car existing but ticket expiring
+        if (error.status === 404) {
+          Swal.fire({
+            title: 'Vé xe đã quá hạn!',
+            text: 'Vui lòng liên hệ phòng vé để đóng phí quá hạn hoặc gia hạn vé!',
+            icon: 'warning',
+            confirmButtonText: 'Xác nhận',
+            confirmButtonColor: 'darkorange'
+          });
+        }
+        // the system unable able to scan the image => numberPlate being null
+
+        if (error.status === 406) {
+          Swal.fire({
+            title: 'Không quét được biển số',
+            text: 'Vui lòng ấn nút tìm xe',
+            icon: 'error',
+            confirmButtonText: 'Xác nhận',
+            confirmButtonColor: 'darkorange'
+          });
+        }
+        // the system error
+        if (error.status === 500) {
+          Swal.fire({
+            title: 'Lỗi hệ thống! Không nhận được file hoặc hệ thống trục trặc',
+            text: 'Vui lòng thử ấn vào nút tìm xe!',
+            icon: 'error',
+            confirmButtonText: 'Xác nhận',
+            confirmButtonColor: 'darkorange'
+
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: 'Tập tin không hợp lệ',
+        text: 'Vui lòng tải lại',
+        icon: 'error',
+        confirmButtonText: 'Xác nhận',
+        confirmButtonColor: 'darkorange'
+      });
     }
-    this.carInOutService.searchCarOutByScanning(imageFormData).subscribe(carOut => {
-      this.carOut = carOut;
-      const options = {
-        timeZone: 'Asia/Ho_Chi_Minh',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: false
-      };
-      // carOut.timeIn = localDate.toLocaleString('vi-VN', options);
-      const now = new Date();
-      this.timeOut = now.toLocaleString('vi-VN', options);
-      console.log(carOut);
-    }, error => {
-      // car not existing in database
-      if (error.status === 404) {
-        Swal.fire({
-          title: 'Không tìm thấy xe',
-          text: 'Vé đã hết hạn, vui lòng liên hệ phòng vé để bổ sung phí hoặc gia hạn vé!',
-          icon: 'question',
-          confirmButtonText: 'Xác nhận'
-        });
-      }
-      // the system is not able to scan the image
-      if (error.status === 406) {
-        Swal.fire({
-          title: 'Không quét được biển số',
-          text: 'Vui lòng ấn vào tìm xe',
-          icon: 'question',
-          confirmButtonText: 'Xác nhận'
-        });
-      }
-      // the system error
-      if (error.status === 500) {
-        Swal.fire({
-          title: 'Lỗi hệ thống',
-          text: 'Không nhận được file hoặc hệ thống trục trặc, vui lòng thử cách khác!',
-          icon: 'error',
-          confirmButtonText: 'Xác nhận'
-        });
-      }
-    });
   }
 
   saveCarOut() {
+    debugger
     // car's data is not found
     if (this.carOut == null) {
       let timerInterval;
       Swal.fire({
-        title: 'Vui lòng tìm dữ liệu xe!',
+        icon: 'warning',
+        title: 'Vui lòng tìm dữ liệu xe trước khi lưu!',
         html: 'Tự động đóng trong <b></b> ms.',
         timer: 2000,
         timerProgressBar: true,
@@ -123,7 +158,10 @@ export class CarOutComponent implements OnInit {
     const carOut = {
       id: this.carOut.carInOutId,
       timeOut: this.timeOut,
-      urlCarOutImage: this.urlCarOutImage
+      urlCarOutImage: this.urlCarOutImage,
+      carDTO: {
+        id: this.carOut.carId
+      }
     };
     console.log(carOut);
     this.carInOutService.saveCarOut(carOut).subscribe(() => {
@@ -131,32 +169,53 @@ export class CarOutComponent implements OnInit {
         title: 'Lưu thành công!',
         text: 'Xin mời xe ra',
         icon: 'success',
-        confirmButtonText: 'Xác nhận'
+        confirmButtonText: 'Xác nhận',
+        confirmButtonColor: 'darkorange'
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
+      this.carOut = null;
+      this.timeOut = '';
+      this.urlCarOutImage = null;
+      this.ngOnInit();
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 3000);
     }, error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi hệ thống',
+        text: 'Vui lòng liên nhân viên kĩ thuật!'
+      });
     });
   }
-  searchCarOut(carPlateNumber: string,
-               customerName: string,
-               customerPhoneNumber: string) {
 
-    this.carInOutService.searchCarOut(carPlateNumber, customerName, customerPhoneNumber).subscribe(carInList => {
+  searchCarOut(customerName: string, customerPhoneNumber: string, carPlateNumber: string) {
+    this.listEmpty = null;
+    this.carInOutService.searchCarOut(customerName, customerPhoneNumber, carPlateNumber).subscribe(carInList => {
       console.log(carInList);
       this.dataList = carInList;
-    })
+    }, error => {
+      this.listEmpty = 'Danh sách trống.';
+    });
   }
 
   selectCar(carId: number) {
     for (let i = 0; i < this.dataList.length; i++) {
-      debugger
       if (this.dataList[i].carId == carId) {
         this.carOut = this.dataList[i];
-        console.log(this.carOut);
         return;
       }
     }
+    const options = {
+      timeZone: 'Asia/Ho_Chi_Minh',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: false
+    };
+    const now = new Date();
+    this.timeOut = now.toLocaleString('vi-VN', options);
   }
 }

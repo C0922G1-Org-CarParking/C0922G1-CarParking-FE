@@ -20,18 +20,18 @@ export class CustomerService {
   }
 
   searchName(name: string): Observable<Customer[]> {
-    return this.http.get<Customer[]>('http://localhost:8080/ticket/listSearchCustomer?name=' + name);
+    return this.http.get<Customer[]>('http://localhost:8080/api/user/ticket/listSearchCustomer?name=' + name);
   }
 
   findCustomerById(id: number) {
-    return this.http.get<Customer>('http://localhost:8080/ticket/chooseCustomer/' + id);
+    return this.http.get<Customer>('http://localhost:8080/api/user/ticket/chooseCustomer/' + id);
   }
 
   getCarListOfCustomerById(id: number):Observable<Car[]> {
-    return this.http.get<Car[]>('http://localhost:8080/ticket/findCarListOfCustomerId/' + id);
+    return this.http.get<Car[]>('http://localhost:8080/api/user/ticket/findCarListOfCustomerId/' + id);
   }
   findByCustomerId(customerId: number): Observable<Customer> {
-    return this.http.get<Customer>('http://localhost:8080/customer/info/' + customerId);
+    return this.http.get<Customer>('http://localhost:8080/api/user/customer/info/' + customerId);
   }
 
   createCustomer(customer: Customer, cars: Car[]) {
@@ -40,7 +40,7 @@ export class CustomerService {
       carDtos: cars
     };
     console.log(data);
-    return this.http.post<any>('http://localhost:8080/customer/create', data);
+    return this.http.post<any>('http://localhost:8080/api/user/customer/create', data);
   }
 
   /**
@@ -51,11 +51,11 @@ export class CustomerService {
 
   updateCustomer(id: number, customerAndCar: CustomerAndCar): Observable<CustomerAndCar> {
 
-    return this.http.put<CustomerAndCar>(`http://localhost:8080/customer/update/${id}`, customerAndCar);
+    return this.http.put<CustomerAndCar>(`http://localhost:8080/api/user/customer/update/${id}`, customerAndCar);
   }
 
   findCustomerVuById(id: number): Observable<CustomerVu> {
-    return this.http.get<CustomerVu>('http://localhost:8080/customer/findCustomer/' + id);
+    return this.http.get<CustomerVu>('http://localhost:8080/api/user/customer/findCustomer/' + id);
   }
 
 
@@ -72,19 +72,16 @@ export class CustomerService {
   }
 
   getAll(name: string, idCard: string, phoneNumber: string, starDate: string, endDate: string, page: number, pageSize: number): Observable<Page<Customer>> {
-    return this.http.get<Page<Customer>>('http://localhost:8080/customer/list?page=' + page + '&pageSize=' + pageSize
+    return this.http.get<Page<Customer>>('http://localhost:8080/api/user/customer/list?page=' + page + '&pageSize=' + pageSize
       + '&name=' + name + '&idCard=' + idCard + '&phoneNumber=' + phoneNumber + '&starDate=' + starDate + '&endDate=' + endDate);
-  }
-  customerConfirmDelete(id: number): Observable<string> {
-    return this.http.get<string>('http://localhost:8080/customer/delete/' + id);
   }
 
   sendEmail(toMail: string, id: number): Observable<string> {
-    return this.http.post<string>('http://localhost:8080/customer/send?to=' + toMail, id);
+    return this.http.post<string>('http://localhost:8080/api/user/customer/send?to=' + toMail, id);
   }
 
   deleteCustomer(id: number): Observable<string> {
-    return this.http.delete<string>('http://localhost:8080/customer/' + id + '/delete');
+    return this.http.delete<string>('http://localhost:8080/api/user/customer/' + id + '/delete');
   }
 
 }

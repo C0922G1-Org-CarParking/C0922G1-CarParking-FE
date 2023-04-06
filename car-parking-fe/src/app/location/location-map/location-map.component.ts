@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {LocationService} from "../../service/location.service";
-import {ILocation} from "../../model/ilocation";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FloorService} from "../../service/floor.service";
-import {Floor} from "../../model/floor";
+import {LocationService} from '../../service/location.service';
+import {ILocation} from '../../model/ilocation';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FloorService} from '../../service/floor.service';
+import {Floor} from '../../model/floor';
 
 @Component({
   selector: 'app-location-map',
@@ -16,14 +16,15 @@ export class LocationMapComponent implements OnInit {
   flag = false;
   checkError = false;
   locationEmpty = 0;
-  totalPage :Floor [];
+  totalPage: Floor [];
   showDetailLocation: String;
-  maxFloor:number
-  check : number;
-  constructor(private locationService: LocationService, private route: Router, private floorService: FloorService, private activatedRoute:ActivatedRoute) {
-    this.activatedRoute.paramMap.subscribe(param =>{
-      this.check= +param.get('id');
-    })
+  maxFloor: number;
+  check: number;
+
+  constructor(private locationService: LocationService, private route: Router, private floorService: FloorService, private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.paramMap.subscribe(param => {
+      this.check = +param.get('id');
+    });
   }
 
   ngOnInit(): void {
@@ -34,8 +35,8 @@ export class LocationMapComponent implements OnInit {
   findMaxFloor() {
     this.floorService.getAllFloor().subscribe(param => {
       this.totalPage = param;
-      this.maxFloor=param.length+1;
-    })
+      this.maxFloor = param.length + 1;
+    });
   }
 
   findAllLocationInFloor() {
@@ -48,18 +49,18 @@ export class LocationMapComponent implements OnInit {
       this.listLocation = null;
       this.checkError = true;
 
-    })
+    });
 
   }
 
   redirectLink(id: number, occupied: boolean) {
     if (occupied) {
-      this.route.navigateByUrl('/location/detail/' + id)
+      this.route.navigateByUrl('/location/detail/' + id);
     } else {
-      if(this.check !=0){
-        this.route.navigateByUrl('/ticket/update/' +this.check+ '/'+id)
-      }else if(this.check==0) {
-        this.route.navigateByUrl('/ticket/create/'+ id)
+      if (this.check != 0) {
+        this.route.navigateByUrl('/ticket/update/' + this.check + '/' + id);
+      } else if (this.check == 0) {
+        this.route.navigateByUrl('/ticket/create/' + id);
       }
 
     }
@@ -85,13 +86,13 @@ export class LocationMapComponent implements OnInit {
   }
 
   show(length: number, width: number, height: number) {
-    this.showDetailLocation = "Chiều dài : " + length + " m" +
-      "\nChiều rộng : " + width + " m" +
-      "\nChiều cao : " + height + "m";
+    this.showDetailLocation = 'Chiều dài : ' + length + ' m' +
+      '\nChiều rộng : ' + width + ' m' +
+      '\nChiều cao : ' + height + 'm';
   }
 
   hiddenInformation() {
-    this.showDetailLocation = ""
+    this.showDetailLocation = '';
   }
 
   pageChange(page: number) {

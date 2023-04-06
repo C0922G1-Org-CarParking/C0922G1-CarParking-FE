@@ -12,8 +12,8 @@ const API_URL = `${environment.apiUrl}`;
 })
 
 export class EmployeeService {
-  private apiList = 'http://localhost:8080/api/list-employee';
-  private apiDelete = 'http://localhost:8080/api/';
+  private apiList = 'http://localhost:8080/api/admin/list-employee';
+  private apiDelete = 'http://localhost:8080/api/admin/';
 
 
   constructor(private http: HttpClient) {
@@ -26,7 +26,7 @@ export class EmployeeService {
    * @return status Ok
    */
   addEmployee(employee: Employee) {
-    return this.http.post('http://localhost:8080/api/create-employee', employee);
+    return this.http.post('http://localhost:8080/api/admin/create-employee', employee);
   }
 
   /**
@@ -36,7 +36,7 @@ export class EmployeeService {
    * @return id
    */
   findById(id: number): Observable<Employee> {
-    return this.http.get<Employee>('http://localhost:8080/api/' + id);
+    return this.http.get<Employee>('http://localhost:8080/api/admin/' + id);
   }
 
   /**
@@ -46,7 +46,7 @@ export class EmployeeService {
    * @return status Ok
    */
   editEmployee(value: any) {
-    return this.http.patch('http://localhost:8080/api/update-employee/' + value.id, value);
+    return this.http.patch('http://localhost:8080/api/admin/update-employee/' + value.id, value);
   }
 
 
@@ -128,6 +128,6 @@ export class EmployeeService {
   }
 
   listEmployee(): Observable<Employee[]> {
-    return this.http.get<Employee[]>('http://localhost:8080/ticket/listEmployee');
+    return this.http.get<Employee[]>('http://localhost:8080/api/user/ticket/listEmployee');
   }
 }

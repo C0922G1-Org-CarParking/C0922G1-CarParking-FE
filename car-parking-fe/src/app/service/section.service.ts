@@ -13,9 +13,9 @@ export class SectionService {
   constructor(private http: HttpClient) {
   }
   getAllSection(floor: number): Observable<any> {
-    return this.http.get<any>("http://localhost:8080/section?floor=" + floor);
+    return this.http.get<any>("http://localhost:8080/api/user/section?floor=" + floor);
   }
   getAllSection1(): Observable<any> {
-    return this.http.get<any>("http://localhost:8080/section/list");
+    return this.http.get<any>("http://localhost:8080/api/user/section/list");
   }
 }

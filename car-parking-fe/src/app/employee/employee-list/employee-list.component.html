@@ -1,3 +1,4 @@
+
 <div style="margin-top: 7%">
   <div class="container-fluid">
     <div class="row justify-content-center mt-5 mb-3">
@@ -25,11 +26,10 @@
             <input class="form-control me-2" type="text"
                    style="border: 1px solid #b6effb; width: 100%" name="nameSearch" [(ngModel)]="nameSearch">
           </div>
-          <!--          <div class="col-md-2"></div>-->
         </div>
         <!--                dòng dưới-->
         <div class="col-md-12 row mt-3">
-          <div class="col-md-2"></div>
+          <!--          <div class="col-md-2"></div>-->
           <div class="col-md-1" style="margin-top: 5px">Sống tại:</div>
           <div class="col-md-3 " style="margin-left: -0.5%">
             <input class="form-control me-2" name="name" type="search"
@@ -38,29 +38,42 @@
           <div class="col-md-1" style="margin-top: 5px">Tỉnh/Thành:</div>
           <div class="col-md-3">
             <select class="form-control"
-                    style="border: 1px solid #b6effb; width: 100%" name="province" #province
+                    style="border: 1px solid #b6effb; margin-left: -2.5%;" name="province" #province
                     (click)="getProvince(province.value)">
               <option value="" selected>Chọn tỉnh thành</option>
               <option *ngFor="let item of provinceList" [value]="item.code">{{item.name}}</option>
             </select>
           </div>
-          <div class="col-md-2">
-            <button (click)="getAll()"
-                    class="btn" type="button"
-                    style="text-align: center; size: 30px; border: 1px solid #b6effb;background-color: darkorange">
-              <i class=" fa-solid fa-magnifying-glass"></i>Tìm kiếm
-            </button>
-          </div>
           <div class="col-md-1"></div>
+          <div class="col-md-3">
+            <div class="row">
+              <div class="col-md-6" style=" margin-left: -4%">
+                <button (click)="search()"
+                        class="btn" type="button"
+                        style="text-align: center; size: 30px; border: 1px solid #b6effb;background-color: darkorange">
+                  Tìm kiếm
+                </button>
+              </div>
+              <div class="col-md-6" style=" margin-left: -15%">
+                <button (click)="clearInputs()"
+                        class="btn" type="button"
+                        style="text-align: center; size: 30px; border: 1px solid #b6effb;background-color: darkorange">
+                  Xem tất cả
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </form>
     </div>
     <div class="row justify-content-center">
       <div class="col-12">
         <div class="col-md-12">
-          <h3 *ngIf="message" style="text-align: center; color: red">không tìm thấy dữ liệu</h3>
-          <table class="table table-bordered table-hover text-center"
-                 style="box-shadow: 0 0 10px 0 #253365; margin-top: 20px" >
+          <h3 *ngIf="message" style="text-align: center; color: red">Không tìm thấy dữ liệu!</h3>
+          <table *ngIf="!message"
+            class="table table-bordered table-hover text-center"
+                 style="box-shadow: 0 0 10px 0 #253365; margin-top: 20px">
             <thead style="background-color: #E67E22">
             <tr>
               <th scope="col">STT</th>
@@ -92,7 +105,7 @@
               <td class="hidden-on-mobile">{{empl.phoneNumber}}</td>
               <td>
                 <span type="submit"><i class="fa-regular fa-pen-to-square"
-                                       routerLink="/employee/update/{{empl.id}}}"></i></span>
+                                       routerLink="/employee/update/{{empl.id}}"></i></span>
               </td>
               <td>
             <span type="submit" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="employeeDelete = empl">
@@ -108,18 +121,26 @@
               </button>
             </div>
             <div class="col-md-8"></div>
-            <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px">
-              <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item" [ngClass]="{disable: currentPage === 0}">
-                    <a class="btn" style="background-color: darkorange" (click)="previous()">Trước</a>
+            <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px" *ngIf="!message">
+              <nav aria-label="Page navigation example" style="float: right">
+                <ul class="pagination" *ngIf="pageCount > 1">
+                  <li class="page-item">
+                    <button [ngClass]="{disabled: currentPage === 0 }" style="background-color: darkorange"
+                            (click)="previousPage()" class="btn" aria-label="Previous">
+                      <span aria-hidden="true" style="color: black">Trước</span>
+                    </button>
                   </li>
-                  <li *ngFor="let page of pageNumber">
-                    <a class="page-link page" [ngClass]="{colorCurrentPage: currentPage + 1 == page}"
-                       (click)="numberPage(page)">{{page}}</a>
+                  <li class="page-item" *ngFor="let pageNumber of pageNumbersToDisplay">
+                    <a style="color: black" class="page-link page" [ngClass]="{colorCurrentPage: currentPage+1 == pageNumber}"
+                       (click)="goToPage(pageNumber)">
+                      {{ pageNumber === '...' ? pageNumber : pageNumber }}
+                    </a>
                   </li>
-                  <li class="page-item" [ngClass]="{disabled: currentPage === totalPages - 1}">
-                    <a class=" btn" style="background-color: darkorange" (click)="next()">Sau</a>
+                  <li class="page-item">
+                    <button [ngClass]="{disabled: currentPage === pageCount - 1 }" style="background-color: darkorange"
+                            class="btn" (click)="nextPage()" aria-label="Next">
+                      <span aria-hidden="true" style="color: black">Sau</span>
+                    </button>
                   </li>
                 </ul>
               </nav>
@@ -138,13 +159,11 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Xác nhận xóa nhân viên</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" style="text-align: center">
-        <span>
-          Bạn có chắc chắn muốn xoá nhân viên
-        </span>
+        <div class="modal-body" style="text-align: center; margin-right: 3%">
+          <span>Bạn có chắc chắn muốn xoá nhân viên </span>
           <span style="color: red">{{employeeDelete.name}}</span>
           <span> này không ?</span>
-          <p style="color: red">* Lưu ý: Hành động này không thể hoàn tác !</p>
+          <p style="color: red ; margin-right: 17%; margin-top: 3%">* Lưu ý: Hành động này không thể hoàn tác !</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #e4e6eb">Đóng

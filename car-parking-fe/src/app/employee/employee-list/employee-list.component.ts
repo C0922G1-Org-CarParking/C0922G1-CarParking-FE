@@ -10,23 +10,24 @@ import {log} from "util";
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  totalPages = 0;
-  // số trang hiện tại
-  currentPage = 0;
+
   employees: Employee[] = [];
   employee: any;
   nameSearch: string;
   // @ts-ignore
   employeeDelete: Employee = {};
-  pageNumber: number[] = [];
   startDate: string;
   endDate: string;
   street: string;
   message: '';
-  size = 10;
+  size = 5;
   province: number = 0;
   provinceList: any;
-
+  pageCount = 0;
+  pageNumbers: number[] = [];
+  totalPages = 0;gi
+  // số trang hiện tại
+  currentPage = 0;
 
   constructor(private employeeService: EmployeeService) {
 
@@ -46,6 +47,19 @@ export class EmployeeListComponent implements OnInit {
       this.province = 0;
     }
   }
+  search() {
+    this.currentPage = 0
+    this.message = null;
+    this.employeeService.getAllEmployee(this.currentPage, this.size,
+      this.nameSearch, this.startDate, this.endDate, this.street, this.province).subscribe(data => {
+      this.employee = data;
+      this.employees = this.employee.content;
+      this.pageCount = this.employee.totalPages;
+      this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);    }, error => {
+      this.message = error.error;
+
+    });
+  }
 
   getAll() {
     this.message = null;
@@ -53,10 +67,10 @@ export class EmployeeListComponent implements OnInit {
       this.nameSearch, this.startDate, this.endDate, this.street, this.province).subscribe(data => {
       this.employee = data;
       this.employees = this.employee.content;
-      this.totalPages = this.employee.totalPages;
-      this.pageNumber = Array.from({length: this.totalPages}, (v, k) => k + 1);
-    }, error => {
+      this.pageCount = this.employee.totalPages;
+      this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);    }, error => {
       this.message = error.error;
+
     });
   }
 
@@ -79,24 +93,63 @@ export class EmployeeListComponent implements OnInit {
     }
   }
 
-  previous() {
+  get pageNumbersToDisplay() {
+    const currentPageIndex = this.currentPage;
+    const totalPageCount = this.pageCount;
+    const pagesToShow = 3;
+
+    if (totalPageCount <= pagesToShow) {
+      return Array.from({ length: totalPageCount }, (_, i) => i + 1);
+    }
+
+    const startPage = Math.max(0, currentPageIndex - Math.floor(pagesToShow / 2));
+    let endPage = startPage + pagesToShow - 1;
+
+    if (endPage >= totalPageCount) {
+      endPage = totalPageCount - 1;
+    }
+
+    let pageNumbersToDisplay: (number | string)[] = Array.from({ length: endPage - startPage + 1 }, (_, i) => i + startPage + 1);
+
+    if (startPage > 0) {
+      pageNumbersToDisplay = [ '...', ...pageNumbersToDisplay];
+    }
+
+    if (endPage < totalPageCount - 1) {
+      pageNumbersToDisplay = [...pageNumbersToDisplay, '...'];
+    }
+
+    return pageNumbersToDisplay;
+  }
+
+  previousPage() {
     if (this.currentPage > 0) {
       this.currentPage--;
-      this.getAll();
     }
-  }
-
-  next() {
-    if (this.currentPage < this.totalPages - 1) {
-      this.currentPage++;
-      this.getAll();
-    }
-  }
-
-  numberPage(page: number) {
-    this.currentPage = page - 1;
     this.getAll();
   }
 
+  nextPage() {
+    if (this.currentPage < this.pageCount - 1) {
+      this.currentPage++;
+    }
+    this.getAll();
+  }
+
+  goToPage(pageNumber: number | string) {
+    if (typeof pageNumber === 'number') {
+      this.currentPage = pageNumber - 1;
+    }
+    this.getAll();
+  }
+
+  clearInputs() {
+    this.nameSearch = '';
+    this.startDate = '';
+    this.endDate = '';
+    this.street= '';
+    this.province = 0
+    this.getAll()
+  }
 
 }

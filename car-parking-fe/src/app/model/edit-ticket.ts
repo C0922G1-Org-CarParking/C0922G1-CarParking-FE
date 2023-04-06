@@ -1,5 +1,5 @@
 export interface EditTicket {
-  id?: number;
+  ticketId?: number;
   customerName?: string;
   plateNumber?: string;
   phoneNumber?: string;

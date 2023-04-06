@@ -66,7 +66,7 @@
                       <button class="btn " type="button"
                               (click)="onSearch(nameInput.value, idCardInput.value, phoneNumberInput.value, starDateInput.value, endDateInput.value)"
                               style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
-                        <i class="fa-solid fa-magnifying-glass"></i>Tìm kiếm
+                        Tìm kiếm
                       </button>
                     </div>
                     <div style="float: right">
@@ -138,48 +138,29 @@
           <div class="col-1"></div>
 
           <div class="col-7" style="margin-top: 5px">
+
+
             <nav aria-label="Page navigation example" style="float: right">
-
-
-<!--              <button [disabled]="!hasPrevious"-->
-<!--                      (click)="getListTicket(ticketPageNumber - 1)">Trước-->
-<!--              </button>-->
-<!--              <a *ngIf="ticketPageNumber > 0" (click)="getListTicket(ticketPageNumber-1)">{{ticketPageNumber}}</a>-->
-<!--              <a style="background-color:#b3c444; border: 1px solid black; padding: 3px 9px; color: #ffffff" (click)="getListTicket(ticketPageNumber)">{{ticketPageNumber + 1}}</a>-->
-<!--              <a *ngIf="ticketPageNumber < totalPage - 1 "-->
-<!--                 (click)="getListTicket(ticketPageNumber + 1)">{{ticketPageNumber + 2}}</a>-->
-<!--              <button [disabled]="!hasNext"-->
-<!--                      (click)="getListTicket( ticketPageNumber + 1)">Sau-->
-<!--              </button>-->
-
-
-
               <ul class="pagination" *ngIf="pageCount > 1">
                 <li class="page-item">
-                  <button (click)="previousPage()" class="page-link" aria-label="Previous" [disabled]="page>1">
+                  <button (click)="previousPage()" class="page-link outline" aria-label="Previous">
                     <span aria-hidden="true">Trước</span>
                   </button>
                 </li>
-                <li class="page-item">
-                  <a class="page-link page"
-                     (click)="goToPage(page-1)">{{ page+1 }}</a>
+                <li class="page-item" *ngFor="let pageNumber of pageNumbersToDisplay">
+                  <a class="page-link page" [ngClass]="{currentpage: page+1 == pageNumber}"
+                     (click)="goToPage(pageNumber)">
+                    {{ pageNumber === '...' ? pageNumber : pageNumber }}
+                  </a>
                 </li>
                 <li class="page-item">
-                  <a class="page-link page" [ngClass]="{currentpage: page+2}"
-                     (click)="goToPage(page)">{{ page+1 }}</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link page"
-                     (click)="goToPage(page+1)">{{ page+3 }}</a>
-                </li>
-
-                <li class="page-item">
-                  <button class="page-link outline" (click)="nextPage()" aria-label="Next" [disabled]="page>pageCount-2">
+                  <button class="page-link outline" (click)="nextPage()" aria-label="Next">
                     <span aria-hidden="true">Sau</span>
                   </button>
                 </li>
               </ul>
             </nav>
+
           </div>
         </div>
       </div>

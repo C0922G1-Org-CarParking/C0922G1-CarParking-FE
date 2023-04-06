@@ -7,10 +7,9 @@ import { CustomerUpdateComponent } from './customer-update/customer-update.compo
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { CustomerCreateComponent } from './customer-create/customer-create.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import { StatusDeleteCustomerComponent } from './status-delete-customer/status-delete-customer.component';
 
 @NgModule({
-  declarations: [CustomerListComponent, CustomerUpdateComponent, CustomerInfoComponent, CustomerCreateComponent, StatusDeleteCustomerComponent],
+  declarations: [CustomerListComponent, CustomerUpdateComponent, CustomerInfoComponent, CustomerCreateComponent],
     imports: [
         CommonModule,
         CustomerRoutingModule,

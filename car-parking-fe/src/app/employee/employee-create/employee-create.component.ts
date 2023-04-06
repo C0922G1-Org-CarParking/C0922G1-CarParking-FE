@@ -35,9 +35,9 @@ export class EmployeeCreateComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
     idCard: new FormControl('', [Validators.required, Validators.pattern('^(\\d{9}|\\d{12})$')]),
     position: new FormControl('', Validators.required),
-    province: new FormControl('', Validators.required),
-    district: new FormControl('', Validators.required),
-    commune: new FormControl('', Validators.required),
+    province: new FormControl(''),
+    district: new FormControl(''),
+    commune: new FormControl(''),
     street: new FormControl('', Validators.required),
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^(0|\\+84)\\d{9}$')])
   });
@@ -104,53 +104,10 @@ export class EmployeeCreateComponent implements OnInit {
       this.employeeService?.addEmployee(this.employeeGroup.value).subscribe(next => {
           this.router.navigateByUrl('/employee/list');
           Swal.fire(
-            'Added!',
-            'Your file has been added.',
+            'Thêm mới thành công!',
             'success'
           );
         }, error => {
-        console.log(error);
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'Thêm mới thất bại!',
-          text: 'Thêm mới thất bại vui lòng điền đúng tất cả thông tin',
-          showConfirmButton: false,
-          timer: 2000
-        });
-        // tslint:disable-next-line:prefer-for-of
-        for (let i = 0; i < error.error.length; i++) {
-          if (error.error && error.error[i].field === 'email') {
-            this.errors.email = error.error[i].defaultMessage;
-          }
-          if (error.error && error.error[i].field === 'phoneNumber') {
-            this.errors.phoneNumber = error.error[i].defaultMessage;
-          }
-          if (error.error && error.error[i].field === 'idCard') {
-            this.errors.idCard = error.error[i].defaultMessage;
-          }
-          if (error.error && error.error[i].field === 'name') {
-            this.errors.name = error.error[i].defaultMessage;
-          }
-          if (error.error && error.error[i].field === 'dateOfBirth') {
-            this.errors.dateOfBirth = error.error[i].defaultMessage;
-          }
-          if (error.error && error.error[i].field === 'province') {
-            this.errors.province = error.error[i].defaultMessage;
-          }
-          if (error.error && error.error[i].field === 'district') {
-            this.errors.district = error.error[i].defaultMessage;
-          }
-          if (error.error && error.error[i].field === 'commune') {
-            this.errors.commune = error.error[i].defaultMessage;
-          }
-          if (error.error && error.error[i].field === 'street') {
-            this.errors.street = error.error[i].defaultMessage;
-          }
-          if (error.error && error.error[i].field === 'phoneNumber') {
-            this.errors.phoneNumber = error.error[i].defaultMessage;
-          }
-        }
           console.log(error);
           Swal.fire({
             position: 'center',
@@ -176,15 +133,6 @@ export class EmployeeCreateComponent implements OnInit {
             }
             if (error.error && error.error[i].field === 'dateOfBirth') {
               this.errors.dateOfBirth = error.error[i].defaultMessage;
-            }
-            if (error.error && error.error[i].field === 'province') {
-              this.errors.province = error.error[i].defaultMessage;
-            }
-            if (error.error && error.error[i].field === 'district') {
-              this.errors.district = error.error[i].defaultMessage;
-            }
-            if (error.error && error.error[i].field === 'commune') {
-              this.errors.commune = error.error[i].defaultMessage;
             }
             if (error.error && error.error[i].field === 'street') {
               this.errors.street = error.error[i].defaultMessage;

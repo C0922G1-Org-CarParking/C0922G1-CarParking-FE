@@ -1,4 +1,4 @@
-<div style="text-align: center; margin-bottom: 18%;">
+<div class="container" style="text-align: center; margin-bottom: 20%;">
   <div class="row" style="margin-top:5%">
     <p>
       <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-2xl"
@@ -151,13 +151,10 @@
       </div>
 
     </div>
-
     <div style="float: left ;margin-top:9%;  ">
       <p> Số chỗ trống: {{locationEmpty}}</p>
       <p>Bản đồ tầng:
-          <a class="btn btn-outline-warning" [ngClass]="{'disabled': idFloor===1}" (click)="previous()">Trước</a>
-        <a class="btn btn-outline-warning" *ngFor="let floor of totalPage"  [style.background-color]="idFloor == floor.id ? 'orangered' : ''" (click)="pageChange(floor.id)">{{floor.name}}</a>
-          <a class="btn btn-outline-warning" [ngClass]="{'disabled': idFloor=== maxFloor-1}" (click)="next()">Sau</a>
+        <span class="btn " *ngFor="let floor of totalPage"  [style.background-color]="idFloor == floor.id ? '#b3c444' : '#d8dce1'" (click)="pageChange(floor.id)">{{floor.name}}</span>
       </p>
     </div>
   </div>

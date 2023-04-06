@@ -1,4 +1,4 @@
-<div style="margin-top: 7%;margin-bottom:1%">
+<div style="margin-top: 3%;margin-bottom:3%">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center h-100" style="margin-left:10%;margin-right:10%;">
       <div class="card" style="border-radius: 1%;box-shadow: 0 0 15px 0 #253365 ">
@@ -18,7 +18,7 @@
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && employeeGroup.controls.name.hasError('required')) ||
                      (employeeGroup.controls.name.hasError('required')) && employeeGroup.controls.name.touched">
-                    Tên Không được để trống.</p>
+                    Tên không được để trống.</p>
 
                   <p style="color: red; position: absolute"
                      *ngIf="
@@ -32,10 +32,12 @@
               </div>
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 5px">Chức vụ:</label>
+                  <label style="font-weight: bold; margin-left: 5px">Chức vụ:<b
+                    style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
-                  <select class="form-control" formControlName="position">
+                  <select class="form-select" formControlName="position">
+                    <option value="" selected>Chức vụ</option>
                     <option *ngFor="let item of position " [ngValue]="item">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"
@@ -61,7 +63,7 @@
                   <p style="color: red; position: absolute"
                      *ngIf="
                    employeeGroup.controls.idCard.hasError('pattern') && employeeGroup.controls.idCard.touched">
-                    CCCD không đúng định dạng.</p>
+                    CCCD phải là 9 hoặc 12 số .</p>
 
                   <p style="color: red; position: absolute"
                      *ngIf="errors.idCard && !employeeGroup.controls.idCard.hasError('required') &&
@@ -79,7 +81,10 @@
                      *ngIf="(clickButton && employeeGroup.controls.dateOfBirth.hasError('required')) ||
                     employeeGroup.controls.dateOfBirth.hasError('required') &&
                      employeeGroup.controls.dateOfBirth.touched">
-                    Ngày Sinh không được để trống.</p>
+                    Ngày sinh không đúng định dạng.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.dateOfBirth && !employeeGroup.controls.dateOfBirth.hasError('required')">{{errors.dateOfBirth}}</p>
+
                 </div>
               </div>
             </div>
@@ -95,11 +100,11 @@
                      *ngIf="(clickButton && employeeGroup.controls.email.hasError('required')) ||
                     employeeGroup.controls.email.hasError('required') &&
                      employeeGroup.controls.email.touched">
-                    email không được để trống.</p>
+                    Email không được để trống.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="
                    employeeGroup.controls.email.hasError('pattern') && employeeGroup.controls.email.touched">
-                    Email không đúng định dạng.</p>
+                    Email không đúng định dạng(dinh@gmail.com).</p>
                   <p style="color: red; position: absolute"
                      *ngIf="errors.email && !employeeGroup.controls.email.hasError('required') &&
                       !employeeGroup.controls.email.hasError('pattern')">{{errors.email}}</p>
@@ -142,16 +147,18 @@
                   <p style="color: red; position: absolute"
                      *ngIf="
                    employeeGroup.controls.phoneNumber.hasError('pattern') && employeeGroup.controls.phoneNumber.touched">
-                    phone Number không đúng định dạng.</p>
+                    SĐT đúng định dạng phải là 10 số  bắt đầu bằng 0 hoặc 84.</p>
 
                   <p style="color: red; position: absolute"
                      *ngIf="errors.phoneNumber && !employeeGroup.controls.phoneNumber.hasError('required') &&
                       !employeeGroup.controls.phoneNumber.hasError('pattern')">{{errors.phoneNumber}}</p>
+
                 </div>
               </div>
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 5px">Địa chỉ cụ thể:</label>
+                  <label style="font-weight: bold; margin-left: 5px">Địa chỉ cụ thể:<b
+                    style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
                   <input class="form-control" formControlName="street" type="text"
@@ -178,10 +185,11 @@
                     <option *ngFor="let item of provinceList" [value]="item.code">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"
-                     *ngIf="(clickButton && employeeGroup.controls.province.hasError('required')) ||
-                    employeeGroup.controls.province.hasError('required') &&
-                     employeeGroup.controls.province.touched">
-                    không được để trống.</p>
+                     *ngIf="
+                    employeeGroup.controls.commune.hasError('required') &&
+                     employeeGroup.controls.commune.touched">
+                    Không được để trống.</p>
+
                 </div>
                 <div class="col-md-3">
                   <select class="form-control" type="text"
@@ -191,10 +199,11 @@
                     <option *ngFor="let item of districtList" [value]="item.code">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"
-                     *ngIf="(clickButton && employeeGroup.controls.district.hasError('required')) ||
-                    employeeGroup.controls.district.hasError('required') &&
-                     employeeGroup.controls.district.touched">
-                    không được để trống.</p>
+                     *ngIf="
+                    employeeGroup.controls.commune.hasError('required') &&
+                     employeeGroup.controls.commune.touched">
+                    Không được để trống.</p>
+
                 </div>
                 <div class="col-md-3">
                   <select class="form-control" type="text"
@@ -204,10 +213,10 @@
                     <option *ngFor="let item of communeList" [value]="item.code">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"
-                     *ngIf="(clickButton && employeeGroup.controls.commune.hasError('required')) ||
+                     *ngIf="
                     employeeGroup.controls.commune.hasError('required') &&
                      employeeGroup.controls.commune.touched">
-                    không được để trống.</p>
+                    Không được để trống.</p>
                 </div>
                 <div class="col-md-1"></div>
               </div>

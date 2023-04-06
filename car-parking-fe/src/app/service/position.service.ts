@@ -22,6 +22,6 @@ export class PositionService {
    * @return data data Position
    */
   getAllPosition(): Observable<IPosition[]> {
-    return this.http.get<IPosition[]>('http://localhost:8080/api/list-position');
+    return this.http.get<IPosition[]>('http://localhost:8080/api/admin/list-position');
   }
 }
