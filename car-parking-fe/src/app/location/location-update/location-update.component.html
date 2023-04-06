@@ -1,0 +1,136 @@
+<section>
+  <div class=" py-5">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <div class="card-body" style="box-shadow: 0 0 20px 0 #253365">
+            <h1 class="mb-3 mt-3 text-center">CHỈNH SỬA VỊ TRÍ ĐỖ</h1>
+
+            <form class="px-md-4 " [formGroup]="locationForm" (ngSubmit)="editLocation()">
+              <div class="row align-items-center pt-4 pb-4">
+                <div class="col-md-4 ps-3">
+                  <label style="font-weight: bold"  class="mb-0">Vị trí<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+                </div>
+
+                <div style="position: relative" class="col-md-8 pe-4" *ngIf="locationDto" >
+
+                  <p >{{locationDto.floorName}}-{{locationDto.sectionName}}{{locationDto.locationName}}</p>
+                </div>
+              </div>
+
+
+              <div class="row align-items-center pt-4 pb-4">
+                <div class="col-md-4 ps-3">
+                  <label style="font-weight: bold"  class="mb-0">Dãy<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+                </div>
+                <div style="position: relative" class="col-md-8 pe-4">
+                  <select  formControlName="section" class="form-select" disabled [compareWith]="compareFun"  aria-label="Default select example"  >
+                    <option value="">Chọn dãy </option>
+                    <option  *ngFor="let sections of sectionList1"  [ngValue]="sections">{{sections.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row align-items-center pt-3 pb-4">
+                <div class="col-md-4 ps-3">
+                  <label style="font-weight: bold"  class="mb-0">Tầng<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+                </div>
+                <div style="position: relative" class="col-md-8 pe-4">
+                  <select formControlName="floor" class="form-select" disabled  [compareWith]="compareFun1" aria-label="Default select example">
+                    <option value="">Chọn tầng </option>
+                    <option *ngFor="let floors of floorList" [ngValue]="floors" >{{floors.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row align-items-center pt-4 pb-4">
+                <div class="col-md-4 ps-3">
+                  <label style="font-weight: bold"  class="mb-0">Số vị trí<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+                </div>
+
+                <div style="position: relative" class="col-md-8 pe-4">
+                  <input readonly formControlName="name" type="number"
+                          class="form-control form-control-md">
+                </div>
+              </div>
+              <div class="row align-items-center pt-4 pb-4">
+                <div class="col-md-4 ps-3">
+
+                  <label style="font-weight: bold" class="mb-0">Chiều rộng<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+                </div>
+                <div style="position: relative" class="col-md-8 pe-4">
+                  <input formControlName="width" type="number"
+                         class="form-control form-control-md">
+                  <p style="color: red;position: absolute"
+                     *ngIf="(clickButton && locationForm.controls.width.hasError('required'))||
+                       locationForm.controls.width.hasError('required') && locationForm.controls.width.touched">
+                    *
+                    Không được để trống.</p>
+                  <p style="color: red;position: absolute"
+                     *ngIf="(clickButton && locationForm.controls.width.hasError('min'))||
+                       locationForm.controls.width.hasError('min') && locationForm.controls.width.touched">
+                    *
+                    Không được nhập số âm.</p>
+                </div>
+              </div>
+
+              <div class="row align-items-center pt-4 pb-4">
+                <div class="col-md-4 ps-3">
+                  <label style="font-weight: bold" class="mb-0">Chiều cao<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+                </div>
+                <div style="position: relative" class="col-md-8 pe-4">
+                  <input formControlName="height" type="number"
+                         class="form-control form-control-md">
+                  <p style="color: red;position: absolute"
+                     *ngIf="(clickButton && locationForm.controls.height.hasError('required'))||
+                       locationForm.controls.height.hasError('required') && locationForm.controls.height.touched">
+                    *
+                    Không được để trống.</p>
+                  <p style="color: red;position: absolute"
+                     *ngIf="(clickButton && locationForm.controls.height.hasError('min'))||
+                       locationForm.controls.height.hasError('min') && locationForm.controls.height.touched">
+                    *
+                    Không được nhập số âm.</p>
+                </div>
+              </div>
+
+              <div class="row align-items-center pt-4 pb-4">
+                <div class="col-md-4 ps-3">
+
+                  <label style="font-weight: bold" class="mb-0">Chiều dài<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+
+                </div>
+                <div style="position: relative" class="col-md-8 pe-4">
+                  <input formControlName="length" type="number"
+                         class="form-control form-control-md"/>
+                  <p style="color: red;position: absolute"
+                     *ngIf="(clickButton && locationForm.controls.length.hasError('required'))||
+                       locationForm.controls.length.hasError('required') && locationForm.controls.length.touched">
+                    *
+                    Không được để trống.</p>
+                  <p style="color: red;position: absolute"
+                     *ngIf="(clickButton && locationForm.controls.length.hasError('min'))||
+                       locationForm.controls.length.hasError('min') && locationForm.controls.length.touched">
+                    *
+                    Không được nhập số âm.</p>
+                </div>
+              </div>
+
+
+              <div class=" text-center">
+                <button type="reset" class="btn m-4 w-25" style="background-color: #e4e6eb">Hủy</button>
+                <button type="submit" class="btn m-4 w-25" style="background-color: darkorange">Lưu</button>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
