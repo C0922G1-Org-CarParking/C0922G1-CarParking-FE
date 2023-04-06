@@ -48,6 +48,24 @@ export class EmployeeListComponent implements OnInit {
     }
   }
 
+  search() {
+    this.currentPage= 0
+    this.message = null;
+    this.employeeService.getAllEmployee(this.currentPage, this.size,
+      this.nameSearch, this.startDate, this.endDate, this.street, this.province).subscribe(data => {
+      this.employee = data;
+      this.employees = this.employee.content;
+      this.pageCount = this.employee.totalPages;
+      this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);    }, error => {
+      // this.message = error.error;
+      Swal.fire(
+        'Không tìm thấy dữ liệu!',
+        '',
+        'error'
+      );
+    });
+  }
+
   getAll() {
     this.message = null;
     this.employeeService.getAllEmployee(this.currentPage, this.size,
