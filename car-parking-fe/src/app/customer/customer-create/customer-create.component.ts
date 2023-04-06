@@ -89,7 +89,6 @@ export class CustomerCreateComponent implements OnInit {
             icon: 'success',
             iconColor: 'darkorange',
             title: 'Thêm mới khách hàng thành công.',
-
             confirmButtonText: 'Xác nhận',
             confirmButtonColor: 'darkorange'
           })
