@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {TicketService} from "../../service/ticket.service";
-import {EditTicket} from "../../model/edit-ticket";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Floor} from "../../model/floor";
-import {FloorService} from "../../service/floor.service";
-import {TicketType} from "../../model/ticket-type";
-import {TicketTypeService} from "../../service/ticket-type.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Updateticket} from "../../model/updateticket";
-import {ILocation} from "../../model/ilocation";
-import {UpdateTicket} from "../../model/update-ticket";
-import {Section} from "../../model/section";
+import {TicketService} from '../../service/ticket.service';
+import {EditTicket} from '../../model/edit-ticket';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Floor} from '../../model/floor';
+import {FloorService} from '../../service/floor.service';
+import {TicketType} from '../../model/ticket-type';
+import {TicketTypeService} from '../../service/ticket-type.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Updateticket} from '../../model/updateticket';
+import {ILocation} from '../../model/ilocation';
+import {UpdateTicket} from '../../model/update-ticket';
+import {Section} from '../../model/section';
 
 @Component({
   selector: 'app-ticket-update',
@@ -52,21 +52,22 @@ export class TicketUpdateComponent implements OnInit {
             this.oldExpiryDate = ticketEdit.effectiveDate;
             console.log(ticketEdit);
             this.initForm();
-          })
-        })
-      })
-    })
+          });
+        });
+      });
+    });
   }
 
   getListSectionOfFloor(idFloor) {
     this.ticketService.listSectionById(idFloor).subscribe(sectionList => {
       this.sectionList = sectionList;
-    })
+    });
   }
+
   getListLocationOfFloor(idFloor, idSection) {
     this.ticketService.listLocation(idFloor, idSection).subscribe(locationList => {
       this.locationList = locationList;
-    })
+    });
   }
 
   initForm() {
@@ -84,7 +85,7 @@ export class TicketUpdateComponent implements OnInit {
   }
 
   editInfoTicket() {
-    if(this.editTicketForm.valid) {
+    if (this.editTicketForm.valid) {
       let id = +this.ticketEdit.ticketId;
       let expiryDate = this.editTicketForm.get('expiryDate').value;
       let totalPrice = +(this.editTicketForm.get('priceNew').value + this.ticketEdit.totalPrice);
@@ -97,18 +98,18 @@ export class TicketUpdateComponent implements OnInit {
         totalPrice,
         ticketTypeId,
         locationId
-      }
+      };
       this.ticketService.updateTicketType(ticketEdit).subscribe(next => {
-        this.router.navigateByUrl("/list")
-        alert("Ok ddi veef")
+        this.router.navigateByUrl('/list');
+        alert('Ok ddi veef');
       }, error => {
-        alert("lỗi")
-      })
+        alert('lỗi');
+      });
     }
   }
 
   getRenewalPrice(newExpiryDate: string) {
-    this.ticketService.getPrice(newExpiryDate, this.ticketEdit.expiryDate, this.ticketEdit.rate).subscribe(price => {
+    this.ticketService.getPrice(this.ticketEdit.expiryDate, newExpiryDate, this.ticketEdit.rate).subscribe(price => {
       this.priceNew = price;
 
     });
@@ -123,7 +124,7 @@ export class TicketUpdateComponent implements OnInit {
       year: 'numeric',
       month: 'numeric',
       day: 'numeric'
-    }
+    };
     console.log(this.ticketTypeList);
     const ticketTypeId = this.editTicketForm.get('ticketType').value;
 
@@ -146,10 +147,14 @@ export class TicketUpdateComponent implements OnInit {
     let month = '';
     if (newDate.getDate() < 10) {
       date = '0' + newDate.getDate();
-    } else date += newDate.getDate();
+    } else {
+      date += newDate.getDate();
+    }
     if (newDate.getMonth() < 10) {
       month = '0' + (newDate.getMonth() + 1);
-    } else month += (newDate.getMonth() + 1);
+    } else {
+      month += (newDate.getMonth() + 1);
+    }
     let year = newDate.getFullYear();
     let newExpiryDateFormatted = year + '-' + month + '-' + date;
     this.getRenewalPrice(newExpiryDateFormatted);
