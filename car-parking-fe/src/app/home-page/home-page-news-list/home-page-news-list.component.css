@@ -74,3 +74,7 @@ section {
 .getstarted {
   border-color:  #ee7843;
 }
+
+.colorCurrentPage {
+  background-color: #b3c444
+}

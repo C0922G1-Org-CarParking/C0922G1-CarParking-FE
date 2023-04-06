@@ -37,7 +37,7 @@ const routes: Routes = [
   }, {
     path: 'location',
     loadChildren: () => import('./location/location.module').then(module => module.LocationModule),
-    canActivate: [AdminGuard]
+    // canActivate: [AdminGuard]
   }, {
     path: 'security',
     loadChildren: () => import('./security-authentication/security-authentication.module')
