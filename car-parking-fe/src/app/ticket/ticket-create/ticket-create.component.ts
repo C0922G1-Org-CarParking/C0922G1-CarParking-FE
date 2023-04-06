@@ -41,6 +41,7 @@ export class TicketCreateComponent implements OnInit {
   carList: Car[] = [];
   enableChooseCar: boolean = false;
   locationInfo: ILocation;
+  sectionList: Section[];
   rate: any
   priceTotal: any
   effectiveDate: any
@@ -172,9 +173,6 @@ export class TicketCreateComponent implements OnInit {
       this.getInfoLocationEnable = true
     })
   }
-
-
-  sectionList: Section[];
 
 
   getPrice(effectiveDate: string, expiryDate: string, rate: any) {

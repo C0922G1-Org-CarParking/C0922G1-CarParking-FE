@@ -8,7 +8,7 @@
           <div class="card" style="border-radius: 15px;box-shadow: 0 0 20px 0 #253365">
             <div class="card-body">
               <form [formGroup]="ticketCreateForm" (ngSubmit)="createTicket()">
-                <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px;text-shadow: 0px 5px 5px #999999;">
+                <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px">
                   THÊM MỚI VÉ</h1>
                 <div class="row d-flex">
                   <div class="row align-items-center py-3 col-md-6"></div>
@@ -92,7 +92,7 @@
                     </div>
                     <p style="color: red" *ngIf="ticketCreateForm.controls.expiryDate.touched && ticketCreateForm.controls.expiryDate.hasError('required')">* Bắt buộc
                       chọn</p>
-                    <p style="color: red" *ngIf="ticketCreateForm.controls.effectiveDate.touched && ticketCreateForm.controls.expiryDate.touched && ticketCreateForm.controls.effectiveDate.value && ticketCreateForm.controls.expiryDate.value && ticketCreateForm.hasError('invalidDateRange')">* Ngày hết hạn phải lớn hơn ngày bắt đầu</p>
+                    <p style="color: red" *ngIf="ticketCreateForm.controls.expiryDate.touched && ticketCreateForm.controls.expiryDate.touched && ticketCreateForm.controls.effectiveDate.value && ticketCreateForm.controls.expiryDate.value && ticketCreateForm.hasError('invalidDateRange')">* Ngày hết hạn phải lớn hơn ngày bắt đầu</p>
                   </div>
                 </div>
 
@@ -176,7 +176,6 @@
                       <div class="col-md-8" *ngIf="chooseEnableLocation == true && getInfoLocationEnable == false">
                         <select name="" id="" class="form-select" formControlName="location" >
                           <option selected [value]="null">---Mời chọn vị trí---</option>
-                          <!--                        <option selected [(ngModel)]="locationInfo">{{locationInfoName}}</option>-->
                           <option *ngFor="let location of locationList" [ngValue]="location">{{location.name}}</option>
                         </select>
                       </div>
@@ -200,10 +199,10 @@
                       <label style="font-weight: bold" class="mb-0">Loại vé: <b
                         style="color: red">*</b></label>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8" >
                       <select class="form-select" formControlName="ticketType">
-                        <option [value]="null" selected>---Mời chọn loại vé---</option>
-                        <option *ngFor="let item of ticketTypeList" [ngValue]="item">{{item.name}}</option>
+                        <option [value]="null" >---Mời chọn loại vé---</option>
+                        <option selected *ngFor="let item of ticketTypeList" [ngValue]="item">{{item.name}}</option>
                       </select>
                     </div>
                     <p style="color: red" *ngIf="ticketCreateForm.controls.ticketType.touched && ticketCreateForm.controls.ticketType.hasError('required')">*Bắt buộc
