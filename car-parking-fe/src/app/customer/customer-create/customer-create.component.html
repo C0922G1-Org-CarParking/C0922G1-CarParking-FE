@@ -1,6 +1,6 @@
-<!--<div class="row container">-->
-
-  <div class="col-md-10" style="margin-left: 9%; margin-top: 3%">
+<div class="row container">
+  <div class="col-md-1"></div>
+  <div class="col-md-10" style="margin-left: 15%">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-md-10">
         <div class="card" style="border-radius: 15px;">
@@ -18,6 +18,15 @@
                     <div style="position: absolute">
                       <div style="color: red" *ngIf="messCustomerName">{{messCustomerName}}</div>
                       <div style="color: red" *ngIf="messCustomerNamePattern">{{messCustomerNamePattern}}</div>
+                      <span
+                        *ngIf="customerForm.controls.name?.touched && customerForm.controls.name?.errors?.required"
+                        style="color: red;">Tên khách hàng không được để trống.</span>
+                      <span *ngIf="customerForm.controls.name?.errors?.pattern"
+                            style="color: red;">
+                        Tên khách hàng không được nhập số và ký tự đặc biệt.</span>
+                      <span *ngIf="customerForm.controls.name?.errors?.maxlength"
+                            style="color: red;">
+                        Tên khách hàng không được quá 30 ký tự.</span>
                     </div>
                   </div>
                 </div>
@@ -32,6 +41,8 @@
                     <div style="position: absolute">
                       <div style="color: red" *ngIf="messCCCD">{{messCCCD}}</div>
                       <div style="color: red" *ngIf="messCCCDPattern">{{messCCCDPattern}}</div>
+                      <div *ngIf="customerForm.controls.idCard?.touched && customerForm.controls.idCard?.errors?.required" style="color: red; ">CCCD không được để trống.</div>
+                      <div *ngIf="customerForm.controls.idCard?.errors?.pattern" style="color: red; ">CCCD phải là 9 hoặc 12 số</div>
                     </div>
                   </div>
                 </div>
@@ -49,6 +60,18 @@
                     <div style="position: absolute">
                       <div style="color: red" *ngIf="messDateOfBirth">{{messDateOfBirth}}</div>
                       <div style="color: red" *ngIf="messDateOfBirthPattern">{{messDateOfBirthPattern}}</div>
+                      <span
+                        *ngIf="customerForm.controls.dateOfBirth?.touched && customerForm.controls.dateOfBirth?.errors?.required"
+                        style="color: red">
+                        Ngày sinh không được để trống .</span>
+                      <span
+                        *ngIf="customerForm.controls.dateOfBirth?.touched && customerForm.controls.dateOfBirth?.errors?.invalidBirthDate1"
+                        style="color: red;">
+                        Ngày sinh phải lớn hơn 18 tuổi.</span>
+                      <span
+                        *ngIf="customerForm.controls.dateOfBirth?.touched && customerForm.controls.dateOfBirth?.errors?.invalidDateOfBirth"
+                        style="color: red">
+                        Ngày sinh lớn ngày hiện tại.</span>
                     </div>
                   </div>
                 </div>
@@ -63,7 +86,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row d-flex" style="margin-top: 60px">
+              <div class="row d-flex mt-5">
                 <div class="row align-items-center py-3 col-md-6">
                   <div class="col-md-4">
                     <label style="font-weight: bold; margin-left: 15px">Email: <b
@@ -74,6 +97,14 @@
                     <div style="position: absolute">
                       <div style="color: red" *ngIf="messEmail">{{messEmail}}</div>
                       <div style="color: red" *ngIf="messEmailPattern">{{messEmailPattern}}</div>
+                      <span
+                        *ngIf="customerForm.controls.email?.touched && customerForm.controls.email?.errors?.required"
+                        style="color: red;">
+                        Email không được để trống.</span>
+                      <span
+                        *ngIf="customerForm.controls.email?.errors?.pattern"
+                        style="color: red;">
+                        Email nhập bị sai .Vui lòng kiểm tra lại.</span>
                     </div>
                   </div>
                 </div>
@@ -84,16 +115,20 @@
                   </div>
                   <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="text" formControlName="phoneNumber">
-
-
                     <div style="position: absolute">
                       <div style="color: red" *ngIf="messPhoneNumber">{{messPhoneNumber}}</div>
                       <div style="color: red" *ngIf="messPhoneNumberPattern">{{messPhoneNumberPattern}}</div>
+                      <span
+                        *ngIf="customerForm.controls.phoneNumber?.touched && customerForm.controls.phoneNumber?.errors?.required" style="color: red;">
+                        Số điện thoại không được để trống.</span>
+                      <span
+                        *ngIf="customerForm.controls.phoneNumber?.touched && customerForm.controls.phoneNumber?.errors?.pattern" style="color: red; ">
+                        Số điện thoại nhập bị sai. Vui lòng kiểm tra lại.</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="row align-items-center py-3" style="margin-top: 60px">
+              <div class="row align-items-center py-3 mt-5">
                 <div class="col-md-2">
                   <label style="font-weight: bold; margin-left: 15px">Ðịa chỉ: <b
                     style="color: red">*</b></label>
@@ -159,7 +194,7 @@
                       </tbody>
                     </table>
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                            data-bs-target="#addExampleModal" style="background-color:  #E67E22;">
+                            data-bs-target="#addExampleModal" style="background-color:  #E67E22;" (click)="resetFormCar()">
                       Thêm xe
                     </button>
                   </div>
@@ -169,7 +204,7 @@
               <div align="center" class="px-5 py-4">
                 <button type="button" class="btn btn-secondary" routerLink="/customer/list">Quay lại</button>
                 <button style="margin-left: 10px;background-color:  #E67E22" type="submit" class="btn"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        data-bs-toggle="modal" data-bs-target="#exampleModal" [disabled]="customerForm.invalid">
                   Lưu thông tin
                 </button>
               </div>
@@ -179,8 +214,8 @@
       </div>
     </div>
   </div>
-
-<!--</div>-->
+  <div class="col-md-1"></div>
+</div>
 
 <!--Modal thêm xe-->
 
@@ -206,14 +241,15 @@
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-9">
-                  <input formControlName="name" class="form-control" type="text">
-                  <p *ngIf="carForm.controls.name?.touched && carForm.controls.name?.errors?.required"
-                     style="color: red">Tên
-                    xe không được để trống.</p>
-                  <p *ngIf="carForm.controls.name?.touched && carForm.controls.name?.errors?.pattern"
-                     style="color: red">Tên
-                    xe không đúng. Vui lòng nhập lại.</p>
-
+                  <input formControlName="name" class="form-control" type="text" style="position: relative">
+                  <div style="position: absolute">
+                    <p *ngIf="carForm.controls.name?.touched && carForm.controls.name?.errors?.required"
+                       style="color: red">Tên
+                      xe không được để trống.</p>
+                    <p *ngIf="carForm.controls.name?.touched && carForm.controls.name?.errors?.pattern"
+                       style="color: red">Tên
+                      xe không đúng. Vui lòng nhập lại.</p>
+                  </div>
                 </div>
               </div>
               <div class="row align-items-center py-3">
@@ -222,14 +258,16 @@
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-9">
-                  <select class="form-control" formControlName="carType">
+                  <select class="form-control" formControlName="carType" style="position: relative">
                     <option value="" selected>Chọn loại xe</option>
                     <option [ngValue]="c" *ngFor="let c of carTypeList">{{c.name }}</option>
                   </select>
-                  <p
-                    *ngIf="carForm.controls.carType?.touched && carForm.controls.carType?.errors?.required"
-                    style="color: red">
-                    Loại xe không được để trống.</p>
+                  <div style="position: absolute">
+                    <p
+                      *ngIf="carForm.controls.carType?.touched && carForm.controls.carType?.errors?.required"
+                      style="color: red">
+                      Loại xe không được để trống.</p>
+                  </div>
                 </div>
               </div>
               <div class="row align-items-center py-3">
@@ -238,16 +276,17 @@
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-9">
-                  <input formControlName="plateNumber" class="form-control" type="text">
-                  <p
-                    *ngIf="carForm.controls.plateNumber?.touched && carForm.controls.plateNumber?.errors?.required"
-                    style="color: red">
-                    Biển số xe không được để trống.</p>
-                  <p
-                    *ngIf="carForm.controls.plateNumber?.touched && carForm.controls.plateNumber?.errors?.pattern"
-                    style="color: red">
-                    Biển số xe không đúng.Vui lòng nhập lại.</p>
-
+                  <input formControlName="plateNumber" class="form-control" type="text" style="position: relative">
+                  <div style="position: absolute">
+                    <p
+                      *ngIf="carForm.controls.plateNumber?.touched && carForm.controls.plateNumber?.errors?.required"
+                      style="color: red">
+                      Biển số xe không được để trống.</p>
+                    <p
+                      *ngIf="carForm.controls.plateNumber?.touched && carForm.controls.plateNumber?.errors?.pattern"
+                      style="color: red">
+                      Biển số xe không đúng.Vui lòng nhập lại.</p>
+                  </div>
                 </div>
               </div>
               <div class="row align-items-center py-3">
@@ -256,13 +295,16 @@
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-9">
-                  <input formControlName="brand" class="form-control" type="text">
-                  <p *ngIf="carForm.controls.brand?.touched && carForm.controls.brand?.errors?.required"
-                     style="color: red">
-                    Hãng xe không được để trống.</p>
-                  <p *ngIf="carForm.controls.brand?.touched && carForm.controls.brand?.errors?.pattern"
-                     style="color: red">
-                    Hãng xe không đúng . Vui lòng nhập lại.</p>
+                  <input formControlName="brand" class="form-control" type="text" style="position: relative">
+                  <div style="position: relative"></div>
+                  <div style="position: absolute">
+                    <p *ngIf="carForm.controls.brand?.touched && carForm.controls.brand?.errors?.required"
+                       style="color: red">
+                      Hãng xe không được để trống.</p>
+                    <p *ngIf="carForm.controls.brand?.touched && carForm.controls.brand?.errors?.pattern"
+                       style="color: red">
+                      Hãng xe không đúng . Vui lòng nhập lại.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -271,7 +313,7 @@
           <div align="center" class="px-5 py-4">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
             <button style="margin-left: 10px;background-color:  #E67E22" type="submit" data-bs-dismiss="modal"
-                    class="btn">
+                    class="btn" [disabled]="carForm.invalid">
               Lưu thông tin
             </button>
           </div>
@@ -281,70 +323,4 @@
   </div>
 </div>
 
-<!--<div class="modal fade" id="addExampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"-->
-<!--     style="margin-left: -2.5%">-->
-<!--  <div class="modal-dialog modal-dialog-centered modal-lg">-->
-<!--    <div class="modal-content" style="max-width: 100%;background-color: whitesmoke; box-shadow: 0 0 20px 0 #253365">-->
-<!--      <div class="modal-header">-->
-<!--        <h1 class="modal-title fs-5" id="addExampleModalLabel">Thêm Mới Xe</h1>-->
-<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <h1 class="text-center mt-3">Thêm Xe</h1>-->
-<!--        <form [formGroup]="carForm" (ngSubmit)="addCar()">-->
-<!--          <div class="row d-flex">-->
-<!--            <div class="col-md-2"></div>-->
-<!--            <div class="col-md-8">-->
-<!--              <div class="row align-items-center py-3">-->
-<!--                <div class="col-3">-->
-<!--                  <label style="font-weight: bold; margin-left: 12px">Tên xe: <b-->
-<!--                    style="color: red">*</b></label>-->
-<!--                </div>-->
-<!--                <div class="col-md-9">-->
-<!--                  <input class="form-control" type="text" formControlName="name">-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="row align-items-center py-3">-->
-<!--                <div class="col-md-3">-->
-<!--                  <label style="font-weight: bold">Loại xe: <b-->
-<!--                    style="color: red">*</b></label>-->
-<!--                </div>-->
-<!--                <div class="col-md-9">-->
-<!--                  <select class="form-control" formControlName="carType">-->
-<!--                    <option >Chọn loại xe</option>-->
-<!--                    <option [ngValue]="c" *ngFor="let c of carTypeList">{{c.name}}</option>-->
-<!--                  </select>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="row align-items-center py-3">-->
-<!--                <div class="col-md-3">-->
-<!--                  <label style="font-weight: bold; margin-left: 12px">Biển số xe: <b-->
-<!--                    style="color: red">*</b></label>-->
-<!--                </div>-->
-<!--                <div class="col-md-9">-->
-<!--                  <input class="form-control" type="text" formControlName="plateNumber">-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="row align-items-center py-3">-->
-<!--                <div class="col-md-3">-->
-<!--                  <label style="font-weight: bold">Hãng xe: <b-->
-<!--                    style="color: red">*</b></label>-->
-<!--                </div>-->
-<!--                <div class="col-md-9">-->
-<!--                  <input formControlName="brand" class="form-control" type="text">-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="col-md-2"></div>-->
-<!--          </div>-->
-<!--          <div align="center" class="px-5 py-4">-->
-<!--            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>-->
-<!--            <button type="submit" class="btn" data-bs-dismiss="modal" style="background-color:#E67E22">Lưu-->
-<!--            </button>-->
-<!--          </div>-->
-<!--        </form>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 
