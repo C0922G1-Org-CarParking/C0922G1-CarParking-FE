@@ -1,5 +1,5 @@
 export interface EditTicket {
-  id?: number;
+  ticketId?: number;
   customerName?: string;
   plateNumber?: string;
   phoneNumber?: string;
@@ -7,7 +7,6 @@ export interface EditTicket {
   expiryDate?: string;
   floorId?: number;
   locationId?: number;
-  sectionId?: number;
   totalPrice?: string;
   ticketTypeId?: number;
   rate?: number;

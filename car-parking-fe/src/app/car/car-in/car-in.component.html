@@ -21,35 +21,34 @@
             </div>
             <div>
               <div class="col-0"></div>
-              <div class="col-12 container-fluid ">
-                <div class="row">
-                  <div class="col-1"></div>
+              <div class="col-11 container-fluid ">
+                <div class="row" style="margin-left: 5%">
+
                   <div class="col-9" style="text-align: right">
                     <form class="d-flex"
-                          style="margin-top: 10px; margin-bottom: 20px;margin-left: 40px">
+                          style="margin-top: 10px; margin-bottom: 5px;margin-left: 10px">
                       <div class="col-4">
-                        <label style="float: left">Tên khách hàng:</label>
+                        <div><label style="float: left;font-weight: bolder">Tên khách hàng:</label></div>
                         <input class="form-control me-2" type="search" #customerName
                                placeholder="Nhập tên khách hàng"
                                aria-label="Search" style="border: 1px solid #b6effb">
                       </div>
                       <div class="col-4" style="margin-left: 20px">
-                        <label style="float: left">Số điện thoại:</label>
+                        <label style="float: left;font-weight: bolder">Số điện thoại:</label>
                         <input class="form-control me-2" type="search" #customerPhoneNumber
                                placeholder="Nhập số điện thoại"
-                               aria-label="Search" style="border: 1px solid #b6effb">
+                               aria-label="Search" style="border: 1px solid #b6effb;margin-top: 20px">
                       </div>
                       <div class="col-4" style="margin-left: 20px">
-                        <label style="float: left">Biển số xe:</label>
+                        <label style="float: left;font-weight: bolder">Biển số xe:</label>
                         <input class="form-control me-2" type="search" #carPlateNumber
                                placeholder="Nhập biển số xe"
-                               aria-label="Search" style="border: 1px solid #b6effb">
+                               aria-label="Search" style="border: 1px solid #b6effb;margin-top: 20px">
                       </div>
                       <div style="margin-left:20px;margin-top: 25px">
                         <button class="btn" type="submit"
                                 (click)="searchCarIn(customerName.value,customerPhoneNumber.value,carPlateNumber.value)"
                                 style="text-align: center; size: 5px; border: 0px solid #B6EFFB;background-color: darkorange;width: 100px">
-                          <!--                          <i class="fa-solid fa-magnifying-glass"></i>-->
                           Tìm kiếm
                         </button>
                       </div>
@@ -58,15 +57,12 @@
                   </div>
                 </div>
                 <div>
-                  <h1 style="size:32px; margin-top: 60px; margin-bottom: 40px; text-align: center">
+                  <h1 style="size:32px; margin-top: 30px; margin-bottom: 40px; text-align: center">
                     BẢNG LỰA CHỌN</h1>
                 </div>
 
-
-                <table class=" table-bordered table-hover"
-                       style="table-layout: fixed; width: 100%;box-shadow: 0 0 10px 0 #253365">
-                  <!--                <table class="container  fixed-size-table table table-hover table-bordered"-->
-                  <!--                       style=";width: 95%;margin-bottom: 20px;border-radius:10px">-->
+                <table class="table table-bordered table-hover mt-3"
+                       style="text-align: center;box-shadow: 0 0 10px 0 #253365">
                   <thead style="background-color: #E67E22">
                   <tr style="font-size: 19px;text-align: center">
                     <th scope="col">STT</th>
