@@ -556,7 +556,7 @@
               </div>
               <div align="center" class="px-5 py-4">
                 <button type="button" class="btn btn-secondary" routerLink="/customer/list">Quay lại</button>
-                <button style="margin-left: 10px;background-color:  #E67E22" class="btn">
+                <button style="margin-left: 10px;background-color:  #E67E22" class="btn" [disabled]="formEditCustomer.invalid">
                   Lưu thay đổi
                 </button>
               </div>
