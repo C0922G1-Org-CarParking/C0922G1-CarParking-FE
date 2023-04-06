@@ -15,3 +15,7 @@
 svg {
   color: #007bff;
 }
+.error {
+  text-align: center;
+  color: red;
+}

@@ -13,11 +13,13 @@
               <div class="form-outline mb-4">
                 <input type="email" id="form2Example1" autofocus formControlName="username" class="form-control"
                        placeholder="Tài khoản email"/>
+                <p class="error" *ngIf="loginForm.controls.username?.errors?.required && loginForm.controls.username?.touched">Xin vui lòng nhập địa chỉ email.</p>
+                <p class="error" *ngIf="loginForm.controls.username?.errors?.email && loginForm.controls.username?.touched">Địa chỉ email không đúng định dạng.</p>
               </div>
-
               <div class="form-outline mb-4">
                 <input type="password" id="form2Example2" formControlName="password" class="form-control"
                        placeholder="Mật khẩu"/>
+                <p class="error" *ngIf="loginForm.controls.password?.errors?.required && loginForm.controls.password?.touched">Xin vui lòng nhập mật khẩu.</p>
               </div>
 
               <div class="row mb-4">

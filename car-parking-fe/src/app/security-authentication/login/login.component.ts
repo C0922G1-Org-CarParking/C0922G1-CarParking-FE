@@ -1,5 +1,5 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import {LoginService} from '../service/login.service';
 import {Router} from '@angular/router';
@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
     }
     this.view();
     this.loginForm = new FormGroup({
-      username: new FormControl(),
-      password: new FormControl(),
+      username: new FormControl('',[Validators.email, Validators.required]),
+      password: new FormControl('',[Validators.required]),
       rememberMe: new FormControl()
     });
     if (this.tokenStorageService.getToken()) {

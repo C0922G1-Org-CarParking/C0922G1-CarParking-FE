@@ -11,9 +11,13 @@ import {Router} from '@angular/router';
 })
 export class HomePageNewsListComponent implements OnInit {
   parkingNews?: ParkingNews[];
-  totalPage: number;
-  pageNumber = 0;
   keyword = '';
+  pageCount = 0;
+  pageNumbers: number[] = [];
+  totalPages = 0;
+  currentPage = 0;
+  pageToDisplay: (number | string)[];
+  mess = '';
 
   constructor(private http: HttpClient,
               private parkingNewsService: ParkingNewsService,
@@ -21,39 +25,86 @@ export class HomePageNewsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getParkingNews(this.keyword, this.pageNumber);
+    this.getParkingNews();
   }
 
-  searchParkingNews() {
-    this.getParkingNews(this.keyword, 0);
-  }
-
-
-  previousNews() {
-    if (this.pageNumber === 0) {
-      this.getParkingNews(this.keyword, this.pageNumber);
-    } else {
-      this.getParkingNews(this.keyword, this.pageNumber - 1);
-    }
-  }
-
-
-  nextNews() {
-    if (this.pageNumber + 1 === this.totalPage) {
-      this.getParkingNews(this.keyword, this.pageNumber);
-    } else {
-      this.getParkingNews(this.keyword, this.pageNumber + 1);
-    }
-  }
-
-  getParkingNews(keyword: string, page: number) {
-    this.parkingNewsService.getListParkingNews(keyword, page).subscribe((items) => {
+  getParkingNews() {
+    this.mess = '';
+    this.parkingNewsService.getListParkingNews(this.keyword, this.currentPage).subscribe((items) => {
+      if(items === null) {
+        this.mess = 'Không tìm thấy tin tức có từ khóa: ' + this.keyword;
+        this.parkingNews = null;
+        this.pageToDisplay = null;
+      }
       this.parkingNews = items.content;
-      this.totalPage = items.totalPages;
-      this.pageNumber = items.pageable.pageNumber;
+      this.pageCount = items.totalPages;
+      this.currentPage = items.pageable.pageNumber;
     }, error => {
-      debugger
       this.route.navigateByUrl('/error');
+    }, () => {
+      this.pageToDisplay = this.pageNumbersToDisplay;
     });
   }
+
+  searchNews() {
+    this.currentPage = 0;
+    this.getParkingNews();
+  }
+
+  getAllNews() {
+    this.keyword = '';
+    this.currentPage = 0;
+    this.getParkingNews();
+  }
+
+  get pageNumbersToDisplay() {
+    const currentPageIndex = this.currentPage;
+    const totalPageCount = this.pageCount;
+    const pagesToShow = 3;
+
+    if (totalPageCount <= pagesToShow) {
+      return Array.from({ length: totalPageCount }, (_, i) => i + 1);
+    }
+
+    const startPage = Math.max(0, currentPageIndex - Math.floor(pagesToShow / 2));
+    let endPage = startPage + pagesToShow - 1;
+
+    if (endPage >= totalPageCount) {
+      endPage = totalPageCount - 1;
+    }
+
+    let pageNumbersToDisplay: (number | string)[] = Array.from({ length: endPage - startPage + 1 }, (_, i) => i + startPage + 1);
+
+    if (startPage > 0) {
+      pageNumbersToDisplay = [ '...', ...pageNumbersToDisplay];
+    }
+
+    if (endPage < totalPageCount - 1) {
+      pageNumbersToDisplay = [...pageNumbersToDisplay, '...'];
+    }
+
+    return pageNumbersToDisplay;
+  }
+
+  previousPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+    }
+    this.getParkingNews();
+  }
+
+  nextPage() {
+    if (this.currentPage < this.pageCount - 1) {
+      this.currentPage++;
+    }
+    this.getParkingNews();
+  }
+
+  goToPage(pageNumber: number | string) {
+    if (typeof pageNumber === 'number') {
+      this.currentPage = pageNumber - 1;
+    }
+    this.getParkingNews();
+  }
+
 }

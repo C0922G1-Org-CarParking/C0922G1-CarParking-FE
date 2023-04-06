@@ -22,10 +22,11 @@ const routes: Routes = [{
 //   path: 'update/:id/:idLocation',
 //   component: TicketUpdateComponent
 // }
-  , {
-  path: 'update/:id/:idFloor',
-  component: TicketUpdateComponent
-}, {
+//   , {
+//   path: 'update/:id/:idFloor',
+//   component: TicketUpdateComponent
+// }
+, {
   path: '',
   pathMatch: 'full',
   redirectTo: 'list'

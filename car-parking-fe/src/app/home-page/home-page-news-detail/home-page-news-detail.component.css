@@ -11,6 +11,7 @@ h5,
 
 p {
   text-align: justify;
+  font-size: 20px;
 }
 
 section {
@@ -24,9 +25,10 @@ a {
 }
 
 
-.head-title,  .head-title a {
+.head-title,  .head-title  {
   color: #5c5c5c;
-  font-size: 14px;
+  font-size: 18px;
+  /*font-weight: bold;*/
 }
 
 .head-title  a:hover{
@@ -40,13 +42,12 @@ a {
 
 .section-title {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 50px;
   padding-bottom: 30px;
 }
 
 .section-title h2 {
-  font-size: 18px;
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 700;
   color: #4e4039;
   margin-top: auto;

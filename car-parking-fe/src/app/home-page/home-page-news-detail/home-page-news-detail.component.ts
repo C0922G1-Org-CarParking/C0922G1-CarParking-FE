@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   templateUrl: './home-page-news-detail.component.html',
   styleUrls: ['./home-page-news-detail.component.css']
 })
+
 export class HomePageNewsDetailComponent implements OnInit {
   id?: number;
   parkingNews: ParkingNews;

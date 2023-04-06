@@ -36,7 +36,7 @@ export class EmployeeService {
    * @return id
    */
   findById(id: number): Observable<Employee> {
-    return this.http.get<Employee>('http://localhost:8080/api/admin' + id);
+    return this.http.get<Employee>('http://localhost:8080/api/admin/' + id);
   }
 
   /**

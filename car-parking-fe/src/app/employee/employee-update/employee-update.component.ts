@@ -59,7 +59,6 @@ export class EmployeeUpdateComponent implements OnInit {
     });
     this.activatedRoute.paramMap.subscribe(next => {
       const id = next.get('id')
-      // tslint:disable-next-line:no-shadowed-variable radix
       employeeService.findById(parseInt(id)).subscribe(next => {
         this.employee = next;
         this.employeeGroup.patchValue(next);
@@ -100,11 +99,10 @@ export class EmployeeUpdateComponent implements OnInit {
     if (this.employeeGroup.valid) {
       this.employeeService.editEmployee(this.employeeGroup.value).subscribe(next => {
           this.router.navigateByUrl('employee/list');
-          Swal.fire(
-            'Updated!',
-            'Your file has been updated.',
-            'success'
-          );
+          Swal.fire({
+              title:'Sửa thành công!',
+              icon: 'success'
+          });
         }, error => {
           console.log(error);
           Swal.fire({

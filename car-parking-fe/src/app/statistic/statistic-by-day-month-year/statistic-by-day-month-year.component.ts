@@ -1,8 +1,17 @@
 import {Component, OnInit} from '@angular/core';
+
+import Chart from 'chart.js/auto';
+import {registerables} from 'chart.js';
+
 import {TicketService} from "../../service/ticket.service";
-import {Ticket} from "../../model/ticket";
 import {CustomerService} from "../../service/customer.service";
-import {Customer} from "../../model/customer";
+
+
+Chart.register(...registerables)
+// Chart.defaults.global.defaultFontFamily = 'Lato';
+// Chart.defaults.global.defaultFontSize = 25;
+// Chart.defaults.global.defaultFontColor = '#777';
+
 
 @Component({
   selector: 'app-statistic-by-day-month-year',
@@ -11,68 +20,89 @@ import {Customer} from "../../model/customer";
 })
 export class StatisticByDayMonthYearComponent implements OnInit {
 
-  ticketList: any[] = []
-  customerList: any[] = []
-  monthList: any[] = []
-  monthId:any
-
-
-
+  ticketList: number[] = []
+  customerList: number[] = []
+  monthList: string[] = []
+  errorMessage: boolean = false;
 
   constructor(private ticketService: TicketService, private customer: CustomerService) {
   }
 
   ngOnInit(): void {
-    this.renderChart(this.ticketList, this.customerList , this.monthList);
+    this.renderChart();
   }
 
-  private renderChart(ticketList,customerList,monthList) {
-    // Global Options
-    // Chart.defaults..defaultFontFamily = 'Lato';
-    // Chart.defaults.global.defaultFontSize = 20;
-    // Chart.defaults.global.defaultFontColor = '#777';
-    let array = ["Tháng 1", "Tháng 3", "Tháng 5", "Tháng 7", "Tháng 9", "Tháng 12"]
+  statistics(sinceMonthh, toMonthh , year) {
+    if (sinceMonthh > toMonthh){
+      return this.errorMessage = true
+    }
+    let sinceMonth = parseInt(sinceMonthh)
+    let toMonth = parseInt(toMonthh)
+    this.monthList = []
+    for (let i = sinceMonth; i <= toMonth; i++) {
+      this.monthList.push("Tháng " + i);
+    }
 
-    // @ts-ignore
-    // @ts-ignore
-    const myChart = new Chart("myChart", {
+    this.ticketService.getTotalCustomerOfMonth(sinceMonth, toMonth , year).subscribe((customerList) => {
+      this.customerList = customerList;
+      this.ticketService.getTotalTicketOfMonth(sinceMonth, toMonth , year).subscribe((ticketList) => {
+        this.ticketList = ticketList;
+        this.renderChart()
+        // });
+      });
+    });
+    debugger
+    console.log(this.monthList)
+    console.log(this.customerList)
+  }
+
+
+  renderChart() {
+    let myChart = document.getElementById('myChart');
+    let chart = Chart.getChart('myChart');
+    if (chart) {
+      chart.destroy();
+    }    debugger
+    new Chart(myChart, {
       type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
       data: {
-        labels: array,
+        labels: this.monthList,
         datasets: [
           {
-            label: 'Số lượng vé',
-            data: ticketList,
-            backgroundColor: [
-              'rgb(255,99,132)',
-            ],
+            label: 'Số lượng khách hàng',
+            data: this.customerList,
+            backgroundColor: 'rgb(255,99,132)',
             borderWidth: 1,
             borderColor: '#777',
             hoverBorderWidth: 3,
             hoverBorderColor: '#000',
+
+
           },
           {
-            label: "Số lượng khách hàng",
-            data: customerList,
+            label: "Số lượng vé",
+            data: this.ticketList,
             // fill: false,
-            borderColor: "rgb(189,0,0, 2)",
+            borderColor: '#777',
             // lineTension: 0.1,
-            backgroundColor: [
-              'rgb(54,162,235)',
-            ],
+            backgroundColor: "rgb(54,162,235)",
+            borderWidth: 1,
+            hoverBorderWidth: 3,
+            hoverBorderColor: '#000',
             stack: 'Stack 2' // Đặt tên cho phân tầng
 
           }
         ]
       },
       options: {
-        // legend: {
-        //   display: true,
-        //   position: 'right',
-        //   labels: {
-        //     fontColor: '#000'
-        //   }
-        // },
+        legend: {
+          display: true,
+          position: 'right',
+          labels: {
+            fontColor: '#000',
+            fontsize: 30
+          }
+        },
         layout: {
           padding: {
             left: 50,
@@ -81,37 +111,16 @@ export class StatisticByDayMonthYearComponent implements OnInit {
             top: 0
           }
         },
-        // tooltips: {
-        //   enabled: true
-        // }
-      }
+        tooltips: {
+          enabled: true
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
+      defaultFontFamily: 'Lato',
+      defaultFontSize: 30,
+      defaultFontColor: '#777'
     });
-
-  }
-   getTotalTicketOfMonth(month: number) {
-    // this.ticketService.getTotalTicketOfMonth(month).subscribe(data=>{
-    //
-    //
-    // })
   }
 
-  statistics(value: string, value2: string) {
-    let sinceMonth = parseInt(value)
-    let toMonth = parseInt(value2)
-
-
-
-    for (let i = sinceMonth ; i <= toMonth ;i++){
-      this.monthList.push(i)
-      this.ticketList.push(this.getTotalTicketOfMonth(i))
-      this.customerList.push(this.getTotalCustomerOfMonth(i))
-    }
-  }
-
-
-
-
-  private getTotalCustomerOfMonth(i: number) {
-
-  }
 }

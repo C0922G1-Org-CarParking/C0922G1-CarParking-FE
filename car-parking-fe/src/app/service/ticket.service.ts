@@ -7,6 +7,10 @@ import {TicketDtoForList} from "../model/ticket-dto-for-list";
 import {TicketType} from "../model/ticket-type";
 import {Floor} from "../model/floor";
 import {Ticket} from "../model/ticket";
+import {ILocation} from "../model/ilocation";
+import {Section} from "../model/section";
+import {UpdateTicket} from "../model/update-ticket";
+import {Employee} from "../model/employee";
 
 
 const API_URL = `${environment.apiUrl}`;
@@ -64,8 +68,8 @@ export class TicketService {
   deleteTicket(idDelete: number): Observable<any> {
     return this.http.delete<any>(`http://localhost:8080/api/user/ticket/delete/${idDelete}`)
   }
-  createTicket(ticket: Ticket):Observable<Ticket> {
 
+  createTicket(ticket: Ticket):Observable<Ticket> {
     return this.http.post<Ticket>("http://localhost:8080/api/user/ticket/createTicket" , ticket)
   }
 
@@ -79,15 +83,66 @@ export class TicketService {
       + "&effectiveDate="+effective +"&rate=" +rate);
   }
   findByTicketId(ticketId: number): Observable<EditTicket> {
-    return this.http.get<EditTicket>('http://localhost:8080/api/user/ticket/' + ticketId);
+    return this.http.get<EditTicket>('http://localhost:8080/api/user/ticket/edit/' + ticketId);
   }
-
-  updateTicket(editTicket: EditTicket) {
-    return this.http.put('http://localhost:8080/api/user/ticket/update/', editTicket)
-  }
+  //
+  // updateTicket(editTicket: EditTicket) {
+  //   return this.http.put('http://localhost:8080/api/user/ticket/update/', editTicket)
+  // }
 
   getRenewalPrice(expiryDate: string, effectiveDate: string, rate: number): Observable<any> {
     return this.http.get(this.URL_GET_PRICE + "?expiryDate=" + expiryDate + "&effectiveDate="
       + effectiveDate + "&rate=" + rate);
   }
+
+  ///
+  // updateTicket(editTicket: EditTicket, id: number) {
+  //
+  //   return this.http.put('http://localhost:8080/ticket/update/' + id, editTicket)
+  // }
+  updateTicketType(editTicket: UpdateTicket) {
+    return this.http.put('http://localhost:8080/api/user/ticket/update' , editTicket)
+  }
+
+  findSectionByFloor(idFloor: number): Observable<ILocation[]> {
+    debugger
+    return this.http.get<ILocation[]>('http://localhost:8080/api/user/ticket/findLocation/' + idFloor);
+  }
+
+  findLocationByFloor(idFloor: number): Observable<ILocation[]> {
+    debugger
+    return this.http.get<ILocation[]>('http://localhost:8080/api/user/ticket/findLocation/' + idFloor);
+  }
+
+  getListFloor(): Observable<Floor[]> {
+    return this.http.get<Floor[]>('http://localhost:8080/api/user/ticket/listFloor')
+  }
+
+  listSectionById(id: number):Observable<Section[]> {
+    return this.http.get<Section[]>('http://localhost:8080/api/user/ticket/listSection/' + id );
+  }
+
+  listLocation(floorId :number , sectionId: number):Observable<ILocation[]> {
+    return this.http.get<ILocation[]>('http://localhost:8080/api/user/ticket/listLocation?floorId=' +floorId +"&sectionId=" +sectionId);
+  }
+
+  getTotalCustomerOfMonth(sinceMonth: number, toMonth: number , year:number):Observable<number[]> {
+    debugger
+    return this.http.get<number[]>('http://localhost:8080/api/user/ticket/statisticalCustomerChart?sinceMonth='+sinceMonth
+      + "&toMonth="+toMonth +"&year=" + year);
+  }
+
+  getTotalTicketOfMonth(sinceMonth:number,toMonth:number, year:number):Observable<number[]> {
+    return this.http.get<number[]>('http://localhost:8080/api/user/ticket/statisticalTicketChart?sinceMonth='+sinceMonth
+      + "&toMonth="+toMonth +"&year=" + year);
+  }
+
+  listEmployee(): Observable<Employee[]> {
+    return this.http.get<Employee[]>('http://localhost:8080/api/user/ticket/listEmployee');
+  }
+
+  listFloor():Observable<Floor[]> {
+    return this.http.get<Floor[]>('http://localhost:8080/api/user/ticket/listFloor');
+  }
+
 }

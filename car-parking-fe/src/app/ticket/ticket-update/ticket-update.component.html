@@ -1,208 +1,215 @@
-<div class="row">
-  <div class="col-0"></div>
-  <div class="col-12">
-    <div class="container-builder">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-xl-9">
+<!--  <div class="container">-->
+<!--    <div class="row d-flex justify-content-center align-items-center h-100" style="margin-left:10%;margin-right:10%;">-->
+<!--      <div class="card" style="border-radius: 1%;box-shadow: 0 0 15px 0 #253365 ">-->
+<!--        <div class="card-body"-->
 
-          <div class="card" style="border-radius: 30px;">
-            <div class="card-body" style="box-shadow: 0 0 20px 0 #253365">
-              <form *ngIf="editTicketForm"  [formGroup]="editTicketForm" (ngSubmit)="editInfoTicket()">
-                <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px">CHỈNH SỬA VÉ</h1>
-                <div class="row d-flex">
-                  <div class="row align-items-center py-3 col-6">
-                    <div class="col-4">
-                      <label style="font-weight: bold">Tên khách hàng:<b
-                        style="color: red">*</b></label>
-                    </div>
-                    <div class="col-8">
-                        <input class="form-control" type="text" readonly formControlName="customerName">
-                    </div>
-                  </div>
 
-                  <div class="row align-items-center py-3 col-6">
-                    <div class="col-4">
-                      <label style="font-weight: bold">Biển số xe:<b
-                        style="color: red">*</b></label>
-                    </div>
-                    <div class="col-8">
-                      <input class="form-control" type="text" readonly formControlName="plateNumber">
-                    </div>
-                  </div>
+<div style="margin-top: 7%;margin-bottom:1%">
+  <div class="container">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+
+      <div class="card" style="border-radius: 30px;box-shadow: 0 0 30px 0 #253365">
+        <div class="card-body">
+          <form *ngIf="editTicketForm" [formGroup]="editTicketForm" (ngSubmit)="editInfoTicket()">
+            <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px">CHỈNH
+              SỬA VÉ</h1>
+            <div class="row d-flex">
+              <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold">Tên khách hàng:<b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-8">
+                  <input class="form-control" type="text" readonly formControlName="customerName">
                 </div>
 
-                <div class="row d-flex">
-                  <div class="row align-items-center py-3 col-6">
-                    <div class="col-4">
-                      <label style="font-weight: bold">Số điện thoại:<b
-                        style="color: red">*</b></label>
-                    </div>
-                    <div class="col-8">
-                      <input class="form-control" type="text" readonly formControlName="phoneNumber">
-                    </div>
-                  </div>
+              </div>
 
-
-                  <div class="row align-items-center py-3 col-6">
-                    <div class="col-4">
-                      <label style="font-weight: bold" class="mb-0">Thời gian bắt đầu:<b
-                        style="color: red">*</b></label>
-                    </div>
-                    <div class="col-8">
-                      <input class="form-control" type="date" readonly formControlName="effectiveDate">
-                    </div>
-                  </div>
+              <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold">Biển số xe:<b
+                    style="color: red">*</b></label>
                 </div>
-
-                <div class="row ">
-                  <div class="row align-items-center py-3 col-6">
-                    <div class="col-4">
-                      <label style="font-weight: bold">Thời gian kết thúc: <b
-                        style="color: red">*</b></label>
-                    </div>
-                    <div class="col-8">
-                      <input class="form-control" type="date" readonly formControlName="expiryDate">
-                    </div>
-                  </div>
-                  <div class="row align-items-center py-3 col-6">
-                    <div class="col-4">
-                      <label style="font-weight: bold">Tầng:<b
-                        style="color: red">*</b></label>
-                    </div>
-                    <div class="col-8">
-                      <input class="form-control" type="text" readonly formControlName="floorId">
-                    </div>
-                  </div>
+                <div class="col-8">
+                  <input class="form-control" type="text" readonly formControlName="plateNumber">
                 </div>
-
-                <div class="row d-flex">
-                  <div class="row align-items-center py-3 col-6">
-                    <div class="col-4">
-                      <label style="font-weight: bold">Vị trí:<b
-                        style="color: red">*</b></label>
-                    </div>
-                    <div class="col-8">
-                      <input class="form-control" type="text" readonly formControlName="sectionId">
-                    </div>
-                  </div>
-                  <div class="row align-items-center py-3 col-6">
-                    <div class="col-4">
-                      <label style="font-weight: bold">Dãy:<b
-                        style="color: red">*</b></label>
-                    </div>
-                    <div class="col-8">
-                      <input class="form-control" type="text" readonly formControlName="sectionId">
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="row d-flex">
-                  <div class="row align-items-center py-3 col-6">
-                    <div class="col-4">
-                      <label style="font-weight: bold" class="mb-0">Loại vé: <b
-                        style="color: red">*</b></label>
-                    </div>
-                    <div class="col-8">
-                      <select class="form-select" formControlName="ticketTypeId">
-                        <option value="" selected>---Chọn loại vé---</option>
-                        <option *ngFor="let item of ticketTypeList" [value]="item.id">{{item.name}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row align-items-center py-3 col-6">
-                    <div class="col-4">
-                      <label style="font-weight: bold">Ngày gia hạn: <b
-                        style="color: red">*</b></label>
-                    </div>
-                    <div class="col-8">
-                      <input #element (input)="getRenewalPrice(element.value)" class="form-control" type="date">
-                    </div>
-                  </div>
-
-                </div>
-
-
-                <div class="row d-flex">
-                  <div class="row align-items-center py-3 col-6">
-                    <div class="col-4">
-                      <label style="font-weight: bold">Giá:<b style="color: red">*</b></label>
-                    </div>
-                    <div class="col-8">
-                      <input [value]="totalPrice" class="form-control" type="text" readonly>
-                    </div>
-                  </div>
-
-                  <div class="row align-items-center py-3 col-6">
-                    <div>
-
-                    </div>
-                    <button type="button" class="btn" routerLink="/location/mapParking/1"
-                            style="background-color: darkorange">Xem bản đồ
-                    </button>
-                  </div>
-                </div>
-
-
-                <div class="row d-flex">
-                  <div class="row align-items-center py-3 col-6">
-                  </div>
-
-                  <div align="center" class="px-5 py-4">
-                    <button type="button" class="btn" style="background-color: #e4e6eb">Hủy</button>
-                    <button type="submit" class="btn" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
-                            style="background-color: darkorange;margin-left: 10px">Lưu
-                    </button>
-
-                  </div>
-                </div>
-
-                <!--                                <div align="center" class="px-5 py-4">-->
-                <!--                                    <button type="button" class="btn" style="background-color: #e4e6eb">Quay lại</button>-->
-
-                <!--                                    &lt;!&ndash;                                    <button style="margin-left: 10px" type="button" class="btn btn-warning"&ndash;&gt;-->
-                <!--                                    &lt;!&ndash;                                            data-bs-toggle="modal" data-bs-target="#exampleModal">&ndash;&gt;-->
-                <!--                                    &lt;!&ndash;                                        Lưu&ndash;&gt;-->
-                <!--                                    &lt;!&ndash;                                    </button>&ndash;&gt;-->
-                <!--                                    <button type="button" class="btn" data-bs-toggle="modal"-->
-                <!--                                            data-bs-target="#exampleModal" style="background-color: darkorange;margin-left: 10px">Lưu-->
-                <!--                                    </button>-->
-
-                <!--                                </div>-->
-              </form>
+              </div>
             </div>
-          </div>
+
+            <div class="row d-flex">
+              <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold">Số điện thoại:<b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-8">
+                  <input class="form-control" type="text" readonly formControlName="phoneNumber">
+                </div>
+              </div>
+
+
+              <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold" class="mb-0">Thời gian bắt đầu:<b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-8">
+                  <input class="form-control" type="date" readonly formControlName="effectiveDate">
+                </div>
+              </div>
+            </div>
+
+            <div class="row ">
+              <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold">Thời gian kết thúc: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-8">
+                  <input class="form-control" type="date" readonly formControlName="expiryDate">
+                </div>
+              </div>
+              <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold" class="mb-0">Tầng: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-8">
+                  <select (focus)="getListSectionOfFloor(floor.value)" #floor class="form-select"
+                          formControlName="floorId">
+                    <option disabled value="" selected>---Chọn tầng---</option>
+                    <option *ngFor="let floor of floorList" [value]="floor.id">{{floor.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row d-flex">
+              <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold" class="mb-0">Loại vé: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-8">
+                  <select (change)="onChange()" class="form-select" formControlName="ticketType">
+                    <option value="" selected>---Chọn loại vé---</option>
+                    <option *ngFor="let item of ticketTypeList" [value]="item.id">{{item.name}}</option>
+                  </select>
+                  <p style="color: red"
+                     *ngIf="editTicketForm.controls.ticketType.touched && editTicketForm.controls.ticketType?.errors?.required">
+                    * Vui lòng chọn loại vé!</p>
+                </div>
+              </div>
+              <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold">Dãy:<b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-8">
+                  <p *ngIf="!sectionList" style="color: red">* Vui lòng chọn tầng</p>
+                  <select *ngIf="sectionList" (focus)="getListLocationOfFloor(floor.value,section.value)" #section class="form-select"
+                          formControlName="floorId">
+                    <option disabled value="" selected>---Chọn dãy---</option>
+                    <option *ngFor="let section of sectionList" [value]="section.id">{{section.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row d-flex">
+              <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold">Ngày gia hạn: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-8">
+                  <input #element (change)="getRenewalPrice(element.value)" [value]="newExpiryDate" class="form-control"
+                         readonly type="text">
+                </div>
+
+              </div>
+              <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold" class="mb-0">Vị trí: <b
+                    style="color: red">*</b></label>
+                </div>
+                <div class="col-8">
+                  <div *ngIf="!locationList"><p style="color: red">* Vui lòng chọn dãy</p></div>
+                  <select *ngIf="locationList" class="form-select" formControlName="locationId">
+                    <option disabled value="" selected>---Chọn vị trí---</option>
+                    <option *ngFor="let location of locationList" [value]="location.id">{{location.name}}</option>
+                  </select>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="row d-flex">
+              <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold">Giá(VNĐ):<b style="color: red">*</b></label>
+                </div>
+                <div class="col-8">
+                  <input [value]="priceNew| number" class="form-control" formControlName="priceNew" type="text"
+                         readonly>
+                </div>
+
+
+              </div>
+
+              <div class="row align-items-center py-3 col-6">
+
+
+              </div>
+            </div>
+
+
+            <div class="row d-flex">
+              <div class="row align-items-center py-3 col-6">
+              </div>
+              <div align="center" class="px-5 py-4">
+                <button type="button" class="btn" style="background-color: #e4e6eb">Hủy</button>
+                <button type="submit" class="btn" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        style="background-color: darkorange;margin-left: 10px">Lưu
+                </button>
+              </div>
+            </div>
+
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
 <div class="col-2"></div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Bạn có muốn lưu chỉnh sửa thông tin vé hay không ?
-      </div>
-      <div class="modal-footer">
-        <!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>-->
-        <button type="submit" class="btn m-4 w-25" data-bs-dismiss="modal" style="background-color: #e4e6eb">
-          Hủy
-        </button>
-        <!--                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Có</button>-->
-        <button type="button" class="btn m-4 w-25" data-bs-dismiss="modal" style="background-color: darkorange">
-          Có
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        Bạn có muốn lưu chỉnh sửa thông tin vé hay không ?-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="submit" class="btn m-4 w-25" data-bs-dismiss="modal" style="background-color: #e4e6eb">-->
+<!--          Hủy-->
+<!--        </button>-->
+<!--        <button type="button" class="btn m-4 w-25" data-bs-dismiss="modal" style="background-color: darkorange">-->
+<!--          Có-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 
 
