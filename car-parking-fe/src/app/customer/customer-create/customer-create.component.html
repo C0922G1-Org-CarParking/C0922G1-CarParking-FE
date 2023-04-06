@@ -1,6 +1,5 @@
-<div class="row container">
-  <div class="col-md-1"></div>
-  <div class="col-md-10" style="margin-left: 15%">
+
+<div class="row d-flex justify-content-center align-items-center" style="margin-left: 5%;margin-right: 5%;margin-top: 7%">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-md-10">
         <div class="card" style="border-radius: 15px;">
@@ -18,15 +17,15 @@
                     <div style="position: absolute">
                       <div style="color: red" *ngIf="messCustomerName">{{messCustomerName}}</div>
                       <div style="color: red" *ngIf="messCustomerNamePattern">{{messCustomerNamePattern}}</div>
-                      <span
+                      <div
                         *ngIf="customerForm.controls.name?.touched && customerForm.controls.name?.errors?.required"
-                        style="color: red;">Tên khách hàng không được để trống.</span>
-                      <span *ngIf="customerForm.controls.name?.errors?.pattern"
+                        style="color: red;">Tên khách hàng không được để trống.</div>
+                      <div *ngIf="customerForm.controls.name?.errors?.pattern"
                             style="color: red;">
-                        Tên khách hàng không được nhập số và ký tự đặc biệt.</span>
-                      <span *ngIf="customerForm.controls.name?.errors?.maxlength"
+                        Tên khách hàng không được nhập số và ký tự đặc biệt.</div>
+                      <div *ngIf="customerForm.controls.name?.errors?.maxlength"
                             style="color: red;">
-                        Tên khách hàng không được quá 30 ký tự.</span>
+                        Tên khách hàng không được quá 30 ký tự.</div>
                     </div>
                   </div>
                 </div>
@@ -37,12 +36,11 @@
                   </div>
                   <div class="col-md-8" style="position: relative">
                     <input class="form-control" type="text" formControlName="idCard">
-
                     <div style="position: absolute">
                       <div style="color: red" *ngIf="messCCCD">{{messCCCD}}</div>
                       <div style="color: red" *ngIf="messCCCDPattern">{{messCCCDPattern}}</div>
                       <div *ngIf="customerForm.controls.idCard?.touched && customerForm.controls.idCard?.errors?.required" style="color: red; ">CCCD không được để trống.</div>
-                      <div *ngIf="customerForm.controls.idCard?.errors?.pattern" style="color: red; ">CCCD phải là 9 hoặc 12 số</div>
+                      <span *ngIf="customerForm.controls.idCard?.errors?.pattern" style="color: red; ">CCCD phải là 9 hoặc 12 số</span>
                     </div>
                   </div>
                 </div>
@@ -122,7 +120,7 @@
                         *ngIf="customerForm.controls.phoneNumber?.touched && customerForm.controls.phoneNumber?.errors?.required" style="color: red;">
                         Số điện thoại không được để trống.</span>
                       <span
-                        *ngIf="customerForm.controls.phoneNumber?.touched && customerForm.controls.phoneNumber?.errors?.pattern" style="color: red; ">
+                        *ngIf="customerForm.controls.phoneNumber?.errors?.pattern" style="color: red; ">
                         Số điện thoại nhập bị sai. Vui lòng kiểm tra lại.</span>
                     </div>
                   </div>
@@ -137,7 +135,7 @@
                   <select class="form-control" type="text"
                           style="margin-left: 3%" formControlName="province" #province
                           (click)="getProvince(province.value)">
-                    <option value="" selected>Chọn Tỉnh</option>
+                    <option [value]="province.value" selected disabled>Chọn Tỉnh</option>
                     <option *ngFor="let item of provinceList" [value]="item.code">{{item.name}}</option>
                   </select>
                 </div>
@@ -145,7 +143,7 @@
                   <select class="form-control" type="text"
                           style="margin-left: 3%" formControlName="district" #district
                           (click)="getDistrict(district.value)">
-                    <option value="" selected>Quận/Huyện</option>
+                    <option value="" selected disabled>Quận/Huyện</option>
                     <option *ngFor="let item of districtList" [value]="item.code">{{item.name}}</option>
                   </select>
                 </div>
@@ -153,7 +151,7 @@
                   <select class="form-control" type="text"
                           style="margin-left: 3%" formControlName="commune" #commune
                           (click)="getCommune(commune.value)">
-                    <option value="" selected>Phường/Xã</option>
+                    <option value="" selected disabled>Phường/Xã</option>
                     <option *ngFor="let item of communeList" [value]="item.code">{{item.name}}</option>
                   </select>
                 </div>
@@ -214,8 +212,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-1"></div>
-</div>
+
 
 <!--Modal thêm xe-->
 
@@ -237,42 +234,39 @@
             <div class="col-md-8">
               <div class="row align-items-center py-3">
                 <div class="col-3">
-                  <label style="font-weight: bold">Tên xe: <b
+                  <label style="font-weight: bold">Tên xe<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-9">
                   <input formControlName="name" class="form-control" type="text" style="position: relative">
                   <div style="position: absolute">
                     <p *ngIf="carForm.controls.name?.touched && carForm.controls.name?.errors?.required"
-                       style="color: red">Tên
-                      xe không được để trống.</p>
-                    <p *ngIf="carForm.controls.name?.touched && carForm.controls.name?.errors?.pattern"
-                       style="color: red">Tên
-                      xe không đúng. Vui lòng nhập lại.</p>
+                       style="color: red">Tên xe không được để trống.</p>
+                    <p *ngIf="carForm.controls.name?.errors?.pattern"
+                       style="color: red">Tên xe không được nhập kí tự đặt biệt.</p>
                   </div>
                 </div>
               </div>
               <div class="row align-items-center py-3">
                 <div class="col-md-3">
-                  <label style="font-weight: bold">Loại xe: <b
+                  <label style="font-weight: bold">Loại xe<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-9">
                   <select class="form-control" formControlName="carType" style="position: relative">
-                    <option value="" selected>Chọn loại xe</option>
+                    <option value="null" selected disabled>Chọn loại xe</option>
                     <option [ngValue]="c" *ngFor="let c of carTypeList">{{c.name }}</option>
                   </select>
                   <div style="position: absolute">
                     <p
                       *ngIf="carForm.controls.carType?.touched && carForm.controls.carType?.errors?.required"
-                      style="color: red">
-                      Loại xe không được để trống.</p>
+                      style="color: red">Loại xe không được để trống.</p>
                   </div>
                 </div>
               </div>
               <div class="row align-items-center py-3">
                 <div class="col-md-3">
-                  <label style="font-weight: bold">Biển số xe: <b
+                  <label style="font-weight: bold">Biển số xe<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-9">
@@ -283,15 +277,15 @@
                       style="color: red">
                       Biển số xe không được để trống.</p>
                     <p
-                      *ngIf="carForm.controls.plateNumber?.touched && carForm.controls.plateNumber?.errors?.pattern"
+                      *ngIf="carForm.controls.plateNumber?.errors?.pattern"
                       style="color: red">
-                      Biển số xe không đúng.Vui lòng nhập lại.</p>
+                      Biển số xe không được chứa ký tự đặt biệt và chữ thường.</p>
                   </div>
                 </div>
               </div>
               <div class="row align-items-center py-3">
                 <div class="col-md-3">
-                  <label style="font-weight: bold">Hãng xe: <b
+                  <label style="font-weight: bold">Hãng xe<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-9">
@@ -301,9 +295,9 @@
                     <p *ngIf="carForm.controls.brand?.touched && carForm.controls.brand?.errors?.required"
                        style="color: red">
                       Hãng xe không được để trống.</p>
-                    <p *ngIf="carForm.controls.brand?.touched && carForm.controls.brand?.errors?.pattern"
+                    <p *ngIf="carForm.controls.brand?.errors?.pattern"
                        style="color: red">
-                      Hãng xe không đúng . Vui lòng nhập lại.</p>
+                      Hãng xe không không được chứa ký tự đặt biệt và số.</p>
                   </div>
                 </div>
               </div>
