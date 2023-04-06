@@ -33,7 +33,7 @@ export class LocationMapComponent implements OnInit {
   }
 
   findMaxFloor() {
-    this.floorService.getAllFloor().subscribe(param => {
+    this.floorService.getAllFloors().subscribe(param => {
       this.totalPage = param;
       this.maxFloor = param.length + 1;
     });

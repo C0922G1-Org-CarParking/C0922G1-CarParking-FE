@@ -44,9 +44,9 @@ locationList: ILocation[] = [];
       console.log(next);
 
     });
-    this.floorService.getAllFloor().subscribe(data =>{
-      this.floorList = data;
-    })
+    // this.floorService.getAllFloor().subscribe(data =>{
+    //   this.floorList = data;
+    // })
     this.sectionService.getAllSection1().subscribe(data =>{
       this.sectionList1 = data
       console.log(data)

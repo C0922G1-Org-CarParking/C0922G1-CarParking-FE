@@ -14,15 +14,12 @@ export class FloorService {
   constructor(private http: HttpClient) {
   }
 
-  getAllFloor(): Observable<any> {
+  getAllFloors(): Observable<any> {
     return this.http.get<any>("http://localhost:8080/api/user/floor");
 
   }
 
-
-  listFloor():Observable<Floor[]> {
-    return this.http.get<Floor[]>('http://localhost:8080/api/user/ticket/listFloor');
+  getAllFloor(): Observable<Floor> {
+    return this.http.get<Floor>('http://localhost:8080/floor');
   }
-
-
 }
