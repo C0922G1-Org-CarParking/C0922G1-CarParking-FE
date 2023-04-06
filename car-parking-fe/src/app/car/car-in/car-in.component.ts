@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
+import {strict} from 'assert';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class CarInComponent implements OnInit {
   now: any;
   urlCarInImage = '../../../../assets/car-images/default.png';
   @ViewChild('uploadFile', {static: true}) public avatarDom: ElementRef | undefined;
+  private listEmpty: string;
 
   constructor(private carInOutService: CarInOutService,
               private router: Router,
@@ -197,6 +199,8 @@ export class CarInComponent implements OnInit {
     this.carInOutService.searchCarIn(customerName, customerPhoneNumber, carPlateNumber).subscribe(carInList => {
       console.log(carInList);
       this.dataList = carInList;
+    }, error => {
+      this.listEmpty = 'Danh sách trống.';
     });
   }
 

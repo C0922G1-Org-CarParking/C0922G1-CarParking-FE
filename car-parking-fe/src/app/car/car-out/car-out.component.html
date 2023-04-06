@@ -20,7 +20,7 @@
                     </button>
                   </div>
                   <div style="display: inline-block; float: right">
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    <button (click)="searchCarOut('','','')" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             class="btn" style="background-color: darkorange">
                       Tìm xe
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -288,6 +288,9 @@
                   </tr>
                   </thead>
                   <tbody style="text-align: center">
+                  <tr>
+                    <td colspan="9" *ngIf="listEmpty"><h5><i>{{listEmpty}}</i></h5></td>
+                  </tr>
                   <tr *ngFor="let item of dataList, let i = index">
                     <td>{{i + 1}}</td>
                     <td>{{item.carPlateNumber}}</td>

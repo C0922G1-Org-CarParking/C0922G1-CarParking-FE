@@ -18,6 +18,7 @@ export class CarOutComponent implements OnInit {
   now: any;
   urlCarOutImage = '../../../../assets/car-images/default.png';
   dataList: ICarInOut[];
+  private listEmpty: string;
 
   constructor(private carInOutService: CarInOutService,
               private router: Router,
@@ -32,7 +33,7 @@ export class CarOutComponent implements OnInit {
   onUpload(event) {
     this.plateNumberImage = event.target.files[0];
     const allowedFileTypes = ['image/jpeg', 'image/png'];
-    if (allowedFileTypes.indexOf(this.plateNumberImage.type) === -1){
+    if (allowedFileTypes.indexOf(this.plateNumberImage.type) === -1) {
       Swal.fire({
         title: 'Tập tin không hợp lệ',
         text: 'Vui lòng tải lại file ảnh đuôi .jpg hoặc .png',
@@ -58,7 +59,7 @@ export class CarOutComponent implements OnInit {
           hour12: false
         };
         let effectiveDate = new Date(this.carOut.ticketEffectiveDate).toLocaleString('vi-VN', options2);
-        let expiryDate  = new Date(this.carOut.ticketExpiryDate).toLocaleString('vi-VN', options2);
+        let expiryDate = new Date(this.carOut.ticketExpiryDate).toLocaleString('vi-VN', options2);
         this.carOut.ticketEffectiveDate = effectiveDate;
         this.carOut.ticketExpiryDate = expiryDate;
 
@@ -188,9 +189,12 @@ export class CarOutComponent implements OnInit {
   }
 
   searchCarOut(customerName: string, customerPhoneNumber: string, carPlateNumber: string) {
+    this.listEmpty = null;
     this.carInOutService.searchCarOut(customerName, customerPhoneNumber, carPlateNumber).subscribe(carInList => {
       console.log(carInList);
       this.dataList = carInList;
+    }, error => {
+      this.listEmpty = 'Danh sách trống.';
     });
   }
 
