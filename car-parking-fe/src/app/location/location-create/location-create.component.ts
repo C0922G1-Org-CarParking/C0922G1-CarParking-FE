@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 export class LocationCreateComponent implements OnInit {
 
   locationForm: FormGroup;
-  floorList: Floor[] = [];
+  floorList: any;
   sectionList: Section[] = [];
   clickButton: false;
   public isSelectedFloor;

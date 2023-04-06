@@ -29,15 +29,15 @@ export class LocationMapComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllLocationInFloor();
-    this.findMaxFloor();
+    // this.findMaxFloor();
   }
 
-  findMaxFloor() {
-    this.floorService.getAllFloor().subscribe(param => {
-      this.totalPage = param;
-      this.maxFloor = param.length + 1;
-    });
-  }
+  // findMaxFloor() {
+  //   this.floorService.getAllFloor().subscribe(param => {
+  //     this.totalPage = param;
+  //     this.maxFloor = param.length + 1;
+  //   });
+  // }
 
   findAllLocationInFloor() {
 
