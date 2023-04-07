@@ -166,6 +166,7 @@ export class TicketCreateComponent implements OnInit {
   private getCarListOfCustomerById(id: number) {
     this.customerService.getCarListOfCustomerById(id).subscribe(data => {
       this.carList = data
+      debugger
       this.messCar = false
       this.enableChooseCar = true
     })

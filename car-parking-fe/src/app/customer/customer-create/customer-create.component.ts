@@ -63,7 +63,7 @@ export class CustomerCreateComponent implements OnInit {
     this.carForm = this.fb?.group({
       id: new FormControl(),
       name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
-      plateNumber: new FormControl('', [Validators.required, Validators.pattern('^[A-Z1-9]+$')]),
+      plateNumber: new FormControl('', [Validators.required, Validators.pattern('^[A-Z0-9]+$')]),
       carType: new FormControl('', Validators.required),
       brand: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
       isDelete: new FormControl()
@@ -89,7 +89,6 @@ export class CustomerCreateComponent implements OnInit {
             icon: 'success',
             iconColor: 'darkorange',
             title: 'Thêm mới khách hàng thành công.',
-
             confirmButtonText: 'Xác nhận',
             confirmButtonColor: 'darkorange'
           })

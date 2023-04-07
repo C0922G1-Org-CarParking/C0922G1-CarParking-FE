@@ -4,6 +4,9 @@
 }
 
 @media (min-width: 992px) {
+  .form-login {
+    width: 75rem;
+  }
   .rounded-tr-lg-0 {
     border-top-right-radius: 0;
   }
