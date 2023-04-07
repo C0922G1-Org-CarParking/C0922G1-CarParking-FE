@@ -145,4 +145,16 @@ export class TicketService {
     return this.http.get<Floor[]>('http://localhost:8080/api/user/ticket/listFloor');
   }
 
+
+// ---------- huyNV up------
+
+  getTotalCustomerOfMonthOfRange(sinceMonth: number, toMonth: number, yearStart: number, yearEnd: number) {
+    return this.http.get<number[]>('http://localhost:8080/ticket/statisticalCustomerChartRange?sinceMonth='+sinceMonth
+      + "&toMonth="+toMonth +"&yearStart=" + yearStart + "&yearEnd=" + yearEnd);
+  }
+
+  getTotalTicketOfMonthOfRange(sinceMonth: number, toMonth: number, yearStart: number, yearEnd: number) {
+    return this.http.get<number[]>('http://localhost:8080/ticket/statisticalTicketChartRange?sinceMonth='+sinceMonth
+      + "&toMonth="+toMonth +"&yearStart=" + yearStart + "&yearEnd=" + yearEnd);
+  }
 }
