@@ -68,9 +68,21 @@ export class CustomerListComponent implements OnInit {
       this.getAll();
     }, error => {
       if (error.status === 404) {
-        Swal.fire('Xóa khách hàng không thành công, khách hàng đã bị xóa hoặc không tồn tại trong cơ sở dữ liệu', '', 'error');
+        Swal.fire({
+          icon: "error",
+          title: "Xoá không thành công",
+          text: 'Khách hàng vẫn còn thời hạn vé, chờ xác nhận từ email của khách hàng.',
+          confirmButtonText: 'Xác nhận',
+          confirmButtonColor: 'darkorange'
+        });
       } else if (error.status === 405) {
-        Swal.fire('Xóa không thành công, Khách hàng hiện tại vẫn còn thời hạn vé. Chờ xác nhận mail từ khách hàng', '', 'error');
+        Swal.fire({
+          icon: "error",
+          title: "Xoá không thành công",
+          text: 'Khách hàng vẫn còn thời hạn vé, chờ xác nhận từ email của khách hàng.',
+          confirmButtonText: 'Xác nhận',
+          confirmButtonColor: 'darkorange'
+        });
         this.customerService.sendEmail('duyhuynhzi767@gmail.com', idDelete).subscribe();
       } else {
         Swal.fire('Lỗi kết nối', '', 'error');

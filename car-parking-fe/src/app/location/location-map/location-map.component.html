@@ -182,12 +182,9 @@
     </div>
     <div style="float: left ;margin-top:5%; ">
       <p>Tầng:
-        <span class="btn " *ngFor="let floor of totalPage"  [style.background-color]="idFloor == floor.id ? '#b3c444' : '#d8dce1'" (click)="pageChange(floor.id)">{{floor.name}}</span>
+        <span class="btn " *ngFor="let floor of totalPage"  [style.background-color]="idFloor == floor.id ? 'darkorange' : 'white'" (click)="pageChange(floor.id)">{{floor.name}}</span>
       </p>
       <p style="margin-right: 34%" > Số chỗ trống:<strong> {{locationEmpty}}</strong></p>
     </div>
   </div>
 </div>
-
-
-

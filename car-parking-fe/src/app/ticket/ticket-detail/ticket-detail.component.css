@@ -1,0 +1,12 @@
+/*NhanPT new 07/04
+*/
+.my-table th, .my-table td{
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.my-table {
+  border: 1px solid black;
+}
+/*NhanPT new 07/04
+*/

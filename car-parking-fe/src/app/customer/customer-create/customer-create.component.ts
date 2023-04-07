@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Car} from '../../model/car';
 import {CarType} from '../../model/car-type';
 import {CustomerService} from 'src/app/service/customer.service';
@@ -45,7 +45,7 @@ export class CustomerCreateComponent implements OnInit {
     this.customerForm = this.fb?.group({
       id: new FormControl(),
       name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-ZÀ-ỹ\\s ]*$'), Validators.maxLength(20)]),
-      dateOfBirth: new FormControl('', Validators.required),
+      dateOfBirth: new FormControl('', [Validators.required, this.birthDateValidator1, this.birthDateValidator]),
       idCard: new FormControl('', [Validators.required, Validators.pattern('^(\\d{9}|\\d{12})$')]),
       phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^(((\\+|)84)|0)(3|5|7|8|9)+([0-9]{8})$')]),
       email: new FormControl('', [Validators.required, Validators.pattern('[\\w]+[@][\\w]+.[\\w]+')]),
@@ -62,8 +62,9 @@ export class CustomerCreateComponent implements OnInit {
 
     this.carForm = this.fb?.group({
       id: new FormControl(),
-      name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
-      plateNumber: new FormControl('', [Validators.required, Validators.pattern('^[A-Z0-9]+$')]),
+
+      name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z1-9]+$')]),
+      plateNumber: new FormControl('', [Validators.required, Validators.pattern('^[A-Z1-9]+$')]),
       carType: new FormControl('', Validators.required),
       brand: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
       isDelete: new FormControl()
@@ -179,5 +180,26 @@ export class CustomerCreateComponent implements OnInit {
 
   resetFormCar() {
     this.carForm.reset()
+  }
+
+  birthDateValidator1(control: AbstractControl): { [key: string]: any } | null {
+    const birthDate = new Date(control.value);
+    const today = new Date();
+    const diff = today.getFullYear() - birthDate.getFullYear();
+    if (diff < 18 && diff > 0) {
+      return {'invalidBirthDate1': {value: control.value}};
+    }
+    return null;
+  }
+
+
+  birthDateValidator(control: AbstractControl): { [key: string]: any } | null {
+    const value = control.value;
+    const dob = new Date(value);
+    const currentDate = new Date();
+    if (dob > currentDate) {
+      return {invalidDateOfBirth: true};
+    }
+    return null;
   }
 }
