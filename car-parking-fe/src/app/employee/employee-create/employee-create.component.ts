@@ -30,6 +30,7 @@ export class EmployeeCreateComponent implements OnInit {
   employeeGroup: FormGroup = new FormGroup({
     id: new FormControl(),
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ỹ\s]*$/)]),
+    // name: new FormControl('', [Validators.required, Validators.pattern('/^(\\p{Lu}[\\p{L}]*\\s?)+$')]),
     dateOfBirth: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
@@ -103,10 +104,13 @@ export class EmployeeCreateComponent implements OnInit {
     if (this.employeeGroup.valid) {
       this.employeeService?.addEmployee(this.employeeGroup.value).subscribe(next => {
           this.router.navigateByUrl('/employee/list');
-          Swal.fire(
-            'Thêm mới thành công!',
-            'success'
-          );
+          Swal.fire({
+            icon: 'success',
+            iconColor: 'darkorange',
+            title: 'Thêm nhân viên thành công.',
+            confirmButtonText: 'Xác nhận',
+            confirmButtonColor: 'darkorange'
+          })
         }, error => {
           console.log(error);
           Swal.fire({

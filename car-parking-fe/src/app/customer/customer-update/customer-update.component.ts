@@ -93,12 +93,12 @@ export class CustomerUpdateComponent implements OnInit {
         } else {
           Swal.fire({
             title: 'Đã xảy ra vài sự cố',
-            text: 'Vui lòng tải lại trang!',
+            text: 'Hệ thống mạng đang gặp sự cố!',
             confirmButtonColor: 'darkorange',
-            confirmButtonText: 'Đóng'
+            confirmButtonText: 'Tải lại'
           }).then((result) => {
             if (result.isConfirmed) {
-              this.router.navigateByUrl('/customer/list');
+              window.location.reload()
             }
           });
         }
@@ -292,7 +292,7 @@ export class CustomerUpdateComponent implements OnInit {
                 this.messCustomerNamePattern = error.error[i].defaultMessage;
               }
             }
-            if (error.error[i].field === 'customerCarDto.phoneNumber') {
+            if (error.error[i].field === 'phoneNumber') {
               if (error.error[i].code === 'NotBlank') {
                 this.messPhoneNumber = error.error[i].defaultMessage;
               } else {

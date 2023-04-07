@@ -17,6 +17,7 @@ export class TicketTypeService {
 
   constructor(private http: HttpClient) {
   }
+
   getAllTicketType():Observable<TicketType[]>{
     return this.http.get<TicketType[]>('http://localhost:8080/api/user/ticket/ticketType')
   }

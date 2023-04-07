@@ -37,7 +37,6 @@ export class TicketListComponent implements OnInit {
   public currentPage = 0;
   public totalPage = 0;
   public pageNumbers: number[] = [];
-
   constructor(private ticketService: TicketService) {
   }
 
@@ -124,8 +123,7 @@ export class TicketListComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Thông báo',
-          text: 'Không tìm thấy dữ liệu!',
-          footer: '<a href="">Xóa thất bại</a>'
+          text: 'Không tìm thấy dữ liệu!'
         })
       }
       this.ticketPage = ticketPage;
@@ -193,7 +191,6 @@ export class TicketListComponent implements OnInit {
         icon: 'error',
         title: 'Lỗi',
         text: 'Không thể xóa!',
-        footer: '<a href=""></a>'
       })
     });
   }
@@ -259,5 +256,13 @@ export class TicketListComponent implements OnInit {
       this.currentPage = pageNumber - 1;
     }
     this.getListTicket(this.currentPage);
+  }
+
+  disPlayAlert() {
+    Swal.fire({
+      icon: 'error',
+      text: 'Vé chưa hết hạn không thể xóa!',
+      timer: 2000
+    })
   }
 }

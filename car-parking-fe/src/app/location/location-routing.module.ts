@@ -16,7 +16,7 @@ const routes: Routes = [
     path: 'list',
     component: LocationListComponent,
   }, {
-    path: 'detail/:id',
+    path: 'detail/:id/:check',
     component: LocationDetailComponent,
   }, {
     path: 'create',

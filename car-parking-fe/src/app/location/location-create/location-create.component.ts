@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 export class LocationCreateComponent implements OnInit {
 
   locationForm: FormGroup;
-  floorList: any;
+  floorList: Floor[] = [];
   sectionList: Section[] = [];
   clickButton: false;
   public isSelectedFloor;
@@ -48,25 +48,33 @@ export class LocationCreateComponent implements OnInit {
   }
 
   addLocation() {
-    const selectedCars = [];
+    const selectedCars = ['', '', '', ''];
     if (this.locationForm.get('car4').value) {
-      selectedCars.push('Xe 4 chỗ');
+      selectedCars[0] = 'Xe 4 chỗ';
     }
     if (this.locationForm.get('car7').value) {
-      selectedCars.push('Xe 7 chỗ');
+      selectedCars[1] = 'Xe 7 chỗ';
     }
     if (this.locationForm.get('otherCarSelected').value) {
-      selectedCars.push(this.locationForm.get('otherCar').value);
+      selectedCars[2] = 'otherCarSelected';
     }
-    /*
-        alert(selectedCars)
-    */
-    this.locationForm.get('permissionCarTypeLocations').setValue(selectedCars);
-    if (this.locationForm.valid) {}
+    if (this.locationForm.get('otherCar').value) {
+      selectedCars[3] = this.locationForm.get('otherCar').value;
+    }
+    const selectedCarsStr = selectedCars.join(',');
+    console.log(selectedCarsStr);
+    this.locationForm.get('permissionCarTypeLocations').setValue(selectedCarsStr);
+    if (this.locationForm.valid) {
+    }
     this.locationService.createLocation(this.locationForm.value).subscribe(data => {
-      console.log(data);
-      Swal.fire('Thêm mới vị trí thành công', '', 'success');
-      this.router.navigateByUrl('/list');
+      Swal.fire({
+        icon: 'success',
+        iconColor: 'darkorange',
+        title: 'Thêm mới vị trí thành công.',
+        confirmButtonText: 'Xác nhận',
+        confirmButtonColor: 'darkorange'
+      })
+      this.router.navigateByUrl('/location/list');
     });
   }
 

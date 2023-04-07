@@ -1,12 +1,12 @@
-<div style="background-color: #f3e0d7;" id="login">
-  <section class=" text-center text-lg-start" style="padding:3% 10%">
+<div class="d-flex justify-content-center" style="background-color: #f3e0d7" id="login">
+  <section class="form-login text-center text-lg-start" style="padding:7% 10%">
     <div class="card mb-3" style=" box-shadow: 0 0 20px 0 #253365">
       <div class="row g-0 d-flex align-items-center">
-        <div class="col-lg-5 d-none d-lg-flex">
+        <div class="col-lg-6 d-none d-lg-flex">
           <img src="assets/img/security-authentication/login.png"
                class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5"/>
         </div>
-        <div class="col-lg-7">
+        <div class="col-lg-6">
           <div class="card-body py-5 px-md-5">
             <form *ngIf="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
               <h1 style="text-align: center; margin-bottom: 5%">Đăng nhập</h1>

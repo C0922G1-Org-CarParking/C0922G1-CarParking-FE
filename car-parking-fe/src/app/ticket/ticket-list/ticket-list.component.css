@@ -1,17 +1,29 @@
 
+
+/*NhanPT new 07/04
+*/
 .currentPage {
-  /*background-color: #b3c444*/
-  background-color: #E67E22;
+  background-color: darkorange;
 }
 
-table {
-  width: max-content;
-  /*table-layout:fixed;*/
+@media only screen and (max-width: 768px) {
+  .hidden-on-mobile {
+    display: none;
+  }
+}
+.col-1-2 {
+  width:  10.33333333%;
 }
 
-
-td, th {
-  text-align: center;
-  padding: 8px;
-  word-wrap: break-word;
+.col-2-8 {
+  width: 23%;
 }
+.my-table {
+  border: 1px solid black;
+}
+.my-table th, .my-table td{
+  padding: 5px;
+  border: 1px solid black;
+}
+/*NhanPT new 07/04
+*/

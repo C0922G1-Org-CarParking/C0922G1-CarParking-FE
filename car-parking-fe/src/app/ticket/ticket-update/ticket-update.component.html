@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-8">
                   <select (change)="onChange()" class="form-select" formControlName="ticketType">
-                    <option value="" selected>---Chọn loại vé---</option>
+                    <option value="" selected >---Chọn loại vé---</option>
                     <option *ngFor="let item of ticketTypeList" [value]="item.id">{{item.name}}</option>
                   </select>
                   <p style="color: red"
@@ -154,6 +154,12 @@
                 </div>
               </div>
               <div class="row align-items-center py-3 col-6">
+                <div class="col-4">
+                  <label style="font-weight: bold">Giá trước khi gia hạn:</label>
+                </div>
+                <div class="col-8">
+                  <input class="form-control" type="text" readonly formControlName="totalPrice">
+                </div>
               </div>
             </div>
             <div class="row d-flex">
@@ -174,8 +180,6 @@
     </div>
   </div>
 </div>
-
-
 <div class="col-2"></div>
 
 
