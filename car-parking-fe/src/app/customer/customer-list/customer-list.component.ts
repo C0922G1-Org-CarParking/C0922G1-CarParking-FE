@@ -18,7 +18,7 @@ export class CustomerListComponent implements OnInit {
   starDate = '';
   endDate = '';
   page = 0;
-  pageSize = 3;
+  pageSize = 5;
   pageCount = 0;
   pageNumbers: number[] = [];
   message: string;
@@ -31,7 +31,7 @@ export class CustomerListComponent implements OnInit {
     this.view();
   }
 
-  onSearch(name: string, idCard: string, phoneNumber: string, starDate: string, endDate: string) {
+    onSearch(name: string, idCard: string, phoneNumber: string, starDate: string, endDate: string) {
     this.name = name;
     this.idCard = idCard;
     this.phoneNumber = phoneNumber;

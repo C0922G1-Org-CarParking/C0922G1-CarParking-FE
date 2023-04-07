@@ -12,19 +12,19 @@
           <div class="col-md-1" style="margin-top: 5px;">Sinh ngày:</div>
           <div class="col-md-3" style="margin-left: -0.5%">
             <input class="form-control me-2" type="date"
-                   aria-label="Search" style="border: 1px solid #b6effb; width: 100%" name="dateOfBirth"
+                   aria-label="Search" style="border: 1px solid darkorange; width: 100%" name="dateOfBirth"
                    [(ngModel)]="startDate">
           </div>
           <div class="col-md-1" style="margin-top: 5px">Đến ngày:</div>
           <div class="col-md-3" style="margin-left: -0.5%">
             <input class="form-control me-2" type="date"
-                   aria-label="Search" style="border: 1px solid #b6effb; width: 100%"
+                   aria-label="Search" style="border: 1px solid darkorange; width: 100%"
                    name="dateOfBirth" [(ngModel)]="endDate">
           </div>
           <div class="col-md-1" style="margin-top: 5px">Tên NV:</div>
           <div class="col-md-3 col-lg-3" style="margin-left: -0.5%">
             <input class="form-control me-2" type="text"
-                   style="border: 1px solid #b6effb; width: 100%" name="nameSearch" [(ngModel)]="nameSearch">
+                   style="border: 1px solid darkorange; width: 100%" name="nameSearch" [(ngModel)]="nameSearch">
           </div>
         </div>
         <!--                dòng dưới-->
@@ -33,12 +33,12 @@
           <div class="col-md-1" style="margin-top: 5px">Sống tại:</div>
           <div class="col-md-3 " style="margin-left: -0.5%">
             <input class="form-control me-2" name="name" type="search"
-                   aria-label="Search" style="border: 1px solid #b6effb; width: 100%" [(ngModel)]="street">
+                   aria-label="Search" style="border: 1px solid darkorange; width: 100%" [(ngModel)]="street">
           </div>
           <div class="col-md-1" style="margin-top: 5px">Tỉnh/Thành:</div>
           <div class="col-md-3">
             <select class="form-control"
-                    style="border: 1px solid #b6effb; margin-left: -2.5%;" name="province" #province
+                    style="border: 1px solid darkorange; margin-left: -2.5%;" name="province" #province
                     (click)="getProvince(province.value)">
               <option value="" selected>Chọn tỉnh thành</option>
               <option *ngFor="let item of provinceList" [value]="item.code">{{item.name}}</option>
@@ -63,7 +63,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </form>
     </div>
@@ -73,8 +72,8 @@
           <h3 *ngIf="message" style="text-align: center; color: red">Không tìm thấy dữ liệu!</h3>
           <table *ngIf="!message"
             class="table table-bordered table-hover text-left"
-                 style="box-shadow: 0 0 10px 0 #253365; margin-top: 20px">
-            <thead style="background-color: #E67E22">
+                 style="box-shadow: 0 0 10px 0 darkorange; margin-top: 20px">
+            <thead style="background-color:darkorange">
             <tr>
               <th scope="col">STT</th>
               <th scope="col">Họ và tên</th>
