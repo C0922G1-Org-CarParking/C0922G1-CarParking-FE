@@ -1,4 +1,3 @@
-
 <div style="margin-top: 2%" class="col-12">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -6,8 +5,8 @@
         <div class="card" style="border-radius: 15px;">
           <div class="card-body" style="box-shadow: 0 0 20px 0 #253365">
             <form>
-              <h4 style="text-align: center; margin-top: 30px; margin-bottom: 50px">QUẢN LÝ XE
-                VÀO</h4>
+              <h2 style="text-align: center; margin-top: 30px; margin-bottom: 50px">QUẢN LÝ XE
+                VÀO</h2>
               <div class="row">
                 <div>
 
@@ -22,7 +21,7 @@
                     </button>
                   </div>
                   <div style="display: inline-block; float: right">
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    <button (click)="searchCarIn('','','')" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             class="btn" style="background-color: darkorange">
                       Tìm xe
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -73,7 +72,7 @@
                       <label style="font-weight: bold">Thời gian vé từ</label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carIn?.ticketEffectiveDate}}" class="form-control" type="date">
+                      <input readonly value="{{carIn?.ticketEffectiveDate}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -83,7 +82,7 @@
                       <label style="font-weight: bold" class="mb-0">Đến: </label>
                     </div>
                     <div class="col-8">
-                      <input readonly value="{{carIn?.ticketExpiryDate}}" class="form-control" type="date">
+                      <input readonly value="{{carIn?.ticketExpiryDate}}" class="form-control" type="text">
                     </div>
                   </div>
                 </div>
@@ -140,7 +139,7 @@
                     </div>
                     <div class="col-12">
                       <div class="row align-items-center">
-                        <img [src]="urlCarInImage"  src="../../../../assets/car-images/default.png"/>
+                        <img [src]="urlCarInImage" src="../../../../assets/car-images/default.png"/>
                       </div>
                     </div>
                   </div>
@@ -153,10 +152,11 @@
                     <div style="text-align: center">
                       <div class="mb-3">
                         <label for="file-upload" class="custom-file-upload">
-                          <img style="width: 60%; height: 60%" src="../../../assets/car-images/scan_icon_176437.png"
+                          <img style="width: 60%; height: 60%" src="../../../../assets/car-images/scan_icon_176437.png"
                                alt="">
                         </label>
-                        <input #uploadFile (change)="onUpload($event)" hidden id="file-upload" type="file"/>
+                        <input accept=".jpg,.png" #uploadFile (change)="onUpload($event)" hidden id="file-upload"
+                               type="file"/>
                       </div>
                     </div>
                   </div>
@@ -210,7 +210,7 @@
   </div>
 </div>
 
-<!-- Button trigger modal -->
+
 <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"-->
 <!--        style="margin-top: 10%">-->
 <!--  Tìm xe-->
@@ -293,6 +293,9 @@
                   </tr>
                   </thead>
                   <tbody style="text-align: center">
+                  <tr>
+                    <td colspan="9" *ngIf="listEmpty"><h5><i>{{listEmpty}}</i></h5></td>
+                  </tr>
                   <tr *ngFor="let carIn of dataList, let i = index">
                     <td>{{i + 1}}</td>
                     <td>{{carIn.carPlateNumber}}</td>
@@ -342,27 +345,27 @@
                 <!--                  </tbody>-->
                 <!--                </table>-->
               </div>
-              <div class="col-1"></div>
-              <div style="margin-left: 53%;margin-top: 40px;font-size:18px ">
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
-                         style="background-color: darkorange;color: black">Trang trước</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#"
-                                             style="background-color: white;color: black">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#"
-                                             style="background-color: darkorange;color: black">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#"
-                                             style="background-color: darkorange;color: black">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" style="background-color: darkorange;color: black">Trang
-                        sau</a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+<!--              <div class="col-1"></div>-->
+<!--              <div style="margin-left: 53%;margin-top: 40px;font-size:18px ">-->
+<!--                <nav aria-label="Page navigation example">-->
+<!--                  <ul class="pagination justify-content-center">-->
+<!--                    <li class="page-item disabled">-->
+<!--                      <a class="page-link" href="#" tabindex="-1" aria-disabled="true"-->
+<!--                         style="background-color: darkorange;color: black">Trang trước</a>-->
+<!--                    </li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#"-->
+<!--                                             style="background-color: white;color: black">1</a></li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#"-->
+<!--                                             style="background-color: darkorange;color: black">2</a></li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#"-->
+<!--                                             style="background-color: darkorange;color: black">3</a></li>-->
+<!--                    <li class="page-item">-->
+<!--                      <a class="page-link" href="#" style="background-color: darkorange;color: black">Trang-->
+<!--                        sau</a>-->
+<!--                    </li>-->
+<!--                  </ul>-->
+<!--                </nav>-->
+<!--              </div>-->
             </div>
           </div>
         </div>
@@ -370,6 +373,4 @@
     </div>
   </div>
 </div>
-
-
 

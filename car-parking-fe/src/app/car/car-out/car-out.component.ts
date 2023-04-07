@@ -19,6 +19,8 @@ export class CarOutComponent implements OnInit {
   urlCarOutImage = '../../../../assets/car-images/default.png';
   dataList: ICarInOut[];
 
+  public listEmpty: string;
+
   constructor(private carInOutService: CarInOutService,
               private router: Router,
               private storage: AngularFireStorage) {
@@ -31,13 +33,65 @@ export class CarOutComponent implements OnInit {
 
   onUpload(event) {
     this.plateNumberImage = event.target.files[0];
+    const allowedFileTypes = ['image/jpeg', 'image/png'];
+    if (allowedFileTypes.indexOf(this.plateNumberImage.type) === -1) {
+      Swal.fire({
+        title: 'Tập tin không hợp lệ',
+        text: 'Vui lòng tải lại file ảnh đuôi .jpg hoặc .png',
+        icon: 'error',
+        confirmButtonText: 'Xác nhận',
+        confirmButtonColor: 'darkorange'
+      });
+      return;
+    }
+
     const imageFormData = new FormData();
     imageFormData.append('plateNumberImage', this.plateNumberImage, this.plateNumberImage.name);
     if (this.plateNumberImage != null) {
       const filePath = this.plateNumberImage.name;
       const fileRef = this.storage.ref(filePath);
+      let timerInterval;
+      Swal.fire({
+        title: 'Đang xử lý!',
+        html: 'Vui lòng đợi trong giây lát...',
+        timerProgressBar: true,
+        allowOutsideClick: false,
+        timer: 3500,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector('b');
+          timerInterval = setInterval(() => {
+            b.textContent = String(Swal.getTimerLeft());
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        }
+      });
       this.carInOutService.searchCarOutByScanning(imageFormData).subscribe(carOut => {
+        setTimeout(() => {
+          Swal.fire({
+            title: 'Đã tìm thấy dữ liệu xe!',
+            text: 'Ấn lưu thông tin để cho xe vào',
+            icon: 'success',
+            confirmButtonText: 'Xác nhận',
+            confirmButtonColor: 'darkorange'
+          });
+        }, 3500);
+
         this.carOut = carOut;
+        const options2 = {
+          timeZone: 'Asia/Ho_Chi_Minh',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour12: false
+        };
+        let effectiveDate = new Date(this.carOut.ticketEffectiveDate).toLocaleString('vi-VN', options2);
+        let expiryDate = new Date(this.carOut.ticketExpiryDate).toLocaleString('vi-VN', options2);
+        this.carOut.ticketEffectiveDate = effectiveDate;
+        this.carOut.ticketExpiryDate = expiryDate;
+
         const options = {
           timeZone: 'Asia/Ho_Chi_Minh',
           year: 'numeric',
@@ -65,10 +119,10 @@ export class CarOutComponent implements OnInit {
             icon: 'warning',
             confirmButtonText: 'Xác nhận',
             confirmButtonColor: 'darkorange'
-
           });
         }
-        // the system unable able to scan the image => numberPlate image being null
+        // the system unable able to scan the image => numberPlate being null
+
         if (error.status === 406) {
           Swal.fire({
             title: 'Không quét được biển số',
@@ -144,7 +198,8 @@ export class CarOutComponent implements OnInit {
         title: 'Lưu thành công!',
         text: 'Xin mời xe ra',
         icon: 'success',
-        confirmButtonText: 'Xác nhận'
+        confirmButtonText: 'Xác nhận',
+        confirmButtonColor: 'darkorange'
       });
       this.carOut = null;
       this.timeOut = '';
@@ -163,9 +218,12 @@ export class CarOutComponent implements OnInit {
   }
 
   searchCarOut(customerName: string, customerPhoneNumber: string, carPlateNumber: string) {
+    this.listEmpty = null;
     this.carInOutService.searchCarOut(customerName, customerPhoneNumber, carPlateNumber).subscribe(carInList => {
       console.log(carInList);
       this.dataList = carInList;
+    }, error => {
+      this.listEmpty = 'Danh sách trống.';
     });
   }
 
@@ -173,7 +231,7 @@ export class CarOutComponent implements OnInit {
     for (let i = 0; i < this.dataList.length; i++) {
       if (this.dataList[i].carId == carId) {
         this.carOut = this.dataList[i];
-        return;
+        break;
       }
     }
     const options = {

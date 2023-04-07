@@ -1,8 +1,7 @@
-<!-- ======= Header ======= -->
 <header class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
   <div class="container-fluid mx-4">
     <div class="logo d-flex flex-row text-center align-items-center">
-      <a [routerLink]="['homepage']" class="p-0"><img src="../../assets/img/header/logo.PNG" alt=""
+      <a [routerLink]="['homepage']" class="p-0"><img src="../../../assets/img/header/logo.png" alt=""
                                                       class="img-fluid"></a>
       <a [routerLink]="['homepage']" style="padding: 0">
         <h5 class="mx-2 logo-name" style="padding: 0; text-align: center; color: #eb5d1e">Bãi đỗ xe thông
@@ -26,11 +25,13 @@
           </div>
         </li>
         <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['ticket']"><span class="n-item">Vé</span></a></li>
-        <li [hidden]="!isLoggedIn || role!=='ROLE_ADMIN'"><a class="nav-link" [routerLink]="['statistic']"><span class="n-item">Thống kê</span></a></li>
+        <li [hidden]="!isLoggedIn || role!=='ROLE_ADMIN'"><a class="nav-link" [routerLink]="['statistic/statistical']"><span class="n-item">Thống kê</span></a></li>
         <li [hidden]="!isLoggedIn"><a class="nav-link" [routerLink]="['location']"><span class="n-item">Bãi đỗ</span></a></li>
         <li [hidden]="isLoggedIn">
           <a routerLink="/security/login"><img src="../../assets/img/header/login-icon.png" class="img-fluid" style="width: 30px"></a>
-        </li>
+
+       </li>
+
         <li [hidden]="!isLoggedIn">
           <div class="dropdownUser">
             <div class="n-item d-flex align-items-center">
@@ -41,6 +42,7 @@
               <div class=" getstarted" (click)="logOut()"><button class="btn">Đăng xuất</button></div>
             </div>
           </div>
+
         </li>
       </ul>
     </nav>

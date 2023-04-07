@@ -3,6 +3,7 @@ import {EmployeeService} from '../../service/employee.service';
 import {Employee} from '../../model/employee';
 import Swal from 'sweetalert2';
 import {log} from "util";
+import {color} from "chart.js/types/helpers";
 
 @Component({
   selector: 'app-employee-list',
@@ -25,7 +26,8 @@ export class EmployeeListComponent implements OnInit {
   provinceList: any;
   pageCount = 0;
   pageNumbers: number[] = [];
-  totalPages = 0;gi
+  totalPages = 0;
+  gi
   // số trang hiện tại
   currentPage = 0;
 
@@ -39,6 +41,7 @@ export class EmployeeListComponent implements OnInit {
       this.provinceList = next.data.data;
     });
   }
+
   getProvince(value: string) {
     console.log(value);
     if (!isNaN(parseInt(value))) {
@@ -48,6 +51,21 @@ export class EmployeeListComponent implements OnInit {
     }
   }
 
+
+  search() {
+    this.currentPage = 0
+    this.message = null;
+    this.employeeService.getAllEmployee(this.currentPage, this.size,
+      this.nameSearch, this.startDate, this.endDate, this.street, this.province).subscribe(data => {
+      this.employee = data;
+      this.employees = this.employee.content;
+      this.pageCount = this.employee.totalPages;
+      this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);
+    }, error => {
+      this.message = error.error;
+    });
+  }
+
   getAll() {
     this.message = null;
     this.employeeService.getAllEmployee(this.currentPage, this.size,
@@ -55,13 +73,10 @@ export class EmployeeListComponent implements OnInit {
       this.employee = data;
       this.employees = this.employee.content;
       this.pageCount = this.employee.totalPages;
-      this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);    }, error => {
-      // this.message = error.error;
-      Swal.fire(
-        'Không tìm thấy dữ liệu!',
-        '',
-        'error'
-      );
+      this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);
+    }, error => {
+      this.message = error.error;
+
     });
   }
 
@@ -72,7 +87,7 @@ export class EmployeeListComponent implements OnInit {
           'Xóa nhân viên thành công',
           '',
           'success'
-        );
+      );
         this.getAll();
       }, error => {
         Swal.fire(
@@ -90,7 +105,7 @@ export class EmployeeListComponent implements OnInit {
     const pagesToShow = 3;
 
     if (totalPageCount <= pagesToShow) {
-      return Array.from({ length: totalPageCount }, (_, i) => i + 1);
+      return Array.from({length: totalPageCount}, (_, i) => i + 1);
     }
 
     const startPage = Math.max(0, currentPageIndex - Math.floor(pagesToShow / 2));
@@ -100,10 +115,10 @@ export class EmployeeListComponent implements OnInit {
       endPage = totalPageCount - 1;
     }
 
-    let pageNumbersToDisplay: (number | string)[] = Array.from({ length: endPage - startPage + 1 }, (_, i) => i + startPage + 1);
+    let pageNumbersToDisplay: (number | string)[] = Array.from({length: endPage - startPage + 1}, (_, i) => i + startPage + 1);
 
     if (startPage > 0) {
-      pageNumbersToDisplay = [ '...', ...pageNumbersToDisplay];
+      pageNumbersToDisplay = ['...', ...pageNumbersToDisplay];
     }
 
     if (endPage < totalPageCount - 1) {
@@ -138,7 +153,7 @@ export class EmployeeListComponent implements OnInit {
     this.nameSearch = '';
     this.startDate = '';
     this.endDate = '';
-    this.street= '';
+    this.street = '';
     this.province = 0
     this.getAll()
   }

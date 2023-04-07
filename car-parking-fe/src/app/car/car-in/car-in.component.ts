@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
+import {strict} from 'assert';
 
 
 @Component({
@@ -21,10 +22,12 @@ export class CarInComponent implements OnInit {
   urlCarInImage = '../../../../assets/car-images/default.png';
   @ViewChild('uploadFile', {static: true}) public avatarDom: ElementRef | undefined;
 
+  public listEmpty: string;
+
+
   constructor(private carInOutService: CarInOutService,
               private router: Router,
-              private storage: AngularFireStorage
-  ) {
+              private storage: AngularFireStorage) {
   }
 
 
@@ -80,6 +83,7 @@ export class CarInComponent implements OnInit {
       this.carIn = null;
       this.urlCarInImage = '../../../../assets/car-images/default.png';
       this.timeIn = '';
+      this.searchCarIn('', '', '');
       // setTimeout(() => {
       //   window.location.reload();
       // }, 3000);
@@ -96,15 +100,66 @@ export class CarInComponent implements OnInit {
 
   onUpload(event) {
     this.plateNumberImage = event.target.files[0];
+    const allowedFileTypes = ['image/jpeg', 'image/png'];
+    if (allowedFileTypes.indexOf(this.plateNumberImage.type) === -1) {
+      Swal.fire({
+        title: 'Tập tin không hợp lệ',
+        text: 'Vui lòng tải lại file ảnh đuôi .jpg hoặc .png',
+        icon: 'error',
+        confirmButtonText: 'Xác nhận',
+        confirmButtonColor: 'darkorange'
+      });
+      return;
+    }
+
+
     if (this.plateNumberImage != null) {
       const filePath = this.plateNumberImage.name;
       const fileRef = this.storage.ref(filePath);
 
       const imageFormData = new FormData();
       imageFormData.append('plateNumberImage', this.plateNumberImage, this.plateNumberImage.name);
+      let timerInterval;
+      Swal.fire({
+        title: 'Đang xử lý!',
+        html: 'Vui lòng đợi trong giây lát...',
+        timerProgressBar: true,
+        allowOutsideClick: false,
+        timer: 3500,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector('b');
+          timerInterval = setInterval(() => {
+            b.textContent = String(Swal.getTimerLeft());
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        }
+      });
+
       this.carInOutService.searchCarInByScanning(imageFormData).subscribe(carIn => {
-        console.log(carIn);
+        setTimeout(() => {
+          Swal.fire({
+            title: 'Đã tìm thấy dữ liệu xe!',
+            text: 'Ấn lưu thông tin để cho xe vào',
+            icon: 'success',
+            confirmButtonText: 'Xác nhận',
+            confirmButtonColor: 'darkorange'
+          });
+        },3500);
         this.carIn = carIn;
+        const options2 = {
+          timeZone: 'Asia/Ho_Chi_Minh',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour12: false
+        };
+        let effectiveDate = new Date(this.carIn.ticketEffectiveDate).toLocaleString('vi-VN', options2);
+        let expiryDate = new Date(this.carIn.ticketExpiryDate).toLocaleString('vi-VN', options2);
+        this.carIn.ticketEffectiveDate = effectiveDate;
+        this.carIn.ticketExpiryDate = expiryDate;
         const now = new Date();
         this.storage.upload(filePath, this.plateNumberImage).snapshotChanges().pipe(
           finalize(() => (fileRef.getDownloadURL().subscribe(url => {
@@ -128,8 +183,8 @@ export class CarInComponent implements OnInit {
         // car not existing in database
         if (error.status === 404) {
           Swal.fire({
-            title: 'Không tìm thấy xe',
-            text: 'Xe có thể đã hết vé!',
+            title: 'Không tìm thấy xe!',
+            text: 'Xe có thể đã hết vé, thử cách khác bằng cách ấn vào nút tìm xe!',
             icon: 'question',
             confirmButtonText: 'Xác nhận',
             confirmButtonColor: 'darkorange'
@@ -151,7 +206,7 @@ export class CarInComponent implements OnInit {
         if (error.status === 500) {
           Swal.fire({
             title: 'Lỗi hệ thống!',
-            text: 'Không nhận được file hoặc hệ thống trục trặc, vui lòng thử cách khác!',
+            text: 'Không nhận được file hoặc hệ thống trục trặc, vui lòng liên hệ nhân viên kĩ thuật!',
             icon: 'error',
             confirmButtonText: 'Xác nhận',
             confirmButtonColor: 'darkorange'
@@ -174,6 +229,8 @@ export class CarInComponent implements OnInit {
     this.carInOutService.searchCarIn(customerName, customerPhoneNumber, carPlateNumber).subscribe(carInList => {
       console.log(carInList);
       this.dataList = carInList;
+    }, error => {
+      this.listEmpty = 'Danh sách trống.';
     });
   }
 
@@ -182,7 +239,7 @@ export class CarInComponent implements OnInit {
     for (let i = 0; i < this.dataList.length; i++) {
       if (this.dataList[i].carId == carId) {
         this.carIn = this.dataList[i];
-        return;
+        break;
       }
     }
     const options = {
@@ -198,4 +255,5 @@ export class CarInComponent implements OnInit {
     const now = new Date();
     this.timeIn = now.toLocaleString('vi-VN', options);
   }
+
 }

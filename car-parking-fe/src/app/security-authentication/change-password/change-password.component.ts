@@ -42,7 +42,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   view(): void {
-    const element = document.getElementById('login');
+    const element = document.getElementById('form');
     if (element) {
       element.scrollIntoView();
     }
@@ -63,7 +63,8 @@ export class ChangePasswordComponent implements OnInit {
       Swal.fire({
         text: 'Đổi mật khẩu thành công!',
         icon: 'success',
-        confirmButtonText: 'OK'
+        showConfirmButton: false,
+        timer: 1500
       });
       this.shareService.sendClickEvent();
       this.router.navigateByUrl('/');
@@ -93,4 +94,6 @@ export class ChangePasswordComponent implements OnInit {
 
     });
   }
+
+
 }

@@ -49,7 +49,6 @@ export class TicketService {
       .filter(([_, value]) => value !== undefined && value !== null)
       .map(([key, value]) => `${key}=${value}`)
       .join('&');
-
     return this.http.get<any>(`http://localhost:8080/api/user/ticket/search?${query}`);
   }
 
@@ -70,6 +69,7 @@ export class TicketService {
   }
 
   createTicket(ticket: Ticket):Observable<Ticket> {
+
     return this.http.post<Ticket>("http://localhost:8080/api/user/ticket/createTicket" , ticket)
   }
 
@@ -145,4 +145,16 @@ export class TicketService {
     return this.http.get<Floor[]>('http://localhost:8080/api/user/ticket/listFloor');
   }
 
+
+// ---------- huyNV up------
+
+  getTotalCustomerOfMonthOfRange(sinceMonth: number, toMonth: number, yearStart: number, yearEnd: number) {
+    return this.http.get<number[]>('http://localhost:8080/api/user/ticket/statisticalCustomerChartRange?sinceMonth='+sinceMonth
+      + "&toMonth="+toMonth +"&yearStart=" + yearStart + "&yearEnd=" + yearEnd);
+  }
+
+  getTotalTicketOfMonthOfRange(sinceMonth: number, toMonth: number, yearStart: number, yearEnd: number) {
+    return this.http.get<number[]>('http://localhost:8080/api/user/ticket/statisticalTicketChartRange?sinceMonth='+sinceMonth
+      + "&toMonth="+toMonth +"&yearStart=" + yearStart + "&yearEnd=" + yearEnd);
+  }
 }

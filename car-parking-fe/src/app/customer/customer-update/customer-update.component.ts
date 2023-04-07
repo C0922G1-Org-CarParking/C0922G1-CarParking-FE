@@ -93,12 +93,12 @@ export class CustomerUpdateComponent implements OnInit {
         } else {
           Swal.fire({
             title: 'Đã xảy ra vài sự cố',
-            text: 'Vui lòng tải lại trang!',
-
-            confirmButtonText: 'Đóng'
+            text: 'Hệ thống mạng đang gặp sự cố!',
+            confirmButtonColor: 'darkorange',
+            confirmButtonText: 'Tải lại'
           }).then((result) => {
             if (result.isConfirmed) {
-              this.router.navigateByUrl('/customer/list');
+              window.location.reload()
             }
           });
         }
@@ -274,9 +274,13 @@ export class CustomerUpdateComponent implements OnInit {
 
       const customerCar = this.formEditCustomer.value;
       this.customerService.updateCustomer(id, customerCar).subscribe(() => {
-
-            Swal.fire('Thêm mới khách hàng thành công.', '', 'success')
-
+        Swal.fire({
+          icon: 'success',
+          iconColor: 'darkorange',
+          title: 'Chỉnh sửa khách hàng thành công.',
+          confirmButtonText: 'Xác nhận',
+          confirmButtonColor: 'darkorange'
+        })
         this.router.navigateByUrl('/customer/list')
         }, error => {
 
@@ -288,7 +292,7 @@ export class CustomerUpdateComponent implements OnInit {
                 this.messCustomerNamePattern = error.error[i].defaultMessage;
               }
             }
-            if (error.error[i].field === 'customerCarDto.phoneNumber') {
+            if (error.error[i].field === 'phoneNumber') {
               if (error.error[i].code === 'NotBlank') {
                 this.messPhoneNumber = error.error[i].defaultMessage;
               } else {
@@ -332,6 +336,10 @@ export class CustomerUpdateComponent implements OnInit {
     if (element) {
       element.scrollIntoView();
     }
+  }
+
+  resetForm() {
+    this.formCreateCar.reset();
   }
 }
 
