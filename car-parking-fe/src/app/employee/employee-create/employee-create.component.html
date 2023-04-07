@@ -8,7 +8,7 @@
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 5px">Họ và tên:<b
+                  <label style="font-weight: bold; margin-left: 5px">Họ và tên<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
@@ -32,28 +32,25 @@
               </div>
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 5px">Chức vụ:<b
+                  <label style="font-weight: bold; margin-left: 5px">Chức vụ<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
-                  <select formControlName="position" class="form-select" aria-label="Default select example">
-                    <option value="" selected>Chức năng</option>
-                    <select class="form-select" formControlName="position">
-                      <option value="" selected>Chức vụ</option>
-                      <option *ngFor="let item of position " [ngValue]="item">{{item.name}}</option>
-                    </select>
-                    <p style="color: red; position: absolute"
-                       *ngIf="(clickButton && employeeGroup.controls.position.hasError('required')) ||
-                    employeeGroup.controls.position.hasError('required') && employeeGroup.controls.position.touched">
-                      Chức vụ không được để trống.</p>
+                  <select class="form-select" formControlName="position">
+                    <option value="null" selected>Chức vụ</option>
+                    <option *ngFor="let item of position " [ngValue]="item">{{item.name}}</option>
                   </select>
+                  <p style="color: red; position: absolute"
+                     *ngIf="(clickButton && employeeGroup.controls.position.hasError('required')) ||
+                    employeeGroup.controls.position.hasError('required') && employeeGroup.controls.position.touched">
+                    Chức vụ không được để trống.</p>
                 </div>
               </div>
             </div>
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 5px" class="mb-0">CCCD: <b
+                  <label style="font-weight: bold; margin-left: 5px" class="mb-0">CCCD<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
@@ -75,7 +72,7 @@
               </div>
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 5px">Ngày sinh: <b
+                  <label style="font-weight: bold; margin-left: 5px">Ngày sinh<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
@@ -94,7 +91,7 @@
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 5px">Email: <b
+                  <label style="font-weight: bold; margin-left: 5px">Email<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
@@ -116,14 +113,14 @@
               </div>
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 10px" class="mb-0">Giới tính: <b
+                  <label style="font-weight: bold; margin-left: 10px" class="mb-0">Giới tính<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
-                  <label>
+                  <label style="margin-right: 3% ">
                     <input type="radio" [value]="true" formControlName="gender">
                   </label>Nam
-                  <label>
+                  <label style="margin-right: 3%;margin-left:5%">
                     <input type="radio" [value]="false" formControlName="gender">
                   </label>Nữ
                   <p style="color: red; position: absolute"
@@ -137,7 +134,7 @@
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 5px">SÐT: <b
+                  <label style="font-weight: bold; margin-left: 5px">SÐT<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
@@ -150,7 +147,7 @@
                   <p style="color: red; position: absolute"
                      *ngIf="
                    employeeGroup.controls.phoneNumber.hasError('pattern') && employeeGroup.controls.phoneNumber.touched">
-                    SĐT đúng định dạng phải là 10 số bắt đầu bằng 0 hoặc 84.</p>
+                    SĐT đúng định dạng phải là 10 số  bắt đầu bằng 0 hoặc 84.</p>
 
                   <p style="color: red; position: absolute"
                      *ngIf="errors.phoneNumber && !employeeGroup.controls.phoneNumber.hasError('required') &&
@@ -160,7 +157,7 @@
               </div>
               <div class="row align-items-center py-3 col-md-6">
                 <div class="col-md-4">
-                  <label style="font-weight: bold; margin-left: 5px">Địa chỉ cụ thể:<b
+                  <label style="font-weight: bold; margin-left: 5px">Số nhà<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
@@ -170,21 +167,24 @@
                      *ngIf="(clickButton && employeeGroup.controls.street.hasError('required')) ||
                     employeeGroup.controls.street.hasError('required') &&
                      employeeGroup.controls.street.touched">
-                    Địa chỉ khác không được để trống.</p>
+                    Số nhà  không được để trống.</p>
                 </div>
               </div>
             </div>
+
+
+
             <div class="row d-flex">
               <div class="row align-items-center py-3">
                 <div class="col-md-2">
-                  <label style="font-weight: bold; margin-left: 5px">Ðịa chỉ: <b
+                  <label style="font-weight: bold; margin-left: 5px">Ðịa chỉ<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-3">
-                  <select class="form-control" type="text"
+                  <select class="form-select"
                           style="margin-left: -10px; margin-right: -10px" formControlName="province" #province
                           (click)="getProvince(province.value)">
-                    <option value="" selected>Chọn tỉnh thành</option>
+                    <option value="null" selected>Chọn tỉnh thành</option>
                     <option *ngFor="let item of provinceList" [value]="item.code">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"
@@ -195,10 +195,10 @@
 
                 </div>
                 <div class="col-md-3">
-                  <select class="form-control" type="text"
-                          style="margin-left: -10px; margin-right: -10px" id="district" formControlName="district"
+                  <select class="form-select" type="text"
+                          style="margin-left: -10px; margin-right: -10px"  id="district" formControlName="district"
                           #district (click)="getDistrict(district.value)">
-                    <option value="" selected>Chọn quận huyện</option>
+                    <option value="null" selected>Chọn quận huyện</option>
                     <option *ngFor="let item of districtList" [value]="item.code">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"
@@ -209,10 +209,10 @@
 
                 </div>
                 <div class="col-md-3">
-                  <select class="form-control" type="text"
+                  <select class="form-select" type="text"
                           style="margin-left: -10px; margin-right: -10px" id="ward" formControlName="commune" #commune
                           (click)="getCommune(commune.value)">
-                    <option value="" selected>Chọn phường xã</option>
+                    <option value="null" selected>Chọn phường xã</option>
                     <option *ngFor="let item of communeList" [value]="item.code">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"

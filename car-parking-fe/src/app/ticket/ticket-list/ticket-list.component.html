@@ -34,7 +34,7 @@
       </div>
       <div class="col-2-8" style="margin-left: -0.5%">
         <input formControlName="expiryDate" aria-label="Search" style="border: 1px solid darkorange"
-               class="form-control me-2" type="text">
+               class="form-control me-2" type="date">
       </div>
       <div class="col-1-2 hidden-on-mobile" >Tầng</div>
       <div class="col-2-8 hidden-on-mobile" style="margin-left: -0.5%">
@@ -60,7 +60,7 @@
       <div class="col-2-8" style="margin-left: -0.5%">
         <select formControlName="status" aria-label="Search" style="border: 1px solid darkorange"
                 class="form-control me-2">
-          <option [value]="null" selected>--Chọn trạng thái--</option>
+          <option [value]="null" selected>-Chọn trạng thái-</option>
           <option [value]="0">chưa xóa</option>
           <option [value]="1">đã xóa</option>
           <option [value]="3">hết hạn</option>
@@ -84,7 +84,7 @@
           <button (click)="setStatusFindAll()"
                   class="btn" type="button"
                   style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: darkorange">
-            Tất cả vé(chưa xóa)
+            Tất cả vé (chưa xóa)
           </button>
         </td>
         <td class="p-0">
@@ -133,7 +133,7 @@
             <td class="hidden-on-mobile" >{{ticket.ticketType}}</td>
             <td >{{ticket.totalPrice}}</td>
             <td >{{ticket.floor}}</td>
-            <td >{{ticket.expiryDate}}</td>
+            <td >{{ticket.expiryDate | date : 'dd-MM-yyyy'}}</td>
             <td >
                                          <span routerLink="/ticket/detail/{{ticket.ticketId}}">
                                              <i class="fa-solid fa-eye"></i>
@@ -218,7 +218,6 @@
             <tr>
               <th >Mã vé</th>
               <th >Tên khách hàng</th>
-              <th >Tên khách hhcàng</th>
               <th >Biển số xe</th>
               <th >Ngày hết hạn</th>
             </tr>

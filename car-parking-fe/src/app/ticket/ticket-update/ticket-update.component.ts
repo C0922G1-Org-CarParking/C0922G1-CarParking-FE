@@ -11,7 +11,7 @@ import {Updateticket} from '../../model/updateticket';
 import {ILocation} from '../../model/ilocation';
 import {UpdateTicket} from '../../model/update-ticket';
 import {Section} from '../../model/section';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ticket-update',
@@ -48,6 +48,7 @@ export class TicketUpdateComponent implements OnInit {
         this.ticketTypeList = ticketTypeList;
         this.activatedRoute.paramMap.subscribe(paramMap => {
           this.ticketService.findByTicketId(+paramMap.get('id')).subscribe(ticketEdit => {
+            debugger
             this.ticketEdit = ticketEdit;
             this.rate = ticketEdit.rate;
             this.oldExpiryDate = ticketEdit.effectiveDate;
@@ -81,6 +82,7 @@ export class TicketUpdateComponent implements OnInit {
       floorId: new FormControl(this.ticketEdit.floorId),
       locationId: new FormControl(this.ticketEdit.locationId),
       priceNew: new FormControl(this.priceNew),
+      totalPrice: new FormControl(this.ticketEdit.totalPrice),
       ticketType: new FormControl(this.ticketEdit.ticketTypeId, [Validators.required]),
     });
   }

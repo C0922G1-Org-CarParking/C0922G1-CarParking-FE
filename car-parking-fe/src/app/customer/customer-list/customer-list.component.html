@@ -82,7 +82,7 @@
               <th scope="col">Giới tính</th>
               <th scope="col" class="a">Số điện thoại</th>
               <th scope="col" class="a">Email</th>
-              <th scope="col">Chỉnh sửa</th>
+              <th scope="col">Sửa</th>
               <th scope="col">Xóa</th>
               <th scope="col">Thông tin xe</th>
             </tr>
@@ -91,7 +91,7 @@
             <tr *ngFor="let customer of customers">
               <th scope="row" class="b">{{customer.id}}</th>
               <td style="text-align: left" class="a">{{customer.name}}</td>
-              <td class="a">{{customer.dateOfBirth}}</td>
+              <td class="a">{{customer.dateOfBirth | date : 'dd-MM-yyyy'}}</td>
               <td>{{customer.idCard}}</td>
               <td *ngIf="customer.gender">Nam</td>
               <td *ngIf="!customer.gender">Nữ</td>
@@ -120,7 +120,7 @@
           <!--phân trang-->
           <div class="row">
             <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px">
-              <button class="btn" style="background-color: darkorange" routerLink="/employee/create">Thêm nhân viên
+              <button class="btn" style="background-color: darkorange" routerLink="/customer/create">Thêm khách hàng
               </button>
             </div>
             <div class="col-md-8"></div>
