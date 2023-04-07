@@ -21,7 +21,8 @@ export class CarInComponent implements OnInit {
   now: any;
   urlCarInImage = '../../../../assets/car-images/default.png';
   @ViewChild('uploadFile', {static: true}) public avatarDom: ElementRef | undefined;
-  listEmpty: string;
+
+  public listEmpty: string;
 
 
   constructor(private carInOutService: CarInOutService,
