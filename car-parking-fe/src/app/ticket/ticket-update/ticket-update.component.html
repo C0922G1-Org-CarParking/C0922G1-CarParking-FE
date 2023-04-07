@@ -11,8 +11,7 @@
 
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
-                  <label style="font-weight: bold">Tên khách hàng:<b
-                    style="color: red">*</b></label>
+                  <label style="font-weight: bold">Tên khách hàng:</label>
                 </div>
                 <div class="col-8">
                   <input class="form-control" type="text" readonly formControlName="customerName">
@@ -21,8 +20,7 @@
 
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
-                  <label style="font-weight: bold">Biển số xe:<b
-                    style="color: red">*</b></label>
+                  <label style="font-weight: bold">Biển số xe:</label>
                 </div>
                 <div class="col-8">
                   <input class="form-control" type="text" readonly formControlName="plateNumber">
@@ -35,8 +33,7 @@
 
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
-                  <label style="font-weight: bold">Số điện thoại:<b
-                    style="color: red">*</b></label>
+                  <label style="font-weight: bold">Số điện thoại:</label>
                 </div>
                 <div class="col-8">
                   <input class="form-control" type="text" readonly formControlName="phoneNumber">
@@ -45,8 +42,7 @@
 
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
-                  <label style="font-weight: bold" class="mb-0">Thời gian bắt đầu:<b
-                    style="color: red">*</b></label>
+                  <label style="font-weight: bold" class="mb-0">Thời gian bắt đầu:</label>
                 </div>
                 <div class="col-8">
                   <input class="form-control" type="date" readonly formControlName="effectiveDate">
@@ -59,8 +55,7 @@
 
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
-                  <label style="font-weight: bold">Thời gian kết thúc: <b
-                    style="color: red">*</b></label>
+                  <label style="font-weight: bold">Thời gian kết thúc:</label>
                 </div>
                 <div class="col-8">
                   <input class="form-control" type="date" readonly formControlName="expiryDate">
@@ -69,7 +64,7 @@
 
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
-                  <label style="font-weight: bold" class="mb-0">Tầng: <b
+                  <label style="font-weight: bold" class="mb-0">Tầng<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-8">
@@ -84,7 +79,7 @@
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
-                  <label style="font-weight: bold" class="mb-0">Loại vé: <b
+                  <label style="font-weight: bold" class="mb-0">Loại vé<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-8">
@@ -99,11 +94,12 @@
               </div>
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
-                  <label style="font-weight: bold">Dãy:<b
+                  <label style="font-weight: bold">Dãy<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-8">
-                  <p *ngIf="!sectionList" style="color: red">* Vui lòng chọn tầng</p>
+                  <input class="form-control" type="text" *ngIf="!sectionList" style="color: red"
+                         placeholder="Vui lòng chọn tầng" readonly>
                   <select *ngIf="sectionList" (focus)="getListLocationOfFloor(floor.value,section.value)" #section
                           class="form-select"
                           formControlName="floorId">
@@ -118,59 +114,53 @@
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
-                  <label style="font-weight: bold">Ngày gia hạn: <b
+                  <label style="font-weight: bold">Ngày gia hạn<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-8">
-                  <p *ngIf="!newExpiryDate" style="color: red">*Vui lòng chọn loại vé</p>
-                  <input *ngIf="newExpiryDate" #element (change)="getRenewalPrice(element.value)" [value]="newExpiryDate" class="form-control"
+                  <input class="form-control" type="text" *ngIf="!newExpiryDate" style="color: red" readonly
+                         placeholder="Vui lòng chọn loại vé">
+                  <input *ngIf="newExpiryDate" #element (change)="getRenewalPrice(element.value)"
+                         [value]="newExpiryDate" class="form-control"
                          readonly type="text">
                 </div>
 
               </div>
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
-                  <label style="font-weight: bold" class="mb-0">Vị trí: <b
+                  <label style="font-weight: bold" class="mb-0">Vị trí<b
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-8">
-                  <div *ngIf="!locationList"><p style="color: red">* Vui lòng chọn dãy</p></div>
+                  <input class="form-control" type="text" *ngIf="!locationList" style="color: red"
+                         placeholder="Vui lòng chọn dãy" readonly>
                   <select *ngIf="locationList" class="form-select" formControlName="locationId">
                     <option disabled value="" selected>---Chọn vị trí---</option>
                     <option *ngFor="let location of locationList" [value]="location.id">{{location.name}}</option>
                   </select>
                 </div>
-
               </div>
-
             </div>
 
 
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-6">
                 <div class="col-4">
-                  <label style="font-weight: bold">Giá(VNĐ):<b style="color: red">*</b></label>
+                  <label style="font-weight: bold">Giá(VNĐ)<b style="color: red">*</b></label>
                 </div>
                 <div class="col-8">
                   <input [value]="priceNew" class="form-control" type="text"
                          readonly>
                 </div>
-
-
               </div>
-
               <div class="row align-items-center py-3 col-6">
-
-
               </div>
             </div>
-
-
             <div class="row d-flex">
               <div class="row align-items-center py-3 col-6">
               </div>
               <div align="center" class="px-5 py-4">
-                <button type="button" class="btn" style="background-color: #e4e6eb">Quay lại</button>
+                <button type="button" class="btn" style="background-color: #e4e6eb" routerLink="/ticket/list">Quay lại</button>
                 <button type="submit" class="btn" data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
                         style="background-color: darkorange;margin-left: 10px">Lưu thay đổi

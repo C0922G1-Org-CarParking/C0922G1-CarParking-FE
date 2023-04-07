@@ -101,6 +101,7 @@ export class TicketService {
   //   return this.http.put('http://localhost:8080/ticket/update/' + id, editTicket)
   // }
   updateTicketType(editTicket: UpdateTicket) {
+    debugger
     return this.http.put('http://localhost:8080/api/user/ticket/update' , editTicket)
   }
 

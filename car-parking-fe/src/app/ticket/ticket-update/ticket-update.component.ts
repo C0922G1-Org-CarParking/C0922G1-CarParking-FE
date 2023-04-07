@@ -11,6 +11,7 @@ import {Updateticket} from '../../model/updateticket';
 import {ILocation} from '../../model/ilocation';
 import {UpdateTicket} from '../../model/update-ticket';
 import {Section} from '../../model/section';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-ticket-update',
@@ -32,6 +33,8 @@ export class TicketUpdateComponent implements OnInit {
   locationList: ILocation[];
   sectionList: Section[];
   id: number;
+  messSection: boolean = false;
+  messLocation: boolean = false;
 
   constructor(private ticketService: TicketService,
               private floorService: FloorService,
@@ -67,6 +70,7 @@ export class TicketUpdateComponent implements OnInit {
   getListLocationOfFloor(idFloor, idSection) {
     this.ticketService.listLocation(idFloor, idSection).subscribe(locationList => {
       this.locationList = locationList;
+      this.messLocation = true
     });
   }
 
@@ -87,7 +91,7 @@ export class TicketUpdateComponent implements OnInit {
   editInfoTicket() {
     if (this.editTicketForm.valid) {
       let id = +this.ticketEdit.ticketId;
-      let expiryDate = this.editTicketForm.get('expiryDate').value;
+      let expiryDate = this.containerExpiryDate;
       let totalPrice = +(this.editTicketForm.get('priceNew').value + this.ticketEdit.totalPrice);
       let ticketTypeId = +this.editTicketForm.get('ticketType').value;
       let locationId = +this.editTicketForm.get('locationId').value;
@@ -100,11 +104,13 @@ export class TicketUpdateComponent implements OnInit {
         locationId
       };
       this.ticketService.updateTicketType(ticketEdit).subscribe(next => {
-        this.router.navigateByUrl('/list');
-        // alert('Ok ddi veef');
+        this.router.navigateByUrl('/ticket/list');
+        Swal.fire('Chỉnh sửa thành công', '', 'success')
       }, error => {
-        alert('lỗi');
+        Swal.fire('Sửa thất bại', '', 'error')
       });
+    } else {
+      Swal.fire('Vui lòng nhập đúng dữ liệu', '', 'error')
     }
   }
 
