@@ -31,7 +31,7 @@ export class CustomerListComponent implements OnInit {
     this.view();
   }
 
-  onSearch(name: string, idCard: string, phoneNumber: string, starDate: string, endDate: string) {
+    onSearch(name: string, idCard: string, phoneNumber: string, starDate: string, endDate: string) {
     this.name = name;
     this.idCard = idCard;
     this.phoneNumber = phoneNumber;
