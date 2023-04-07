@@ -84,6 +84,13 @@ export class CustomerService {
     return this.http.delete<string>('http://localhost:8080/api/user/customer/' + id + '/delete');
   }
 
+  deleteConfirmedCustomer(id: number): Observable<string>{
+    return this.http.get<string>('http://localhost:8080/api/user/customer/delete' + id);
+  }
+  email: string = '';
+  renderEmail(email: string){
+    this.email = email;
+  }
 }
 
 export interface Page<T> {

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Customer} from '../../model/customer';
 import {CustomerService} from '../../service/customer.service';
 import Swal from 'sweetalert2';
+import {CustomerWaitingToDelete} from '../../dto/customer-waiting-to-delete';
 
 @Component({
   selector: 'app-customer-list',
@@ -11,6 +12,7 @@ import Swal from 'sweetalert2';
 export class CustomerListComponent implements OnInit {
   idDelete: number;
   nameDelete: string;
+  emailDelete: string;
   customers: Customer[];
   name = '';
   idCard = '';
@@ -22,6 +24,9 @@ export class CustomerListComponent implements OnInit {
   pageCount = 0;
   pageNumbers: number[] = [];
   message: string;
+  customersWaitingToDelete: CustomerWaitingToDelete = {id: 0,name: '', email: '', status: false};
+  customersWaitingToDeletes: CustomerWaitingToDelete[] = [];
+  sizeCustomersWaitingToDelete: number = 0;
 
   constructor(private customerService: CustomerService) {
   }
@@ -56,12 +61,17 @@ export class CustomerListComponent implements OnInit {
       });
   }
 
-  delete(id: number, name: string) {
+  onClickDelete(id: number, name: string, email: string) {
     this.idDelete = id;
     this.nameDelete = name;
+    this.emailDelete = email;
   }
 
-  deletes(idDelete: number) {
+  deletes(idDelete: number, email: string, name: string) {
+    debugger
+    this.customersWaitingToDelete.id = idDelete;
+    this.customersWaitingToDelete.name = name;
+    this.customersWaitingToDelete.email = email;
     this.message = null;
     this.customerService.deleteCustomer(idDelete).subscribe(() => {
       Swal.fire('Xóa khách hàng thành công', '', 'success');
@@ -71,11 +81,15 @@ export class CustomerListComponent implements OnInit {
         Swal.fire('Xóa khách hàng không thành công, khách hàng đã bị xóa hoặc không tồn tại trong cơ sở dữ liệu', '', 'error');
       } else if (error.status === 405) {
         Swal.fire('Xóa không thành công, Khách hàng hiện tại vẫn còn thời hạn vé. Chờ xác nhận mail từ khách hàng', '', 'error');
+        debugger
+        this.customersWaitingToDeletes.push(this.customersWaitingToDelete);
+        this.sizeCustomersWaitingToDelete = this.customersWaitingToDeletes.length;
         this.customerService.sendEmail('duyhuynhzi767@gmail.com', idDelete).subscribe();
       } else {
         Swal.fire('Lỗi kết nối', '', 'error');
       }
     });
+
   }
 
   backList(nameInput: HTMLInputElement, idCardInput: HTMLInputElement, phoneNumberInput: HTMLInputElement, starDateInput: HTMLInputElement, endDateInput: HTMLInputElement) {
@@ -146,5 +160,15 @@ export class CustomerListComponent implements OnInit {
     if (element) {
       element.scrollIntoView();
     }
+  }
+
+  deleteCustomersWithValidTickets(id: number) {
+    this.customerService.deleteConfirmedCustomer(id).subscribe(next =>{
+      Swal.fire('Xóa khách hàng thành công', '', 'success');
+      this.getAll();
+    }, error => {
+      Swal.fire('Xóa khách hàng không thành công, khách hàng đã bị xóa hoặc không tồn tại trong cơ sở dữ liệu', '', 'error');
+    })
+
   }
 }

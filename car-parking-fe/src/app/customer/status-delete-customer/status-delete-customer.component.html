@@ -1,1 +1,14 @@
-<p>status-delete-customer works!</p>
+<div class="dropdown">
+  <button class="btn dropdown-toggle position-relative"style="text-align: center; size: 30px;
+                      border: 1px solid #b6effb; background-color: #e67e22; color: black"
+          type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+    Khách hàng chờ xóa
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+          *ngIf="sizeCustomersWaitingToDelete">{{sizeCustomersWaitingToDelete}}</span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="customersWaitingToDeletes">
+    <li *ngFor="let delete of customersWaitingToDeletes">
+      <a class="dropdown-item" (click)="deleteCustomersWithValidTickets(delete.id)">{{delete.name}}</a>
+    </li>
+  </ul>
+</div>
