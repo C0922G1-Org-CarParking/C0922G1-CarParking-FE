@@ -40,8 +40,9 @@ export class TicketCreateComponent implements OnInit {
   idKhachHang: any;
   carList: Car[] = [];
   enableChooseCar: boolean = false;
-  locationInfo: Location;
-  locationInfoName: any;
+  locationInfo: ILocation;
+  sectionList: Section[];
+  location: ILocation;
   rate: any
   priceTotal: any
   effectiveDate: any
@@ -50,6 +51,7 @@ export class TicketCreateComponent implements OnInit {
   floorId: any
   sectionId: any
   chooseEnableLocation:boolean = false
+  getInfoLocationEnable:boolean = false
 
 
   constructor(
@@ -63,7 +65,6 @@ export class TicketCreateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
   ) {
     this.ticketCreateForm = new FormGroup({
-      id: new FormControl(),
       effectiveDate: new FormControl(this.ticket?.effectiveDate, [Validators.required]),
       expiryDate: new FormControl(this.ticket?.expiryDate, [Validators.required]),
       isDeleted: new FormControl(0),
@@ -99,6 +100,13 @@ export class TicketCreateComponent implements OnInit {
         this.ticketTypeList = data
       })
     })
+    this.activatedRoute.paramMap.subscribe(data => {
+      const id = data.get('idLocation');
+      if (id != null) {
+        this.getLocationById(+id)
+
+      }
+    })
 
 
     this.activatedRoute.paramMap.subscribe(data => {
@@ -107,18 +115,11 @@ export class TicketCreateComponent implements OnInit {
         this.getCustomerById(+id)
       }
     })
-    // this.getPrice(this.effectiveDate,this.expiryDate,this.rate)
-    // this.activatedRoute.paramMap.subscribe(data => {
-    //   const id = data.get('idLocation');
-    //   if (id != null) {
-    //     this.getLocationById(+id)
-    //   }
-    // })
-
+    this.getPrice(this.effectiveDate,this.expiryDate,this.rate)
   }
 
 
-  location: ILocation;
+
 
   createTicket() {
     if (this.ticketCreateForm.valid) {
@@ -140,11 +141,11 @@ export class TicketCreateComponent implements OnInit {
       this.customerService.searchName(name).subscribe(data => {
         debugger
         this.customerList = data;
-        this.router.navigateByUrl("/ticket/create")
+        this.ngOnInit()
         // this.ngOnInit()
       })
     } else {
-      Swal.fire('Không tìm thấy tên khách hàng', '', 'error')
+      Swal.fire('Cần nhập để tìm khách hàng', '', 'error')
       this.customerList = []
     }
   }
@@ -163,20 +164,19 @@ export class TicketCreateComponent implements OnInit {
   private getCarListOfCustomerById(id: number) {
     this.customerService.getCarListOfCustomerById(id).subscribe(data => {
       this.carList = data
+      debugger
       this.messCar = false
       this.enableChooseCar = true
     })
   }
 
-  // private getLocationById(id: number) {
-  //   this.locationService.findLocationEmptyById(id).subscribe(data=>{
-  //     this.locationInfo = data
-  //     this.locationInfoName = this.locationInfo.name
-  //   })
-  // }
-  sectionList: Section[];
-
-
+  private getLocationById(id: number) {
+    this.locationService.findLocationEmptyById(id).subscribe(data=>{
+      this.locationInfo = data
+      this.getInfoLocationEnable = true
+      this.ngOnInit()
+    })
+  }
 
 
   getPrice(effectiveDate: string, expiryDate: string, rate: any) {
@@ -218,11 +218,8 @@ export class TicketCreateComponent implements OnInit {
 
   getRate($event: Event) {
     let idCar = this.ticketCreateForm.get('car').value;
-    console.log(idCar)
     this.ticketService.findRateByIdCar(idCar.id).subscribe(data => {
-      console.log(data)
       this.rate = data
-      console.log(this.rate)
       this.getPrice(this.effectiveDate, this.expiryDate, this.rate);
     })
   }

@@ -43,7 +43,7 @@ export class LocationService {
     return this.http.get<any>("http://localhost:8080/api/user/location/" + id);
 
   }
-  getAll(id: number){
+  getAll(id){
     return this.http.get<any>("http://localhost:8080/api/user/location/info/" + id)
   }
 

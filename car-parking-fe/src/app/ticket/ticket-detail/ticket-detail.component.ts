@@ -56,11 +56,18 @@ export class TicketDetailComponent implements OnInit {
     }, error => {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'Error!',
-        footer: '<a href="">Xóa thất bại</a>'
+        text: 'Xóa thất bại',
+        timer: 2000
       })
     });
+  }
+
+  disPlayAlert() {
+    Swal.fire({
+      icon: 'error',
+      text: 'Vé chưa hết hạn không thể xóa!',
+      timer: 2000
+    })
   }
 
   private checkTicketExpiry() {

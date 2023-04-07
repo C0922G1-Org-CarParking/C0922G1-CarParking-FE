@@ -1,8 +1,9 @@
 button {
   width: 50px;
   height: 100px;
-  border:  1px solid white
+  border: 1px solid white
 }
+
 .col-3 {
   height: 35px;
 
@@ -11,40 +12,141 @@ button {
 .fa-2xl {
   font-size: 200%
 }
-.fa-xl{
+
+.fa-xl {
   font-size: 150%
 }
-.col-6{
+
+.col-6 {
   width: 35%;
   margin-bottom: -28%;
 }
 
-.col-md-6{
-  width: 51%;
-}
-.col-xs-6{
-  width: 35%;
-  margin-bottom: -90px;
-}
-button:hover{
+
+
+button:hover {
   position: relative;
 }
-button:hover span{
+
+button:hover span {
   position: absolute;
   transform: rotate(314deg);
   display: flex;
-  background: cadetblue  ;
-  width: 120px;
-  border:darkorange 1px solid;
- color: black;
+  background: cadetblue;
+  width: 150px;
+  border: darkorange 1px solid;
+  color: black;
   height: 100px;
   right: 20px;
   top: 30px;
   margin-left: 1%;
 }
-button span{
-display: none;
+
+button span {
+  display: none;
 
 }
+@media only screen and (min-width: 100px )  {
+  .col-6 {
+    width: 40%;
+    margin-bottom: -32%;
+  }
+  .mybutton{
+    margin-top: 39%;
+    margin-left: -50%;
+  }
+}
+@media only screen and (min-width: 320px)  {
+  .col-6 {
+    width: 40%;
+    margin-bottom: -33%;
+  }
+  .mybutton{
+    margin-top: 30%;
+    margin-left: -64%;
+  }
+
+}
+
+@media only screen and (min-width: 376px)  {
+  .col-6 {
+    width: 40%;
+    margin-bottom: -33%;
+  }
+  .mybutton{
+    margin-top: 24%;
+    margin-left: -71%;
+  }
+}
+
+@media only screen and (min-width: 415px)   {
+  .col-6 {
+    width: 34%;
+    margin-bottom: -26%;
+  }
+  .mybutton {
+    transform: rotate(135deg); margin-top: 40%;
+    margin-left: -50%;
+    border: 1px solid white
+  }
+}
+
+
+@media only screen and (min-width: 500px)  {
+  .col-6 {
+    width: 43%;
+    margin-bottom: -34%;
+  }
+}
+
+@media only screen and (min-width: 601px)   {
+  .col-6 {
+    width: 50%;
+    margin-bottom: -42%;
+  }
+  .mybutton {
+    transform: rotate(135deg);
+    margin-top: 54%;
+    margin-left: -9%;
+    border: 1px solid white
+  }
+
+}
+@media only screen and (min-width: 770px)   {
+  .col-6 {
+    width: 35%;
+    margin-bottom: -30%;
+  }
+  .mybutton {
+    transform: rotate(135deg);
+    margin-top: 60%;
+    margin-left: 1%;
+    border: 1px solid white
+  }
+  .myIcon{
+    display: flex;
+  }
+}
+
+
+@media only screen and (min-width: 1300px)  {
+  .col-6 {
+    width: 47%;
+    margin-bottom: -37%;
+  }
+  .mybutton {
+    margin-top: 26%;
+    margin-left: -81%;
+
+  }
+
+}
+
+.mybutton {
+  transform: rotate(135deg);
+  border: 1px solid white
+}
+
+
 
 

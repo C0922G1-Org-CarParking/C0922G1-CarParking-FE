@@ -33,7 +33,7 @@ export class LocationMapComponent implements OnInit {
   }
 
   findMaxFloor() {
-    this.floorService.getAllFloor().subscribe(param => {
+    this.floorService.getAllFloors().subscribe(param => {
       this.totalPage = param;
       this.maxFloor = param.length + 1;
     });
@@ -55,15 +55,10 @@ export class LocationMapComponent implements OnInit {
 
   redirectLink(id: number, occupied: boolean) {
     if (occupied) {
-      this.route.navigateByUrl('/location/detail/' + id);
+      this.route.navigateByUrl('/location/detail/' + id+ '/1');
     } else {
-      if (this.check != 0) {
-        this.route.navigateByUrl('/ticket/update/' + this.check + '/' + id);
-      } else if (this.check == 0) {
-        this.route.navigateByUrl('/ticket/create/' + id);
+        this.route.navigateByUrl('/ticket/create/'+ id)
       }
-
-    }
   }
 
   findLocationIsEmpty() {
