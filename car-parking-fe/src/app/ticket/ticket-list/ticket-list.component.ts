@@ -34,16 +34,9 @@ export class TicketListComponent implements OnInit {
   public isTicketExpired: boolean = false;
   private isSearchTicket: boolean = false;
   private isSearchExpired: boolean;
-<<<<<<< HEAD
-  public totalPage: number;
-  public hasPrevious: boolean = false;
-  public hasNext: boolean = false;
-=======
   public currentPage = 0;
   public totalPage = 0;
   public pageNumbers: number[] = [];
-
->>>>>>> origin/car-in-out
   constructor(private ticketService: TicketService) {
   }
 
@@ -115,11 +108,6 @@ export class TicketListComponent implements OnInit {
   }
 
   getListTicket(page?: number) {
-<<<<<<< HEAD
-    this.hasNext = true;
-    this.hasPrevious = true
-=======
->>>>>>> origin/car-in-out
     this.setPageNumber(page);
     this.ticketService.searchTicket(
       this.customerNameSearch,
@@ -135,30 +123,10 @@ export class TicketListComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Thông báo',
-          text: 'Không tìm thấy dữ liệu!',
-          footer: '<a href="">Xóa thất bại</a>'
+          text: 'Không tìm thấy dữ liệu!'
         })
       }
       this.ticketPage = ticketPage;
-<<<<<<< HEAD
-      this.totalPage = this.ticketPage.totalPages;
-      this.ticketList = this.ticketPage.content;
-      this.setStatusPreviousNext();
-      if (this.isSearchExpired || !this.isSearchTicket) {
-        this.initForm();
-      }
-    });
-
-  }
-
-  setStatusPreviousNext() {
-    if (this.ticketPageNumber >= this.totalPage - 1) {
-      this.hasNext = false;
-    }
-    if (this.ticketPageNumber <= 0) {
-      this.hasPrevious = false;
-    }
-=======
       this.ticketList = this.ticketPage.content;
       this.totalPage = this.ticketPage.totalPages;
       this.pageNumbers = Array.from({length: this.totalPage}, (v, k) => k + 1);
@@ -179,7 +147,6 @@ export class TicketListComponent implements OnInit {
       ticketType: new FormControl(this.ticketTypeSearch),
       status: new FormControl(this.statusSearch)
     });
->>>>>>> origin/car-in-out
   }
 
   setPageNumber(page?: number) {
@@ -224,7 +191,6 @@ export class TicketListComponent implements OnInit {
         icon: 'error',
         title: 'Lỗi',
         text: 'Không thể xóa!',
-        footer: '<a href=""></a>'
       })
     });
   }
@@ -241,8 +207,6 @@ export class TicketListComponent implements OnInit {
       status: new FormControl('')
     });
   }
-<<<<<<< HEAD
-=======
 
   get pageNumbersToDisplay() {
     const currentPageIndex = this.currentPage;
@@ -293,5 +257,12 @@ export class TicketListComponent implements OnInit {
     }
     this.getListTicket(this.currentPage);
   }
->>>>>>> origin/car-in-out
+
+  disPlayAlert() {
+    Swal.fire({
+      icon: 'error',
+      text: 'Vé chưa hết hạn không thể xóa!',
+      timer: 2000
+    })
+  }
 }

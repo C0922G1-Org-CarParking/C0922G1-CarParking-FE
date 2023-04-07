@@ -95,19 +95,11 @@ export class TicketCreateComponent implements OnInit {
     })
     this.ticketService.listFloor().subscribe(data => {
       this.floorList = data
-      this.ticketTypeService.getAllTicketType().subscribe(data => {
-        this.ticketTypeList = data
-      })
     })
-<<<<<<< HEAD
     this.ticketTypeService.listTicketType().subscribe(data => {
       debugger
       this.ticketTypeList = data
     })
-=======
-
-
->>>>>>> origin/car-in-out
     this.activatedRoute.paramMap.subscribe(data => {
       const id = data.get('id');
       if (id != null) {

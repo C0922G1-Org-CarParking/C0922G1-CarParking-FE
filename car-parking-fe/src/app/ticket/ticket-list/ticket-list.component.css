@@ -1,138 +1,29 @@
 
+
+/*NhanPT new 07/04
+*/
 .currentPage {
-  /*background-color: #b3c444*/
-  background-color: #E67E22;
+  background-color: darkorange;
 }
 
-<<<<<<< HEAD
-.pagination button, .pagination a {
-  background-color: #ffffff;
-  border-radius: 5px;
-  margin: 2px;
-  color: black;
-  float: left;
-  padding: 2px 8px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 2px solid #fa9c29;
-  font-size: 17px;
+@media only screen and (max-width: 768px) {
+  .hidden-on-mobile {
+    display: none;
+  }
+}
+.col-1-2 {
+  width:  10.33333333%;
 }
 
-.pagination button:active {
-  background-color: #ffffff;
-  color: white;
+.col-2-8 {
+  width: 23%;
+}
+.my-table {
   border: 1px solid black;
 }
-
-.pagination a:hover:not(.active), .pagination button:hover:enabled:not(.active) {
-  background-color: #fa9926;
-  padding: 3px 9px;
+.my-table th, .my-table td{
+  padding: 5px;
+  border: 1px solid black;
 }
-
-.table-container {
-  width: 100%;
-  height: fit-content;
-  overflow-x: auto;
-}
-
-.fixed-size-table {
-  width: max-content;
-  table-layout: auto;
-  margin-bottom: 1em;
-}
-.fixed-size-table td {
-  padding: 8px;
-  text-align: center;
-  vertical-align: top;
-  border: 1px solid #ccc;
-}
-.fixed-size-table th {
-  text-align: center;
-  padding: 8px;
-  vertical-align: top;
-  border: 1px solid #ccc;
-}
-.table-delete th, td{
-  padding: 8px;
-  text-align: center;
-  vertical-align: top;
-  border: 1px solid #ccc;
-}
-
-.my-button {
-  background-image: linear-gradient(#ff8c00, #ff8c00, #fcb969);
-  color: #000000;
-  padding: 6px;
-}
-
-.my-button:hover {
-  background-image: linear-gradient(#c66c00, #ffa43b, #ffc376);
-  color: #000000;
-  padding: 6px;
-}
-.my-button:active {
-  background-image: linear-gradient(#ff8c00, #ff8c00, #fcb969);
-  color: #ff8c00;
-  padding: 6px;
-}
-
-@media only screen and (min-width:0px ){
-  .col-a-1 {width: 8.33333%;}
-  .col-a-2 {width: 16.66667%;}
-  .col-a-3 {width: 20%;}
-  .col-a-4 {width: 33.33333%;}
-  .col-a-5 {width: 41.66667%;}
-  .col-a-6 {width: 50%;}
-  .col-a-7 {width: 58.33333%;}
-  .col-a-8 {width: 66.66667%;}
-  .col-a-9 {width: 75%;}
-  .col-a-10 {width: 83.33333%;}
-  .col-a-11 {width: 91.66667%;}
-  .col-a-12 {width: 100%;}
-}
-/*Màn hinh laptop và máy tính bảng*/
-@media only screen and (min-width:501px){
-  .col-b-1 {width: 8.33333%;}
-  .col-b-2 {width: 16.66667%;}
-  .col-b-3 {width: 20%;}
-  .col-b-4 {width: 30.33333%;}
-  .col-b-5 {width: 41.66667%;}
-  .col-b-6 {width: 50%;}
-  .col-b-7 {width: 58.33333%;}
-  .col-b-8 {width: 66.66667%;}
-  .col-b-9 {width: 75%;}
-  .col-b-10 {width: 83.33333%;}
-  .col-b-11 {width: 91.66667%;}
-  .col-b-12 {width: 100%;}
-}
-/*Màn hình máy tính pc và tivi smart*/
-@media only screen and (min-width:701px){
-  .col-c-1 {width: 8.33333%;}
-  .col-c-2 {width: 16.66667%;}
-  .col-c-3 {width: 20%;}
-  .col-c-3-2 {width: 24%;}
-  .col-c-4 {width: 33.33333%;}
-  .col-c-5 {width: 41.66667%;}
-  .col-c-6 {width: 50%;}
-  .col-c-7 {width: 58.33333%;}
-  .col-c-8 {width: 66.66667%;}
-  .col-c-9 {width: 75%;}
-  .col-c-10 {width: 83.33333%;}
-  .col-c-11 {width: 91.66667%;}
-  .col-c-12 {width: 100%;}
-}
-
-
-=======
-table {
-  width: max-content;
-  /*table-layout:fixed;*/
-}
-
-
-td, th {
-  text-align: center;
-  padding: 8px;
-  word-wrap: break-word;
-}
->>>>>>> origin/car-in-out
+/*NhanPT new 07/04
+*/

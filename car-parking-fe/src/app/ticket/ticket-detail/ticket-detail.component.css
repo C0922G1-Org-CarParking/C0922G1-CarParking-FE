@@ -1,16 +1,12 @@
-.my-button {
-  margin: 10px;
-  background-image: linear-gradient(#ff8c00, #ff8c00, #fcb969);
-  color: #000000;
-  padding: 6px;
+/*NhanPT new 07/04
+*/
+.my-table th, .my-table td{
+  border: 1px solid black;
+  padding: 5px;
 }
 
-.my-button:hover {
-  color: #aa5a00;
-  background-image: linear-gradient(#ff9722, #ff9722, #ff9722);
+.my-table {
+  border: 1px solid black;
 }
-.my-button:active {
-  padding: 5px;
-  color: #000000;
-  background-image: linear-gradient(orange, orange, orange);
-}
+/*NhanPT new 07/04
+*/

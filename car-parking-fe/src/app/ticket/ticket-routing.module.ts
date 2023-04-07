@@ -4,14 +4,6 @@ import {TicketListComponent} from "./ticket-list/ticket-list.component";
 import {TicketCreateComponent} from "./ticket-create/ticket-create.component";
 import {TicketUpdateComponent} from "./ticket-update/ticket-update.component";
 import {TicketDetailComponent} from "./ticket-detail/ticket-detail.component";
-<<<<<<< HEAD
-=======
-import {StatisticByDayMonthYearComponent} from "../statistic/statistic-by-day-month-year/statistic-by-day-month-year.component";
-// import {TicketListComponent} from "./ticket-list/ticket-list.component";
-// import {TicketCreateComponent} from "./ticket-create/ticket-create.component";
-// import {TicketUpdateComponent} from "./ticket-update/ticket-update.component";
-
->>>>>>> origin/car-in-out
 
 const routes: Routes = [{
   path: 'list',

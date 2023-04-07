@@ -17,14 +17,9 @@ export class TicketTypeService {
 
   constructor(private http: HttpClient) {
   }
-<<<<<<< HEAD
 
-  listTicketType(): Observable<TicketType[]> {
-    return this.http.get<TicketType[]>('http://localhost:8080/ticket/ticketType');
-=======
   getAllTicketType():Observable<TicketType[]>{
     return this.http.get<TicketType[]>('http://localhost:8080/api/user/ticket/ticketType')
->>>>>>> origin/car-in-out
   }
 
   listTicketType(): Observable<TicketType[]> {
