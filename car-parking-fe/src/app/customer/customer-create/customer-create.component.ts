@@ -65,6 +65,7 @@ export class CustomerCreateComponent implements OnInit {
 
       name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z1-9]+$')]),
       plateNumber: new FormControl('', [Validators.required, Validators.pattern('^[A-Z1-9]+$')]),
+
       carType: new FormControl('', Validators.required),
       brand: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
       isDelete: new FormControl()

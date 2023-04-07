@@ -6,7 +6,7 @@
            style="float: left; margin-left: 8% ; margin-top: -11%"></i>
       </p>
     </div>
-    <div class="col-xs-10 col-md-2" style= "background: #999999; height: 16%; ">
+    <div class="col-xs-10 col-md-2" style= " height: 16%; ">
       <table style="margin-left: 10% ">
         <tr>
           <td><p class=" btn" style="background: green"></p></td>
@@ -180,7 +180,7 @@
       </div>
 
     </div>
-    <div style="float: left ;margin-top:5%; ">
+    <div style="float: left ;margin-top:5%; margin-bottom: 2% ">
       <p>Tầng:
         <span class="btn " *ngFor="let floor of totalPage"  [style.background-color]="idFloor == floor.id ? 'darkorange' : 'white'" (click)="pageChange(floor.id)">{{floor.name}}</span>
       </p>
