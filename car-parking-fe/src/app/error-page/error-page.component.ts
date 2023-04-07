@@ -11,14 +11,14 @@ export class ErrorPageComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-    // this.view();
+    this.view();
     this.isLoggedIn = this.tokenStorageService.isLogger();
   }
-  // view(): void {
-  //   const element = document.getElementById('test');
-  //   if (element) {
-  //     element.scrollIntoView();
-  //   }
-  // }
+  view(): void {
+    const element = document.getElementById('error-page');
+    if (element) {
+      element.scrollIntoView();
+    }
+  }
 
 }
