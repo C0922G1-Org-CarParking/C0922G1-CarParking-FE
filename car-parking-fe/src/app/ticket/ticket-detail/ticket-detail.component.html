@@ -15,7 +15,6 @@
                 <p>{{ticketDetail.ticketId}}</p>
               </div>
             </div>
-
             <div class="row align-items-center py-3 col-6">
               <div class="col-5">
                 <label style="font-weight: bold" class="mb-0">Biển số xe : </label>
@@ -25,7 +24,6 @@
               </div>
             </div>
           </div>
-
           <div class="row d-flex">
             <div class="row align-items-center py-3 col-6">
               <div class="col-5">
@@ -35,7 +33,6 @@
                 <p>{{ticketDetail.customerName}}</p>
               </div>
             </div>
-
             <div class="row align-items-center py-3 col-6">
               <div class="col-5">
                 <label style="font-weight: bold" class="mb-0">SĐT khách hàng: </label>
@@ -54,7 +51,6 @@
                 <p>{{ticketDetail.customerCode}}</p>
               </div>
             </div>
-
             <div class="row align-items-center py-3 col-6">
               <div class="col-5">
                 <label style="font-weight: bold" class="mb-0">Mã người tạo vé: </label>
@@ -73,7 +69,6 @@
                 <p>{{ticketDetail.employeeName}}</p>
               </div>
             </div>
-
             <div class="row align-items-center py-3 col-6">
               <div class="col-5">
                 <label style="font-weight: bold" class="mb-0">SĐT người tạo vé: </label>
@@ -92,7 +87,6 @@
                 <p>{{ticketDetail.effectiveDate}}</p>
               </div>
             </div>
-
             <div class="row align-items-center py-3 col-6">
               <div class="col-5">
                 <label style="font-weight: bold" class="mb-0">Thời gian hết hiệu lực: </label>
@@ -102,7 +96,6 @@
               </div>
             </div>
           </div>
-
           <div class="row d-flex">
             <div class="row align-items-center py-3 col-6">
               <div class="col-5">
@@ -112,7 +105,6 @@
                 <p>{{ticketDetail.ticketType}}</p>
               </div>
             </div>
-
             <div class="row align-items-center py-3 col-6">
               <div class="col-5">
                 <label style="font-weight: bold" class="mb-0">Giá vé: </label>
@@ -120,7 +112,6 @@
               <div class="col-7">{{ticketDetail.totalPrice}}</div>
             </div>
           </div>
-
           <div class="row d-flex">
             <div class="row align-items-center py-3 col-6">
               <div class="col-5">
@@ -139,7 +130,6 @@
               </div>
             </div>
           </div>
-
           <div class="row d-flex">
             <div class="row align-items-center py-3 col-6">
               <div class="col-5">
@@ -154,7 +144,7 @@
       </div>
       <div class=" text-center">
         <button routerLink="/ticket/list" type="reset" class="btn m-4 w-25" style="background-color: #e4e6eb">Quay lại</button>
-        <button routerLink="/ticket/edit/{{ticketDetail.ticketId}}}" type="reset" class="btn m-4 w-25" style="background-color: darkorange">Chỉnh sửa</button>
+        <button routerLink="/ticket/update/{{ticketDetail.ticketId}}" type="reset" class="btn m-4 w-25" style="background-color: darkorange">Chỉnh sửa</button>
         <button (click)="setInfoDelete(
         ticketDetail.ticketId,
         ticketDetail.customerName,
@@ -167,7 +157,6 @@
     </div>
   </div>
 </div>
-
 <!--modal delete-->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -180,47 +169,29 @@
         <p>
           Bạn có chắc chắn muốn xoá vé dưới đây không
         </p>
-        <table class="table-delete">
+        <table class="my-table">
           <tr>
-            <td>Mã vé</td>
-            <td>Tên khách hàng</td>
-            <td>Biển số xe</td>
-            <td>Thời gian hết hiệu lực</td>
+            <th>Mã vé</th>
+            <th>Tên khách hàng</th>
+            <th>Biển số xe</th>
+            <th>Ngày hết hạn</th>
           </tr>
           <tr>
-            <td class="text-danger">1</td>
-            <td class="text-danger">Phan Thành Nhân</td>
-            <td class="text-danger">81-H1 20032</td>
-            <td class="text-danger">27/4/2023</td>
+            <td class="text-danger text-font-delete">{{idDelete}}</td>
+            <td class="text-danger text-font-delete">{{nameCustomerDelete}}</td>
+            <td class="text-danger text-font-delete">{{plateNumberDelete}}</td>
+            <td class="text-danger text-font-delete">{{expiryDateDelete}}</td>
           </tr>
         </table>
         <p class="text-danger">Lưu ý: khi xóa sẽ không thể hoàn tác!</p>
       </div>
       <div class="modal-footer">
-        <button type="reset" class="btn" style="background-color: #e4e6eb" data-bs-dismiss="modal">Hủy</button>
-        <button *ngIf="isTicketExpired" class="btn" style="background-color: darkorange" (click)="delete()">Xóa</button>
-        <button *ngIf="!isTicketExpired" class="btn" style="background-color: darkorange" data-bs-toggle="modal"
-                data-bs-target="#warning">Xóa
+        <button class="btn" style="background-color: #e4e6eb" data-bs-dismiss="modal">Hủy</button>
+        <button *ngIf="isTicketExpired" class="btn" style="background-color: darkorange" (click)="delete()"
+                data-bs-dismiss="modal">Xóa</button>
+        <button *ngIf="!isTicketExpired" class="btn" style="background-color: darkorange" (click)="disPlayAlert()"
+                data-bs-dismiss="modal">Xóa
         </button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- modal cảnh báo-->
-<div class="modal fade" id="warning" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel2">Cảnh báo</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p class="text-danger">
-          Vé này chưa hết hạn không thể xóa
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn" style="background-color: darkorange" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

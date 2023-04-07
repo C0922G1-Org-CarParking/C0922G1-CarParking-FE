@@ -49,7 +49,6 @@ export class TicketService {
       .filter(([_, value]) => value !== undefined && value !== null)
       .map(([key, value]) => `${key}=${value}`)
       .join('&');
-
     return this.http.get<any>(`http://localhost:8080/api/user/ticket/search?${query}`);
   }
 
@@ -70,6 +69,7 @@ export class TicketService {
   }
 
   createTicket(ticket: Ticket):Observable<Ticket> {
+
     return this.http.post<Ticket>("http://localhost:8080/api/user/ticket/createTicket" , ticket)
   }
 
@@ -79,7 +79,7 @@ export class TicketService {
 
   getPrice(effective: string, expiryDate: string, rate: any) {
 
-    return this.http.get<number>('http://localhost:8080/api/user/ticket/getPrice?expiryDate='+expiryDate
+    return this.http.get<number>('http://localhost:8080/ticket/getPrice?expiryDate='+expiryDate
       + "&effectiveDate="+effective +"&rate=" +rate);
   }
   findByTicketId(ticketId: number): Observable<EditTicket> {
