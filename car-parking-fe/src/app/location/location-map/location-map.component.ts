@@ -55,7 +55,7 @@ export class LocationMapComponent implements OnInit {
 
   redirectLink(id: number, occupied: boolean) {
     if (occupied) {
-      this.route.navigateByUrl('/location/detail/' + id);
+      this.route.navigateByUrl('/location/detail/' + id+ '/1');
     } else {
         this.route.navigateByUrl('/ticket/create/'+ id)
       }
