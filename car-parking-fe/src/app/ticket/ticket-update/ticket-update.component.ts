@@ -11,6 +11,7 @@ import {Updateticket} from '../../model/updateticket';
 import {ILocation} from '../../model/ilocation';
 import {UpdateTicket} from '../../model/update-ticket';
 import {Section} from '../../model/section';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-ticket-update',
@@ -100,8 +101,13 @@ export class TicketUpdateComponent implements OnInit {
         locationId
       };
       this.ticketService.updateTicketType(ticketEdit).subscribe(next => {
-        this.router.navigateByUrl('/list');
-        alert('Ok ddi veef');
+        this.router.navigateByUrl('/ticket/list');
+        Swal.fire({
+          title: 'Sửa thành công!',
+          icon: 'success',
+          confirmButtonText: 'Xác nhận',
+          confirmButtonColor: 'darkorange'
+        });
       }, error => {
         alert('lỗi');
       });

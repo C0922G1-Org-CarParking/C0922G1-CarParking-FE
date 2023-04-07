@@ -118,7 +118,35 @@ export class CarInComponent implements OnInit {
 
       const imageFormData = new FormData();
       imageFormData.append('plateNumberImage', this.plateNumberImage, this.plateNumberImage.name);
+      let timerInterval;
+      Swal.fire({
+        title: 'Đang xử lý!',
+        html: 'Vui lòng đợi trong giây lát...',
+        timerProgressBar: true,
+        allowOutsideClick: false,
+        timer: 3500,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector('b');
+          timerInterval = setInterval(() => {
+            b.textContent = String(Swal.getTimerLeft());
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        }
+      });
+
       this.carInOutService.searchCarInByScanning(imageFormData).subscribe(carIn => {
+        setTimeout(() => {
+          Swal.fire({
+            title: 'Đã tìm thấy dữ liệu xe!',
+            text: 'Ấn lưu thông tin để cho xe vào',
+            icon: 'success',
+            confirmButtonText: 'Xác nhận',
+            confirmButtonColor: 'darkorange'
+          });
+        },3500);
         this.carIn = carIn;
         const options2 = {
           timeZone: 'Asia/Ho_Chi_Minh',
@@ -210,7 +238,7 @@ export class CarInComponent implements OnInit {
     for (let i = 0; i < this.dataList.length; i++) {
       if (this.dataList[i].carId == carId) {
         this.carIn = this.dataList[i];
-        return;
+        break;
       }
     }
     const options = {

@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
       Swal.fire({
         text: 'Bạn đã đăng nhập.',
         icon: 'warning',
-        iconColor: 'darkorange',
         showConfirmButton: false,
         timer: 1500
       });

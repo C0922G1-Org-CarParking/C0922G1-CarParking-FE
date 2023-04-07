@@ -18,7 +18,7 @@ export class CustomerListComponent implements OnInit {
   starDate = '';
   endDate = '';
   page = 0;
-  pageSize = 3;
+  pageSize = 5;
   pageCount = 0;
   pageNumbers: number[] = [];
   message: string;
