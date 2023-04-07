@@ -1,77 +1,66 @@
-
 <div class="container-fluid">
-
   <div class="row justify-content-center mt-5 mb-3">
     <h1 class="text-center">DANH SÁCH VÉ</h1>
   </div>
-
   <!--                     Tìm kiếm-->
   <div *ngIf="formSearchTicket" class="container" [formGroup]="formSearchTicket">
     <!--              Dòng 1-->
     <div class="col-md-12 row mt-2">
       <div class="col-1-2" >Tên KH:</div>
       <div class="col-2-8" style="margin-left: -0.5%">
-        <input aria-label="Search" style="border: 1px solid #b6effb" class="form-control me-2" type="text"
+        <input aria-label="Search" style="border: 1px solid darkorange" class="form-control me-2" type="text"
                formControlName="customerName"
                id="nameCustomer">
       </div>
-
       <div class="col-1-2 hidden-on-mobile" >SĐT KH:</div>
       <div class="col-2-8 hidden-on-mobile" style="margin-left: -0.5%">
-        <input formControlName="customerPhone" aria-label="Search" style="border: 1px solid #b6effb"
+        <input formControlName="customerPhone" aria-label="Search" style="border: 1px solid darkorange"
                class="form-control " type="text">
       </div>
-
       <div class="col-1-2" >Tên NTV:</div>
       <div class="col-2-8" style="margin-left: -0.5%">
-        <input formControlName="employeeName" aria-label="Search" style="border: 1px solid #b6effb"
+        <input formControlName="employeeName" aria-label="Search" style="border: 1px solid darkorange"
                class="form-control " type="text">
       </div>
     </div>
     <!--              Dòng 2-->
     <div class="col-md-12 row mt-2">
-
       <div class="col-1-2 hidden-on-mobile" >SĐT NTV</div>
       <div class="col-2-8 hidden-on-mobile" style="margin-left: -0.5%">
-        <input formControlName="employeePhone" aria-label="Search" style="border: 1px solid #b6effb"
+        <input formControlName="employeePhone" aria-label="Search" style="border: 1px solid darkorange"
                class="form-control " type="text">
       </div>
-
       <div class="col-1-2" >Ngày hết hạn
       </div>
       <div class="col-2-8" style="margin-left: -0.5%">
-        <input formControlName="expiryDate" aria-label="Search" style="border: 1px solid #b6effb"
+        <input formControlName="expiryDate" aria-label="Search" style="border: 1px solid darkorange"
                class="form-control me-2" type="text">
       </div>
-
       <div class="col-1-2 hidden-on-mobile" >Tầng</div>
       <div class="col-2-8 hidden-on-mobile" style="margin-left: -0.5%">
-        <select formControlName="floor" aria-label="Search" style="border: 1px solid #b6effb"
+        <select formControlName="floor" aria-label="Search" style="border: 1px solid darkorange"
                 class="form-control me-2">
-          <option [value]="null" selected>-chọn tầng-</option>
+          <option selected [value]="null">-Chọn tầng-</option>
           <option *ngFor="let floor of floorList" [value]="floor.name">{{floor.name}}</option>
         </select>
       </div>
     </div>
     <!--              Dòng 3-->
     <div class="col-md-12 row mt-2">
-
       <div class="col-1-2" >Loại vé</div>
       <div class="col-2-8" style="margin-left: -0.5%">
-        <select formControlName="ticketType" aria-label="Search" style="border: 1px solid #b6effb"
+        <select formControlName="ticketType" aria-label="Search" style="border: 1px solid darkorange"
                 class="form-control me-2">
-          <option [value]="null" selected>-chọn loại vé-</option>
+          <option [value]="null" selected >-Chọn loại vé-</option>
           <option *ngFor="let ticketType of ticketTypeList"
                   [value]="ticketType.name">{{ticketType.name}}</option>
         </select>
       </div>
-
-
       <div class="col-1-2" >Trạng thái</div>
       <div class="col-2-8" style="margin-left: -0.5%">
-        <select formControlName="status" aria-label="Search" style="border: 1px solid #b6effb"
+        <select formControlName="status" aria-label="Search" style="border: 1px solid darkorange"
                 class="form-control me-2">
-          <option [value]="null" selected>--chọn trạng thái--</option>
+          <option [value]="null" selected>--Chọn trạng thái--</option>
           <option [value]="0">chưa xóa</option>
           <option [value]="1">đã xóa</option>
           <option [value]="3">hết hạn</option>
@@ -81,28 +70,27 @@
       <div class="col-2-8" style="margin-left: -0.5%">
         <button (click)="setStatusSearch()"
                 class="btn " type="button"
-                style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
+                style="text-align: center; size: 30px; border: 1px solid ; background-color: darkorange">
           <i class="fa-solid fa-magnifying-glass"></i>
           Tìm kiếm
         </button>
       </div>
     </div>
   </div>
-
   <div class="row justify-content-center mt-4 mb-1">
     <table class="m-0" style="width: fit-content;">
       <tr>
         <td class="p-0 ">
           <button (click)="setStatusFindAll()"
                   class="btn" type="button"
-                  style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
+                  style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: darkorange">
             Tất cả vé(chưa xóa)
           </button>
         </td>
         <td class="p-0">
           <button (click)="setStatusSearchAllExpired()"
                   class="btn" type="button"
-                  style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: #e67e22">
+                  style="text-align: center; size: 30px; border: 1px solid #b6effb; background-color: darkorange">
             Vé hết hạn
           </button>
         </td>
@@ -113,9 +101,9 @@
   <div class="row justify-content-center ">
     <div class="col-12">
       <div class="col-md-12">
-        <table  class="table table-bordered table-hover text-center"
-                style="box-shadow: 0 0 10px 0 #253365; margin-top: 8px">
-          <thead style="background-color: #E67E22">
+        <table  class="table table-bordered table-hover"
+                style="box-shadow: 0 0 10px 0 darkorange; margin-top: 8px">
+          <thead style="background-color: darkorange">
           <tr>
             <th scope="col" class="hidden-on-mobile" >STT</th>
             <th scope="col"  >Mã vé</th>
@@ -180,7 +168,6 @@
       </div>
     </div>
   </div>
-
   <div class="row container-fluid">
     <div class="col-4" style="margin-top: 5px">
       <button class="btn" type="button" style="float: left; background-color: darkorange"
@@ -189,7 +176,6 @@
       </button>
     </div>
     <div class="col-1"></div>
-
     <div class="col-7" style="margin-top: 5px">
       <nav aria-label="Page navigation example" style="float: right">
         <ul class="pagination" *ngIf="totalPage > 1">
@@ -215,7 +201,6 @@
       </nav>
     </div>
   </div>
-
   <!--modal delete-->
   <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -233,6 +218,7 @@
             <tr>
               <th >Mã vé</th>
               <th >Tên khách hàng</th>
+              <th >Tên khách hhcàng</th>
               <th >Biển số xe</th>
               <th >Ngày hết hạn</th>
             </tr>
