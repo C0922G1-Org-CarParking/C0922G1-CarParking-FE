@@ -77,10 +77,11 @@ export class EmployeeListComponent implements OnInit {
   delete(id: number) {
     if (id != null) {
       return this.employeeService.deleteById(this.employeeDelete.id).subscribe(data => {
-        Swal.fire(
-          'Xóa nhân viên thành công',
-          '',
-          'success'
+        Swal.fire({
+           title: 'Xóa nhân viên thành công',
+             iconColor:'darkorange',
+            icon:'success'
+        }
         );
         this.getAll();
       }, error => {

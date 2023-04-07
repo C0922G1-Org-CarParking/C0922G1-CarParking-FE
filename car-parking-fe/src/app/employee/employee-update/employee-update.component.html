@@ -36,7 +36,7 @@
 
 
                   <select class="form-select" formControlName="position" [compareWith]="compare">
-                    <option value="" selected>Chức vụ</option>
+                    <option value="null" selected>Chức vụ</option>
                     <option *ngFor="let item of position" [ngValue]="item">{{item.name}}</option>
                   </select>
 
@@ -115,10 +115,10 @@
                     style="color: red">*</b></label>
                 </div>
                 <div class="col-md-8">
-                  <label>
+                  <label style="margin-right: 3% ">
                     <input type="radio" [value]="true" formControlName="gender">
                   </label>Nam
-                  <label>
+                  <label style="margin-right: 3%;margin-left:5%">
                     <input type="radio" [value]="false" formControlName="gender">
                   </label>Nữ
                   <p style="color: red; position: absolute"
@@ -178,7 +178,7 @@
                   <select class="form-control" type="text"
                           style="margin-left: -10px; margin-right: -10px" formControlName="province" #province
                           (click)="getProvince(province.value)" [compareWith]="compare">
-                    <option value="" selected>Chọn tỉnh thành</option>
+                    <option value="null" selected>Chọn tỉnh thành</option>
                     <option *ngFor="let item of provinceList" [value]="item.code">{{item.name}}</option>
                   </select>
 
@@ -192,7 +192,7 @@
                   <select class="form-control" type="text"
                           style="margin-left: -10px; margin-right: -10px" id="district" formControlName="district"
                           #district (click)="getDistrict(district.value)" [compareWith]="compare">
-                    <option value="" selected>Chọn quận huyện</option>
+                    <option value="null" selected>Chọn quận huyện</option>
                     <option *ngFor="let item of districtList" [value]="item.code">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"
@@ -205,7 +205,7 @@
                   <select class="form-control" type="text"
                           style="margin-left: -10px; margin-right: -10px" id="ward" formControlName="commune" #commune
                           (click)="getCommune(commune.value)" [compareWith]="compare">
-                    <option value="" selected>Chọn phường xã</option>
+                    <option value="null" selected>Chọn phường xã</option>
                     <option *ngFor="let item of communeList" [value]="item.code">{{item.name}}</option>
                   </select>
                   <p style="color: red; position: absolute"

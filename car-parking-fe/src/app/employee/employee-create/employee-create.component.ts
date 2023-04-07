@@ -104,11 +104,13 @@ export class EmployeeCreateComponent implements OnInit {
     if (this.employeeGroup.valid) {
       this.employeeService?.addEmployee(this.employeeGroup.value).subscribe(next => {
           this.router.navigateByUrl('/employee/list');
-        Swal.fire(
-          'Đã thêm !',
-          'Thêm mới nhân viên thành công.',
-          'success'
-        )
+        Swal.fire({
+          icon: 'success',
+          iconColor: 'darkorange',
+          title: 'Thêm nhân viên thành công.',
+          confirmButtonText: 'Xác nhận',
+          confirmButtonColor: 'darkorange'
+        })
         }, error => {
           console.log(error);
           Swal.fire({

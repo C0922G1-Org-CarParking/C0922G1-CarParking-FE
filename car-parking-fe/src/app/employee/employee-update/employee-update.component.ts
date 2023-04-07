@@ -99,10 +99,14 @@ export class EmployeeUpdateComponent implements OnInit {
     if (this.employeeGroup.valid) {
       this.employeeService.editEmployee(this.employeeGroup.value).subscribe(next => {
           this.router.navigateByUrl('employee/list');
-          Swal.fire({
-              title:'Sửa thành công!',
-              icon: 'success'
-          });
+        Swal.fire({
+          icon: 'success',
+          iconColor: 'darkorange',
+          title: 'Sửa nhân viên thành công.',
+
+          confirmButtonText: 'Xác nhận',
+          confirmButtonColor: 'darkorange'
+        })
         }, error => {
           console.log(error);
           Swal.fire({
