@@ -49,7 +49,6 @@ export class EmployeeUpdateComponent implements OnInit {
   communeList: any;
 
 
-
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private employeeService: EmployeeService,
@@ -70,7 +69,6 @@ export class EmployeeUpdateComponent implements OnInit {
   }
 
 
-
   getProvince(value: string) {
     console.log(value);
     parseInt(value);
@@ -78,6 +76,7 @@ export class EmployeeUpdateComponent implements OnInit {
       this.districtList = next.data.data;
     });
   }
+
   getDistrict(value: string) {
     console.log(value);
     this.employeeService.getAllCommune(parseInt(value)).subscribe(next => {
@@ -95,18 +94,20 @@ export class EmployeeUpdateComponent implements OnInit {
       this.provinceList = next.data.data;
     });
   }
+
   submitUpdate() {
+    this.errors.email = '';
     if (this.employeeGroup.valid) {
       this.employeeService.editEmployee(this.employeeGroup.value).subscribe(next => {
           this.router.navigateByUrl('employee/list');
-        Swal.fire({
-          icon: 'success',
-          iconColor: 'darkorange',
-          title: 'Sửa nhân viên thành công.',
+          Swal.fire({
+            icon: 'success',
+            iconColor: 'darkorange',
+            title: 'Sửa nhân viên thành công.',
 
-          confirmButtonText: 'Xác nhận',
-          confirmButtonColor: 'darkorange'
-        })
+            confirmButtonText: 'Xác nhận',
+            confirmButtonColor: 'darkorange'
+          })
         }, error => {
           console.log(error);
           Swal.fire({
@@ -154,6 +155,7 @@ export class EmployeeUpdateComponent implements OnInit {
       );
     }
   }
+
   compare(s1: any, s2: any) {
     return s1 && s2 ? s1.id === s2.id : s1 === s2;
   }
@@ -161,4 +163,11 @@ export class EmployeeUpdateComponent implements OnInit {
   cancel() {
     this.router.navigateByUrl('/employee/list');
   }
+
+  deleteMess() {
+    this.errors.email = "";
+    this.errors.idCard = "";
+    this.errors.phoneNumber = "";
+  }
+
 }
