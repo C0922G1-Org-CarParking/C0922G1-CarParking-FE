@@ -1,0 +1,187 @@
+<div style="margin-top: 7%">
+  <div class="container-fluid">
+    <div class="row justify-content-center mt-5 mb-3">
+      <h1 class="text-center">DANH SÁCH KHÁCH HÀNG</h1>
+    </div>
+    <div class="container">
+      <div>
+        <!--                dòng trên-->
+        <div class="col-md-12 row ">
+          <!--          <div class="col-md-2"></div>-->
+          <div class="col-md-1" style="margin-top: 5px;">Tên KH:</div>
+          <div class="col-md-3" style="margin-left: -0.5%">
+            <input class="form-control me-4" type="text" placeholder="Tên khách hàng" #nameInput [value]="name"
+                   aria-label="Search" style="border: 1px solid darkorange">
+
+          </div>
+          <div class="col-md-1" style="margin-top: 5px">CMND:</div>
+          <div class="col-md-3" style="margin-left: -0.5%">
+            <input class="form-control me-4" type="text" placeholder="Chứng minh nhân dân" #idCardInput
+                   [value]="idCard"
+                   aria-label="Search" style="border: 1px solid darkorange; ">
+          </div>
+          <div class="col-md-1" style="margin-top: 5px">SDT:</div>
+          <div class="col-md-3 col-lg-3" style="margin-left: -0.5%">
+            <input class="form-control me-4" name="name" type="search" placeholder="Số điện thoại"
+                   #phoneNumberInput [value]="phoneNumber"
+                   aria-label="Search" style="border: 1px solid darkorange">
+
+          </div>
+        </div>
+        <!--                dòng dưới-->
+        <div class="col-md-12 row mt-3">
+          <!--          <div class="col-md-2"></div>-->
+          <div class="col-md-1" style="margin-top: 5px">Ngày sinh:</div>
+          <div class="col-md-3 " style="margin-left: -0.5%">
+
+            <input class="form-control me-4" type="date" #starDateInput [value]="starDate"
+                   aria-label="Search" style="border: 1px solid darkorange; ">
+
+          </div>
+          <div class="col-md-1" style="margin-top: 5px">Đến ngày:</div>
+          <div class="col-md-3">
+            <input class="form-control me-4" name="name" type="date" #endDateInput [value]="endDate"
+                   aria-label="Search" style="border: 1px solid darkorange; margin-left: -7.9px">
+
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-3">
+            <div class="row">
+              <div class="col-md-6" style=" margin-left: -4%">
+                <button (click)="onSearch(nameInput.value, idCardInput.value, phoneNumberInput.value, starDateInput.value, endDateInput.value)"
+                        class="btn" type="button"
+                        style="text-align: center; size: 30px; border: 1px solid #b6effb;background-color: darkorange">
+                  Tìm kiếm
+                </button>
+              </div>
+              <div class="col-md-6" style=" margin-left: -15%">
+                <button (click)="backList(nameInput, idCardInput, phoneNumberInput, starDateInput, endDateInput)"
+                        class="btn" type="button"
+                        style="text-align: center; size: 30px; border: 1px solid #b6effb;background-color: darkorange">
+                  Xem tất cả
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="col-md-12">
+          <h3 *ngIf="message" style="text-align: center; color: red">Không tìm thấy dữ liệu!</h3>
+          <table *ngIf="!message"
+                 class="table table-bordered table-hover text-left"
+                 style="box-shadow: 0 0 10px 0 darkorange; margin-top: 20px">
+            <thead class="table" style="background-color: darkorange">
+            <tr>
+              <th scope="col" class="b">Mã KH</th>
+              <th scope="col" class="a">Họ và tên</th>
+              <th scope="col" class="a">Ngày sinh</th>
+              <th scope="col" class="a">CMND</th>
+              <th scope="col">Giới tính</th>
+              <th scope="col" class="a">Số điện thoại</th>
+              <th scope="col" class="a">Email</th>
+              <th scope="col">Sửa</th>
+              <th scope="col">Xóa</th>
+              <th scope="col">Thông tin xe</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let customer of customers">
+              <th scope="row" class="b">{{customer.id}}</th>
+              <td style="text-align: left" class="a">{{customer.name}}</td>
+              <td class="a">{{customer.dateOfBirth | date : 'dd-MM-yyyy'}}</td>
+              <td>{{customer.idCard}}</td>
+              <td *ngIf="customer.gender">Nam</td>
+              <td *ngIf="!customer.gender">Nữ</td>
+              <td class="a">{{customer.phoneNumber}}</td>
+              <td class="a">{{customer.email}}</td>
+              <td>
+                <button type="button" class="btn outline" routerLink="/customer/update/{{customer.id}}">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+              </td>
+              <td>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        class="btn outline" (click)="delete(customer.id, customer.name)">
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn outline" routerLink="/customer/info/{{customer.id}}">
+                  <i class="fa-sharp fa-regular fa-eye"></i>
+                </button>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+          <!--phân trang-->
+          <div class="row">
+            <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px">
+              <button class="btn" style="background-color: darkorange" routerLink="/customer/create">Thêm khách hàng
+              </button>
+            </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2" style=" margin-bottom: 20px;margin-top: 5px" *ngIf="!message">
+              <nav aria-label="Page navigation example" style="float: right">
+                <ul class="pagination" *ngIf="pageCount > 1">
+                  <li class="page-item">
+                    <button  [ngClass]="{disabled: page === 0 }"
+                      (click)="previousPage()" class="page-link btn" style="background-color: darkorange" aria-label="Previous">
+                      <span aria-hidden="true" style="color:black;">Trước</span>
+                    </button>
+                  </li>
+                  <li class="page-item" *ngFor="let pageNumber of pageNumbersToDisplay">
+                    <a style="color: black " class="page-link page" [ngClass]="{currentpage: page+1 == pageNumber}"
+                       (click)="goToPage(pageNumber)">
+                      {{ pageNumber === '...' ? pageNumber : pageNumber }}
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <button [ngClass]="{disabled: page === pageCount - 1 }" style="background-color: darkorange"
+                      class="page-link btn" (click)="nextPage()" aria-label="Next">
+                      <span aria-hidden="true" style="color: black">Sau</span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--modal xóa-->
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="col justify-content-center">
+            <h1 class="modal-title fs-5 " id="exampleModalLabel">XÁC NHẬN XÓA KHÁCH HÀNG</h1>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <span>Bạn có chắc chắn muốn xoá khách hàng: </span>
+          <span style="color: red">{{nameDelete}}</span><br>
+          <span>Có Mã khách hàng là:</span>
+          <span style="color: red">{{idDelete}}</span>
+          <span> không?</span><br>
+          <small style="color: red">*Lưu ý: Hành động này không thể hoàn tác.</small>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #e4e6eb">Đóng
+          </button>
+          <button type="button" class="btn" (click)="deletes(idDelete)"
+                  data-bs-dismiss="modal" style="background-color: darkorange">Xóa
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

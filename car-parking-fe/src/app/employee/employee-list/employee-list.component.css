@@ -1,0 +1,29 @@
+.colorCurrentPage {
+  background-color : darkorange;
+  /*background-color: #b3c444*/
+
+}
+/*@media (max-width: 768px) {*/
+/*  .class-cua-phane-tu-can-an {*/
+/*    display: none;*/
+/*  }*/
+/*}*/
+@media only screen and (max-width: 768px) {
+  .hidden-on-mobile {
+    display: none;
+  }
+}
+
+
+
+
+ .wrapper {
+   position: relative;
+ }
+
+.btn-nhanvien {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
