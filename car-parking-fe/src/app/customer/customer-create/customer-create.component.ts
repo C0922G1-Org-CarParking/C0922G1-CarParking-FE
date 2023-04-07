@@ -21,7 +21,6 @@ export class CustomerCreateComponent implements OnInit {
   communeList: string;
   valueProvince: string = "";
   valueDistrict: string = "";
-
   messCustomerName: string;
   messEmail: string;
   messPhoneNumber: string;
