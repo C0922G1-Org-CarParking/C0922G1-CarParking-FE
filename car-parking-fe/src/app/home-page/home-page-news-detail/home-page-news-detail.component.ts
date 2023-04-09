@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ParkingNews} from '../../model/parking-news';
 import {HttpClient} from '@angular/common/http';
 import {ParkingNewsService} from '../../service/parking-news.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-home-page-news-detail',
@@ -12,24 +12,26 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 export class HomePageNewsDetailComponent implements OnInit {
   id?: number;
-  parkingNews: ParkingNews;
+  parkingNews?: ParkingNews;
+  currentPage?: number;
+  keyword?: string;
+  mess?: string
 
   constructor(private http: HttpClient,
               private parkingNewsService: ParkingNewsService,
-              private activatedRoute: ActivatedRoute,
-              private route: Router) {
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((param) => {
       this.id = +param.get('id');
-    }, error => {
-      console.log(error);
+      this.currentPage = + param.get('currentPage') === null ? 0 : + param.get('currentPage');
+      this.keyword = param.get('keyword')=== null ? '' : param.get('keyword');
     });
     this.parkingNewsService.getDetailParkingNews(this.id).subscribe((item) => {
       this.parkingNews = item;
-    }, error => {
-      this.route.navigateByUrl('/error');
+    }, () => {
+        this.mess = 'Thông tin này hiện không tồn tại. Vui lòng về lại trang chủ.';
     });
   }
 

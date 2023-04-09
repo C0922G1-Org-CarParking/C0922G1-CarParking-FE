@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ParkingNews} from '../../model/parking-news';
 import {HttpClient} from '@angular/common/http';
 import {ParkingNewsService} from '../../service/parking-news.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-page-news-list',
@@ -13,7 +13,6 @@ export class HomePageNewsListComponent implements OnInit {
   parkingNews?: ParkingNews[];
   keyword = '';
   pageCount = 0;
-  pageNumbers: number[] = [];
   totalPages = 0;
   currentPage = 0;
   pageToDisplay: (number | string)[];
@@ -21,26 +20,38 @@ export class HomePageNewsListComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private parkingNewsService: ParkingNewsService,
-              private route: Router) {
+              private route: Router,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(param => {
+      this.currentPage = +param.get('currentPage') === null ? 0 : +param.get('currentPage');
+      this.keyword = param.get('keyword') === null ? '' : param.get('keyword');
+    });
     this.getParkingNews();
   }
 
   getParkingNews() {
     this.mess = '';
     this.parkingNewsService.getListParkingNews(this.keyword, this.currentPage).subscribe((items) => {
-      if(items === null) {
-        this.mess = 'Không tìm thấy tin tức có từ khóa: ' + this.keyword;
+      if (items === null && this.keyword === '') {
+        this.mess = 'Trang thông tin đang cập nhật. Vui lòng quay lại sau.';
         this.parkingNews = null;
-        this.pageToDisplay = null;
       }
-      this.parkingNews = items.content;
-      this.pageCount = items.totalPages;
-      this.currentPage = items.pageable.pageNumber;
-    }, error => {
-      this.route.navigateByUrl('/error');
+
+      if (items === null && this.keyword !== '') {
+        this.mess = 'Không tìm thấy tin tức liên quan với từ khóa: ' + this.keyword;
+        this.parkingNews = null;
+      }
+
+      if (items !== null) {
+        this.parkingNews = items.content;
+        this.pageCount = items.totalPages;
+        this.currentPage = items.pageable.pageNumber;
+      }
+    }, () => {
+      this.route.navigateByUrl('/error').then(() => true);
     }, () => {
       this.pageToDisplay = this.pageNumbersToDisplay;
     });
@@ -63,7 +74,7 @@ export class HomePageNewsListComponent implements OnInit {
     const pagesToShow = 3;
 
     if (totalPageCount <= pagesToShow) {
-      return Array.from({ length: totalPageCount }, (_, i) => i + 1);
+      return Array.from({length: totalPageCount}, (_, i) => i + 1);
     }
 
     const startPage = Math.max(0, currentPageIndex - Math.floor(pagesToShow / 2));
@@ -73,10 +84,10 @@ export class HomePageNewsListComponent implements OnInit {
       endPage = totalPageCount - 1;
     }
 
-    let pageNumbersToDisplay: (number | string)[] = Array.from({ length: endPage - startPage + 1 }, (_, i) => i + startPage + 1);
+    let pageNumbersToDisplay: (number | string)[] = Array.from({length: endPage - startPage + 1}, (_, i) => i + startPage + 1);
 
     if (startPage > 0) {
-      pageNumbersToDisplay = [ '...', ...pageNumbersToDisplay];
+      pageNumbersToDisplay = ['...', ...pageNumbersToDisplay];
     }
 
     if (endPage < totalPageCount - 1) {

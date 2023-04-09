@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from '../security-authentication/service/token-storage.service';
 import {ShareService} from '../security-authentication/service/share.service';
 import {Router} from '@angular/router';
@@ -57,13 +57,5 @@ export class HeaderComponent implements OnInit {
       this.nameEmployee = this.tokenStorageService.getUser().name;
     }
   }
-
-  //
-  // ngOnchanges(): void {
-  // }
-  //
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   this.loadHeader();
-  // }
 
 }

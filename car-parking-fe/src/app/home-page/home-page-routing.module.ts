@@ -9,11 +9,23 @@ const routes: Routes = [{
   pathMatch: 'full',
   redirectTo: 'list'
 }, {
+  path: 'list/:currentPage/:keyword',
+  component: HomePageNewsListComponent,
+},  {
+  path: 'list/:currentPage',
+  component: HomePageNewsListComponent,
+}, {
   path: 'list',
   component: HomePageNewsListComponent,
 }, {
-  path: 'detail/:id',
+  path: 'detail/:id/:currentPage/:keyword',
   component: HomePageNewsDetailComponent,
+}, {
+  path: 'detail/:id/:currentPage',
+  component: HomePageNewsDetailComponent,
+}, {
+    path: 'detail/:id',
+    component: HomePageNewsDetailComponent,
 }];
 
 @NgModule({

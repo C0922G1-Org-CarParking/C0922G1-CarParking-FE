@@ -1,11 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
-body {
-  font-family: "Open Sans", sans-serif;
+#main,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+.card-title,
+.font-primary {
+  font-family: "Raleway", sans-serif;
   color: #212529;
 }
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 a:hover {
@@ -13,26 +23,10 @@ a:hover {
   text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-h5 .card-title
-.font-primary {
-  font-family: "Raleway", sans-serif;
-}
-
-/*#main {*/
-/*  margin-top: 72px;*/
-/*}*/
-
 /*--------------------------------------------------------------
 # Section
 --------------------------------------------------------------*/
 section {
-  /*padding: 60px 0;*/
   overflow: hidden;
 }
 
@@ -65,7 +59,7 @@ section {
   left: calc(50% - 30px);
 }
 
-.getstarted:hover
+.getstarted:hover,
 .getstarted:focus:hover{
   color: #fff;
   background: #ee7843;

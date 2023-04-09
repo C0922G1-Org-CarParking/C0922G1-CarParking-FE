@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {TokenStorageService} from "../security-authentication/service/token-storage.service";
+import {ShareService} from "../security-authentication/service/share.service";
 
 @Component({
   selector: 'app-footer',
@@ -6,10 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
+  isLoggedIn = false;
+  username: string;
 
-  constructor() { }
+  constructor(private tokenStorageService: TokenStorageService,
+              private shareService: ShareService) {
+  }
+
+  loadHeader(): void {
+    if (this.tokenStorageService.getToken()) {
+      this.username = this.tokenStorageService.getUser().username;
+    }
+    this.isLoggedIn = this.username != null;
+  }
+
 
   ngOnInit(): void {
+    this.shareService.getClickEvent().subscribe(() => {
+      this.loadHeader();
+    });
+    this.loadHeader();
   }
 
 }
+
