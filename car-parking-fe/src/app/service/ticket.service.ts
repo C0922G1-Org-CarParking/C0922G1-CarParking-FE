@@ -49,6 +49,7 @@ export class TicketService {
       .filter(([_, value]) => value !== undefined && value !== null)
       .map(([key, value]) => `${key}=${value}`)
       .join('&');
+    debugger
     return this.http.get<any>(`http://localhost:8080/api/user/ticket/search?${query}`);
   }
 

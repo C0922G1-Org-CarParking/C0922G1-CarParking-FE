@@ -57,6 +57,7 @@ export class TicketListComponent implements OnInit {
   }
 
   setStatusSearch() {
+    debugger
     this.isSearchExpired = false;
     this.isSearchTicket = true;
     this.setValueSearch();
@@ -80,6 +81,7 @@ export class TicketListComponent implements OnInit {
     if (this.isSearchTicket) {
       this.statusSearch = this.formSearchTicket?.value?.status;
       this.setOtherValuesSearch();
+      debugger
     } else if (this.isSearchExpired) {
       this.statusSearch = 3;
       this.setOtherValuesSearch();
@@ -87,6 +89,7 @@ export class TicketListComponent implements OnInit {
       this.statusSearch = '';
       this.setOtherValuesSearch();
     }
+    debugger
   }
 
   setOtherValuesSearch() {
@@ -98,6 +101,7 @@ export class TicketListComponent implements OnInit {
     this.expiryDateSearch = this.formSearchTicket?.value?.expiryDate;
     this.ticketTypeSearch = this.formSearchTicket?.value?.ticketType;
     this.getListTicket();
+    debugger
   }
 
   findAllFloor() {
